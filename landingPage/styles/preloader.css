@@ -10,9 +10,9 @@
     background: #fff;
     /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
     z-index: 1001;
-  }
-  
-  .preloader__row {
+}
+
+.preloader__row {
     font-size: 0;
     position: relative;
     top: 50%;
@@ -24,13 +24,13 @@
     text-align: center;
     animation: preloader-rotate 2s infinite linear;
     animation-delay: -1.5s;
-  }
+}
 
-  .preloader__row:last-child{
+.preloader__row:last-child {
     animation-delay: -0.5s;
-  }
-  
-  .preloader__item {
+}
+
+.preloader__item {
     position: absolute;
     display: inline-block;
     top: 0;
@@ -39,37 +39,37 @@
     width: 20px;
     height: 20px;
     animation: preloader-bounce 2s infinite ease-in-out;
-  }
-  
-  .preloader__item:last-child {
+}
+
+.preloader__item:last-child {
     top: auto;
     bottom: 0;
     animation-delay: -1s;
-  }
-  
-  @keyframes preloader-rotate {
+}
+
+@keyframes preloader-rotate {
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  @keyframes preloader-bounce {
-  
+}
+
+@keyframes preloader-bounce {
+
     0%,
     100% {
-      transform: scale(0.3);
+        transform: scale(0.3);
     }
-  
+
     50% {
-      transform: scale(0.7);
+        transform: scale(0.7);
     }
-  }
-  
-  .loaded_hiding .preloader {
+}
+
+.loaded_hiding .preloader {
     transition: 0.6s opacity;
     opacity: 0;
-  }
-  
-  .loaded .preloader {
+}
+
+.loaded .preloader {
     display: none;
-  }
+}

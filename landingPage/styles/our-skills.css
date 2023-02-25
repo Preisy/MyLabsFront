@@ -1,60 +1,64 @@
 .our-skills {
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
 
-  background: #dad9de;
+    background: #dad9de;
 
-  font-size: 3rem;
+    font-size: 3rem;
 }
 
 .our-skills .content {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .our-skills .holder {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.our-skills .holder .block:nth-child(odd){
+.our-skills .holder .block:nth-child(odd) {
     transform: translateY(15vh);
 }
 
-.our-skills .holder .block:nth-child(even){
+.our-skills .holder .block:nth-child(even) {
     transform: translateY(-15vh);
 }
 
 .c-lang {
-  background-image: url(../assets/ourSkillsIcons/clang.svg);
+    background-image: url(../assets/ourSkillsIcons/clang.svg);
 }
+
 .cpp-lang {
-  background-image: url(../assets/ourSkillsIcons/cpp.svg);
+    background-image: url(../assets/ourSkillsIcons/cpp.svg);
 }
+
 .py-lang {
-  background-image: url(../assets/ourSkillsIcons/python.svg);
+    background-image: url(../assets/ourSkillsIcons/python.svg);
 }
+
 .excel-app {
-  background-image: url(../assets/ourSkillsIcons/excel.svg);
+    background-image: url(../assets/ourSkillsIcons/excel.svg);
 }
+
 .word-app {
-  background-image: url(../assets/ourSkillsIcons/word.svg);
+    background-image: url(../assets/ourSkillsIcons/word.svg);
 }
 
 .our-skills .block {
-  width: 20vh;
-  height: 20vh;
+    width: 20vh;
+    height: 20vh;
 
-  background-repeat: no-repeat;
-  background-size: contain;
+    background-repeat: no-repeat;
+    background-size: contain;
 
-  border-radius: 2rem;
-  border: 1.5px solid #e1e3e4;
-  background-color: #ffffff;
+    border-radius: 2rem;
+    border: 1.5px solid #e1e3e4;
+    background-color: #ffffff;
 }

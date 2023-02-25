@@ -5,17 +5,17 @@
     const middle_screen_size = 900;
 
 
-    for(let question of question_elements){
+    for (let question of question_elements) {
         question.onclick = () => {
-            if(window.innerWidth > middle_screen_size) return;
+            if (window.innerWidth > middle_screen_size) return;
             const parent = question.parentElement;
             const answer = parent.querySelector('.answer');
 
-            const questionHeight = question.getBoundingClientRect().height+10;
+            const questionHeight = question.getBoundingClientRect().height + 10;
             const spanSize = answer.querySelector('span').getBoundingClientRect().height;
             const answerSize = answer.getBoundingClientRect().height;
 
-            const maxHeight = Math.max(spanSize, answerSize)+20;
+            const maxHeight = Math.max(spanSize, answerSize) + 20;
 
             question.classList.toggle('active');
 

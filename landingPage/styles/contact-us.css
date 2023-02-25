@@ -13,7 +13,7 @@
 
 .contact-section .title {
     font-size: 60px;
-    
+
     margin-bottom: 100px;
 }
 
@@ -108,7 +108,6 @@
     /*.contact-section .link * {
     font-size: 20px;
   }*/
-
     .contact-section {
         background-image: url('../assets/contact-us-low.svg');
     }

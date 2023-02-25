@@ -22,12 +22,14 @@ function computeLinesProps(): void {
     home.classList.remove("transition_disabled");
     // home.getBoundingClientRect();
 }
+
 function homeBackgroundAppearance(): void {
     let svg: SVGElement = findActiveBg(document.querySelector(".home_background"));
     // svg.getBoundingClientRect();
     // let triggerLayout = svg.scrollHeight;
     svg.classList.add("full")
 }
+
 function addTransitionToSvg() {
     let svgs: NodeListOf<SVGElement> = document.querySelectorAll(".home_background svg");
     setTimeout(function () {

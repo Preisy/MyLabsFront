@@ -9,6 +9,6 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
     var mm = String(today.getMonth() + 1).padStart(2, '0');
     var yyyy = today.getFullYear();
 
-    date_div.textContent = `${dd} ${months[mm-1]}`;
+    date_div.textContent = `${dd} ${months[mm - 1]}`;
     copyright_year.textContent = `${yyyy}`;
 })();

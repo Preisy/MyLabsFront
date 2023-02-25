@@ -70,7 +70,7 @@ function prepareUsers(response) {
 
 /**
  * @brief Takes user JSON. Search through each size of photo, search for 'x' size.
- * 
+ *
  * @param {JSON} user - response of VK API Users.get method;
  * @returns user photo url of 'x' size;
  */
@@ -124,7 +124,9 @@ function getAttachments(attachments_array) {
     for (let attachment of attachments_array) {
         if (attachment.type !== "photo") continue;
 
-        result_attachments.push(attachment.photo.sizes.find((size) => { return size.type === "x" }).url);
+        result_attachments.push(attachment.photo.sizes.find((size) => {
+            return size.type === "x"
+        }).url);
     }
     return result_attachments;
 }
@@ -143,7 +145,7 @@ function html_render(comments_array) {
         const newSlide = document.createElement('div');
         newSlide.classList.add('slide');
         mountEl.append(newSlide);
-        
+
         const adjusterEl = document.createElement("div");
         adjusterEl.classList.add('adjuster');
         newSlide.append(adjusterEl);
@@ -151,16 +153,16 @@ function html_render(comments_array) {
         for (let i = 0; i < commentsInSlide; ++i) {
             const index = slide * commentsInSlide + i;
             const comment = comments_array[index];
-            if(!comment) break;
-            
+            if (!comment) break;
+
             const newComment = template.content.cloneNode(true); //template clone
             //fill data in placeholders
             newComment.querySelector(".icon").src = comment.AuthorIcon;
             newComment.querySelector(".fio").textContent = comment.Name;
             newComment.querySelector(".comment").textContent = comment.Content;
-            
+
             const links = newComment.querySelectorAll(".vk_link");
-            for(let link of links)
+            for (let link of links)
                 link.href = comment.Url;
 
             if (comment.Attachments)

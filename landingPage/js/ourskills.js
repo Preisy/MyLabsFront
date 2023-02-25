@@ -9,6 +9,7 @@ for (let i = 0; i < lines.length; i++) {
     lines[i].style.strokeDashoffset = lines[i].getTotalLength() + "px";
     lines[i].style.animationDelay = i * transitionInterval + "ms";
 }
+
 function animLines() {
     let i = 0;
     (function setSDO() {
@@ -28,5 +29,6 @@ function animLines() {
     })();
     setTimeout(animLines, transitionInterval * (skills.length - 1));
 }
+
 animLines();
 //# sourceMappingURL=ourskills.js.map

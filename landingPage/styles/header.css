@@ -1,128 +1,131 @@
 :root {
-  --link-padding: 5px;
-  --header-height: 80px;
+    --link-padding: 5px;
+    --header-height: 80px;
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  z-index: 99;
+    position: fixed;
+    top: 0;
+    z-index: 99;
 
-  height: var(--header-height);
-  width: 100vw;
+    height: var(--header-height);
+    width: 100vw;
 
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 9%,
-    rgba(255, 255, 255, 0.92) 40%,
-    rgba(255, 255, 255, 0.88) 72%,
-    rgba(255, 255, 255, 0.85) 100%
-  );
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 1) 9%,
+            rgba(255, 255, 255, 0.92) 40%,
+            rgba(255, 255, 255, 0.88) 72%,
+            rgba(255, 255, 255, 0.85) 100%
+    );
 
-  -webkit-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
 
-  user-select: none;
+    user-select: none;
 }
 
 .header .structure {
-  height: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .header .content {
-  align-items: center;
-  justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .header .logo {
-  margin-top: 10px; /*<---- поменяется высота хедера и всему пиздец*/
-  margin-bottom: 10px; /*<---- поменяется высота хедера и всему пиздец*/
-  height: 80%;
-  /*margin-left: 15%;*/
-  z-index: 1;
+    margin-top: 10px; /*<---- поменяется высота хедера и всему пиздец*/
+    margin-bottom: 10px; /*<---- поменяется высота хедера и всему пиздец*/
+    height: 80%;
+    /*margin-left: 15%;*/
+    z-index: 1;
 }
 
-.header .logo img{
-  height: 100%;
+.header .logo img {
+    height: 100%;
 }
 
 .header .icons {
-  position: absolute;
+    position: absolute;
 
-  left: calc(100% + 20px);
-  white-space: nowrap;
-  font-size: 0;
+    left: calc(100% + 20px);
+    white-space: nowrap;
+    font-size: 0;
 
-  height: 45%; /*<---- поменяется высота хедера и всему пиздец*/
+    height: 45%; /*<---- поменяется высота хедера и всему пиздец*/
 }
 
 .header .icons .icon {
-  font-size: 0;
+    font-size: 0;
 
-  display: inline-block;
-  margin-right: 20px;
-  height: 100%;
-  border-radius: 100%;
+    display: inline-block;
+    margin-right: 20px;
+    height: 100%;
+    border-radius: 100%;
 
-  transition: all 0.15s;
+    transition: all 0.15s;
 }
 
 .header .icons svg {
-  height: 100%;
+    height: 100%;
 }
 
 .header .icons .icon:hover {
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0px 0px 3px 0px #000000;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0px 0px 3px 0px #000000;
 }
+
 .header .icons .icon svg {
-  fill: #060137;
-  transition: 0.15s all;
+    fill: #060137;
+    transition: 0.15s all;
 }
+
 .header .icons .icon.tg:hover svg path {
-  fill: #0088cc;
+    fill: #0088cc;
 }
+
 .header .icons .icon.vk:hover svg path {
-  fill: #0077ff;
+    fill: #0077ff;
 }
 
 .header .icons .icon:active {
-  transform: scale(1.1);
-  transition: 0.05s;
+    transform: scale(1.1);
+    transition: 0.05s;
 }
 
 .header .icons .icon:last-child {
-  margin: 0;
+    margin: 0;
 }
 
 .header .links {
-  font-size: 0px;
+    font-size: 0px;
 
-  height: 100%;
-  float: right;
+    height: 100%;
+    float: right;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .header .link {
-  display: inline-block;
-  margin-left: 20px;
+    display: inline-block;
+    margin-left: 20px;
 
-  width: min-content;
-  white-space: nowrap;
+    width: min-content;
+    white-space: nowrap;
 }
 
 .header .link span {
-  font-size: 1.3rem !important;
+    font-size: 1.3rem !important;
 }
 
 .header .link:first-child {
-  margin-left: 0px;
+    margin-left: 0px;
 }
 
 /*
@@ -137,192 +140,201 @@
 */
 
 .header .link {
-  position: relative;
-  padding-top: var(--link-padding);
-  padding-bottom: var(--link-padding);
+    position: relative;
+    padding-top: var(--link-padding);
+    padding-bottom: var(--link-padding);
 }
 
 .header .link.active span {
-  transform: translateY(-10px);
-  color: #2ba84a;
+    transform: translateY(-10px);
+    color: #2ba84a;
 }
 
 .header .link span {
-  display: block;
-  transition: all 0.2s;
+    display: block;
+    transition: all 0.2s;
 }
 
 .header .link.active span {
-  transform: translateY(-10px);
-  color: #2ba84a;
+    transform: translateY(-10px);
+    color: #2ba84a;
 }
+
 .header .link:hover span {
-  transform: translateY(-10px);
-  color: #2ba84a;
+    transform: translateY(-10px);
+    color: #2ba84a;
 }
 
 .header .link:after {
-  transition: 0.3s;
-  content: '';
+    transition: 0.3s;
+    content: '';
 
-  background: #2ba84a;
-  opacity: 0;
+    background: #2ba84a;
+    opacity: 0;
 
-  height: 5px;
+    height: 5px;
 
-  display: inline-block;
-  clear: both;
+    display: inline-block;
+    clear: both;
 
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  right: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
 
-  border-radius: 250px; /*Просто большое число, чтобы были скругленные края*/
-  transform: translateY(calc(var(--link-padding) * -1));
+    border-radius: 250px; /*Просто большое число, чтобы были скругленные края*/
+    transform: translateY(calc(var(--link-padding) * -1));
 }
 
 .header .active:after,
 .header .link:hover:after {
-  opacity: 0.5;
-  left: 0;
-  right: 0;
+    opacity: 0.5;
+    left: 0;
+    right: 0;
 }
 
 .header .hamburger-menu svg {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .header .hamburger-menu {
-  --hamburger-size: 40px;
-  position: absolute;
-  right: 0;
+    --hamburger-size: 40px;
+    position: absolute;
+    right: 0;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  width: var(--hamburger-size);
-  height: var(--hamburger-size);
+    width: var(--hamburger-size);
+    height: var(--hamburger-size);
 
-  transition: 0.2s all;
+    transition: 0.2s all;
 
-  z-index: 1;
+    z-index: 1;
 }
 
 .header .hamburger-menu:hover {
-  transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .header .prevent {
-  display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgb(255, 255, 255);
-  opacity: 0;
-  left: 0;
-  top: var(--header-height);
-  z-index: -1;
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    opacity: 0;
+    left: 0;
+    top: var(--header-height);
+    z-index: -1;
 }
 
-.header .prevent.active{
-  display: block;
-  opacity: 0.3;
+.header .prevent.active {
+    display: block;
+    opacity: 0.3;
 }
 
 /*media*/
 
 @media (max-width: 1024px) {
-  .header {
-    --header-height: 70px;
-  }
-  .header ul {
-    padding: 20px 20px;
-  }
-  .header .hamburger-menu {
-    display: block;
-  }
+    .header {
+        --header-height: 70px;
+    }
 
-  .header .links {
-    display: flex;
-    box-sizing: border-box;
+    .header ul {
+        padding: 20px 20px;
+    }
 
-    position: fixed;
-    right: 0px;
-    top: 70px;
-    right: -101%;
+    .header .hamburger-menu {
+        display: block;
+    }
 
-    width: 300px;
-    height: calc(100vh - 70px);
+    .header .links {
+        display: flex;
+        box-sizing: border-box;
 
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-items: center;
-    align-items: flex-end;
+        position: fixed;
+        right: 0px;
+        top: 70px;
+        right: -101%;
 
-    box-shadow: 0px 4px 8px 0px rgb(34 60 80 / 20%);
+        width: 300px;
+        height: calc(100vh - 70px);
 
-    background: white;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-items: center;
+        align-items: flex-end;
 
-    transition: 0.15s;
+        box-shadow: 0px 4px 8px 0px rgb(34 60 80 / 20%);
 
-    -webkit-tap-highlight-color: transparent;
-  }
+        background: white;
 
-  .header .link {
-    text-align: right;
-    font-size: 40px;
+        transition: 0.15s;
 
-    margin-bottom: 40px;
-  }
+        -webkit-tap-highlight-color: transparent;
+    }
 
-  .header .link:first-of-type {
-    margin-top: 20px !important;
-  }
+    .header .link {
+        text-align: right;
+        font-size: 40px;
 
-  .header .hamburger-menu.active + nav > ul.links {
-    right: 0;
-  }
+        margin-bottom: 40px;
+    }
 
-  .header .icons {
-    left: calc(
-      100% - (40px + 10px)
-    ); /*40px == --hamburger-size; 20px -> some margin*/
-    transform: translateX(-100%);
-    height: 50%;
-  }
-  .header .icons .icon {
-    margin-right: 15px;
-  }
+    .header .link:first-of-type {
+        margin-top: 20px !important;
+    }
+
+    .header .hamburger-menu.active + nav > ul.links {
+        right: 0;
+    }
+
+    .header .icons {
+        left: calc(
+                100% - (40px + 10px)
+        ); /*40px == --hamburger-size; 20px -> some margin*/
+        transform: translateX(-100%);
+        height: 50%;
+    }
+
+    .header .icons .icon {
+        margin-right: 15px;
+    }
 }
 
 @media (max-width: 700px) {
-  .header .hamburger-menu {
-    --hamburger-size: 35px;
-  }
+    .header .hamburger-menu {
+        --hamburger-size: 35px;
+    }
 
-  .header .link.active:after {
-    opacity: 0.5;
-    left: 0;
-    right: 0;
-  }
+    .header .link.active:after {
+        opacity: 0.5;
+        left: 0;
+        right: 0;
+    }
 }
+
 @media (max-width: 500px) {
-  .header {
-    --header-height: 50px;
-  }
-  .header .links {
-    width: 70%;
-    top: 50px;
-    height: calc(100vh - 50px);
-  }
-  .header .icons {
-    left: calc(100% - (40px));
-  }
-  .header .icons .icon {
-    margin-right: 10px;
-  }
-  .header .hamburger-menu {
-    --hamburger-size: 30px;
-  }
+    .header {
+        --header-height: 50px;
+    }
+
+    .header .links {
+        width: 70%;
+        top: 50px;
+        height: calc(100vh - 50px);
+    }
+
+    .header .icons {
+        left: calc(100% - (40px));
+    }
+
+    .header .icons .icon {
+        margin-right: 10px;
+    }
+
+    .header .hamburger-menu {
+        --hamburger-size: 30px;
+    }
 }

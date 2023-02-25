@@ -6,6 +6,7 @@ function findActiveBg(parent) {
         }
     }
 }
+
 function computeLinesProps() {
     let home = document.querySelector(".home_background");
     home.classList.add("transition_disabled");
@@ -19,12 +20,14 @@ function computeLinesProps() {
     home.classList.remove("transition_disabled");
     // home.getBoundingClientRect();
 }
+
 function homeBackgroundAppearance() {
     let svg = findActiveBg(document.querySelector(".home_background"));
     // svg.getBoundingClientRect();
     // let triggerLayout = svg.scrollHeight;
     svg.classList.add("full");
 }
+
 function addTransitionToSvg() {
     let svgs = document.querySelectorAll(".home_background svg");
     setTimeout(function () {
@@ -33,6 +36,7 @@ function addTransitionToSvg() {
         }
     }, 3000);
 }
+
 function moveLines(svg) {
     let linesToMove = 10;
     let lines = svg.querySelectorAll("g.lines path");
@@ -58,6 +62,7 @@ function moveLines(svg) {
         }, td * 2 * 1000);
     }
 }
+
 function isVisible(el) {
     let targetPosition = {
         bottom: Math.min(el.getBoundingClientRect().bottom, el.getBoundingClientRect().bottom) + pageYOffset,
@@ -70,9 +75,11 @@ function isVisible(el) {
     return targetPosition.bottom > windowPosition.top &&
         targetPosition.top < windowPosition.bottom;
 }
+
 function isMobile() {
     return window.innerWidth <= 600;
 }
+
 function homeBackgroundMovements() {
     let home = document.querySelector(".home_background");
     let intervalId = setInterval(function () {
@@ -81,6 +88,7 @@ function homeBackgroundMovements() {
         }
     }, 2000);
 }
+
 computeLinesProps();
 homeBackgroundAppearance();
 addTransitionToSvg();
