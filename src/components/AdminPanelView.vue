@@ -14,7 +14,17 @@ import AdminNavButton from '@/views/AdminNavButton.vue'</script>
     </nav>
 
     <main>
-      <RouterView></RouterView>
+<!--      todo: remove before prod build-->
+<!--      <transition name="fade">-->
+        <RouterView></RouterView>
+<!--      </transition>-->
+
+<!--      this way not working correctly-->
+<!--        <router-view v-slot="{ Component }">-->
+<!--          <transition name="fade">-->
+<!--            <component :is="Component" />-->
+<!--          </transition>-->
+<!--        </router-view>-->
     </main>
 
   </div>
@@ -22,6 +32,16 @@ import AdminNavButton from '@/views/AdminNavButton.vue'</script>
 
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .wrapper {
   display: flex;
 }

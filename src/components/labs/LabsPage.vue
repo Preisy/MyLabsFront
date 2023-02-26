@@ -1,25 +1,22 @@
 <script setup lang="ts">
+import LabCard from "@/components/labs/LabCard.vue";
+import {onBeforeMount, ref} from "vue";
 import type {AxiosResponse} from "axios";
 import axios from "axios";
-import type {OrderModel} from "@/model/OrderModel";
-import OrderCard from "@/components/orders/OrderCard.vue"
-import type {Ref} from "vue";
-import {onBeforeMount, ref} from "vue";
+import type {LabModel} from "@/model/LabModel";
 
-let orders: Ref<OrderModel[]> = ref([] as OrderModel[]);
-
+let labs = ref([] as LabModel[]);
 onBeforeMount(async function () {
-  let a: AxiosResponse<OrderModel[]> = await axios.get(`/api/orders`)
-  orders.value = a.data
+  let a: AxiosResponse<LabModel[]> = await axios.get(`/api/labs`)
+  labs.value = a.data
 })
-
 </script>
 
 <template>
   <div>
-    <h2>Orders</h2>
+    <h2>Labs</h2>
     <div class="task_wrapper">
-      <OrderCard v-for="order in orders" :order="order"></OrderCard>
+      <LabCard v-for="lab in labs" :lab="lab"></LabCard>
     </div>
   </div>
 </template>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type {OrderModel} from "@/model/OrderModel";
-import PopupOrderCard from "@/components/orders/PopupOrderCard.vue"
 import PopUp from "@/components/PopUp.vue"
 import {ref} from "vue";
+import type {LabModel} from "@/model/LabModel";
+import PopupLabCard from "@/components/labs/PopupLabCard.vue";
+
 
 defineProps<{
-  order: OrderModel
+  lab: LabModel
 }>()
 
 let isPopUpOpened = ref(false);
@@ -17,29 +18,26 @@ function openPopUp() {
 function closePopUp() {
   isPopUpOpened.value = false;
 }
+
 </script>
 
 <template>
   <div>
-    <div v-on:click="openPopUp" class="order">
-      <p><span>Name:</span> {{ order.username }}</p>
-      <p><span>Contacts:</span> {{ order.contacts }}</p>
-      <p><span>Deadline:</span> {{ order.deadline }}</p>
-      <div v-if="order.taskText != null" class="taskText">
-        <p><span>Task:</span></p>
-        <p>{{ order.taskText.length < 50 ? order.taskText : order.taskText.substring(0, 50) + '...' }}</p>
-      </div>
-
+    <div v-on:click="openPopUp" class="lab">
+      <p><span>Title:</span> {{ lab.title }}</p>
+      <p><span>Duration:</span> {{ lab.duration }}</p>
+      <p><span>Price:</span> {{ lab.price }}</p>
+      <p><span>Type:</span> {{ lab.type }}</p>
     </div>
     <PopUp :isOpen="isPopUpOpened" v-on:closePopUp="closePopUp">
-      <PopupOrderCard :order="order"></PopupOrderCard>
+      <PopupLabCard :lab="lab"></PopupLabCard>
     </PopUp>
   </div>
 
 </template>
 
 <style scoped>
-.order {
+.lab {
   border-radius: 10px;
   padding: 1rem;
   transition: all 0.15s ease-in-out;
@@ -50,7 +48,7 @@ function closePopUp() {
   line-height: 1.25rem;
 }
 
-.order:hover {
+.lab:hover {
   -webkit-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.6);
   -moz-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.6);
   box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.6);

@@ -3,6 +3,9 @@ import type {OrderModel} from "@/model/OrderModel";
 import env from "@/env.json"
 import type {AxiosResponse} from "axios"
 import axios from "axios";
+import PopUp from "@/components/PopUp.vue";
+import {ref} from "vue";
+import PopupCreateLabCard from "@/components/labs/PopupCreateLabCard.vue";
 
 let props = defineProps<{
   order: OrderModel
@@ -25,8 +28,13 @@ async function removeExecutor(event: Event) {
   })
 }
 
+let isPopupOpened = ref(false)
 async function completeLab(event: Event) {
+  isPopupOpened.value = true
   // axios.post()
+}
+async function closePopupLab() {
+  isPopupOpened.value = false
 }
 
 </script>
@@ -63,7 +71,10 @@ async function completeLab(event: Event) {
           </div>
         </div>
         <div class="complete_button_wrapper">
-          <div><span>Complete order</span></div>
+          <span @click="completeLab" class="complete_button">Complete order</span>
+          <PopUp :is-open="isPopupOpened">
+            <PopupCreateLabCard :order-id="props.order.id"></PopupCreateLabCard>
+          </PopUp>
         </div>
       </div>
 
@@ -94,18 +105,8 @@ async function completeLab(event: Event) {
 
 <style scoped>
 .popup_order_card {
-  height: 80vh;
-  width: 85vw;
-  background-color: var(--white-color);
-
-  border-radius: 10px;
-  flex: 1;
-  padding: 2rem 0;
+  width: 80vw;
   transition: all 0.15s ease-in-out;
-
-  -webkit-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.4);
-  -moz-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.4);
-  box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.4);
 }
 
 
@@ -113,8 +114,8 @@ async function completeLab(event: Event) {
   height: 80vh;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 2rem;
   overflow-y: scroll;
+  padding: 0.2rem;
 }
 
 p {
@@ -135,7 +136,7 @@ span {
 
 .aside_wrapper {
   float: right;
-  padding-top: 0.2rem;
+  /*padding-top: 0.2rem;*/
 }
 
 .executor {
@@ -175,26 +176,8 @@ span {
   transform: translateY(0.05rem);
 }
 
-input {
-  line-height: 1.25rem;
-  font-size: 1rem;
-  user-select: none;
-  border: 1px solid #000;
-  padding: 0.2rem 0.4rem;
-  border-radius: 5px;
-}
 
-input:focus {
-  outline: none;
-  -webkit-appearance: none;
-  border: 1px solid #000;
-
-  /*-webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.6);*/
-  /*-moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.6);*/
-  /*box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.6);*/
-}
-
-.complete_button_wrapper div {
+.complete_button {
   padding: 0.5rem 1.2rem;
   background-color: var(--green-color);
   outline: 2px solid var(--white-color);
@@ -203,22 +186,15 @@ input:focus {
   /*display: inline-block;*/
   white-space: nowrap;
   width: min-content;
+  display: block;
 
   transition: all 0.15s ease-in-out;
 }
 
-.complete_button_wrapper span {
-  color: var(--white-color);
-}
-
-.complete_button_wrapper div:hover {
+.complete_button:hover {
   background-color: var(--white-color);
   color: var(--green-color);
   outline: 2px solid var(--green-color);
-}
-
-.complete_button_wrapper div:hover span {
-  color: var(--green-color);
 }
 
 @media (min-width: 1300px) {
