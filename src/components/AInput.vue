@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 import { ref } from 'vue';
 
 interface ButtonProps {
@@ -8,10 +8,11 @@ interface ButtonProps {
   bgColor?: string;
   labelColor?: string;
 }
+
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'dark',
   bgColor: 'info',
-  labelColor: 'dark',
+  labelColor: 'dark'
 });
 
 // TODO:
@@ -20,17 +21,17 @@ const temp = ref();
 
 <template>
   <q-input
-    class="br-15px"
-    v-model:model-value="temp"
+    class='br-15px'
+    v-model:model-value='temp'
     standout
-    :color="color"
-    :bg-color="bgColor"
-    :label-color="labelColor"
-    :label="props.label"
+    :color='color'
+    :bg-color='bgColor'
+    :label-color='labelColor'
+    :label='props.label'
   />
 </template>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .homepage__input {
   border-radius: 0.75rem;
   overflow: hidden;

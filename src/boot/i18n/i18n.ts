@@ -10,7 +10,6 @@ import { TCounterPageI18n } from 'pages/landing/counterPage';
 import { useLocaleStore } from 'boot/i18n/useLocaleStore';
 
 
-
 // export type MessageLanguages = keyof typeof messages;
 // Type-define 'en-US' as the master schema for the resource
 // export type MessageSchema = typeof messages['en-US'];
@@ -32,7 +31,7 @@ import { useLocaleStore } from 'boot/i18n/useLocaleStore';
 // }
 /* eslint-enable @typescript-eslint/no-empty-interface */
 
-const localeStore = useLocaleStore()
+const localeStore = useLocaleStore();
 
 export default boot(({ app }) => {
   const i18n = createI18n({

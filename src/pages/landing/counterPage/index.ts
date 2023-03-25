@@ -1,3 +1,4 @@
-import CounterPage from './CounterPage.vue'
+import CounterPage from './CounterPage.vue';
+
 export default CounterPage;
-export * from './i18n'
+export * from './i18n';

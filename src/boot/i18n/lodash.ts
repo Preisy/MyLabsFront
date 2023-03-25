@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers';
-import VueLodash from 'vue-lodash'
+import VueLodash from 'vue-lodash';
 
 export default boot(({ app }) => {
 

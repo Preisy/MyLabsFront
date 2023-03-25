@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang='ts'>
 interface CardProps {
   title: string;
   imgSrc: string;
@@ -9,25 +9,26 @@ interface CardProps {
 const props = defineProps<CardProps>();
 </script>
 <template>
-  <div class="card">
-    <div class="title__wrapper row items-center">
-      <img class="title__icon" :src="props.imgSrc"  alt=''/>
-      <h4 class="title">{{ props.title }}</h4>
+  <div class='card'>
+    <div class='title__wrapper row items-center'>
+      <img class='title__icon' :src='props.imgSrc' alt='' />
+      <h4 class='title'>{{ props.title }}</h4>
     </div>
-    <div class="details">
-      <div class="time">
-        <q-icon class="icon" color="accent" name="update" />
+    <div class='details'>
+      <div class='time'>
+        <q-icon class='icon' color='accent' name='update' />
         <span>{{ props.time }} часов</span>
       </div>
-      <div class="price">
-        <q-icon class="icon" color="accent" name="currency_ruble" /><span
-          >{{ props.price }} рублей</span
+      <div class='price'>
+        <q-icon class='icon' color='accent' name='currency_ruble' />
+        <span
+        >{{ props.price }} рублей</span
         >
       </div>
     </div>
   </div>
 </template>
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .card {
   background-color: $primary;
   box-sizing: border-box;
@@ -36,6 +37,7 @@ const props = defineProps<CardProps>();
 
   .title__wrapper {
     margin-bottom: 2.5rem;
+
     .title__icon {
       --size: 1.2rem;
       width: var(--size);
@@ -49,6 +51,7 @@ const props = defineProps<CardProps>();
 
   .details {
     font-size: 1.2rem;
+
     .icon {
       font-size: 1.2rem;
       margin-right: 0.5rem;

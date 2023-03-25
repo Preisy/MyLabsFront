@@ -1,31 +1,31 @@
-<script setup lang="ts">
-import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
-</script>
+<script setup lang='ts'>
+import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';</script>
 
 <template>
-  <div class="homepage bg-base">
-    <div class="homepage__wrapper structure">
-      <div class="homepage__left-part">
-        <h2 class="description">
+  <div class='homepage bg-base'>
+    <div class='homepage__wrapper structure'>
+      <div class='homepage__left-part'>
+        <h2 class='description'>
           {{ $t('pages.landing.homePage.h1') }}
         </h2>
-      <UnregisteredLeadForm />
+        <UnregisteredLeadForm />
       </div>
-      <div class="homepage__right-part">
-        <img src="src/assets/homepage/man_on_chair.png" class="man-on-chair"  alt=''/>
-        <img src="src/assets/homepage/floor_shadow.svg" class="floor-light"  alt=''/>
+      <div class='homepage__right-part'>
+        <img src='src/assets/homepage/man_on_chair.png' class='man-on-chair' alt='' />
+        <img src='src/assets/homepage/floor_shadow.svg' class='floor-light' alt='' />
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped lang='scss'>
 .homepage {
   overflow: hidden;
   border-radius: 0 0 2rem 2rem;
 
   position: relative;
   z-index: 1;
+
   .homepage__wrapper {
     display: flex;
     justify-content: center;
@@ -35,6 +35,7 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
     .homepage__left-part {
       width: min-content;
       margin-right: 8rem;
+
       .description {
         font-size: 2.4rem;
         line-height: 2.9rem;
@@ -47,12 +48,14 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
 
     .homepage__right-part {
       position: relative;
+
       .man-on-chair {
         position: relative;
         z-index: 1;
         aspect-ratio: 753/591.22;
         width: 37.5rem;
       }
+
       .floor-light {
         position: absolute;
         z-index: 0;

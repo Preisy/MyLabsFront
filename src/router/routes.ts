@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/LandingLayout.vue'),
+    component: () => import('layouts/LandingLayout.vue')
     // children: [{ path: '', component: () => import('pages/LandingPage.vue') }],
   },
 
@@ -11,8 +11,8 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/NotFoundPage.vue'),
-  },
+    component: () => import('pages/NotFoundPage.vue')
+  }
 ];
 
 export default routes;

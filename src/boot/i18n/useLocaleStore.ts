@@ -4,19 +4,19 @@ import { ref, watch } from 'vue';
 
 export const useLocaleStore = defineStore('localeStore', () => {
   const _locale = localStorage.getItem('locale');
-  if (_locale !== 'ru-RU' && _locale !== 'en-US') localStorage.setItem('locale', 'ru-RU')
+  if (_locale !== 'ru-RU' && _locale !== 'en-US') localStorage.setItem('locale', 'ru-RU');
 
-  const locale = ref<Locale>(localStorage.getItem('locale') as Locale)
+  const locale = ref<Locale>(localStorage.getItem('locale') as Locale);
   watch(() => locale, (state) => {
-    localStorage.setItem('locale', state.value)
-  })
+    localStorage.setItem('locale', state.value);
+  });
 
   const setLocale = (newLocale: Locale) => {
-    locale.value = newLocale
-  }
+    locale.value = newLocale;
+  };
 
   return {
     locale,
     setLocale
-  }
-})
+  };
+});

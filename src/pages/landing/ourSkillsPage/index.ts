@@ -1,2 +1,3 @@
-import OurSkillsPage from './OurSkillsPage.vue'
+import OurSkillsPage from './OurSkillsPage.vue';
+
 export default OurSkillsPage;

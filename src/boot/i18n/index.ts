@@ -1,2 +1,3 @@
 import boot from './i18n';
-export default boot
+
+export default boot;
