@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { deprecate } from 'util';
-import { deflateRaw } from 'zlib';
-
 interface CardProps {
   title: string;
   imgSrc: string;
@@ -14,7 +11,7 @@ const props = defineProps<CardProps>();
 <template>
   <div class="card">
     <div class="title__wrapper row items-center">
-      <img class="title__icon" :src="props.imgSrc" />
+      <img class="title__icon" :src="props.imgSrc"  alt=''/>
       <h4 class="title">{{ props.title }}</h4>
     </div>
     <div class="details">

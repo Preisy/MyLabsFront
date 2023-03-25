@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ButtonComponent from 'src/components/ButtonComponent.vue';
+import ButtonComponent from 'components/ABtn.vue';
 import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
 </script>
 
@@ -30,6 +30,9 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
 .our-skills {
   background-color: $primary;
   border-radius: 2rem 2rem 0 0;
+
+  position: relative;
+  z-index: 1;
 
   .our-skills__wrapper {
     padding-top: 8rem;

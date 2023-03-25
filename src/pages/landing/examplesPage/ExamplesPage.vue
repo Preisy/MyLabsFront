@@ -1,46 +1,8 @@
 <script setup lang="ts">
 import ExamplesCardComponent from 'src/components/ExamplesCardComponent.vue';
-import SlideComponent from 'src/components/SlideComponent.vue';
+import SlideComponent from 'components/A-CarouselSlide.vue';
 import { ref } from 'vue';
-
-const cards = [
-  {
-    title: 'Backup system',
-    time: '6',
-    price: '3000',
-    imgSrc: 'src/assets/examples/cs_lang.png',
-  },
-  {
-    title: 'Mp3 editor',
-    time: '3',
-    price: '1400',
-    imgSrc: 'src/assets/examples/c_lang.png',
-  },
-  {
-    title: 'Xml->Yml Converter',
-    time: '8',
-    price: '4000',
-    imgSrc: 'src/assets/examples/python_lang.png',
-  },
-  {
-    title: 'Backup system',
-    time: '6',
-    price: '3000',
-    imgSrc: 'src/assets/examples/cs_lang.png',
-  },
-  {
-    title: 'Mp3 editor',
-    time: '3',
-    price: '1400',
-    imgSrc: 'src/assets/examples/c_lang.png',
-  },
-  {
-    title: 'Xml->Yml Converter',
-    time: '8',
-    price: '4000',
-    imgSrc: 'src/assets/examples/python_lang.png',
-  },
-];
+import { cards } from './cards'
 
 const slider_index = ref('1');
 </script>
@@ -64,7 +26,7 @@ const slider_index = ref('1');
         </q-carousel>
       </div>
     </div>
-    <img class="bg-image" src="src/assets/man_on_chair_alt.png" />
+    <img class="bg-image" src="src/assets/man_on_chair_alt.png"  alt=''/>
   </div>
 </template>
 

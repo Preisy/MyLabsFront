@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HeaderComponent from 'src/components/HeaderComponent.vue';
-import { ref } from 'vue';
+import LandingPage from 'pages/landing/LandingPage.vue';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import { ref } from 'vue';
     <HeaderComponent class="header"></HeaderComponent>
 
     <q-page-container class="no-padding">
-      <router-view />
+      <LandingPage />
     </q-page-container>
   </q-layout>
 </template>

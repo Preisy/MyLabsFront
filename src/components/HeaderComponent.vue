@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ButtonComponent from './ButtonComponent.vue';
+import ButtonComponent from './ABtn.vue';
 
-const model = ref('possibilities');
+// const model = ref('possibilities');
 const current_link_index = ref(0);
 
 const button_links = [
@@ -14,7 +14,7 @@ const button_links = [
 </script>
 
 <template>
-  <q-header bordered class="header">
+  <q-header class="header">
     <q-toolbar class="header__toolbar justify-between">
       <div class="toolbar__buttons">
         <router-link
@@ -82,7 +82,7 @@ const button_links = [
           content: '';
           top: 85%;
           left: var(--highlight-middlepoint);
-          width: 0%;
+          width: 0;
           height: 0.25rem;
           background-color: $accent;
 
