@@ -2,7 +2,17 @@
   "pages": {
     "landing": {
       "homePage": {
-        "h1": "hi nigga"
+        "title": "Мы быстро и эффективно решим ваши проблемы с учебой!",
+        "form": {
+          "task": "Task",
+          "lang": "Programming language",
+          "deadline": "Deadline",
+          "name": "Your name",
+          "email": "Your e-mail",
+          "contacts": "Contacts(number)",
+          "promo": "PROMO",
+          "order": "Order"
+        }
       }
     }
   }

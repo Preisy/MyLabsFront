@@ -1,54 +1,57 @@
-<script setup lang='ts'>
-import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';</script>
+<script setup lang="ts">
+import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
+</script>
 
 <template>
-  <div class='homepage bg-base'>
-    <div class='homepage__wrapper structure'>
-      <div class='homepage__left-part'>
-        <h2 class='description'>
-          {{ $t('pages.landing.homePage.h1') }}
-        </h2>
-        <UnregisteredLeadForm />
-      </div>
-      <div class='homepage__right-part'>
-        <img src='src/assets/homepage/man_on_chair.png' class='man-on-chair' alt='' />
-        <img src='src/assets/homepage/floor_shadow.svg' class='floor-light' alt='' />
+  <div class="homepage">
+    <div class="structure content-wrapper">
+      <h1 class="description">
+        {{ $t('pages.landing.homePage.title') }}
+      </h1>
+      <UnregisteredLeadForm />
+      <div class="homepage-img">
+        <img
+          src="src/assets/homepage/man_on_chair.png"
+          class="man-on-chair"
+          alt=""
+        />
+        <img
+          src="src/assets/homepage/floor_shadow.svg"
+          class="floor-light"
+          alt=""
+        />
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .homepage {
+  background: $primary;
   overflow: hidden;
   border-radius: 0 0 2rem 2rem;
 
   position: relative;
   z-index: 1;
 
-  .homepage__wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 12rem 0;
+  .content-wrapper {
+    position: relative;
+    margin: 12rem auto;
+    padding: 0;
 
-    .homepage__left-part {
-      width: min-content;
-      margin-right: 8rem;
+    .description {
+      font-size: 2.4rem;
+      line-height: 2.9rem;
+      font-weight: 700;
+      margin-bottom: 2.2rem;
 
-      .description {
-        font-size: 2.4rem;
-        line-height: 2.9rem;
-        font-weight: 700;
-        margin-bottom: 2.2rem;
-
-        width: 175%;
-      }
+      width: 60%;
     }
 
-    .homepage__right-part {
-      position: relative;
-
+    .homepage-img {
+      position: absolute;
+      top: 0;
+      right: 6rem;
       .man-on-chair {
         position: relative;
         z-index: 1;
@@ -68,9 +71,9 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
       }
     }
   }
+}
 
-  .text-bold {
-    font-weight: 600;
-  }
+.text-bold {
+  font-weight: 600;
 }
 </style>

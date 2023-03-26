@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "landing": {
+      "ourskillsBlock": {
+        "title": "Our skills",
+        "details": "Если вашего языка или фреймворка тут нет, свяжитесь с нами и мы вас проконсультируем!",
+        "contacts-btn": "Contacts"
+      }
+    }
+  }
+}

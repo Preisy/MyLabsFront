@@ -1,7 +1,7 @@
 import en from './en.json';
 import ru from './ru.json';
 
-export const TCounterPageI18n = {
+export const TCounterBlockI18n = {
   'en-US': en,
   'ru-RU': ru
 };

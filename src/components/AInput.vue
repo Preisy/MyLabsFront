@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import { ref } from 'vue';
 
 interface ButtonProps {
@@ -12,7 +12,7 @@ interface ButtonProps {
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'dark',
   bgColor: 'info',
-  labelColor: 'dark'
+  labelColor: 'dark',
 });
 
 // TODO:
@@ -21,19 +21,25 @@ const temp = ref();
 
 <template>
   <q-input
-    class='br-15px'
-    v-model:model-value='temp'
-    standout
-    :color='color'
-    :bg-color='bgColor'
-    :label-color='labelColor'
-    :label='props.label'
+    class="br-15px input"
+    input-class="less-padding"
+    v-model:model-value="temp"
+    filled
+    dense
+    :color="color"
+    :bg-color="bgColor"
+    :label-color="labelColor"
+    :label="props.label"
   />
 </template>
 
-<style scoped lang='scss'>
-.homepage__input {
+<style lang="scss">
+.q-field--dense .q-field__control {
+  height: 2.25rem !important;
   border-radius: 0.75rem;
-  overflow: hidden;
+}
+.q-field--dense .q-field__label {
+  font-size: 0.8rem !important;
+  top: 13px !important;
 }
 </style>

@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "landing": {
+      "footerBlock": {
+        "title": "«MyLabs» — Безопасный онлайн сервис с провеными экспертами для ваших лабораторных",
+        "contacts": "Contacts",
+        "information": "Information",
+        "tg": "Telegram",
+        "vk": "Vkontakte",
+        "about": "About us",
+        "referral": "Referral program"
+      }
+    }
+  }
+}
