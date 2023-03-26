@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import * as yup from 'yup';
+import {
+  UnregisteredLeadForm,
+  UnregisteredLeadFormSchema,
+} from 'src/model/unregisteredLeadForm';
+import { Form as VeeForm } from 'vee-validate';
 import AInput from 'components/AInput.vue';
-import { ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
 import { useI18n } from 'vue-i18n';
+import { ref } from 'vue';
+import ASelect from 'components/ASelect.vue';
+import { LabTypes } from 'src/global/LabTypes';
 
 const { t } = useI18n();
 
@@ -18,59 +26,93 @@ const text_data = {
 };
 
 const task_val = ref('');
+
+const schema = yup.object<
+  UnregisteredLeadForm,
+  typeof UnregisteredLeadFormSchema
+>(UnregisteredLeadFormSchema);
+
+function onSubmit(values: UnregisteredLeadForm, actions: any) {
+  // todo store
+  console.log(JSON.stringify(values, null, 2));
+  actions.resetForm();
+}
 </script>
 
 <template>
-  <div class="form">
-    <div class="form__line row">
-      <a-input class="col" :label="text_data.task" :model-value="task_val" />
+  <VeeForm :validation-schema="schema" class="form" @submit="onSubmit">
+    <div class="form-line row">
+      <a-input
+        class="col"
+        :label="text_data.task"
+        :model-value="task_val"
+        name="text"
+      />
       <q-btn
-        class="clip-button br-15px"
+        class="clip-button btn br-15px"
         text-color="dark"
         color="grey"
         icon="attach_file"
       />
     </div>
-    <div class="form__line row">
-      <a-input class="col" :label="text_data.lang" :model-value="task_val" />
-      <a-input
-        class="col-4"
-        :label="text_data.deadline"
-        :model-value="task_val"
+    <div class="form-line row">
+      <a-select
+        class="col"
+        :label="text_data.lang"
+        :options="LabTypes"
+        name="type"
       />
+      <a-input class="col-4" label="Дедлайн" name="deadline" />
     </div>
-    <div class="form__line">
-      <a-input class="col" :label="text_data.name" :model-value="task_val" />
-    </div>
-    <div class="form__line">
-      <a-input class="col" :label="text_data.email" :model-value="task_val" />
-    </div>
-    <div class="form__line">
+    <template
+      v-for="(col, i) in [
+        { label: `${text_data.name}`, name: 'name', placeholder: 'Ivan' },
+        {
+          label: `${text_data.email}`,
+          name: 'email',
+          placeholder: 'example@mail.ru',
+        },
+        {
+          label: `${text_data.contacts}`,
+          name: 'contact',
+          placeholder: '@myNickname',
+        },
+      ]"
+      :key="i"
+    >
+      <div class="form-line">
+        <a-input
+          :label="col.label"
+          :name="col.name"
+          :placeholder="col.placeholder"
+          class="col"
+        />
+      </div>
+    </template>
+
+    <div class="form-line row">
       <a-input
         class="col"
-        :label="text_data.contacts"
-        :model-value="task_val"
-      />
-    </div>
-    <div class="form__line row">
-      <a-input
-        class="col"
-        :label="text_data.promo"
         bgColor="grey"
-        :model-value="task_val"
+        :label="text_data.promo"
+        name="promocode"
       />
-      <a-btn class="col-5" :label="text_data.order"></a-btn>
+      <a-btn class="col-5 btn" :label="text_data.order" type="submit"></a-btn>
     </div>
-  </div>
+  </VeeForm>
 </template>
 
 <style scoped lang="scss">
 .form {
-  width: 19rem;
+  width: 20rem;
 
-  .form__line {
+  .form-line {
     gap: 0.75rem;
     margin-bottom: 0.75rem;
+
+    .btn {
+      height: 2.25rem;
+    }
   }
 }
 </style>

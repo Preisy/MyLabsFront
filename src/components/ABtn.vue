@@ -1,13 +1,15 @@
 <script setup lang='ts'>
 interface ButtonProps {
+  label: string;
   color?: string;
   textColor?: string;
-  label: string;
+  type?: 'button' | 'reset' | 'submit';
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'dark',
-  textColor: 'primary'
+  textColor: 'primary',
+  type: 'button'
 });
 </script>
 
@@ -19,6 +21,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
     :text-color='props.textColor'
     no-caps
     :label='props.label'
+    :type='props.type'
   />
 </template>
 

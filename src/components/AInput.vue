@@ -1,35 +1,39 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useField } from 'vee-validate';
 
 interface ButtonProps {
-  modelValue: string;
+  name: string;
   label: string;
   color?: string;
   bgColor?: string;
   labelColor?: string;
+  placeholder?: string;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'dark',
   bgColor: 'info',
   labelColor: 'dark',
+  placeholder: '',
 });
 
-// TODO:
-const temp = ref();
+const { errorMessage, value } = useField(props.name);
+// const { errorMessage, value } = useField(toRef(props, 'name'));
 </script>
 
 <template>
   <q-input
-    class="br-15px input"
-    input-class="less-padding"
-    v-model:model-value="temp"
+    v-model="value"
+    :bg-color="props.bgColor"
+    :error="!!errorMessage"
+    :error-message="errorMessage"
+    class="br-15px"
     filled
     dense
     :color="color"
-    :bg-color="bgColor"
-    :label-color="labelColor"
     :label="props.label"
+    :label-color="props.labelColor"
   />
 </template>
 

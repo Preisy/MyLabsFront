@@ -61,7 +61,7 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
 
       .floor-light {
         position: absolute;
-        z-index: 0;
+        z-index: -1;
         top: 50%;
         right: -60%;
       }
