@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import ExamplesCardComponent from 'src/components/ExamplesCardComponent.vue';
-import SlideComponent from 'components/A-CarouselSlide.vue';
+import SlideComponent from 'components/ACarouselSlide.vue';
 import { ref } from 'vue';
 import { cards } from './cards';
 

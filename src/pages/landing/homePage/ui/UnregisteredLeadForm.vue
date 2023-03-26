@@ -1,19 +1,28 @@
 <script setup lang='ts'>
+import * as yup from 'yup';
+import { UnregisteredLeadForm, UnregisteredLeadFormSchema } from 'src/model/unregisteredLeadForm';
+import { Form as VeeForm } from 'vee-validate';
 import AInput from 'components/AInput.vue';
-import { ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
+import ASelect from 'components/ASelect.vue';
+import { LabTypes } from 'src/global/LabTypes';
 
-const task_val = ref('');
 
+const schema = yup.object<UnregisteredLeadForm, typeof UnregisteredLeadFormSchema>(UnregisteredLeadFormSchema);
+
+function onSubmit(values: UnregisteredLeadForm, actions: any) { // todo store
+  console.log(JSON.stringify(values, null, 2));
+  actions.resetForm();
+}
 </script>
 
 <template>
-  <div class='form'>
+  <VeeForm :validation-schema='schema' class='form' @submit='onSubmit'>
     <div class='form__line row'>
       <a-input
         class='col'
         label='Задание, проблема'
-        :model-value='task_val'
+        name='text'
       />
       <q-btn
         class='clip-button br-15px'
@@ -23,48 +32,43 @@ const task_val = ref('');
       />
     </div>
     <div class='form__line row'>
-      <a-input
+      <a-select
         class='col'
         label='Язык программирования'
-        :model-value='task_val'
+        :options='LabTypes'
+        name='type'
       />
       <a-input
         class='col-4'
         label='Дедлайн'
-        :model-value='task_val'
+        name='deadline'
       />
     </div>
-    <div class='form__line'>
-      <a-input
-        class='col'
-        label='Ваше имя'
-        :model-value='task_val'
-      />
-    </div>
-    <div class='form__line'>
-      <a-input
-        class='col'
-        label='Электронная почта'
-        :model-value='task_val'
-      />
-    </div>
-    <div class='form__line'>
-      <a-input
-        class='col'
-        label='Контакт для связи'
-        :model-value='task_val'
-      />
-    </div>
+    <template v-for='(col, i) in [
+      { label: "Имя", name: "name", placeholder: "Ivan" },
+      { label: "Электронная почта", name: "email", placeholder: "example@mail.ru" },
+      { label: "Контакт для связи", name: "contact", placeholder: "@myNickname" }
+    ]' :key='i'>
+      <div class='form__line'>
+        <a-input
+          :label='col.label'
+          :name='col.name'
+          :placeholder='col.placeholder'
+          class='col'
+        />
+      </div>
+    </template>
+
     <div class='form__line row'>
       <a-input
         class='col'
-        label='ПРОМОКОД'
         bgColor='grey'
-        :model-value='task_val'
+        label='ПРОМОКОД'
+        name='promocode'
       />
-      <a-btn class='col-5' label='Заказать'></a-btn>
+      <a-btn class='col-5' label='Заказать' type='submit'></a-btn>
     </div>
-  </div>
+  </VeeForm>
 </template>
 
 <style scoped lang='scss'>
