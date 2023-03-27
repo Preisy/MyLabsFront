@@ -1,9 +1,9 @@
 {
   "pages": {
     "landing": {
-      "ourskillsBlock": {
+      "ourSkillsBlock": {
         "title": "Our skills",
-        "details": "Если вашего языка или фреймворка тут нет, свяжитесь с нами и мы вас проконсультируем!",
+        "details": "If your language or framework is not listed here, contact us and we will advise you!",
         "contacts-btn": "Contacts"
       }
     }

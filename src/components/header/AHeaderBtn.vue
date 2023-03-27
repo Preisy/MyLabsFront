@@ -6,13 +6,10 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emits = defineEmits<{
+defineEmits<{
   (e: 'update:modelValue', value: number): void;
 }>();
 
-const update = () => {
-  emits('update:modelValue', props.id);
-};
 </script>
 
 <template>
@@ -23,7 +20,7 @@ const update = () => {
     no-caps
     flat
     :label="props.label"
-    @click="update"
+    @click="$emit('update:modelValue', props.id);"
   />
 </template>
 

@@ -2,14 +2,14 @@
   "pages": {
     "landing": {
       "homePage": {
-        "title": "Мы быстро и эффективно решим ваши проблемы с учебой!",
+        "title": "We will quickly and effectively solve your problems with your studies!",
         "form": {
           "task": "Task",
           "lang": "Programming language",
           "deadline": "Deadline",
           "name": "Your name",
           "email": "Your e-mail",
-          "contacts": "Contacts(number)",
+          "contacts": "Contacts",
           "promo": "PROMO",
           "order": "Order"
         }

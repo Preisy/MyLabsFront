@@ -44,6 +44,10 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
       line-height: 2.9rem;
       font-weight: 700;
       margin-bottom: 2.2rem;
+      background-color: #ffffff8a;
+      border-radius: 2.4rem;
+      padding: 1rem;
+      box-sizing: content-box;
 
       width: 60%;
     }
@@ -54,7 +58,7 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
       right: 6rem;
       .man-on-chair {
         position: relative;
-        z-index: 1;
+        z-index: -1;
         aspect-ratio: 753/591.22;
         width: 37.5rem;
       }

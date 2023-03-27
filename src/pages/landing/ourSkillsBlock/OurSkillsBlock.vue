@@ -1,30 +1,22 @@
 <script setup lang="ts">
 import ButtonComponent from 'components/ABtn.vue';
 import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
-import { ref, watch } from 'vue';
-import { useAnimationStore } from '../useAnimationStore';
-
-const ourskills = ref<HTMLElement>();
-
-watch(ourskills, () => {
-  if (ourskills.value) useAnimationStore().setOurskills(ourskills.value);
-});
 </script>
 
 <template>
-  <div class="our-skills bg-base" ref="ourskills">
+  <div class="our-skills bg-base">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
-        {{ $t('pages.landing.ourskillsBlock.title') }}
+        {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
       <div class="content row justify-between items-center">
         <div class="description col-3">
           <p class="description-details">
-            {{ $t('pages.landing.ourskillsBlock.details') }}
+            {{ $t('pages.landing.ourSkillsBlock.details') }}
           </p>
           <ButtonComponent
             class="q-px-xl q-py-sm"
-            :label="$t('pages.landing.ourskillsBlock.contacts-btn')"
+            :label="$t('pages.landing.ourSkillsBlock.contacts-btn')"
           ></ButtonComponent>
         </div>
         <div class="skills-diagram">
