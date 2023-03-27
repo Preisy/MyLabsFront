@@ -1,0 +1,39 @@
+{
+  "pages": {
+    "landing": {
+      "faqBlock": {
+        "title": "FAQ",
+        "howItWorks": {
+          "title": "Как это работает?",
+          "step_1": "Отправка задания",
+          "step_2": "Оценка стоимости",
+          "step_3": "Выполнение заказа",
+          "step_4": "Поддержка до конца",
+          "step_5": "Хорошая оценка"
+        },
+        "QA": {
+          "card_1": {
+            "Q": "Узнает ли мой учитель, что я списал?",
+            "A": "Lorem ipsum dolor sit amet"
+          },
+          "card_2": {
+            "Q": "Как быстро выполнят мой заказ?",
+            "A": "Lorem ipsum dolor sit amet"
+          },
+          "card_3": {
+            "Q": " Что будет, если учитель найдет ошибку в работе?",
+            "A": "Lorem ipsum dolor sit amet"
+          },
+          "card_4": {
+            "Q": "Как происходит оплата?",
+            "A": "Lorem ipsum dolor sit amet"
+          },
+          "card_5": {
+            "Q": "Можно ли нам доверять?",
+            "A": "Lorem ipsum dolor sit amet"
+          }
+        }
+      }
+    }
+  }
+}

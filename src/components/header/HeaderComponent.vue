@@ -5,9 +5,9 @@ import ButtonComponent from '../ABtn.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
 
 // const model = ref('possibilities');
-const current_link_index = ref(0);
+const currentLinkIndex = ref(0);
 
-const button_links = [
+const buttonLinks = [
   { label: 'Возможности', value: 'possibilities' },
   { label: 'Примеры работ', value: 'examples' },
   { label: 'Отзывы', value: 'reviews' },
@@ -28,12 +28,12 @@ const scrollHandler = (val: any) => {
       <div class="header-buttons">
         <router-link
           class="header-router"
-          v-for="(link, index) in button_links"
+          v-for="(link, index) in buttonLinks"
           :key="index"
           :to="''"
         >
           <AHeaderBtn
-            v-model="current_link_index"
+            v-model="currentLinkIndex"
             :id="index"
             :label="link.label"
           ></AHeaderBtn>

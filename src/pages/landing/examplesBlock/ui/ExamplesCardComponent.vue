@@ -17,11 +17,17 @@ const props = defineProps<CardProps>();
     <div class="details">
       <div class="time">
         <q-icon class="icon" color="accent" name="update" />
-        <span>{{ props.time }} часов</span>
+        <span>
+          {{ props.time }}
+          {{ $t('pages.landing.examplesBlock.card.hours') }}
+        </span>
       </div>
       <div class="price">
         <q-icon class="icon" color="accent" name="currency_ruble" />
-        <span>{{ props.price }} рублей</span>
+        <span>
+          {{ props.price }}
+          {{ $t('pages.landing.examplesBlock.card.roubles') }}
+        </span>
       </div>
     </div>
   </div>

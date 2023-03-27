@@ -5,6 +5,7 @@ import OurSkillsBlock from './ourSkillsBlock';
 import ExamplesBlock from './examplesBlock';
 import ReviewsBlock from './reviewsBlock';
 import FooterBlock from './footer';
+import FaqBlock from './faqBlock';
 
 let components = [
   HomePage,
@@ -12,6 +13,7 @@ let components = [
   OurSkillsBlock,
   ExamplesBlock,
   ReviewsBlock,
+  FaqBlock,
   FooterBlock,
 ];
 </script>

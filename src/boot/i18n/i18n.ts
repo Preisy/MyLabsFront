@@ -12,6 +12,7 @@ import { TFooterBlockI18n } from 'src/pages/landing/footer';
 import { TReviewsBlockI18n } from 'src/pages/landing/reviewsBlock';
 import { TOurSkillsBlockI18n } from 'src/pages/landing/ourSkillsBlock';
 import { TExamplesBlockI18n } from 'src/pages/landing/examplesBlock';
+import { TFaqBlockI18n } from 'src/pages/landing/faqBlock';
 
 
 const localeStore = useLocaleStore();
@@ -26,6 +27,7 @@ export default boot(({ app }) => {
       TOurSkillsBlockI18n,
       TExamplesBlockI18n,
       TReviewsBlockI18n,
+      TFaqBlockI18n,
       TFooterBlockI18n,
     )
   });

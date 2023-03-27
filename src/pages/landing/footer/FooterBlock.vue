@@ -1,26 +1,28 @@
-<script setup lang="ts">
-const _this = 'pages.landing.footerBlock';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="footer">
     <div class="content-wrapper structure text-primary">
       <h1 class="title">
-        {{ $t(`${_this}.title`) }}
+        {{ $t('pages.landing.footerBlocktitle') }}
       </h1>
       <div class="details row justify-end">
         <div class="contacts column">
-          <h4>{{ $t(`${_this}.contacts`) }}</h4>
-          <a href="#" class="tg link text-primary">{{ $t(`${_this}.tg`) }}</a>
-          <a href="#" class="vk link text-primary">{{ $t(`${_this}.vk`) }}</a>
+          <h4>{{ $t('pages.landing.footerBlock.contacts') }}</h4>
+          <a href="#" class="tg link text-primary">{{
+            $t('pages.landing.footerBlock.tg')
+          }}</a>
+          <a href="#" class="vk link text-primary">{{
+            $t('pages.landing.footerBlock.vk')
+          }}</a>
         </div>
         <div class="info column">
-          <h4>{{ $t(`${_this}.information`) }}</h4>
+          <h4>{{ $t('pages.landing.footerBlock.information') }}</h4>
           <a href="#" class="about-us link text-primary">
-            {{ $t(`${_this}.about`) }}
+            {{ $t('pages.landing.footerBlock.about') }}
           </a>
           <a href="#" class="referral link text-primary">
-            {{ $t(`${_this}.referral`) }}
+            {{ $t('pages.landing.footerBlock.referral') }}
           </a>
         </div>
       </div>

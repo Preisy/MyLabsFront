@@ -4,13 +4,13 @@ import { ref, watch } from 'vue';
 
 interface Props {
   modelValue: string;
-  slides_count: number;
+  slidesCount: number;
 
-  control_theme?: 'dark' | 'light';
+  controlTheme?: 'dark' | 'light';
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  control_theme: 'light',
+  controlTheme: 'light',
 });
 const emits = defineEmits<{
   (e: 'update:v-model', value: string): void;
@@ -24,48 +24,55 @@ watch(model, (value) => {
 const carousel = ref<QCarousel>();
 
 const btn_classes =
-  props.control_theme === 'light'
+  props.controlTheme === 'light'
     ? 'bg-primary text-dark'
     : 'bg-dark text-primary';
 const text_classes =
-  props.control_theme === 'light' ? 'text-primary' : 'text-dark';
+  props.controlTheme === 'light' ? 'text-primary' : 'text-dark';
 </script>
 
 <template>
-  <q-carousel
-    ref="carousel"
-    transition-prev="slide-right"
-    transition-next="slide-left"
-    animated
-    swipeable
-    v-model="model"
-  >
-    <slot></slot>
+  <div>
+    <q-carousel
+      ref="carousel"
+      transition-prev="slide-right"
+      transition-next="slide-left"
+      animated
+      swipeable
+      class="slider"
+      v-model="model"
+    >
+      <slot></slot>
+    </q-carousel>
 
-    <template #control>
-      <div class="controls row justify-center items-center">
-        <QBtn
-          class="btn left br-15px"
-          :class="btn_classes"
-          icon="chevron_left"
-          @click="carousel?.previous()"
-        ></QBtn>
-        <div class="counter" :class="text_classes">
-          {{ parseInt(model) + 1 }} / {{ slides_count }}
-        </div>
-        <QBtn
-          class="btn left br-15px"
-          :class="btn_classes"
-          icon="chevron_right"
-          @click="carousel?.next()"
-        ></QBtn>
+    <div class="controls row justify-center items-center">
+      <QBtn
+        class="btn left br-15px"
+        :class="btn_classes"
+        icon="chevron_left"
+        @click="carousel?.previous()"
+      ></QBtn>
+      <div class="counter" :class="text_classes">
+        {{ parseInt(model) + 1 }} / {{ slidesCount }}
       </div>
-    </template>
-  </q-carousel>
+      <QBtn
+        class="btn left br-15px"
+        :class="btn_classes"
+        icon="chevron_right"
+        @click="carousel?.next()"
+      ></QBtn>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.slider {
+  height: auto;
+  background: transparent;
+}
+
 .controls {
+  margin-top: 3rem;
   .counter {
     margin: 0 1rem;
   }

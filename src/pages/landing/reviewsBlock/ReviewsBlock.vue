@@ -16,11 +16,7 @@ const carousel_val = ref('0');
         {{ $t('pages.landing.reviewsPage.title') }}
       </h1>
       <div class="slider-wrapper">
-        <ACarousel
-          class="slider"
-          v-model="carousel_val"
-          :slides_count="slides.length"
-        >
+        <ACarousel v-model="carousel_val" :slides-count="slides.length">
           <CarouselSlide
             v-for="(slide, index) in slides"
             :key="index"
