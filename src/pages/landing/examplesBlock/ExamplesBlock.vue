@@ -1,27 +1,46 @@
 <script setup lang="ts">
 import ExamplesCardComponent from './ui/ExamplesCardComponent.vue';
 import SlideComponent from './ui/CarouselSlide.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { slides } from './cards';
 import ACarousel from 'src/components/ACarousel.vue';
+import { Screen } from 'quasar';
 
 const slider_index = ref('1');
+
+const isMobile = Screen.lt.sm;
+
+const _slides = computed(() => {
+  let result = [];
+  const cardsInOneSlide = isMobile ? 1 : 6;
+  const slidesCount = slides.length / cardsInOneSlide;
+
+  for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
+    const slide = [];
+    for (let card_i = 0; card_i < cardsInOneSlide; card_i++)
+      slide.push(slides[slide_i * cardsInOneSlide + card_i]);
+
+    result.push(slide);
+  }
+
+  return result;
+});
 </script>
 
 <template>
-  <div class="examples bg-base">
+  <div class="examples bg-base" :class="{ mobile: isMobile }">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.examplesBlock.title') }}
       </h1>
       <ACarousel
         v-model="slider_index"
-        :slides-count="slides.length"
+        :slides-count="_slides.length"
         control-theme="dark"
         class="slider-wrapper"
       >
         <SlideComponent
-          v-for="(slide, index) in slides"
+          v-for="(slide, index) in _slides"
           :key="index"
           :name="index.toString()"
         >
@@ -46,6 +65,25 @@ const slider_index = ref('1');
   position: relative;
   overflow: hidden;
   z-index: 1;
+
+  border-radius: 0 0 2rem 2rem;
+
+  &.mobile {
+    .content-wrapper {
+      padding: 1.5rem 0;
+
+      .title {
+        margin-bottom: 1.5rem;
+        line-height: unset;
+      }
+    }
+
+    .bg-image {
+      --width: 50rem;
+      bottom: calc(-1.1 * var(--width) / 1.7 / var(--aspect-ratio));
+      left: calc(-1.1 * var(--width) / 2);
+    }
+  }
 
   .content-wrapper {
     padding: 8rem 0;

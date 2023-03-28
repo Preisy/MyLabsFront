@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import QACard from './QACard.vue';
 import { useI18n } from 'vue-i18n';
+import { Screen } from 'quasar';
 const { t } = useI18n();
 
 const cards = [
@@ -25,14 +26,19 @@ const cards = [
     answer: `${t('pages.landing.faqBlock.QA.card_5.A')}`,
   },
 ];
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="qa-wrapper">
+  <div class="qa-wrapper" :class="{ mobile: isMobile }">
     <div class="qa-cards text-left">
-      <QACard v-for="(card, index) in cards" :key="index">
-        <template #question>{{ card.question }}</template>
-      </QACard>
+      <QACard
+        v-for="(card, index) in cards"
+        :key="index"
+        :question="card.question"
+        :answer="card.answer"
+      />
     </div>
   </div>
 </template>
@@ -40,5 +46,9 @@ const cards = [
 <style scoped lang="scss">
 .qa-wrapper {
   width: 50%;
+
+  &.mobile {
+    width: 100%;
+  }
 }
 </style>

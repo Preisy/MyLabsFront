@@ -1,20 +1,27 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Screen } from 'quasar';
+
+const isMobile = Screen.lt.sm;
+</script>
 
 <template>
-  <div class="footer">
+  <div class="footer" :class="{ mobile: isMobile }">
     <div class="content-wrapper structure text-primary">
       <h1 class="title">
-        {{ $t('pages.landing.footerBlocktitle') }}
+        {{ $t('pages.landing.footerBlock.title') }}
       </h1>
-      <div class="details row justify-end">
+      <div
+        class="details row"
+        :class="{ 'justify-end': !isMobile, 'no-wrap': isMobile }"
+      >
         <div class="contacts column">
           <h4>{{ $t('pages.landing.footerBlock.contacts') }}</h4>
-          <a href="#" class="tg link text-primary">{{
-            $t('pages.landing.footerBlock.tg')
-          }}</a>
-          <a href="#" class="vk link text-primary">{{
-            $t('pages.landing.footerBlock.vk')
-          }}</a>
+          <a href="#" class="tg link text-primary">
+            {{ $t('pages.landing.footerBlock.tg') }}
+          </a>
+          <a href="#" class="vk link text-primary">
+            {{ $t('pages.landing.footerBlock.vk') }}
+          </a>
         </div>
         <div class="info column">
           <h4>{{ $t('pages.landing.footerBlock.information') }}</h4>
@@ -39,6 +46,30 @@
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;
+
+  &.mobile {
+    .content-wrapper {
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      overflow: hidden;
+
+      .title {
+        line-height: unset;
+        margin-bottom: 2rem;
+      }
+
+      .details {
+        margin-bottom: 4rem;
+        .column {
+          margin-left: 0rem;
+
+          &:last-of-type {
+            margin-left: 2.2rem;
+          }
+        }
+      }
+    }
+  }
 
   .content-wrapper {
     margin-top: 8rem;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import StepComponent from './StepComponent.vue';
 import { useI18n } from 'vue-i18n';
+import { Screen } from 'quasar';
 const { t } = useI18n();
 
 const steps = [
@@ -25,10 +26,12 @@ const steps = [
     icon: 'check_box',
   },
 ];
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="how-it-works bg-primary">
+  <div class="how-it-works bg-primary" :class="{ mobile: isMobile }">
     <h4 class="title">
       {{ $t('pages.landing.faqBlock.howItWorks.title') }}
     </h4>
@@ -56,6 +59,12 @@ const steps = [
   border-radius: 1.5rem;
 
   height: fit-content;
+
+  &.mobile {
+    --margin-right: 0;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
 
   .title {
     font-weight: 700;

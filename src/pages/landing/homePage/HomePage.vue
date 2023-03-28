@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import { Screen } from 'quasar';
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="homepage">
+  <div class="homepage" :class="{ mobile: isMobile }">
     <div class="structure content-wrapper">
-      <h1 class="description">
-        {{ $t('pages.landing.homePage.title') }}
-      </h1>
-      <UnregisteredLeadForm />
       <div class="homepage-img">
         <img
           src="src/assets/homepage/man_on_chair.png"
@@ -21,6 +20,10 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
           alt=""
         />
       </div>
+      <h1 class="description">
+        {{ $t('pages.landing.homePage.title') }}
+      </h1>
+      <UnregisteredLeadForm />
     </div>
   </div>
 </template>
@@ -34,15 +37,36 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
   position: relative;
   z-index: 1;
 
+  &.mobile {
+    .content-wrapper {
+      margin: 1.5rem auto;
+      .homepage-img {
+        position: relative;
+        width: 120%;
+        top: unset;
+        left: -10%;
+        right: auto;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .description {
+        line-height: 1.5rem;
+        width: 100%;
+        padding: 0;
+      }
+    }
+  }
+
   .content-wrapper {
     position: relative;
     margin: 12rem auto;
     padding: 0;
 
     .description {
-      font-size: 2.4rem;
       line-height: 2.9rem;
-      font-weight: 700;
       margin-bottom: 2.2rem;
       background-color: #ffffff8a;
       border-radius: 2.4rem;
@@ -75,9 +99,5 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
       }
     }
   }
-}
-
-.text-bold {
-  font-weight: 600;
 }
 </style>

@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import { Screen } from 'quasar';
 import HowItWorks from './ui/HowItWorks.vue';
 import QAComponent from './ui/QAComponent.vue';
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="faqblock">
+  <div class="faqblock bg-primary" :class="{ mobile: isMobile }">
     <div class="content-wrapper structure text-center">
       <h1 class="title">{{ $t('pages.landing.faqBlock.title') }}</h1>
-      <div class="content row">
+      <div class="content" :class="{ row: !isMobile, column: isMobile }">
         <HowItWorks></HowItWorks>
         <QAComponent></QAComponent>
       </div>
@@ -20,6 +23,22 @@ import QAComponent from './ui/QAComponent.vue';
 .faqblock {
   overflow: hidden;
   position: relative;
+  border-radius: 2rem;
+  margin: -2rem 0;
+
+  &.mobile {
+    .content-wrapper {
+      padding: 3.5rem 0;
+
+      .title {
+        margin-bottom: 1.5rem;
+      }
+      .content {
+        // flex-wrap: unset;
+      }
+    }
+  }
+
   .content-wrapper {
     padding: 8rem 0;
     position: relative;

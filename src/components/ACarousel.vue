@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QCarousel, QBtn } from 'quasar';
+import { QCarousel, QBtn, Screen } from 'quasar';
 import { ref, watch } from 'vue';
 
 interface Props {
@@ -29,10 +29,12 @@ const btn_classes =
     : 'bg-dark text-primary';
 const text_classes =
   props.controlTheme === 'light' ? 'text-primary' : 'text-dark';
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div>
+  <div :class="{ mobile: isMobile }">
     <q-carousel
       ref="carousel"
       transition-prev="slide-right"
@@ -80,6 +82,12 @@ const text_classes =
     --size: 2rem;
     width: var(--size);
     height: var(--size);
+  }
+}
+
+.mobile {
+  .controls {
+    margin-top: 1rem;
   }
 }
 </style>

@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import ButtonComponent from 'components/ABtn.vue';
 import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
+import { Screen } from 'quasar';
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="our-skills bg-base">
+  <div class="our-skills bg-base" :class="{ mobile: isMobile }">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
-      <div class="content row justify-between items-center">
+      <div
+        class="content justify-between items-center"
+        :class="{ row: !isMobile, 'column reverse content-center': isMobile }"
+      >
         <div class="description col-3">
           <p class="description-details">
             {{ $t('pages.landing.ourSkillsBlock.details') }}
@@ -20,7 +26,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
           ></ButtonComponent>
         </div>
         <div class="skills-diagram">
-          <SkillTreeComponent></SkillTreeComponent>
+          <SkillTreeComponent class="skills"></SkillTreeComponent>
         </div>
       </div>
     </div>
@@ -34,6 +40,25 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
 
   position: relative;
   z-index: 1;
+
+  &.mobile {
+    .content-wrapper {
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+
+      .title {
+        margin-bottom: 1.5rem;
+      }
+
+      .skills-diagram {
+        width: 100%;
+        margin-bottom: 1.5rem;
+        .skills {
+          width: 100%;
+        }
+      }
+    }
+  }
 
   .content-wrapper {
     padding-top: 8rem;

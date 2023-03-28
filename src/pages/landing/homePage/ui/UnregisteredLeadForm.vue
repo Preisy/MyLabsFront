@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
 import ASelect from 'components/ASelect.vue';
 import { LabTypes } from 'src/global/LabTypes';
+import { Screen } from 'quasar';
 
 const { t } = useI18n();
 
@@ -37,10 +38,17 @@ function onSubmit(values: UnregisteredLeadForm, actions: any) {
   console.log(JSON.stringify(values, null, 2));
   actions.resetForm();
 }
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <VeeForm :validation-schema="schema" class="form" @submit="onSubmit">
+  <VeeForm
+    :validation-schema="schema"
+    class="form"
+    :class="{ mobile: isMobile }"
+    @submit="onSubmit"
+  >
     <div class="form-line row">
       <a-input
         class="col"
@@ -105,6 +113,13 @@ function onSubmit(values: UnregisteredLeadForm, actions: any) {
 <style scoped lang="scss">
 .form {
   width: 20rem;
+
+  &.mobile {
+    width: 100%;
+    .form-line {
+      margin-bottom: 0;
+    }
+  }
 
   .form-line {
     gap: 0.75rem;
