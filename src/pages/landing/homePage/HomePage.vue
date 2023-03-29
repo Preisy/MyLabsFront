@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
+import ATypingText from 'components/ATypingText.vue';
 </script>
 
 <template>
   <div class="homepage">
     <div class="structure content-wrapper">
       <h1 class="description">
-        {{ $t('pages.landing.homePage.title') }}
+        <ATypingText :text='$t("pages.landing.homePage.title")' />
       </h1>
       <UnregisteredLeadForm />
       <div class="homepage-img">
@@ -44,9 +45,7 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
       line-height: 2.9rem;
       font-weight: 700;
       margin-bottom: 2.2rem;
-      background-color: #ffffff8a;
       border-radius: 2.4rem;
-      padding: 1rem;
       box-sizing: content-box;
 
       width: 60%;
