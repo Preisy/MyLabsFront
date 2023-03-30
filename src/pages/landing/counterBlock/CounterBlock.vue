@@ -1,30 +1,37 @@
 <script setup lang="ts">
-import { QScrollObserver } from 'quasar';
+import { QScrollObserver, Screen } from 'quasar';
 import { ref } from 'vue';
-import isVisible from 'src/global/utils/isVisible'
+import isVisible from 'src/global/utils/isVisible';
 
-const root = ref<HTMLDivElement>()
+const root = ref<HTMLDivElement>();
 const counter = ref(0);
 
 let end = -2;
-let margin = ref<number>(0)
+let margin = ref<number>(0);
 
 const scrollHandler = () => {
   if (!root.value || !isVisible(root.value)) return;
-  const bcr = root.value?.getBoundingClientRect()
-  const centerBcr = bcr.bottom - bcr.height / 2
-  const delta = centerBcr - document.documentElement.clientHeight / 2
-  let newMargin = Math.round(Math.abs(delta) / 80 * 10) / 10;
-  if (newMargin < Math.abs(end)) margin.value = end
-  else margin.value = -newMargin
+  const bcr = root.value?.getBoundingClientRect();
+  const centerBcr = bcr.bottom - bcr.height / 2;
+  const delta = centerBcr - document.documentElement.clientHeight / 2;
+  let newMargin = Math.round((Math.abs(delta) / 80) * 10) / 10;
+  if (newMargin < Math.abs(end)) margin.value = end;
+  else margin.value = -newMargin;
 };
+
+const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="counterpage" ref='root' :style='{margin: `${margin}rem`}'>
+  <div
+    class="counterpage"
+    ref="root"
+    :class="{ mobile: isMobile }"
+    :style="{ margin: `${margin}rem` }"
+  >
     <QScrollObserver @scroll="scrollHandler" />
-    <div class="counter__wrapper structure">
-      <h1 class="counter">
+    <div class="content-wrapper structure">
+      <h1 class="counter text-primary text-center">
         <span class="counter__number">{{ counter }}</span>
         {{ $t('pages.landing.counterPage.amount') }}
       </h1>
@@ -46,12 +53,18 @@ const scrollHandler = () => {
   //  margin: -2rem auto;
   //}
 
-  .counter__wrapper {
+  .content-wrapper {
     padding: 15rem 0;
 
     .counter {
       color: $primary;
       text-align: center;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding: 7rem 0;
     }
   }
 }

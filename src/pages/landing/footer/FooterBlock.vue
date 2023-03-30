@@ -4,17 +4,17 @@
   <div class="footer">
     <div class="content-wrapper structure text-primary">
       <h1 class="title">
-        {{ $t('pages.landing.footerBlocktitle') }}
+        {{ $t('pages.landing.footerBlock.title') }}
       </h1>
-      <div class="details row justify-end">
+      <div class="details row">
         <div class="contacts column">
           <h4>{{ $t('pages.landing.footerBlock.contacts') }}</h4>
-          <a href="#" class="tg link text-primary">{{
-            $t('pages.landing.footerBlock.tg')
-          }}</a>
-          <a href="#" class="vk link text-primary">{{
-            $t('pages.landing.footerBlock.vk')
-          }}</a>
+          <a href="#" class="tg link text-primary">
+            {{ $t('pages.landing.footerBlock.tg') }}
+          </a>
+          <a href="#" class="vk link text-primary">
+            {{ $t('pages.landing.footerBlock.vk') }}
+          </a>
         </div>
         <div class="info column">
           <h4>{{ $t('pages.landing.footerBlock.information') }}</h4>
@@ -55,6 +55,7 @@
     }
 
     .details {
+      justify-items: end;
       .column {
         margin-left: 3.6rem;
       }
@@ -68,6 +69,33 @@
       position: absolute;
       left: 0;
       bottom: 0;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      overflow: hidden;
+
+      .title {
+        line-height: unset;
+        margin-bottom: 2rem;
+      }
+
+      .details {
+        justify-items: unset;
+        flex-wrap: nowrap;
+
+        margin-bottom: 4rem;
+        .column {
+          margin-left: 0rem;
+
+          &:last-of-type {
+            margin-left: 2.2rem;
+          }
+        }
+      }
     }
   }
 }

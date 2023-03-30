@@ -20,7 +20,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
           ></ButtonComponent>
         </div>
         <div class="skills-diagram">
-          <SkillTreeComponent></SkillTreeComponent>
+          <SkillTreeComponent class="skills"></SkillTreeComponent>
         </div>
       </div>
     </div>
@@ -38,6 +38,11 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
   .content-wrapper {
     padding-top: 8rem;
 
+    .content {
+      display: flex;
+      flex-direction: row;
+    }
+
     .title {
       margin-bottom: 3.5rem;
     }
@@ -46,6 +51,34 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       .description-details {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+
+      .content {
+        flex-direction: column-reverse;
+        align-content: center;
+
+        .description {
+          width: 100%;
+        }
+      }
+
+      .title {
+        margin-bottom: 1.5rem;
+      }
+
+      .skills-diagram {
+        width: 100%;
+        margin-bottom: 1.5rem;
+        .skills {
+          width: 100%;
+        }
       }
     }
   }

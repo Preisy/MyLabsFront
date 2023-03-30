@@ -6,7 +6,7 @@ interface Props {
   icon?: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
@@ -83,6 +83,33 @@ const props = defineProps<Props>();
     }
     .icon {
       height: 100%;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    position: relative;
+    --line-margin-right: 0.05rem;
+    --height: 3rem;
+    .img-wrapper {
+      height: 0;
+      display: none;
+      // position: absolute;
+      // opacity: 0.3;
+      // height: 6rem;
+      // z-index: 0;
+
+      // img {
+      //   height: 100%;
+      // }
+    }
+    .step-content {
+      position: relative;
+      margin-left: 0 !important;
+      z-index: 1;
+
+      .step-num {
+        margin-right: 1rem;
+      }
     }
   }
 }

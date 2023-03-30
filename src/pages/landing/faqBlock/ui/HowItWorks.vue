@@ -6,23 +6,23 @@ const { t } = useI18n();
 const steps = [
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_1')}`,
-    icon: 'mail',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_2')}`,
-    icon: 'payments',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_3')}`,
-    icon: 'construction',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_4')}`,
-    icon: 'favorite',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_5')}`,
-    icon: 'check_box',
+    icon: '',
   },
 ];
 </script>
@@ -60,6 +60,12 @@ const steps = [
   .title {
     font-weight: 700;
     margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: $screen-sm) {
+    --margin-right: 0;
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
 }
 </style>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { QScrollObserver } from 'quasar';
+import { QScrollObserver, Screen } from 'quasar';
 import { ref } from 'vue';
 import ButtonComponent from '../ABtn.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
 
-// const model = ref('possibilities');
 const currentLinkIndex = ref(0);
 
 const buttonLinks = [
@@ -19,13 +18,24 @@ const scrollHandler = (val: any) => {
   const top = val.position.top;
   isCompact.value = top > 500;
 };
+
+const isMobile = Screen.lt.sm;
+const isMenuOpened = ref(false);
 </script>
 
 <template>
-  <q-header class="header" :class="{ compact: isCompact }">
+  <q-header
+    class="header"
+    :class="{ compact: isCompact && !isMobile, mobile: isMobile }"
+  >
     <QScrollObserver axis="vertical" @scroll="scrollHandler" />
-    <q-toolbar class="header-toolbar justify-between">
-      <div class="header-buttons">
+    <img src="src/assets/my_labs_logo.png" alt="" class="logo" />
+
+    <q-toolbar
+      class="header-toolbar justify-between"
+      :class="{ opened: isMenuOpened, column: isMobile }"
+    >
+      <div class="header-buttons" :class="{ column: isMobile }">
         <router-link
           class="header-router"
           v-for="(link, index) in buttonLinks"
@@ -53,21 +63,83 @@ const scrollHandler = (val: any) => {
         ></button-component>
       </div>
     </q-toolbar>
+
+    <div class="btn-holder" v-if="isMobile">
+      <q-btn
+        size="1.2rem"
+        flat
+        color="dark"
+        :icon="isMenuOpened ? 'close' : 'menu'"
+        @click="isMenuOpened = !isMenuOpened"
+      />
+    </div>
   </q-header>
 </template>
 
 <style scoped lang="scss">
 .header {
   border-radius: 0 0 2rem 2rem;
-  background: url('src/assets/my_labs_logo.png');
   background-color: $primary;
-  background-size: 4rem 2.25rem;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+  // background: url('src/assets/my_labs_logo.png');
+  // background-size: 4rem 2.25rem;
+  // background-position: 50% 50%;
+  // background-repeat: no-repeat;
+
+  position: relative;
+
+  .logo {
+    --width: 4rem;
+    --height: 2.25rem;
+
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    top: calc(50% - var(--height) / 2);
+    left: calc(50% - var(--width) / 2);
+  }
 
   &.compact {
     .header-toolbar {
       padding: 0.6rem 3.5rem;
+    }
+  }
+
+  &.mobile {
+    --header-height: 3rem;
+    border-radius: 0;
+    height: var(--header-height);
+
+    .logo {
+      left: calc(15% - var(--width) / 2);
+      z-index: 1;
+    }
+
+    .header-toolbar {
+      position: absolute;
+      background: $primary;
+      top: -1000%;
+      z-index: 0;
+
+      padding: 2rem;
+      padding-top: calc(var(--header-height) + 1rem);
+      border-radius: 1.5rem;
+
+      align-items: flex-start;
+
+      .header-buttons {
+        margin-bottom: 2.5rem;
+      }
+
+      &.opened {
+        top: 0;
+      }
+    }
+
+    .btn-holder {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
     }
   }
 

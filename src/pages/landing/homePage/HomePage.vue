@@ -41,9 +41,7 @@ import ATypingText from 'components/ATypingText.vue';
     padding: 0;
 
     .description {
-      font-size: 2.4rem;
       line-height: 2.9rem;
-      font-weight: 700;
       margin-bottom: 2.2rem;
       border-radius: 2.4rem;
       box-sizing: content-box;
@@ -74,9 +72,28 @@ import ATypingText from 'components/ATypingText.vue';
       }
     }
   }
-}
 
-.text-bold {
-  font-weight: 600;
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      margin: 1.5rem auto;
+      .homepage-img {
+        position: relative;
+        width: 120%;
+        top: unset;
+        left: -10%;
+        right: auto;
+
+        img {
+          width: 100% !important;
+        }
+      }
+
+      .description {
+        line-height: 1.5rem;
+        width: 100%;
+        padding: 0;
+      }
+    }
+  }
 }
 </style>

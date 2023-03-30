@@ -1,11 +1,33 @@
 <script setup lang="ts">
 import ExamplesCardComponent from './ui/ExamplesCardComponent.vue';
 import SlideComponent from './ui/CarouselSlide.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { slides } from './cards';
 import ACarousel from 'src/components/ACarousel.vue';
+import { Screen } from 'quasar';
 
 const slider_index = ref('1');
+
+const isMobile = computed(() => {
+  console.log(Screen);
+  return Screen.lt.sm;
+});
+
+const _slides = computed(() => {
+  let result = [];
+  const cardsInOneSlide = isMobile.value ? 1 : 6;
+  const slidesCount = slides.length / cardsInOneSlide;
+
+  for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
+    const slide = [];
+    for (let card_i = 0; card_i < cardsInOneSlide; card_i++)
+      slide.push(slides[slide_i * cardsInOneSlide + card_i]);
+
+    result.push(slide);
+  }
+
+  return result;
+});
 </script>
 
 <template>
@@ -16,12 +38,12 @@ const slider_index = ref('1');
       </h1>
       <ACarousel
         v-model="slider_index"
-        :slides-count="slides.length"
+        :slides-count="_slides.length"
         control-theme="dark"
         class="slider-wrapper"
       >
         <SlideComponent
-          v-for="(slide, index) in slides"
+          v-for="(slide, index) in _slides"
           :key="index"
           :name="index.toString()"
         >
@@ -47,6 +69,8 @@ const slider_index = ref('1');
   overflow: hidden;
   z-index: 1;
 
+  border-radius: 0 0 2rem 2rem;
+
   .content-wrapper {
     padding: 8rem 0;
 
@@ -68,6 +92,22 @@ const slider_index = ref('1');
     bottom: calc(-1 * var(--width) / 1.7 / var(--aspect-ratio));
     left: calc(-1 * var(--width) / 2);
     z-index: -1;
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding: 5rem 0;
+
+      .title {
+        line-height: unset;
+      }
+    }
+
+    .bg-image {
+      --width: 50rem;
+      bottom: calc(-1.1 * var(--width) / 1.7 / var(--aspect-ratio));
+      left: calc(-1.1 * var(--width) / 2);
+    }
   }
 }
 </style>

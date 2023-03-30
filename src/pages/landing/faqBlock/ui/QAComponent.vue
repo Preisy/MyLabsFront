@@ -30,9 +30,12 @@ const cards = [
 <template>
   <div class="qa-wrapper">
     <div class="qa-cards text-left">
-      <QACard v-for="(card, index) in cards" :key="index">
-        <template #question>{{ card.question }}</template>
-      </QACard>
+      <QACard
+        v-for="(card, index) in cards"
+        :key="index"
+        :question="card.question"
+        :answer="card.answer"
+      />
     </div>
   </div>
 </template>
@@ -40,5 +43,9 @@ const cards = [
 <style scoped lang="scss">
 .qa-wrapper {
   width: 50%;
+
+  @media (max-width: $screen-sm) {
+    width: 100%;
+  }
 }
 </style>

@@ -1,45 +1,68 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Props {
+  question: string;
+  answer: string;
+}
+
+const props = defineProps<Props>();
+</script>
 
 <template>
-  <div class="qa-card bg-primary">
-    <div class="wrapper">
-      <h4 class="question">
-        <slot name="question"></slot>
-      </h4>
-      <q-btn
-        class="btn br-15px"
-        text-color="primary"
-        color="dark"
-        icon="expand_more"
-      />
-    </div>
-  </div>
+  <q-expansion-item
+    class="qa-card"
+    header-class="card-header"
+    expand-icon-class="card-btn bg-dark text-primary br-15px"
+    :label="props.question"
+  >
+    <p class="answer">{{ props.answer }}</p>
+  </q-expansion-item>
 </template>
 
 <style scoped lang="scss">
 .qa-card {
-  padding: 1.5rem;
-  border-radius: 1.5rem;
+  background: white;
+  box-shadow: 0 0 20px 0 #00000030;
+  border-radius: 2rem;
+
+  padding: 1rem;
+
   margin-bottom: 1.5rem;
 
-  box-shadow: 0 0 20px 0 #00000020;
-
-  .wrapper {
-    position: relative;
+  .answer {
+    margin: 0;
+    margin-top: 1rem;
   }
+}
+</style>
 
-  .question {
-    font-weight: 700;
-    padding-right: 3rem;
+<style lang="scss">
+.card-btn {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  padding: 0 !important;
+  align-items: center !important;
+
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+
+.card-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.6rem;
+
+  padding: 0 !important;
+  padding-right: 3rem !important;
+}
+
+.qa-card {
+  .q-focus-helper {
+    display: none;
   }
-  .btn {
-    --size: 2.25rem;
-    width: var(--size);
-    height: var(--size);
-
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  .q-hover-helper {
+    display: none;
   }
 }
 </style>

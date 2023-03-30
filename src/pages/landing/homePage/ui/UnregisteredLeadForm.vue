@@ -114,6 +114,13 @@ function onSubmit(values: UnregisteredLeadForm, actions: any) {
       height: 2.25rem;
     }
   }
+
+  @media (max-width: $screen-sm) {
+    width: 100%;
+    .form-line {
+      margin-bottom: 0;
+    }
+  }
 }
 </style>
 
