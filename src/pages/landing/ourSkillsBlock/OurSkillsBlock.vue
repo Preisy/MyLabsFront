@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ButtonComponent from 'components/ABtn.vue';
-import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
+import SkillTreeComponent from './ui/SkillTreeComponent.vue';
 import { Screen } from 'quasar';
 
 const isMobile = Screen.lt.sm;
@@ -27,6 +27,7 @@ const isMobile = Screen.lt.sm;
         </div>
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
+          <img class='blue-shadow' src='/src/assets/ourSkills/blue_shadow.svg' alt=''>
         </div>
       </div>
     </div>
@@ -40,6 +41,18 @@ const isMobile = Screen.lt.sm;
 
   position: relative;
   z-index: 1;
+  overflow: hidden;
+
+  .skills-diagram {
+    position: relative;
+
+    .blue-shadow {
+      position: absolute;
+      top: -75%;
+      right: -60%;
+      z-index: -1;
+    }
+  }
 
   &.mobile {
     .content-wrapper {
@@ -61,10 +74,11 @@ const isMobile = Screen.lt.sm;
   }
 
   .content-wrapper {
-    padding-top: 8rem;
+    padding-top: 7rem;
+    padding-bottom: 1rem;
 
     .title {
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
     }
 
     .description {
