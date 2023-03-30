@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Screen } from 'quasar';
-
 interface Props {
   num: number;
   isLast: boolean;
@@ -9,12 +7,10 @@ interface Props {
 }
 
 defineProps<Props>();
-
-const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="step row" :class="{ last: isLast, mobile: isMobile }">
+  <div class="step row" :class="{ last: isLast }">
     <div class="img-wrapper">
       <img
         class="line"
@@ -54,33 +50,6 @@ const isMobile = Screen.lt.sm;
     }
   }
 
-  &.mobile {
-    position: relative;
-    --line-margin-right: 0.05rem;
-    --height: 3rem;
-    .img-wrapper {
-      height: 0;
-      display: none;
-      // position: absolute;
-      // opacity: 0.3;
-      // height: 6rem;
-      // z-index: 0;
-
-      // img {
-      //   height: 100%;
-      // }
-    }
-    .step-content {
-      position: relative;
-      margin-left: 0 !important;
-      z-index: 1;
-
-      .step-num {
-        margin-right: 1rem;
-      }
-    }
-  }
-
   .img-wrapper {
     height: 125%;
     margin-right: var(--line-margin-right);
@@ -114,6 +83,33 @@ const isMobile = Screen.lt.sm;
     }
     .icon {
       height: 100%;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    position: relative;
+    --line-margin-right: 0.05rem;
+    --height: 3rem;
+    .img-wrapper {
+      height: 0;
+      display: none;
+      // position: absolute;
+      // opacity: 0.3;
+      // height: 6rem;
+      // z-index: 0;
+
+      // img {
+      //   height: 100%;
+      // }
+    }
+    .step-content {
+      position: relative;
+      margin-left: 0 !important;
+      z-index: 1;
+
+      .step-num {
+        margin-right: 1rem;
+      }
     }
   }
 }

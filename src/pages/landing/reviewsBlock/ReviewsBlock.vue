@@ -10,7 +10,7 @@ const carousel_val = ref('0');
 
 const _slides = computed(() => {
   let result = [];
-  const cardsInOneSlide = isMobile ? 1 : 2;
+  const cardsInOneSlide = isMobile.value ? 1 : 2;
   const slidesCount = slides.length / cardsInOneSlide;
 
   for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
@@ -24,11 +24,11 @@ const _slides = computed(() => {
   return result;
 });
 
-const isMobile = Screen.lt.sm;
+const isMobile = computed(() => Screen.lt.sm);
 </script>
 
 <template>
-  <div class="reviews" :class="{ mobile: isMobile }">
+  <div class="reviews">
     <div class="content-wrapper structure">
       <h1 class="title text-primary text-center">
         {{ $t('pages.landing.reviewsPage.title') }}
@@ -63,24 +63,6 @@ const isMobile = Screen.lt.sm;
   padding: 3.5rem 0;
   padding-bottom: 5.5rem;
 
-  &.mobile {
-    padding-top: 4.5rem;
-    padding-bottom: 3.5rem;
-
-    margin: -2rem 0;
-
-    .content-wrapper {
-      .title {
-        padding: 0;
-        margin-bottom: 1.5rem;
-        line-height: unset;
-      }
-      .slider-wrapper {
-        width: 100%;
-      }
-    }
-  }
-
   .content-wrapper {
     .title {
       padding-bottom: 3.5rem;
@@ -100,6 +82,24 @@ const isMobile = Screen.lt.sm;
         .pos_bottom {
           align-self: flex-end;
         }
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    padding-top: 6rem;
+    padding-bottom: 5.5rem;
+
+    margin: -2rem 0;
+
+    .content-wrapper {
+      .title {
+        padding: 0;
+        margin-bottom: 2.5rem;
+        line-height: unset;
+      }
+      .slider-wrapper {
+        width: 100%;
       }
     }
   }

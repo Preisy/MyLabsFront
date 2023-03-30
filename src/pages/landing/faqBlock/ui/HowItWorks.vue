@@ -1,37 +1,34 @@
 <script setup lang="ts">
 import StepComponent from './StepComponent.vue';
 import { useI18n } from 'vue-i18n';
-import { Screen } from 'quasar';
 const { t } = useI18n();
 
 const steps = [
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_1')}`,
-    icon: 'mail',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_2')}`,
-    icon: 'payments',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_3')}`,
-    icon: 'construction',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_4')}`,
-    icon: 'favorite',
+    icon: '',
   },
   {
     label: `${t('pages.landing.faqBlock.howItWorks.step_5')}`,
-    icon: 'check_box',
+    icon: '',
   },
 ];
-
-const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="how-it-works bg-primary" :class="{ mobile: isMobile }">
+  <div class="how-it-works bg-primary">
     <h4 class="title">
       {{ $t('pages.landing.faqBlock.howItWorks.title') }}
     </h4>
@@ -60,15 +57,15 @@ const isMobile = Screen.lt.sm;
 
   height: fit-content;
 
-  &.mobile {
-    --margin-right: 0;
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
-
   .title {
     font-weight: 700;
     margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: $screen-sm) {
+    --margin-right: 0;
+    width: 100%;
+    margin-bottom: 1.5rem;
   }
 }
 </style>

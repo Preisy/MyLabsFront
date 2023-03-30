@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { Screen } from 'quasar';
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
-
-const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="homepage" :class="{ mobile: isMobile }">
+  <div class="homepage">
     <div class="structure content-wrapper">
       <div class="homepage-img">
         <img
@@ -36,29 +33,6 @@ const isMobile = Screen.lt.sm;
 
   position: relative;
   z-index: 1;
-
-  &.mobile {
-    .content-wrapper {
-      margin: 1.5rem auto;
-      .homepage-img {
-        position: relative;
-        width: 120%;
-        top: unset;
-        left: -10%;
-        right: auto;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      .description {
-        line-height: 1.5rem;
-        width: 100%;
-        padding: 0;
-      }
-    }
-  }
 
   .content-wrapper {
     position: relative;
@@ -96,6 +70,29 @@ const isMobile = Screen.lt.sm;
 
       img {
         user-select: none;
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      margin: 1.5rem auto;
+      .homepage-img {
+        position: relative;
+        width: 120%;
+        top: unset;
+        left: -10%;
+        right: auto;
+
+        img {
+          width: 100% !important;
+        }
+      }
+
+      .description {
+        line-height: 1.5rem;
+        width: 100%;
+        padding: 0;
       }
     }
   }

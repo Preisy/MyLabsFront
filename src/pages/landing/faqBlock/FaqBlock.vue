@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { Screen } from 'quasar';
 import HowItWorks from './ui/HowItWorks.vue';
 import QAComponent from './ui/QAComponent.vue';
-
-const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="faqblock bg-primary" :class="{ mobile: isMobile }">
+  <div class="faqblock bg-primary">
     <div class="content-wrapper structure text-center">
       <h1 class="title">{{ $t('pages.landing.faqBlock.title') }}</h1>
-      <div class="content" :class="{ row: !isMobile, column: isMobile }">
+      <div class="content">
         <HowItWorks></HowItWorks>
         <QAComponent></QAComponent>
       </div>
@@ -26,23 +23,15 @@ const isMobile = Screen.lt.sm;
   border-radius: 2rem;
   margin: -2rem 0;
 
-  &.mobile {
-    .content-wrapper {
-      padding: 3.5rem 0;
-
-      .title {
-        margin-bottom: 1.5rem;
-      }
-      .content {
-        // flex-wrap: unset;
-      }
-    }
-  }
-
   .content-wrapper {
     padding: 8rem 0;
     position: relative;
     z-index: 1;
+
+    .content {
+      display: flex;
+      flex-direction: row;
+    }
 
     .title {
       margin-bottom: 3.5rem;
@@ -60,6 +49,19 @@ const isMobile = Screen.lt.sm;
 
     right: calc(-1 * var(--width) / 2);
     bottom: calc(-1.3 * var(--width) / var(--aspect-ratio) / 2);
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding: 3.5rem 0;
+
+      .title {
+        margin-bottom: 1.5rem;
+      }
+      .content {
+        flex-direction: column;
+      }
+    }
   }
 }
 </style>

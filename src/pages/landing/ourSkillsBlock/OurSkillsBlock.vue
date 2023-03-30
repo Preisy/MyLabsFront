@@ -1,21 +1,15 @@
 <script setup lang="ts">
 import ButtonComponent from 'components/ABtn.vue';
 import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
-import { Screen } from 'quasar';
-
-const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div class="our-skills bg-base" :class="{ mobile: isMobile }">
+  <div class="our-skills bg-base">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
-      <div
-        class="content justify-between items-center"
-        :class="{ row: !isMobile, 'column reverse content-center': isMobile }"
-      >
+      <div class="content row justify-between items-center">
         <div class="description col-3">
           <p class="description-details">
             {{ $t('pages.landing.ourSkillsBlock.details') }}
@@ -41,10 +35,39 @@ const isMobile = Screen.lt.sm;
   position: relative;
   z-index: 1;
 
-  &.mobile {
+  .content-wrapper {
+    padding-top: 8rem;
+
+    .content {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .title {
+      margin-bottom: 3.5rem;
+    }
+
+    .description {
+      .description-details {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  @media (max-width: $screen-sm) {
     .content-wrapper {
       padding-top: 1.5rem;
       padding-bottom: 2rem;
+
+      .content {
+        flex-direction: column-reverse;
+        align-content: center;
+
+        .description {
+          width: 100%;
+        }
+      }
 
       .title {
         margin-bottom: 1.5rem;
@@ -56,21 +79,6 @@ const isMobile = Screen.lt.sm;
         .skills {
           width: 100%;
         }
-      }
-    }
-  }
-
-  .content-wrapper {
-    padding-top: 8rem;
-
-    .title {
-      margin-bottom: 3.5rem;
-    }
-
-    .description {
-      .description-details {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
       }
     }
   }

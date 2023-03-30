@@ -53,18 +53,18 @@ const isMobile = Screen.lt.sm;
   //  margin: -2rem auto;
   //}
 
-  &.mobile {
-    .content-wrapper {
-      padding: 3.6rem 0;
-    }
-  }
-
   .content-wrapper {
     padding: 15rem 0;
 
     .counter {
       color: $primary;
       text-align: center;
+    }
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding: 7rem 0;
     }
   }
 }

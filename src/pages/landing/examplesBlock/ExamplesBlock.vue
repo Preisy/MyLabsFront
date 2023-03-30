@@ -8,11 +8,14 @@ import { Screen } from 'quasar';
 
 const slider_index = ref('1');
 
-const isMobile = Screen.lt.sm;
+const isMobile = computed(() => {
+  console.log(Screen);
+  return Screen.lt.sm;
+});
 
 const _slides = computed(() => {
   let result = [];
-  const cardsInOneSlide = isMobile ? 1 : 6;
+  const cardsInOneSlide = isMobile.value ? 1 : 6;
   const slidesCount = slides.length / cardsInOneSlide;
 
   for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
@@ -28,7 +31,7 @@ const _slides = computed(() => {
 </script>
 
 <template>
-  <div class="examples bg-base" :class="{ mobile: isMobile }">
+  <div class="examples bg-base">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.examplesBlock.title') }}
@@ -68,23 +71,6 @@ const _slides = computed(() => {
 
   border-radius: 0 0 2rem 2rem;
 
-  &.mobile {
-    .content-wrapper {
-      padding: 1.5rem 0;
-
-      .title {
-        margin-bottom: 1.5rem;
-        line-height: unset;
-      }
-    }
-
-    .bg-image {
-      --width: 50rem;
-      bottom: calc(-1.1 * var(--width) / 1.7 / var(--aspect-ratio));
-      left: calc(-1.1 * var(--width) / 2);
-    }
-  }
-
   .content-wrapper {
     padding: 8rem 0;
 
@@ -106,6 +92,22 @@ const _slides = computed(() => {
     bottom: calc(-1 * var(--width) / 1.7 / var(--aspect-ratio));
     left: calc(-1 * var(--width) / 2);
     z-index: -1;
+  }
+
+  @media (max-width: $screen-sm) {
+    .content-wrapper {
+      padding: 5rem 0;
+
+      .title {
+        line-height: unset;
+      }
+    }
+
+    .bg-image {
+      --width: 50rem;
+      bottom: calc(-1.1 * var(--width) / 1.7 / var(--aspect-ratio));
+      left: calc(-1.1 * var(--width) / 2);
+    }
   }
 }
 </style>
