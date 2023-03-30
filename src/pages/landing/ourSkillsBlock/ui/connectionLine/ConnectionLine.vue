@@ -49,7 +49,4 @@ svg {
   left: calc(50% - 0.1rem);
   top: -100%;
 }
-
-
-
 </style>

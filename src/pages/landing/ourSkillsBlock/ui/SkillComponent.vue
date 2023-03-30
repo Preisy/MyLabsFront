@@ -1,13 +1,13 @@
 <script setup lang='ts'>
-import ConnectionLine from 'pages/landing/ourSkillsBlock/ui/connectionLine/ConnectionLine.vue';
-import { Skill } from './Skill'
-import { ref } from 'vue';
+import ConnectionLine from 'pages/landing/ourSkillsBlock/ui/connectionLine';
+import { Skill } from './Skill';
 
 interface SkillComponentProps {
   skill: Skill,
   line?: 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb'
 }
-const props = defineProps<SkillComponentProps>()
+
+const props = defineProps<SkillComponentProps>();
 </script>
 
 <template>
