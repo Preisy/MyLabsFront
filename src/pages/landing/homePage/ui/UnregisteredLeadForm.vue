@@ -33,6 +33,7 @@ const schema = yup.object<
   typeof UnregisteredLeadFormSchema
 >(UnregisteredLeadFormSchema);
 
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 function onSubmit(values: UnregisteredLeadForm, actions: any) {
   // todo store
   console.log(JSON.stringify(values, null, 2));
