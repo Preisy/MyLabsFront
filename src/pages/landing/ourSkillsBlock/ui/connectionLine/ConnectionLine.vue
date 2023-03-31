@@ -1,9 +1,10 @@
 <script setup lang='ts'>
+import { Direction } from '../types';
 import ConnectionLineHorizontal from './ConnectionLineHorizontal.vue';
 import ConnectionLineVertical from './ConnectionLineVertical.vue';
 
 interface ConnectionLineProps {
-  direction: 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb'
+  direction: Direction
 }
 const props = withDefaults(defineProps<ConnectionLineProps>(), {
   direction: 'rb'

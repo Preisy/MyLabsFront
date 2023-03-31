@@ -3,14 +3,18 @@
   "editor.guides.bracketPairs": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": [
-    "source.fixAll.eslint"
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "i18n-ally.localesPaths": [
+    "src/boot/i18n",
+    "src/pages/landing/counterBlock/i18n",
+    "src/pages/landing/examplesBlock/i18n",
+    "src/pages/landing/footer/i18n",
+    "src/pages/landing/faqBlock/i18n",
+    "src/pages/landing/ourSkillsBlock/i18n",
+    "src/pages/landing/homePage/i18n",
+    "src/pages/landing/reviewsBlock/i18n"
   ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "vue"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "i18n-ally.sourceLanguage": "ru"
 }

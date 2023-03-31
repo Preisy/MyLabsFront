@@ -2,10 +2,10 @@
 import SkillComponent from './SkillComponent.vue';
 import { skillsDesktop, skillsMobile } from './skills'
 import { onMounted, onUnmounted, Ref, ref } from 'vue';
-import { Skill } from 'pages/landing/ourSkillsBlock/ui/Skill';
+import { Direction, Skill } from 'pages/landing/ourSkillsBlock/ui/types';
 
 let skills: Ref<(Skill & {
-  line?: string | undefined
+  line?: Direction | undefined
 })[]> = ref([])
 
 let choose = () => {

@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 import ConnectionLine from 'pages/landing/ourSkillsBlock/ui/connectionLine';
-import { Skill } from './Skill';
+import { Direction, Skill } from './types';
 
 interface SkillComponentProps {
   skill: Skill,
-  line?: 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb'
+  line?: Direction
 }
 
 const props = defineProps<SkillComponentProps>();

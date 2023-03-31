@@ -15,7 +15,7 @@ import ButtonComponent from 'components/ABtn.vue';
   </div>
 </template>
 
-<style lang='scss'>
+<style scoped lang='scss'>
 .description {
   width: 18rem;
   .description-details {

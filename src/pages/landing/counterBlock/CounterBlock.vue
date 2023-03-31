@@ -48,7 +48,7 @@ const isMobile = Screen.lt.sm;
   //transition: 0.3s all ease-in-out;
 
   margin: -8rem auto;
-  //will-change: margin;
+  will-change: margin;
   //&.tools {
   //  margin: -2rem auto;
   //}
