@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ButtonComponent from 'components/ABtn.vue';
-import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
+import SkillTreeComponent from './ui/SkillTreeComponent.vue';
 </script>
 
 <template>
@@ -21,6 +21,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
         </div>
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
+          <img class='blue-shadow' src='/src/assets/ourSkills/blue_shadow.svg' alt=''>
         </div>
       </div>
     </div>
@@ -34,6 +35,18 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
 
   position: relative;
   z-index: 1;
+  overflow: hidden;
+
+  .skills-diagram {
+    position: relative;
+
+    .blue-shadow {
+      position: absolute;
+      top: -75%;
+      right: -60%;
+      z-index: -1;
+    }
+  }
 
   .content-wrapper {
     padding-top: 8rem;
@@ -79,6 +92,21 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
         .skills {
           width: 100%;
         }
+      }
+    }
+  }
+  .content-wrapper {
+    padding-top: 7rem;
+    padding-bottom: 1rem;
+
+    .title {
+      margin-bottom: 3rem;
+    }
+
+    .description {
+      .description-details {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
       }
     }
   }

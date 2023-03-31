@@ -3,6 +3,7 @@ import { QScrollObserver, Screen } from 'quasar';
 import { ref } from 'vue';
 import ButtonComponent from '../ABtn.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
+import { QScrollDetailsEvent } from 'src/global/types';
 
 const currentLinkIndex = ref(0);
 
@@ -14,7 +15,7 @@ const buttonLinks = [
 ];
 
 const isCompact = ref(false);
-const scrollHandler = (val: any) => {
+const scrollHandler = (val: QScrollDetailsEvent) => {
   const top = val.position.top;
   isCompact.value = top > 500;
 };

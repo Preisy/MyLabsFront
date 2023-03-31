@@ -1,14 +1,17 @@
 // app global css in SCSS form
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('./reset.css');
 @import url('./base.scss');
 
 :root {
   --font-family: 'Montserrat', sans-serif;
   --font-size: 20px;
+  --font-color: #0F0B33;
 }
 
 :root {
   font-size: var(--font-size);
+  color: var(--font-color);
   font-family: var(--font-family);
 }
 
