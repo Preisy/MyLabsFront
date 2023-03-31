@@ -87,6 +87,7 @@ const _slides = computed(() => {
     --width: 75rem;
     --aspect-ratio: 1.58371;
 
+    user-select: none;
     position: absolute;
     width: var(--width);
     bottom: calc(-1 * var(--width) / 1.7 / var(--aspect-ratio));

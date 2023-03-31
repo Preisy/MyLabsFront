@@ -1,25 +1,20 @@
 <script setup lang='ts'>
 import SkillComponent from './SkillComponent.vue';
-import cpp from 'assets/ourSkills/c++icon.png';
-import cSharp from 'assets/ourSkills/csicon.png';
-import c from 'src/assets/ourSkills/cicon.png';
-import linux from 'src/assets/ourSkills/linuxicon.png';
-import java from 'src/assets/ourSkills/javaicon.png';
-import python from 'src/assets/ourSkills/pyhtonicon.png';
-import office from 'src/assets/ourSkills/officeicon.png';
-import { Skill } from './Skill';
+import { skillsDesktop, skillsMobile } from './skills'
+import { onMounted, onUnmounted, Ref, ref } from 'vue';
+import { Skill } from 'pages/landing/ourSkillsBlock/ui/Skill';
 
-let skills: (Skill & {
-  line?: string
-})[] = [
-  { x: 2, y: 1, image: cpp, description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 6, y: 2, image: cSharp, line: 'rb', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 10, y: 1, image: c, line: 'rt', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 11, y: 5, image: linux, line: 'br', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 1, y: 7, image: python, line: 'lb', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 5, y: 6, image: java, line: 'bl', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' },
-  { x: 9, y: 7, image: office, line: 'rb', description: 'stl, opengl, libcurl, json, googletest, tinyXML2' }
-];
+let skills: Ref<(Skill & {
+  line?: string | undefined
+})[]> = ref([])
+
+let choose = () => {
+  if (innerWidth > 1500) skills.value = skillsDesktop
+  else skills.value = skillsMobile
+}
+choose()
+onMounted(() => window.addEventListener('resize', choose))
+onUnmounted(() => window.removeEventListener('resize', choose))
 
 </script>
 
@@ -31,8 +26,15 @@ let skills: (Skill & {
 
 <style scoped lang='scss'>
 .skilltree {
+  margin: 0 auto;
+  width: min-content;
   --scale: 3rem;
   display: grid;
-  grid-template: repeat(8, var(--scale)) / repeat(13, var(--scale));
+  grid-template: repeat(12, var(--scale)) / repeat(12, var(--scale));
+}
+@media (max-width: 1500px) {
+  .skilltree {
+    grid-template: repeat(15, var(--scale)) / repeat(7, var(--scale));
+  }
 }
 </style>

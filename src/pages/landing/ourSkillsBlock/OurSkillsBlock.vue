@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ButtonComponent from 'components/ABtn.vue';
 import SkillTreeComponent from './ui/SkillTreeComponent.vue';
+import OurSkillsDescription from './ui/OurSkillsDescription.vue';
 </script>
 
 <template>
@@ -10,15 +10,7 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
         {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
       <div class="content row justify-between items-center">
-        <div class="description col-3">
-          <p class="description-details">
-            {{ $t('pages.landing.ourSkillsBlock.details') }}
-          </p>
-          <ButtonComponent
-            class="q-px-xl q-py-sm"
-            :label="$t('pages.landing.ourSkillsBlock.contacts-btn')"
-          ></ButtonComponent>
-        </div>
+        <OurSkillsDescription />
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
           <img class='blue-shadow' src='/src/assets/ourSkills/blue_shadow.svg' alt=''>
@@ -39,10 +31,12 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
 
   .skills-diagram {
     position: relative;
+    width: min-content;
 
     .blue-shadow {
+      user-select: none;
       position: absolute;
-      top: -75%;
+      top: -36%;
       right: -60%;
       z-index: -1;
     }
@@ -60,11 +54,19 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
       margin-bottom: 3.5rem;
     }
 
-    .description {
-      .description-details {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
+  }
+
+  @media (max-width: 1500px) {
+    .skills-diagram {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .content {
+      flex-direction: column-reverse !important;
+      gap: 4rem;
+      align-content: center;
     }
   }
 
@@ -76,10 +78,6 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
       .content {
         flex-direction: column-reverse;
         align-content: center;
-
-        .description {
-          width: 100%;
-        }
       }
 
       .title {
@@ -87,7 +85,6 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
       }
 
       .skills-diagram {
-        width: 100%;
         margin-bottom: 1.5rem;
         .skills {
           width: 100%;
@@ -101,13 +98,6 @@ import SkillTreeComponent from './ui/SkillTreeComponent.vue';
 
     .title {
       margin-bottom: 3rem;
-    }
-
-    .description {
-      .description-details {
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-      }
     }
   }
 }

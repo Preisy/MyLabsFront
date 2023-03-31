@@ -42,7 +42,7 @@ const props = defineProps<SkillComponentProps>();
     background-color: #fff;
     @include box-shadow(0 0 3rem 0 rgba(0, 0, 0, 0.1));
     position: relative;
-    padding: 1rem;
+    padding: 1em;
     border-radius: 10rem;
     text-align: left;
     transition: all 0.3s ease-in-out;
@@ -70,6 +70,11 @@ const props = defineProps<SkillComponentProps>();
     z-index: 1;
     margin-left: -2rem;
     overflow: unset;
+
+    @media (max-width: 750px) {
+      margin-left: -6rem;
+      width: 250%;
+    }
 
     img {
       height: 80%;
