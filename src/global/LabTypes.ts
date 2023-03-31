@@ -6,6 +6,14 @@ export const LabTypes = [
   'Python',
   'Microsoft',
   'Linux',
-  'Web'
+  'Web',
 ];
-export type LabType = 'C' | 'Cpp' | 'C#' | 'Java' | 'Python' | 'Microsoft' | 'Linux' | 'Web'
+export type LabType =
+  | 'C'
+  | 'Cpp'
+  | 'C#'
+  | 'Java'
+  | 'Python'
+  | 'Microsoft'
+  | 'Linux'
+  | 'Web';

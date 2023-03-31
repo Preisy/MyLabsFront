@@ -5,4 +5,4 @@ export type Skill = {
   description: string;
 };
 
-export type Direction = 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb'
+export type Direction = 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb';

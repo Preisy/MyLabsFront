@@ -1,26 +1,33 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 import ConnectionLine from 'pages/landing/ourSkillsBlock/ui/connectionLine';
 import { Direction, Skill } from './types';
 
 interface SkillComponentProps {
-  skill: Skill,
-  line?: Direction
+  skill: Skill;
+  line?: Direction;
 }
 
 const props = defineProps<SkillComponentProps>();
 </script>
 
 <template>
-<div class='skill' :style='{gridColumnStart: props.skill.x, gridRowStart: props.skill.y}'>
-  <div class='content'>
-    <img :src='props.skill.image' alt=''>
-    <p class='p'>{{props.skill.description}}</p>
+  <div
+    class="skill"
+    :style="{ gridColumnStart: props.skill.x, gridRowStart: props.skill.y }"
+  >
+    <div class="content">
+      <img :src="props.skill.image" alt="" />
+      <p class="p">{{ props.skill.description }}</p>
+    </div>
+    <ConnectionLine
+      v-if="props.line"
+      class="connection-line"
+      :direction="props.line"
+    />
   </div>
-  <ConnectionLine v-if='props.line' class='connection-line' :direction='props.line'/>
-</div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 @mixin box-shadow($val) {
   -webkit-box-shadow: $val;
   -moz-box-shadow: $val;
@@ -84,7 +91,6 @@ const props = defineProps<SkillComponentProps>();
       opacity: 1;
       transition: all 0.15s 0.3s ease-in-out;
     }
-
   }
 }
 </style>

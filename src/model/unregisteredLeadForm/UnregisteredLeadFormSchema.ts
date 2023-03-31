@@ -3,5 +3,5 @@ import { UserCredsLeadFormSchema } from 'src/model/userCredsLeadForm';
 
 export const UnregisteredLeadFormSchema = {
   ...TaskSchema,
-  ...UserCredsLeadFormSchema
+  ...UserCredsLeadFormSchema,
 };

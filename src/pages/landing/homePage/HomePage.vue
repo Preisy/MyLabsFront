@@ -7,7 +7,7 @@ import ATypingText from 'components/ATypingText.vue';
   <div class="homepage">
     <div class="structure content-wrapper">
       <h1 class="description">
-        <ATypingText :text='$t("pages.landing.homePage.title")' />
+        <ATypingText :text="$t('pages.landing.homePage.title')" />
       </h1>
       <UnregisteredLeadForm />
       <div class="homepage-img">

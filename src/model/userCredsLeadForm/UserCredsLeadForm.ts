@@ -1,5 +1,5 @@
 export interface UserCredsLeadForm {
-  name: string,
-  email: string,
-  contact: string
+  name: string;
+  email: string;
+  contact: string;
 }

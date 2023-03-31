@@ -1,9 +1,9 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { useField } from 'vee-validate';
 
 interface ASelectProps {
-  name: string,
-  options: string[],
+  name: string;
+  options: string[];
   label: string;
   color?: string;
   bgColor?: string;
@@ -14,7 +14,7 @@ interface ASelectProps {
 const props = withDefaults(defineProps<ASelectProps>(), {
   color: 'dark',
   bgColor: 'info',
-  labelColor: 'dark'
+  labelColor: 'dark',
   // placeholder: ''
 });
 
@@ -23,19 +23,16 @@ const { errorMessage, value } = useField(props.name);
 
 <template>
   <q-file
-    v-model='value'
-    :bg-color='props.bgColor'
-    :color='color'
-    :error='!!errorMessage'
-
-    :error-message='errorMessage'
-    :label='props.label'
-    :label-color='props.labelColor'
-    class='br-15px'
+    v-model="value"
+    :bg-color="props.bgColor"
+    :color="color"
+    :error="!!errorMessage"
+    :error-message="errorMessage"
+    :label="props.label"
+    :label-color="props.labelColor"
+    class="br-15px"
     standout
   />
 </template>
 
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -13,7 +13,11 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
         <OurSkillsDescription />
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
-          <img class='blue-shadow' src='/src/assets/ourSkills/blue_shadow.svg' alt=''>
+          <img
+            class="blue-shadow"
+            src="/src/assets/ourSkills/blue_shadow.svg"
+            alt=""
+          />
         </div>
       </div>
     </div>
@@ -53,7 +57,6 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
     .title {
       margin-bottom: 3.5rem;
     }
-
   }
 
   @media (max-width: 1500px) {

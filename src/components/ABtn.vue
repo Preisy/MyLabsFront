@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script setup lang="ts">
 interface ButtonProps {
   label: string;
   color?: string;
@@ -9,23 +9,23 @@ interface ButtonProps {
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'dark',
   textColor: 'primary',
-  type: 'button'
+  type: 'button',
 });
 </script>
 
 <template>
   <q-btn
-    class='br-15px text-weight-600 btn'
+    class="br-15px text-weight-600 btn"
     unelevated
-    :color='props.color'
-    :text-color='props.textColor'
+    :color="props.color"
+    :text-color="props.textColor"
     no-caps
-    :label='props.label'
-    :type='props.type'
+    :label="props.label"
+    :type="props.type"
   />
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .btn {
   font-size: 0.8rem;
 }

@@ -2,7 +2,6 @@ import { boot } from 'quasar/wrappers';
 import { createI18n } from 'vue-i18n';
 import { mergeI18n } from './merge';
 
-
 // import messages from 'src/i18n';
 import { useLocaleStore } from 'boot/i18n/useLocaleStore';
 
@@ -13,7 +12,6 @@ import { TReviewsBlockI18n } from 'src/pages/landing/reviewsBlock';
 import { TOurSkillsBlockI18n } from 'src/pages/landing/ourSkillsBlock';
 import { TExamplesBlockI18n } from 'src/pages/landing/examplesBlock';
 import { TFaqBlockI18n } from 'src/pages/landing/faqBlock';
-
 
 const localeStore = useLocaleStore();
 
@@ -28,11 +26,10 @@ export default boot(({ app }) => {
       TExamplesBlockI18n,
       TReviewsBlockI18n,
       TFaqBlockI18n,
-      TFooterBlockI18n,
-    )
+      TFooterBlockI18n
+    ),
   });
 
   // Set i18n instance on app
   app.use(i18n);
 });
-
