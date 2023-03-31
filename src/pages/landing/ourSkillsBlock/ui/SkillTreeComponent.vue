@@ -9,8 +9,6 @@ import python from 'src/assets/ourSkills/pyhtonicon.png';
 import office from 'src/assets/ourSkills/officeicon.png';
 import { Skill } from './Skill';
 
-console.log(cSharp);
-
 let skills: (Skill & {
   line?: string
 })[] = [

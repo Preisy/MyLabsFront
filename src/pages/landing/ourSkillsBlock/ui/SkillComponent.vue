@@ -55,6 +55,7 @@ const props = defineProps<SkillComponentProps>();
       margin-right: 1rem;
       height: 100%;
       transition: all 0.1s ease-in-out;
+      user-select: none;
     }
     .p {
       opacity: 0;
