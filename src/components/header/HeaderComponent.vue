@@ -15,8 +15,8 @@ const buttonLinks = [
 ];
 
 const isCompact = ref(false);
-const scrollHandler = (val: QScrollDetailsEvent) => {
-  const top = val.position.top;
+const scrollHandler = (details: QScrollDetailsEvent) => {
+  const top = details.position.top;
   isCompact.value = top > 500;
 };
 
@@ -146,7 +146,7 @@ const isMenuOpened = ref(false);
 
   .header-toolbar {
     transition: 0.2s all ease-in-out;
-    padding: 1.8rem 3.5rem;
+    padding: 2.8rem 3.5rem;
 
     .header-buttons {
       .header-router {

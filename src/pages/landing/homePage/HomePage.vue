@@ -37,8 +37,7 @@ import ATypingText from 'components/ATypingText.vue';
 
   .content-wrapper {
     position: relative;
-    margin: 12rem auto;
-    padding: 0;
+    margin: 6rem auto 9rem;
 
     .description {
       line-height: 2.9rem;
@@ -52,7 +51,9 @@ import ATypingText from 'components/ATypingText.vue';
     .homepage-img {
       position: absolute;
       top: 0;
-      right: 6rem;
+      right: -6rem;
+      z-index: -1;
+
       .man-on-chair {
         position: relative;
         z-index: -1;
@@ -62,9 +63,9 @@ import ATypingText from 'components/ATypingText.vue';
 
       .floor-light {
         position: absolute;
-        z-index: -1;
-        top: 50%;
-        right: -60%;
+        bottom: -9rem;
+        right: -30%;
+        z-index: -2;
       }
 
       img {
