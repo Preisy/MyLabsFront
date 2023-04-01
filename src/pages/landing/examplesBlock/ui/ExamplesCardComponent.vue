@@ -38,6 +38,7 @@ const props = defineProps<CardProps>();
   box-sizing: border-box;
   padding: 1.5rem;
   border-radius: 1.5rem;
+  box-shadow: 0 0 2rem 0 #00000020;
 
   .title-wrapper {
     margin-bottom: 2.5rem;

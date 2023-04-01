@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { ref } from 'vue';
+import { Nullable } from 'src/global/types';
+import { computed, ref } from 'vue';
 import ButtonComponent from '../ABtn.vue';
+import ADialogHolder from '../dialog/ADialogHolder.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
 
 const currentLinkIndex = ref(0);
@@ -19,8 +21,17 @@ const scrollHandler = (val: any) => {
   isCompact.value = top > 500;
 };
 
-const isMobile = Screen.lt.sm;
+const isMobile = computed(() => Screen.lt.sm);
 const isMenuOpened = ref(false);
+
+const dialogComp = ref<Nullable<InstanceType<typeof ADialogHolder>>>(null);
+
+const showAuthDialog = () => {
+  dialogComp.value?.auth();
+};
+const showRegisterDialog = () => {
+  dialogComp.value?.register();
+};
 </script>
 
 <template>
@@ -56,10 +67,12 @@ const isMenuOpened = ref(false);
           color="grey"
           text-color="dark"
           label="Войти"
+          @click="showAuthDialog"
         ></button-component>
         <button-component
           class="auth-signup"
           label="Регистрация"
+          @click="showRegisterDialog"
         ></button-component>
       </div>
     </q-toolbar>
@@ -74,6 +87,8 @@ const isMenuOpened = ref(false);
       />
     </div>
   </q-header>
+
+  <ADialogHolder ref="dialogComp" />
 </template>
 
 <style scoped lang="scss">
@@ -85,7 +100,7 @@ const isMenuOpened = ref(false);
   // background-position: 50% 50%;
   // background-repeat: no-repeat;
 
-  position: relative;
+  position: fixed;
 
   .logo {
     --width: 4rem;
@@ -150,6 +165,7 @@ const isMenuOpened = ref(false);
     .header-buttons {
       .header-router {
         margin-right: 1.5rem;
+        text-decoration: unset;
 
         &:last-of-type {
           margin-right: 0;

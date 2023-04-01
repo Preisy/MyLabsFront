@@ -79,7 +79,7 @@ const _slides = computed(() => {
     }
 
     .slider-wrapper {
-      background: radial-gradient(#00000010 15%, transparent 75%);
+      // background: radial-gradient(#00000010 15%, transparent 75%);
     }
   }
 

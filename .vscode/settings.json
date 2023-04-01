@@ -12,5 +12,15 @@
     "typescript",
     "vue"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "i18n-ally.localesPaths": [
+    "src/boot/i18n",
+    "src/pages/landing/counterBlock/i18n",
+    "src/pages/landing/faqBlock/i18n",
+    "src/pages/landing/examplesBlock/i18n",
+    "src/pages/landing/footer/i18n",
+    "src/pages/landing/homePage/i18n",
+    "src/pages/landing/ourSkillsBlock/i18n",
+    "src/pages/landing/reviewsBlock/i18n"
+  ]
 }
