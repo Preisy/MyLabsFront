@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ButtonComponent from 'components/ABtn.vue';
-import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
+import SkillTreeComponent from './ui/SkillTreeComponent.vue';
+import OurSkillsDescription from './ui/OurSkillsDescription.vue';
 </script>
 
 <template>
@@ -9,18 +9,15 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       <h1 class="title text-center">
         {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
-      <div class="content row items-center">
-        <div class="description col-3">
-          <p class="description-details">
-            {{ $t('pages.landing.ourSkillsBlock.details') }}
-          </p>
-          <ButtonComponent
-            class="q-px-xl q-py-sm"
-            :label="$t('pages.landing.ourSkillsBlock.contacts-btn')"
-          ></ButtonComponent>
-        </div>
+      <div class="content row justify-between items-center">
+        <OurSkillsDescription />
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
+          <img
+            class="blue-shadow"
+            src="/src/assets/ourSkills/blue_shadow.svg"
+            alt=""
+          />
         </div>
       </div>
     </div>
@@ -34,9 +31,28 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
 
   position: relative;
   z-index: 1;
+  overflow: hidden;
+
+  .skills-diagram {
+    position: relative;
+    width: min-content;
+
+    .blue-shadow {
+      user-select: none;
+      position: absolute;
+      top: -36%;
+      right: -60%;
+      z-index: -1;
+    }
+  }
 
   .content-wrapper {
-    padding-top: 8rem;
+    padding-top: 7rem;
+    padding-bottom: 1rem;
+
+    .title {
+      margin-bottom: 3rem;
+    }
 
     .content {
       display: flex;
@@ -44,16 +60,30 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       justify-content: center;
     }
 
-    .title {
-      margin-bottom: 3.5rem;
-    }
-
     .description {
-      margin-right: 3rem;
       .description-details {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
       }
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    .content-wrapper {
+      .content {
+        justify-content: unset;
+      }
+    }
+    .skills-diagram {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .content {
+      flex-direction: column-reverse !important;
+      gap: 4rem;
+      align-content: center;
     }
   }
 
@@ -65,10 +95,6 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       .content {
         flex-direction: column-reverse;
         align-content: center;
-
-        .description {
-          width: 100%;
-        }
       }
 
       .title {
@@ -76,7 +102,6 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       }
 
       .skills-diagram {
-        width: 100%;
         margin-bottom: 1.5rem;
         .skills {
           width: 100%;

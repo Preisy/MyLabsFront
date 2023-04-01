@@ -5,6 +5,7 @@ import { computed, ref } from 'vue';
 import ButtonComponent from '../ABtn.vue';
 import ADialogHolder from '../dialog/ADialogHolder.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
+import { QScrollDetailsEvent } from 'src/global/types';
 
 const currentLinkIndex = ref(0);
 
@@ -16,7 +17,7 @@ const buttonLinks = [
 ];
 
 const isCompact = ref(false);
-const scrollHandler = (val: any) => {
+const scrollHandler = (val: QScrollDetailsEvent) => {
   const top = val.position.top;
   isCompact.value = top > 500;
 };
@@ -196,6 +197,13 @@ const showRegisterDialog = () => {
         bottom: 0;
         background-color: #ffffff99;
       }
+    }
+  }
+
+  @media (min-width: $screen-xl) {
+    .header-toolbar {
+      width: 90rem;
+      margin: 0 auto;
     }
   }
 }

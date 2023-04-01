@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
 import { ref } from 'vue';
-import isVisible from 'src/global/utils/isVisible';
+import { isVisible } from 'src/global/utils';
 
 const root = ref<HTMLDivElement>();
 const counter = ref(0);
