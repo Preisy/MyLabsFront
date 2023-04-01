@@ -55,7 +55,7 @@
     }
 
     .details {
-      justify-items: end;
+      justify-content: end;
       .column {
         margin-left: 3.6rem;
       }

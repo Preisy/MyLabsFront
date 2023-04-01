@@ -37,7 +37,7 @@ import ATypingText from 'components/ATypingText.vue';
 
   .content-wrapper {
     position: relative;
-    margin: 6rem auto 9rem;
+    margin: 14rem auto 9rem;
 
     .description {
       line-height: 2.9rem;
@@ -77,12 +77,16 @@ import ATypingText from 'components/ATypingText.vue';
   @media (max-width: $screen-sm) {
     .content-wrapper {
       margin: 1.5rem auto;
+      display: flex;
+      flex-direction: column;
+
       .homepage-img {
         position: relative;
         width: 120%;
         top: unset;
         left: -10%;
         right: auto;
+        margin-top: 2rem;
 
         img {
           width: 100% !important;

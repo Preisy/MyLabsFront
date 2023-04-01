@@ -5,7 +5,7 @@ import LandingPage from 'pages/landing/LandingPage.vue';
 
 <template>
   <q-layout view="lHh lpr lff">
-    <HeaderComponent class="header"></HeaderComponent>
+    <HeaderComponent></HeaderComponent>
 
     <q-page-container class="no-padding">
       <LandingPage />

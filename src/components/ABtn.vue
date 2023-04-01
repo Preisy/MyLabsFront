@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 interface ButtonProps {
   label: string;
   color?: string;
@@ -11,6 +13,11 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   textColor: 'primary',
   type: 'button',
 });
+
+const emits = defineEmits<{
+  (e: 'click', val: boolean): void;
+}>();
+const state = ref<boolean>(false);
 </script>
 
 <template>
@@ -22,6 +29,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
     no-caps
     :label="props.label"
     :type="props.type"
+    @click="emits('click', state)"
   />
 </template>
 

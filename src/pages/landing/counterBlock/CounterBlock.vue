@@ -42,16 +42,14 @@ const isMobile = Screen.lt.sm;
 <style scoped lang="scss">
 .counterpage {
   background: url('src/assets/digital_background.png');
-  background-size: cover;
+  // background-size: cover;
+  background-position: center;
   position: relative;
   z-index: 0;
   //transition: 0.3s all ease-in-out;
 
   margin: -8rem auto;
-  will-change: margin;
-  //&.tools {
-  //  margin: -2rem auto;
-  //}
+  // will-change: margin;
 
   .content-wrapper {
     padding: 15rem 0;

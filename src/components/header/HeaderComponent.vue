@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { ref } from 'vue';
+import { Nullable } from 'src/global/types';
+import { computed, ref } from 'vue';
 import ButtonComponent from '../ABtn.vue';
+import ADialogHolder from '../dialog/ADialogHolder.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
 
@@ -17,11 +19,20 @@ const buttonLinks = [
 const isCompact = ref(false);
 const scrollHandler = (details: QScrollDetailsEvent) => {
   const top = details.position.top;
-  isCompact.value = top > 500;
+  isCompact.value = top > 100;
 };
 
-const isMobile = Screen.lt.sm;
+const isMobile = computed(() => Screen.lt.sm);
 const isMenuOpened = ref(false);
+
+const dialogComp = ref<Nullable<InstanceType<typeof ADialogHolder>>>(null);
+
+const showAuthDialog = () => {
+  dialogComp.value?.auth();
+};
+const showRegisterDialog = () => {
+  dialogComp.value?.register();
+};
 </script>
 
 <template>
@@ -57,15 +68,17 @@ const isMenuOpened = ref(false);
           color="grey"
           text-color="dark"
           label="Войти"
+          @click="showAuthDialog"
         ></button-component>
         <button-component
           class="auth-signup"
           label="Регистрация"
+          @click="showRegisterDialog"
         ></button-component>
       </div>
     </q-toolbar>
 
-    <div class="btn-holder" v-if="isMobile">
+    <div v-if="isMobile" class="btn-holder">
       <q-btn
         size="1.2rem"
         flat
@@ -74,7 +87,11 @@ const isMenuOpened = ref(false);
         @click="isMenuOpened = !isMenuOpened"
       />
     </div>
+
+    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" />
   </q-header>
+
+  <ADialogHolder ref="dialogComp" />
 </template>
 
 <style scoped lang="scss">
@@ -86,17 +103,40 @@ const isMenuOpened = ref(false);
   // background-position: 50% 50%;
   // background-repeat: no-repeat;
 
-  position: relative;
+  position: fixed;
 
   .logo {
     --width: 4rem;
     --height: 2.25rem;
 
+    user-select: none;
     width: var(--width);
     height: var(--height);
     position: absolute;
     top: calc(50% - var(--height) / 2);
     left: calc(50% - var(--width) / 2);
+  }
+
+  .header-toolbar {
+    transition: 0.2s all ease-in-out;
+    padding: 1.8rem 3.5rem;
+
+    .header-buttons {
+      .header-router {
+        margin-right: 1.5rem;
+        text-decoration: unset;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .auth {
+    .auth-login {
+      margin-right: 0.75rem;
+    }
   }
 
   &.compact {
@@ -112,14 +152,14 @@ const isMenuOpened = ref(false);
 
     .logo {
       left: calc(15% - var(--width) / 2);
-      z-index: 1;
+      z-index: 2;
     }
 
     .header-toolbar {
       position: absolute;
       background: $primary;
       top: -1000%;
-      z-index: 0;
+      z-index: 1;
 
       padding: 2rem;
       padding-top: calc(var(--header-height) + 1rem);
@@ -141,6 +181,8 @@ const isMenuOpened = ref(false);
       align-items: center;
       height: 100%;
       justify-content: flex-end;
+      position: relative;
+      z-index: 2;
     }
   }
 
@@ -148,20 +190,25 @@ const isMenuOpened = ref(false);
     transition: 0.2s all ease-in-out;
     padding: 2.8rem 3.5rem;
 
-    .header-buttons {
-      .header-router {
-        margin-right: 1.5rem;
+    .bg-prevent {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 100%;
+      transition: 0.2s ease-in-out all;
 
-        &:last-of-type {
-          margin-right: 0;
-        }
+      &.open {
+        bottom: 0;
+        background-color: #ffffff99;
       }
     }
   }
 
-  .auth {
-    .auth-login {
-      margin-right: 0.75rem;
+  @media (min-width: $screen-xl) {
+    .header-toolbar {
+      width: 90rem;
+      margin: 0 auto;
     }
   }
 }

@@ -47,25 +47,39 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
   }
 
   .content-wrapper {
-    padding-top: 8rem;
+    padding-top: 7rem;
+    padding-bottom: 1rem;
+
+    .title {
+      margin-bottom: 3rem;
+    }
 
     .content {
       display: flex;
       flex-direction: row;
+      justify-content: center;
     }
 
-    .title {
-      margin-bottom: 3.5rem;
+    .description {
+      .description-details {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
     }
   }
 
-  @media (max-width: 1500px) {
+  @media (max-width: $screen-lg) {
+    .content-wrapper {
+      .content {
+        justify-content: unset;
+      }
+    }
     .skills-diagram {
       flex: 1;
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $screen-md) {
     .content {
       flex-direction: column-reverse !important;
       gap: 4rem;
@@ -95,12 +109,17 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
       }
     }
   }
-  .content-wrapper {
-    padding-top: 7rem;
-    padding-bottom: 1rem;
 
-    .title {
-      margin-bottom: 3rem;
+  @media (min-width: $screen-xl) {
+    .content-wrapper {
+      .content {
+        width: fit-content;
+        justify-content: center;
+
+        .description {
+          margin-right: 3rem;
+        }
+      }
     }
   }
 }
