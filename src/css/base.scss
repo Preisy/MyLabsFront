@@ -40,3 +40,10 @@ h4 {
     line-height: 1.2rem;
   }
 }
+
+/*Bigger than full-hd*/
+@media (min-width: 1921px) {
+  .structure {
+    width: fit-content;
+  }
+}

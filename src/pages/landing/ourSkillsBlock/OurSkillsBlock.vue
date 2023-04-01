@@ -9,7 +9,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
       <h1 class="title text-center">
         {{ $t('pages.landing.ourSkillsBlock.title') }}
       </h1>
-      <div class="content row justify-between items-center">
+      <div class="content row items-center">
         <div class="description col-3">
           <p class="description-details">
             {{ $t('pages.landing.ourSkillsBlock.details') }}
@@ -41,6 +41,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
     .content {
       display: flex;
       flex-direction: row;
+      justify-content: center;
     }
 
     .title {
@@ -48,6 +49,7 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
     }
 
     .description {
+      margin-right: 3rem;
       .description-details {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
@@ -78,6 +80,19 @@ import SkillTreeComponent from 'src/components/SkillTreeComponent.vue';
         margin-bottom: 1.5rem;
         .skills {
           width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $screen-xl) {
+    .content-wrapper {
+      .content {
+        width: fit-content;
+        justify-content: center;
+
+        .description {
+          margin-right: 3rem;
         }
       }
     }

@@ -6,10 +6,6 @@ import ATypingText from 'components/ATypingText.vue';
 <template>
   <div class="homepage">
     <div class="structure content-wrapper">
-      <h1 class="description">
-        <ATypingText :text='$t("pages.landing.homePage.title")' />
-      </h1>
-      <UnregisteredLeadForm />
       <div class="homepage-img">
         <img
           src="src/assets/homepage/man_on_chair.png"
@@ -22,6 +18,11 @@ import ATypingText from 'components/ATypingText.vue';
           alt=""
         />
       </div>
+
+      <h1 class="description">
+        <ATypingText :text="$t('pages.landing.homePage.title')" />
+      </h1>
+      <UnregisteredLeadForm />
     </div>
   </div>
 </template>
@@ -76,12 +77,16 @@ import ATypingText from 'components/ATypingText.vue';
   @media (max-width: $screen-sm) {
     .content-wrapper {
       margin: 1.5rem auto;
+      display: flex;
+      flex-direction: column;
+
       .homepage-img {
         position: relative;
         width: 120%;
         top: unset;
         left: -10%;
         right: auto;
+        margin-top: 2rem;
 
         img {
           width: 100% !important;

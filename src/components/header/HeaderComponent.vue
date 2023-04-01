@@ -77,7 +77,7 @@ const showRegisterDialog = () => {
       </div>
     </q-toolbar>
 
-    <div class="btn-holder" v-if="isMobile">
+    <div v-if="isMobile" class="btn-holder">
       <q-btn
         size="1.2rem"
         flat
@@ -86,6 +86,8 @@ const showRegisterDialog = () => {
         @click="isMenuOpened = !isMenuOpened"
       />
     </div>
+
+    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" />
   </q-header>
 
   <ADialogHolder ref="dialogComp" />
@@ -106,56 +108,12 @@ const showRegisterDialog = () => {
     --width: 4rem;
     --height: 2.25rem;
 
+    user-select: none;
     width: var(--width);
     height: var(--height);
     position: absolute;
     top: calc(50% - var(--height) / 2);
     left: calc(50% - var(--width) / 2);
-  }
-
-  &.compact {
-    .header-toolbar {
-      padding: 0.6rem 3.5rem;
-    }
-  }
-
-  &.mobile {
-    --header-height: 3rem;
-    border-radius: 0;
-    height: var(--header-height);
-
-    .logo {
-      left: calc(15% - var(--width) / 2);
-      z-index: 1;
-    }
-
-    .header-toolbar {
-      position: absolute;
-      background: $primary;
-      top: -1000%;
-      z-index: 0;
-
-      padding: 2rem;
-      padding-top: calc(var(--header-height) + 1rem);
-      border-radius: 1.5rem;
-
-      align-items: flex-start;
-
-      .header-buttons {
-        margin-bottom: 2.5rem;
-      }
-
-      &.opened {
-        top: 0;
-      }
-    }
-
-    .btn-holder {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      justify-content: flex-end;
-    }
   }
 
   .header-toolbar {
@@ -177,6 +135,67 @@ const showRegisterDialog = () => {
   .auth {
     .auth-login {
       margin-right: 0.75rem;
+    }
+  }
+
+  &.compact {
+    .header-toolbar {
+      padding: 0.6rem 3.5rem;
+    }
+  }
+
+  &.mobile {
+    --header-height: 3rem;
+    border-radius: 0;
+    height: var(--header-height);
+
+    .logo {
+      left: calc(15% - var(--width) / 2);
+      z-index: 2;
+    }
+
+    .header-toolbar {
+      position: absolute;
+      background: $primary;
+      top: -1000%;
+      z-index: 1;
+
+      padding: 2rem;
+      padding-top: calc(var(--header-height) + 1rem);
+      border-radius: 1.5rem;
+
+      align-items: flex-start;
+
+      .header-buttons {
+        margin-bottom: 2.5rem;
+      }
+
+      &.opened {
+        top: 0;
+      }
+    }
+
+    .btn-holder {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bg-prevent {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 100%;
+      transition: 0.2s ease-in-out all;
+
+      &.open {
+        bottom: 0;
+        background-color: #ffffff99;
+      }
     }
   }
 }

@@ -89,14 +89,16 @@ const _slides = computed(() => {
 
     position: absolute;
     width: var(--width);
-    bottom: calc(-1 * var(--width) / 1.7 / var(--aspect-ratio));
-    left: calc(-1 * var(--width) / 2);
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
     z-index: -1;
+    user-select: none;
   }
 
   @media (max-width: $screen-sm) {
     .content-wrapper {
-      padding: 5rem 0;
+      padding: 6rem 0;
 
       .title {
         line-height: unset;
@@ -105,8 +107,6 @@ const _slides = computed(() => {
 
     .bg-image {
       --width: 50rem;
-      bottom: calc(-1.1 * var(--width) / 1.7 / var(--aspect-ratio));
-      left: calc(-1.1 * var(--width) / 2);
     }
   }
 }
