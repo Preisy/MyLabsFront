@@ -23,5 +23,6 @@
     "src/pages/landing/ourSkillsBlock/i18n",
     "src/pages/landing/reviewsBlock/i18n"
   ],
-  "i18n-ally.sourceLanguage": "ru"
+  "i18n-ally.sourceLanguage": "ru",
+  "i18n-ally.keystyle": "nested"
 }

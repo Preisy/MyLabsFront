@@ -19,6 +19,14 @@ const props = defineProps<SlideProps>();
   gap: 1.5rem;
   padding: 1.5rem;
 
+  @media (max-width: $screen-md-lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: $screen-md) {
+    grid-template-columns: 1fr;
+  }
+
   @media (max-width: $screen-sm) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;

@@ -8,8 +8,8 @@ import QAComponent from './ui/QAComponent.vue';
     <div class="content-wrapper structure text-center">
       <h1 class="title">{{ $t('pages.landing.faqBlock.title') }}</h1>
       <div class="content">
-        <HowItWorks></HowItWorks>
-        <QAComponent></QAComponent>
+        <HowItWorks class="hiw-faqblock"></HowItWorks>
+        <QAComponent class="col"></QAComponent>
       </div>
     </div>
     <img class="bg-img" src="src/assets/man_on_chair_alt.png" alt="" />
@@ -49,6 +49,19 @@ import QAComponent from './ui/QAComponent.vue';
 
     right: calc(-1 * var(--width) / 2);
     bottom: calc(-1.3 * var(--width) / var(--aspect-ratio) / 2);
+  }
+
+  @media (max-width: $screen-md-lg) {
+    .content-wrapper {
+      .content {
+        flex-direction: column;
+
+        .hiw-faqblock {
+          margin: 0 auto;
+          margin-bottom: 2rem;
+        }
+      }
+    }
   }
 
   @media (max-width: $screen-sm) {

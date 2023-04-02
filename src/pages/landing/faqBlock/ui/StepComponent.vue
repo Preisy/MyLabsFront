@@ -108,7 +108,7 @@ defineProps<Props>();
       z-index: 1;
 
       .step-num {
-        margin-right: 1rem;
+        margin-right: 0.6rem;
       }
     }
   }

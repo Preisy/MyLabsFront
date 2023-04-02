@@ -22,7 +22,7 @@ import ATypingText from 'components/ATypingText.vue';
       <h1 class="description">
         <ATypingText :text="$t('pages.landing.homePage.title')" />
       </h1>
-      <UnregisteredLeadForm />
+      <UnregisteredLeadForm class="form-homepage" />
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ import ATypingText from 'components/ATypingText.vue';
     .homepage-img {
       position: absolute;
       top: 0;
-      right: 6rem;
+      left: 50%;
       .man-on-chair {
         position: relative;
         z-index: -1;
@@ -74,6 +74,47 @@ import ATypingText from 'components/ATypingText.vue';
     }
   }
 
+  @media (max-width: $screen-lg) {
+    .content-wrapper {
+      .description {
+        width: 100%;
+      }
+      .homepage-img {
+        top: 8rem;
+      }
+    }
+  }
+
+  @media (max-width: $screen-md-lg) {
+    .content-wrapper {
+      .homepage-img {
+        top: 10rem;
+        left: 60%;
+        .man-on-chair {
+          width: 27.5rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .content-wrapper {
+      text-align: center;
+      position: unset;
+      margin-top: 6rem;
+
+      .homepage-img {
+        top: unset;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        bottom: 0;
+      }
+      .form-homepage {
+        margin: 0 auto;
+      }
+    }
+  }
+
   @media (max-width: $screen-sm) {
     .content-wrapper {
       margin: 1.5rem auto;
@@ -87,6 +128,8 @@ import ATypingText from 'components/ATypingText.vue';
         left: -10%;
         right: auto;
         margin-top: 2rem;
+
+        transform: unset;
 
         img {
           width: 100% !important;

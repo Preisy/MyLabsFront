@@ -26,6 +26,12 @@ h4 {
   margin: 0;
 }
 
+@media (max-width: 1200px) {
+  .structure {
+    width: 80%;
+  }
+}
+
 @media (max-width: 600px) {
   .structure {
     width: 90%;

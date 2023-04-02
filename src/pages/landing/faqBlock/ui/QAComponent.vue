@@ -44,6 +44,10 @@ const cards = [
 .qa-wrapper {
   width: 50%;
 
+  @media (max-width: $screen-lg) {
+    width: auto;
+  }
+
   @media (max-width: $screen-sm) {
     width: 100%;
   }

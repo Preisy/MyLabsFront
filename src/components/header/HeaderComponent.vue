@@ -22,7 +22,7 @@ const scrollHandler = (val: QScrollDetailsEvent) => {
   isCompact.value = top > 500;
 };
 
-const isMobile = computed(() => Screen.lt.sm);
+const isMobile = computed(() => Screen.lt.md);
 const isMenuOpened = ref(false);
 
 const dialogComp = ref<Nullable<InstanceType<typeof ADialogHolder>>>(null);
@@ -141,7 +141,8 @@ const showRegisterDialog = () => {
 
   &.compact {
     .header-toolbar {
-      padding: 0.6rem 3.5rem;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
     }
   }
 
@@ -204,6 +205,14 @@ const showRegisterDialog = () => {
     .header-toolbar {
       width: 90rem;
       margin: 0 auto;
+    }
+  }
+  @media (max-width: $screen-lg) {
+    .header-toolbar {
+      padding-left: 8rem;
+    }
+    .logo {
+      left: 2.4rem;
     }
   }
 }

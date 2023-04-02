@@ -34,4 +34,4 @@ const { errorMessage, value } = useField(props.name);
   />
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss"></style>
