@@ -1,9 +1,5 @@
 <script setup lang="ts">
 import {
-  UnregisteredLeadForm,
-  UnregisteredLeadFormSchema,
-} from 'src/model/unregisteredLeadForm';
-import {
   SubmissionContext,
   useForm,
 } from 'vee-validate';
@@ -11,6 +7,15 @@ import AInput from 'components/AInput.vue';
 import ABtn from 'components/ABtn.vue';
 import ASelect from 'components/ASelect.vue';
 import { LabTypes } from 'src/global/LabTypes';
+import { TaskSchema } from 'src/model/task';
+import { UserCreds, UserCredsSchema } from 'src/model/userCreds';
+import omit from 'lodash/omit'
+
+type UnregisteredLeadForm = Omit<UserCreds, 'password'>
+const UnregisteredLeadFormSchema = {
+  ...TaskSchema,
+  ...omit(UserCredsSchema, 'password'),
+};
 
 const { handleSubmit } = useForm<UnregisteredLeadForm>({
   validationSchema: UnregisteredLeadFormSchema,

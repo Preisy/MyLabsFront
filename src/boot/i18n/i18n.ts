@@ -13,9 +13,9 @@ import { TOurSkillsBlockI18n } from 'src/pages/landing/ourSkillsBlock';
 import { TExamplesBlockI18n } from 'src/pages/landing/examplesBlock';
 import { TFaqBlockI18n } from 'src/pages/landing/faqBlock';
 
-const localeStore = useLocaleStore();
-
 export default boot(({ app }) => {
+  const localeStore = useLocaleStore();
+
   const i18n = createI18n({
     locale: localeStore.locale, // todo switch
     legacy: false,
