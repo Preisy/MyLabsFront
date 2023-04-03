@@ -6,6 +6,7 @@ interface ButtonProps {
   color?: string;
   textColor?: string;
   type?: 'button' | 'reset' | 'submit';
+  width?: string
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -30,6 +31,7 @@ const state = ref<boolean>(false);
     :label="props.label"
     :type="props.type"
     @click="emits('click', state)"
+    :style="{width: width}"
   />
 </template>
 

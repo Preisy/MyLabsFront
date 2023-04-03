@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeaderComponent from 'components/header/HeaderComponent.vue';
+import HeaderComponent from 'pages/landing/header/HeaderComponent.vue';
 import LandingPage from 'pages/landing/LandingPage.vue';
 </script>
 

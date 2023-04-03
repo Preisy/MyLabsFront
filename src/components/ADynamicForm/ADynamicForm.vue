@@ -11,6 +11,7 @@ interface ADynamicFormProps {
     values: Record<string, unknown>,
     ctx: SubmissionContext<Record<string, unknown>>
   ) => void;
+  buttonWidth?: string;
 }
 const props = defineProps<ADynamicFormProps>();
 
@@ -20,26 +21,37 @@ const schema = fromPairs(
   })
 );
 
-const { handleSubmit } = useForm({
+const { handleSubmit, values } = useForm({
   validationSchema: schema,
 });
 
-const onSubmit = handleSubmit.withControlled(props.onSubmit);
+defineExpose({ values });
+
+const onSubmit = handleSubmit.withControlled((values, ctx) =>
+  props.onSubmit(values, ctx)
+);
 </script>
 
 <template>
-  <div>
-    <form @submit="onSubmit">
-      <AInput
-        v-for="(field, i) in props.schema"
-        :key="i"
-        :name="field.name"
-        :label="field.label"
-      />
+  <form @submit="onSubmit">
+    <AInput
+      class="a-input"
+      v-for="(field, i) in props.schema"
+      :key="i"
+      :name="field.name"
+      :label="field.label"
+    />
 
-      <ABtn label="Submit" />
-    </form>
-  </div>
+    <ABtn
+      :label="$t('components.ADynamicForm.next')"
+      type="submit"
+      :width="buttonWidth"
+    />
+  </form>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.a-input {
+  width: 100%;
+}
+</style>

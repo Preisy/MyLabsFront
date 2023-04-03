@@ -2,7 +2,6 @@ import { boot } from 'quasar/wrappers';
 import { createI18n } from 'vue-i18n';
 import { mergeI18n } from './merge';
 
-// import messages from 'src/i18n';
 import { useLocaleStore } from 'boot/i18n/useLocaleStore';
 
 import { THomePageI18n } from 'pages/landing/homePage';
@@ -12,6 +11,8 @@ import { TReviewsBlockI18n } from 'src/pages/landing/reviewsBlock';
 import { TOurSkillsBlockI18n } from 'src/pages/landing/ourSkillsBlock';
 import { TExamplesBlockI18n } from 'src/pages/landing/examplesBlock';
 import { TFaqBlockI18n } from 'src/pages/landing/faqBlock';
+import { THeaderI18n } from 'src/pages/landing/header/i18n';
+import { TADynamicFormI18n } from 'src/components/ADynamicForm/i18n';
 
 export default boot(({ app }) => {
   const localeStore = useLocaleStore();
@@ -26,7 +27,9 @@ export default boot(({ app }) => {
       TExamplesBlockI18n,
       TReviewsBlockI18n,
       TFaqBlockI18n,
-      TFooterBlockI18n
+      TFooterBlockI18n,
+      THeaderI18n,
+      TADynamicFormI18n
     ),
   });
 

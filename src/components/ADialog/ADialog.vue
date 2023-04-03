@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 const emits = defineEmits<{
-    (e: 'close', value: unknown): void
+  (e: 'close', value: unknown): void;
 }>();
 
 const isOpen = ref<boolean>(false);
@@ -26,31 +26,21 @@ const _close = (event: unknown) => {
 </script>
 
 <template>
-  <teleport to="body">
-    <q-dialog class="dialog" v-model="isOpen" @hide="_close($event)">
-      <div class="content-wrapper">
-        <slot @close="_close($event)" />
-      </div>
-    </q-dialog>
-  </teleport>
+  <q-dialog class="dialog" v-model="isOpen" @hide="_close($event)">
+    <slot @close="_close($event)" />
+  </q-dialog>
 </template>
 
 <style scoped lang="scss">
 .dialog {
-  background: #ffffff55;
-  .content-wrapper {
-    width: 23rem;
-    padding: 2rem;
-    padding-bottom: 0.5rem;
+  // .content-wrapper {
+  //   width: 23rem;
+  //   padding: 2rem;
+  //   padding-bottom: 0.5rem;
 
-    background: $primary;
+  //   background: $primary;
 
-    border-radius: 1.5rem;
-  }
-  .clicker {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-  }
+  //   border-radius: 1.5rem;
+  // }
 }
 </style>

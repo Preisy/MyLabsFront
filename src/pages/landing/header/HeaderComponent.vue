@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { Nullable } from 'src/global/types';
 import { computed, ref } from 'vue';
-import ButtonComponent from '../ABtn.vue';
-import ADialogHolder from '../dialog/ADialogHolder.vue';
-import AHeaderBtn from './AHeaderBtn.vue';
+import ABtn from 'components/ABtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
+import { SignUpDialog, LoginDialog } from './ui';
+import { useI18n } from 'vue-i18n';
+import HeaderBtn from './ui';
 
 const currentLinkIndex = ref(0);
 
+const { t } = useI18n();
+
 const buttonLinks = [
-  { label: 'Возможности', value: 'possibilities' },
-  { label: 'Примеры работ', value: 'examples' },
-  { label: 'Отзывы', value: 'reviews' },
-  { label: 'FAQ', value: 'FAQ' },
+  { label: t('pages.landing.header.possibilities'), value: 'possibilities' },
+  { label: t('pages.landing.header.examples'), value: 'examples' },
+  { label: t('pages.landing.header.reviews'), value: 'reviews' },
+  { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
 ];
 
 const isCompact = ref(false);
@@ -25,14 +27,8 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
 const isMobile = computed(() => Screen.lt.sm);
 const isMenuOpened = ref(false);
 
-const dialogComp = ref<Nullable<InstanceType<typeof ADialogHolder>>>(null);
-
-const showAuthDialog = () => {
-  dialogComp.value?.auth();
-};
-const showRegisterDialog = () => {
-  dialogComp.value?.register();
-};
+let signup = ref<InstanceType<typeof SignUpDialog>>();
+let login = ref<InstanceType<typeof LoginDialog>>();
 </script>
 
 <template>
@@ -54,27 +50,29 @@ const showRegisterDialog = () => {
           :key="index"
           :to="''"
         >
-          <AHeaderBtn
+          <HeaderBtn
             v-model="currentLinkIndex"
             :id="index"
             :label="link.label"
-          ></AHeaderBtn>
+          ></HeaderBtn>
         </router-link>
       </div>
 
       <div class="auth">
-        <button-component
+        <ABtn
           class="auth-login q-px-xl"
           color="grey"
           text-color="dark"
-          label="Войти"
-          @click="showAuthDialog"
-        ></button-component>
-        <button-component
+          :label="$t('pages.landing.header.login')"
+          @click="login?.open()"
+        ></ABtn>
+        <ABtn
           class="auth-signup"
-          label="Регистрация"
-          @click="showRegisterDialog"
-        ></button-component>
+          :label="$t('pages.landing.header.signup')"
+          @click="signup?.open()"
+        ></ABtn>
+        <LoginDialog ref="login" />
+        <SignUpDialog ref="signup" />
       </div>
     </q-toolbar>
 
@@ -91,7 +89,7 @@ const showRegisterDialog = () => {
     <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" />
   </q-header>
 
-  <ADialogHolder ref="dialogComp" />
+  <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
 
 <style scoped lang="scss">
