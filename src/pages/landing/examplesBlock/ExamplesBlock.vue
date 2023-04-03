@@ -95,7 +95,7 @@ const _slides = computed(() => {
     width: var(--width);
     bottom: 0;
     left: 0;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 59%);
     z-index: -1;
     user-select: none;
   }

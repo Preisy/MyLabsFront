@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types/State';
-import { UserCreds } from 'src/model/userCreds/UserCreds';
+import { UserCreds } from 'src/model/UserCreds/UserCreds';
 import { LoginData } from 'src/model/loginData/LoginData';
 import { AuthService } from 'src/service/AuthService';
 

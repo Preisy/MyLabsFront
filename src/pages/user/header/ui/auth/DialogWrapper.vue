@@ -81,7 +81,6 @@ defineExpose({
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
-  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
   // position: relative;
 
   .floor {

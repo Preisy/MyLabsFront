@@ -54,6 +54,11 @@ const props = defineProps<Props>();
     bottom: 0;
     position: absolute;
     right: 0;
+
+    @media (max-width: $screen-md) {
+      --size: 1.7rem;
+      border-radius: 0.6rem;
+    }
   }
 
   .card-header {
@@ -66,6 +71,9 @@ const props = defineProps<Props>();
 
     @media (max-width: $screen-md) {
       font-size: 1.2rem;
+    }
+    @media (max-width: $screen-sm) {
+      font-size: 1rem;
     }
   }
 }

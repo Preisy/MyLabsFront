@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import DialogWrapper from './DialogWrapper.vue';
 import ADialog from 'src/components/ADialog';
 import { getSchema } from 'src/global/utils';
-import { LoginData, LoginDataSchema } from 'src/model/loginData';
+import { LoginDataSchema } from 'src/model/loginData';
 import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
-import { AuthService } from 'src/service/AuthService';
-import { GenericFormData } from 'axios';
-import { SubmissionContext } from 'vee-validate';
-import { useAuthStore } from 'src/stores/AuthStore';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
@@ -30,15 +26,8 @@ const close = () => {
 
 let schema = getSchema(LoginDataSchema);
 
-type LoginKeys = 'email' | 'password';
-const onSubmit = (
-  values: Record<LoginKeys, string>,
-  ctx: SubmissionContext<Record<string, unknown>>
-) => {
-  useAuthStore().login({
-    email: values.email,
-    password: values.password,
-  });
+const onSubmit = () => {
+  console.log('login');
 };
 </script>
 
@@ -92,7 +81,7 @@ const onSubmit = (
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
-
+  
   .floor {
     user-select: none;
     position: absolute;

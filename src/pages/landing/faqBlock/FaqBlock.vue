@@ -43,12 +43,13 @@ import QAComponent from './ui/QAComponent.vue';
     user-select: none;
 
     position: absolute;
-    z-index: -1;
+    z-index: 0;
 
     width: var(--width);
 
-    right: calc(-1 * var(--width) / 2);
-    bottom: calc(-1.3 * var(--width) / var(--aspect-ratio) / 2);
+    right: 0;
+    bottom: 0;
+    transform: translate(50%, 58%);
   }
 
   @media (max-width: $screen-md-lg) {

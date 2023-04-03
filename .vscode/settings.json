@@ -25,6 +25,6 @@
     "src/pages/landing/header/i18n",
     "src/components/ADynamicForm/i18n"
   ],
-  "i18n-ally.sourceLanguage": "ru",
+  "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested"
 }

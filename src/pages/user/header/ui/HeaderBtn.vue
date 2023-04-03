@@ -25,7 +25,7 @@ defineEmits<{
 
 <style scoped lang="scss">
 .header-btn {
-  --highlight-padding: 0%;
+  --highlight-padding: 5%;
   --highlight-width: calc(100% + var(--highlight-padding));
   --highlight-middlepoint: calc(var(--highlight-width) / 2);
   --highlight-offset: calc(-1 * var(--highlight-padding) / 2);

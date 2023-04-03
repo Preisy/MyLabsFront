@@ -2,33 +2,35 @@
 interface CardProps {
   title: string;
   imgSrc: string;
-  time: string;
+  date: string;
   price: string;
+  link: string;
 }
 
 const props = defineProps<CardProps>();
 </script>
 <template>
-  <div class="card column justify-between">
+  <div class="card">
     <div class="title-wrapper row items-center no-wrap">
       <img class="title-icon" :src="props.imgSrc" alt="" />
       <h4 class="title">{{ props.title }}</h4>
     </div>
     <div class="details">
-      <div class="time">
-        <q-icon class="icon" color="accent" name="update" />
-        <span>
-          {{ props.time }}
-          {{ $t('pages.landing.examplesBlock.card.hours') }}
-        </span>
-      </div>
       <div class="price">
         <q-icon class="icon" color="accent" name="currency_ruble" />
         <span>
           {{ props.price }}
-          {{ $t('pages.landing.examplesBlock.card.roubles') }}
         </span>
       </div>
+      <div class="date">
+        <q-icon class="icon" color="accent" name="update" />
+        <span>
+          {{ props.date }}
+        </span>
+      </div>
+    </div>
+    <div class="link">
+      <q-btn icon="clip" color="grey" text-color="dark"></q-btn>
     </div>
   </div>
 </template>
@@ -60,12 +62,6 @@ const props = defineProps<CardProps>();
     .icon {
       font-size: 1.2rem;
       margin-right: 0.5rem;
-    }
-  }
-
-  @media (max-width: $screen-md) {
-    .details {
-      font-size: 0.9rem;
     }
   }
 
