@@ -8,11 +8,21 @@ import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
 
+let isOpened = ref(false);
+let floor = ref<HTMLImageElement>();
 let restore = ref<InstanceType<typeof RestorePasswordDialog>>();
 let dialog = ref<InstanceType<typeof DialogWrapper>>();
 defineExpose({
-  open: () => dialog.value?.open(),
+  open: () => {
+    dialog.value?.open();
+    setTimeout(() => (isOpened.value = true), 0);
+  },
 });
+const close = () => {
+  floor.value?.classList.remove('showed');
+  dialog.value?.close();
+  isOpened.value = false;
+};
 
 let schema = getSchema(LoginDataSchema);
 
@@ -25,6 +35,14 @@ const onSubmit = () => {
   <div>
     <ADialog ref="dialog">
       <div class="content-wrapper">
+        <img
+          src="src/assets/header/floor.svg"
+          class="floor"
+          alt=""
+          ref="floor"
+          @click="close"
+          :class="{ showed: isOpened }"
+        />
         <h4 class="title">
           {{ $t('pages.landing.header.auth.login.1') }}
         </h4>
@@ -61,10 +79,23 @@ const onSubmit = () => {
   width: 23rem;
   padding: 2rem;
   padding-bottom: 0.5rem;
-
   background: $primary;
-
   border-radius: 1.5rem;
+  
+  .floor {
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    // transition: opacity 0.1s ease-in-out;
+  }
+  .showed {
+    transition: opacity 0.3s 0.1s ease-in-out;
+
+    opacity: 1;
+  }
 
   .form {
     text-align: center;

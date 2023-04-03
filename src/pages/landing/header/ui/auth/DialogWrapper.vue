@@ -26,15 +26,21 @@ let onSubmit = (
   setTimeout(() => dialog.value?.open(), 200);
 };
 
+let floor = ref<HTMLImageElement>();
+let isOpened = ref(false);
+
 let dialog = ref<InstanceType<typeof ADialog>>();
 const close = () => {
+  floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;
+  isOpened.value = false;
 };
 defineExpose({
   open: () => {
     dialog.value?.open();
     i.value = 0;
+    setTimeout(() => (isOpened.value = true), 0);
   },
   close,
 });
@@ -43,6 +49,14 @@ defineExpose({
 <template>
   <ADialog ref="dialog">
     <div v-if="i != dialogs.length" class="content-wrapper">
+      <img
+        src="src/assets/header/floor.svg"
+        class="floor"
+        alt=""
+        ref="floor"
+        @click="close"
+        :class="{ showed: isOpened }"
+      />
       <h4 class="title">
         {{ dialogs[i].title }}
       </h4>
@@ -65,10 +79,24 @@ defineExpose({
   width: 23rem;
   padding: 2rem;
   padding-bottom: 0.5rem;
-
   background: $primary;
-
   border-radius: 1.5rem;
+  // position: relative;
+
+  .floor {
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    // transition: opacity 0.1s ease-in-out;
+  }
+  .showed {
+    transition: opacity 0.3s 0.1s ease-in-out;
+
+    opacity: 1;
+  }
 
   .form {
     text-align: center;
@@ -90,5 +118,18 @@ defineExpose({
     white-space: nowrap;
     margin: 0 auto;
   }
+}
+</style>
+
+<style lang="scss">
+.q-dialog__backdrop {
+  background-color: #ffffff99;
+  backdrop-filter: blur(0.4rem);
+}
+</style>
+
+<style>
+.q-dialog__inner > div {
+  overflow: unset;
 }
 </style>

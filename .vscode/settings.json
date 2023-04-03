@@ -19,5 +19,8 @@
     "src/components/ADynamicForm/i18n"
   ],
   "i18n-ally.sourceLanguage": "ru-RU",
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
 }
