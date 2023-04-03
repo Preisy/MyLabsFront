@@ -3,14 +3,14 @@ import { Nullable } from 'src/global/types';
 import { Ref, ref } from 'vue';
 import ADialog from './ADialog.vue';
 import AAuthDialog from './AAuthDialog.vue';
-import ARegisterDialog from './ARegisterDialog.vue';
-import AMailDialog from './AMailDialog.vue';
-import ARestoreDialog from './ARestoreDialog.vue';
-import APasswordDialog from './APasswordDialog.vue';
 import AEndingDialog from './AEndingDialog.vue';
+import ARegisterDialog from './ARegisterDialog.vue';
+import ARestoreDialog from './ARestoreDialog.vue';
+import AMailDialog from './AMailDialog.vue';
+import APasswordDialog from './APasswordDialog.vue';
 
 type Dialog = Nullable<InstanceType<typeof ADialog>>;
-const authDialog = ref<Dialog>(null);
+const loginDialog = ref<Dialog>(null);
 const registerRouteStart = ref<Dialog>(null);
 const restoreRouteStart = ref<Dialog>(null);
 const mailCodeDialog = ref<Dialog>(null);
@@ -34,18 +34,18 @@ const restoreRoute = [
 ];
 
 defineExpose({
-  register: () => {
+  signup: () => {
     currentIndex.value = -1;
     currentRoute.value = registerRoute;
     next();
   },
-  auth: () => {
-    authDialog.value?.open();
+  login: () => {
+    loginDialog.value?.open();
   },
 });
 
 const restore = () => {
-  authDialog.value?.close();
+  loginDialog.value?.close();
   currentIndex.value = -1;
   currentRoute.value = restoreRoute;
   next();
@@ -65,7 +65,7 @@ function next() {
 <template>
   <Teleport to="body">
     <AAuthDialog
-      :ref="(el: InstanceType<typeof AAuthDialog>)=>{ authDialog = el.getDialog()?.value }"
+      :ref="(el: InstanceType<typeof AAuthDialog>)=>{ loginDialog = el.getDialog()?.value }"
       :restore-func="restore"
     />
     <ARegisterDialog

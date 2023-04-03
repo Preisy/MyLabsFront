@@ -1,21 +1,25 @@
-<script setup lang='ts'>
+<script setup lang="ts">
+import { Direction } from '../types';
 import ConnectionLineHorizontal from './ConnectionLineHorizontal.vue';
 import ConnectionLineVertical from './ConnectionLineVertical.vue';
 
 interface ConnectionLineProps {
-  direction: 'rb' | 'rt' | 'br' | 'bl' | 'lt' | 'lb'
+  direction: Direction;
 }
 const props = withDefaults(defineProps<ConnectionLineProps>(), {
-  direction: 'rb'
-})
+  direction: 'rb',
+});
 </script>
 
 <template>
-  <ConnectionLineHorizontal v-if='props.direction[0] === "r" || props.direction[0] === "l"' :class='props.direction'/>
-  <ConnectionLineVertical v-else :class='props.direction' />
+  <ConnectionLineHorizontal
+    v-if="props.direction[0] === 'r' || props.direction[0] === 'l'"
+    :class="props.direction"
+  />
+  <ConnectionLineVertical v-else :class="props.direction" />
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 svg {
   position: absolute;
   z-index: -1;

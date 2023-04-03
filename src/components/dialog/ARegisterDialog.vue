@@ -5,6 +5,9 @@ import ABtn from '../ABtn.vue';
 import { ref } from 'vue';
 import { Nullable } from 'src/global/types';
 
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 interface Props {
   nextFunc: () => void;
 }
@@ -17,18 +20,30 @@ defineExpose({
 </script>
 
 <template>
-  <ADialog ref="dialog" title="Получи возможности после регистарции">
+  <ADialog ref="dialog" :title="t('components.dialogs.signup.title')">
     <template #body>
-      <AInput class="full-width" label="Имя" name="name" />
-      <AInput class="full-width" label="Email" name="mail" />
       <AInput
         class="full-width"
-        label="Контакт: email, tg, vk"
+        :label="t('components.dialogs.signup.inputs.name')"
+        name="name"
+      />
+      <AInput
+        class="full-width"
+        :label="t('components.dialogs.signup.inputs.email')"
+        name="mail"
+      />
+      <AInput
+        class="full-width"
+        :label="t('components.dialogs.signup.inputs.contacts')"
         name="contacts"
       />
     </template>
     <template #controls>
-      <ABtn class="q-px-xl" label="Дальше" @click="nextFunc" />
+      <ABtn
+        class="q-px-xl"
+        :label="t('components.dialogs.signup.buttons.next')"
+        @click="nextFunc"
+      />
     </template>
   </ADialog>
 </template>

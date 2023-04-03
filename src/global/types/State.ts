@@ -1,1 +1,1 @@
-export type SimpleState = 'unset' | 'loading' | 'success' | 'error'
+export type SimpleState = 'unset' | 'loading' | 'success' | 'error';

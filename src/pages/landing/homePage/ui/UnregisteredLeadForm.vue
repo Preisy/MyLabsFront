@@ -1,52 +1,34 @@
 <script setup lang="ts">
-import * as yup from 'yup';
 import {
   UnregisteredLeadForm,
   UnregisteredLeadFormSchema,
 } from 'src/model/unregisteredLeadForm';
-import { Form as VeeForm } from 'vee-validate';
+import {
+  SubmissionContext,
+  useForm,
+} from 'vee-validate';
 import AInput from 'components/AInput.vue';
 import ABtn from 'components/ABtn.vue';
-import { useI18n } from 'vue-i18n';
-import { ref } from 'vue';
 import ASelect from 'components/ASelect.vue';
 import { LabTypes } from 'src/global/LabTypes';
 
-const { t } = useI18n();
+const { handleSubmit } = useForm<UnregisteredLeadForm>({
+  validationSchema: UnregisteredLeadFormSchema,
+});
 
-const text_data = {
-  task: t('pages.landing.homePage.form.task'),
-  lang: t('pages.landing.homePage.form.lang'),
-  deadline: t('pages.landing.homePage.form.deadline'),
-  name: t('pages.landing.homePage.form.name'),
-  email: t('pages.landing.homePage.form.email'),
-  contacts: t('pages.landing.homePage.form.contacts'),
-  promo: t('pages.landing.homePage.form.promo'),
-  order: t('pages.landing.homePage.form.order'),
-};
-
-const task_val = ref('');
-
-const schema = yup.object<
-  UnregisteredLeadForm,
-  typeof UnregisteredLeadFormSchema
->(UnregisteredLeadFormSchema);
-
-/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-function onSubmit(values: UnregisteredLeadForm, actions: any) {
-  // todo store
-  console.log(JSON.stringify(values, null, 2));
-  actions.resetForm();
-}
+const onSubmit = handleSubmit.withControlled(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  (values, ctx: SubmissionContext<UnregisteredLeadForm>) => {
+    console.log(JSON.stringify(values, null, 2));
+  });
 </script>
 
 <template>
-  <VeeForm :validation-schema="schema" class="form" @submit="onSubmit">
+  <form class="form" @submit="onSubmit">
     <div class="form-line row">
       <a-input
         class="col"
-        :label="text_data.task"
-        :model-value="task_val"
+        :label="$t('pages.landing.homePage.form.task')"
         name="text"
       />
       <q-btn
@@ -59,22 +41,30 @@ function onSubmit(values: UnregisteredLeadForm, actions: any) {
     <div class="form-line row">
       <a-select
         class="col"
-        :label="text_data.lang"
+        :label="$t('pages.landing.homePage.form.lang')"
         :options="LabTypes"
         name="type"
       />
-      <a-input class="col-4" label="Дедлайн" name="deadline" />
+      <a-input
+        class="col-4"
+        :label="$t('pages.landing.homePage.form.deadline')"
+        name="deadline"
+      />
     </div>
     <template
       v-for="(col, i) in [
-        { label: `${text_data.name}`, name: 'name', placeholder: 'Ivan' },
         {
-          label: `${text_data.email}`,
+          label: $t('pages.landing.homePage.form.name'),
+          name: 'name',
+          placeholder: 'Ivan',
+        },
+        {
+          label: $t('pages.landing.homePage.form.email'),
           name: 'email',
           placeholder: 'example@mail.ru',
         },
         {
-          label: `${text_data.contacts}`,
+          label: $t('pages.landing.homePage.form.contacts'),
           name: 'contact',
           placeholder: '@myNickname',
         },
@@ -95,12 +85,16 @@ function onSubmit(values: UnregisteredLeadForm, actions: any) {
       <a-input
         class="col"
         bgColor="grey"
-        :label="text_data.promo"
+        :label="$t('pages.landing.homePage.form.promo')"
         name="promocode"
       />
-      <a-btn class="col-5 btn" :label="text_data.order" type="submit"></a-btn>
+      <a-btn
+        class="col-5 btn"
+        :label="$t('pages.landing.homePage.form.order')"
+        type="submit"
+      ></a-btn>
     </div>
-  </VeeForm>
+  </form>
 </template>
 
 <style scoped lang="scss">

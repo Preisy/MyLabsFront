@@ -1,0 +1,65 @@
+{
+  "components": {
+    "dialogs": {
+      "login": {
+        "title": "Welcome back!",
+        "inputs": {
+          "email": "Email",
+          "password": "Password"
+        },
+        "buttons": {
+          "login": "Login",
+          "restore": "Forgot password"
+        }
+      },
+      "signup": {
+        "title": "Sign up to get access to services",
+        "inputs": {
+          "name": "Your name",
+          "email": "Email",
+          "contacts": "Contacts: email, tg, vk"
+        },
+        "buttons": {
+          "next": "Next"
+        }
+      },
+      "restore": {
+        "title": "Don't worry! You can recover password.",
+        "inputs": {
+          "email": "Email"
+        },
+        "buttons": {
+          "next": "Next"
+        }
+      },
+      "mail": {
+        "title": "Put secret code from email",
+        "inputs": {
+          "secret": "Secret code"
+        },
+        "buttons": {
+          "next": "Next"
+        }
+      },
+      "password": {
+        "title": "Generate password or write your own!",
+        "body": "Generated password will be sent via email!",
+        "inputs": {
+          "password": "Password",
+          "passwordRepeat": "Repeat the password"
+        },
+        "buttons": {
+          "generate": "Generate",
+          "next": "Next"
+        }
+      },
+      "ending": {
+        "title": "Congratulations!",
+        "body": "Your sign up done now! Wait a message",
+        "buttons": {
+          "end": "Done"
+        }
+      }
+    }
+  }
+}

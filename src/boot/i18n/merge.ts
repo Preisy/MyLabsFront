@@ -9,4 +9,3 @@ export function mergeI18n(...i18ns: any[]) {
   }
   return merged as any;
 }
-

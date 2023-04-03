@@ -38,4 +38,10 @@ import ButtonComponent from 'components/ABtn.vue';
     }
   }
 }
+
+@media (max-width: $screen-sm) {
+  .description {
+    width: 100% !important;
+  }
+}
 </style>

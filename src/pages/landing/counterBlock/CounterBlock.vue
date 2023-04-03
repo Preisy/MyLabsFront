@@ -49,10 +49,7 @@ const isMobile = Screen.lt.sm;
   //transition: 0.3s all ease-in-out;
 
   margin: -8rem auto;
-  will-change: margin;
-  //&.isVisible {
-  //  margin: -2rem auto;
-  //}
+  // will-change: margin;
 
   .content-wrapper {
     padding: 15rem 0;

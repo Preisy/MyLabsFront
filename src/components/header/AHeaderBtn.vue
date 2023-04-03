@@ -9,7 +9,6 @@ const props = defineProps<Props>();
 defineEmits<{
   (e: 'update:modelValue', value: number): void;
 }>();
-
 </script>
 
 <template>
@@ -20,7 +19,7 @@ defineEmits<{
     no-caps
     flat
     :label="props.label"
-    @click="$emit('update:modelValue', props.id);"
+    @click="$emit('update:modelValue', props.id)"
   />
 </template>
 
@@ -61,6 +60,12 @@ defineEmits<{
   .q-focus-helper {
     background: $primary !important;
     opacity: 0 !important;
+  }
+}
+
+.header-btn {
+  .q-ripple {
+    display: none;
   }
 }
 </style>

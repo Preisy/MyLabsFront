@@ -17,7 +17,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   placeholder: '',
 });
 
-const { errorMessage, value } = useField(props.name);
+const { errorMessage, value } = useField<string | number | undefined>(
+  props.name
+);
 // const { errorMessage, value } = useField(toRef(props, 'name'));
 </script>
 

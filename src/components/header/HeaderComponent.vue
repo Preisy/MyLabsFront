@@ -6,33 +6,28 @@ import ButtonComponent from '../ABtn.vue';
 import ADialogHolder from '../dialog/ADialogHolder.vue';
 import AHeaderBtn from './AHeaderBtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const currentLinkIndex = ref(0);
 
 const buttonLinks = [
-  { label: 'Возможности', value: 'possibilities' },
-  { label: 'Примеры работ', value: 'examples' },
-  { label: 'Отзывы', value: 'reviews' },
-  { label: 'FAQ', value: 'FAQ' },
+  { label: t('components.header.links.ourskills'), value: 'possibilities' },
+  { label: t('components.header.links.examples'), value: 'examples' },
+  { label: t('components.header.links.reviews'), value: 'reviews' },
+  { label: t('components.header.links.faq'), value: 'FAQ' },
 ];
 
 const isCompact = ref(false);
-const scrollHandler = (val: QScrollDetailsEvent) => {
-  const top = val.position.top;
-  isCompact.value = top > 500;
+const scrollHandler = (details: QScrollDetailsEvent) => {
+  const top = details.position.top;
+  isCompact.value = top > 100;
 };
 
 const isMobile = computed(() => Screen.lt.md);
 const isMenuOpened = ref(false);
 
 const dialogComp = ref<Nullable<InstanceType<typeof ADialogHolder>>>(null);
-
-const showAuthDialog = () => {
-  dialogComp.value?.auth();
-};
-const showRegisterDialog = () => {
-  dialogComp.value?.register();
-};
 </script>
 
 <template>
@@ -47,19 +42,15 @@ const showRegisterDialog = () => {
       class="header-toolbar justify-between"
       :class="{ opened: isMenuOpened, column: isMobile }"
     >
-      <div class="header-buttons" :class="{ column: isMobile }">
-        <router-link
-          class="header-router"
+      <div class="header-buttons" :class="{ 'column items-start': isMobile }">
+        <AHeaderBtn
           v-for="(link, index) in buttonLinks"
           :key="index"
-          :to="''"
-        >
-          <AHeaderBtn
-            v-model="currentLinkIndex"
-            :id="index"
-            :label="link.label"
-          ></AHeaderBtn>
-        </router-link>
+          v-model="currentLinkIndex"
+          :id="index"
+          :label="link.label"
+          class="header-router"
+        ></AHeaderBtn>
       </div>
 
       <div class="auth">
@@ -67,13 +58,13 @@ const showRegisterDialog = () => {
           class="auth-login q-px-xl"
           color="grey"
           text-color="dark"
-          label="Войти"
-          @click="showAuthDialog"
+          :label="t('components.header.buttons.login')"
+          @click="dialogComp?.login()"
         ></button-component>
         <button-component
           class="auth-signup"
-          label="Регистрация"
-          @click="showRegisterDialog"
+          :label="t('components.header.buttons.signup')"
+          @click="dialogComp?.signup()"
         ></button-component>
       </div>
     </q-toolbar>
@@ -185,6 +176,11 @@ const showRegisterDialog = () => {
       position: relative;
       z-index: 2;
     }
+  }
+
+  .header-toolbar {
+    transition: 0.2s all ease-in-out;
+    padding: 2.8rem 3.5rem;
 
     .bg-prevent {
       position: fixed;
