@@ -37,5 +37,11 @@ const props = defineProps<Props>();
   .details {
     font-size: 1.2rem;
   }
+
+  @media (max-width: $screen-md) {
+    .details {
+      font-size: 0.9rem;
+    }
+  }
 }
 </style>

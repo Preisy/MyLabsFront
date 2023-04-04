@@ -8,20 +8,23 @@ import { Screen } from 'quasar';
 
 const slider_index = ref('1');
 
-const isMobile = computed(() => {
-  console.log(Screen);
-  return Screen.lt.sm;
+const cardsInOneSlide = computed(() => {
+  // console.log(Screen.width);
+  if (Screen.lt.sm) return 1;
+
+  if (Screen.width <= 900) return 3;
+
+  return 6;
 });
 
 const _slides = computed(() => {
   let result = [];
-  const cardsInOneSlide = isMobile.value ? 1 : 6;
-  const slidesCount = slides.length / cardsInOneSlide;
+  const slidesCount = slides.length / cardsInOneSlide.value;
 
   for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
     const slide = [];
-    for (let card_i = 0; card_i < cardsInOneSlide; card_i++)
-      slide.push(slides[slide_i * cardsInOneSlide + card_i]);
+    for (let card_i = 0; card_i < cardsInOneSlide.value; card_i++)
+      slide.push(slides[slide_i * cardsInOneSlide.value + card_i]);
 
     result.push(slide);
   }
@@ -92,7 +95,7 @@ const _slides = computed(() => {
     width: var(--width);
     bottom: 0;
     left: 0;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 59%);
     z-index: -1;
     user-select: none;
   }

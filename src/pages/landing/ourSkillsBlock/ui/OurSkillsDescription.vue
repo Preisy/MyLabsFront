@@ -23,19 +23,25 @@ import ButtonComponent from 'components/ABtn.vue';
   }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: $screen-lg) {
   .description {
     width: 35%;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $screen-md) {
   .description {
     width: 18rem !important;
     .description-details {
-      font-size: 1.25rem;
+      font-size: 1rem;
       margin-bottom: 1.5rem;
     }
+  }
+}
+
+@media (max-width: $screen-sm) {
+  .description {
+    width: 100% !important;
   }
 }
 </style>

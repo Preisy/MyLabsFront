@@ -7,9 +7,8 @@ import { SignUpDialog, LoginDialog } from './ui';
 import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
 
-const currentLinkIndex = ref(0);
-
 const { t } = useI18n();
+const currentLinkIndex = ref(0);
 
 const buttonLinks = [
   { label: t('pages.landing.header.possibilities'), value: 'possibilities' },
@@ -24,7 +23,7 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
   isCompact.value = top > 100;
 };
 
-const isMobile = computed(() => Screen.lt.sm);
+const isMobile = computed(() => Screen.lt.md);
 const isMenuOpened = ref(false);
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
@@ -43,19 +42,15 @@ let login = ref<InstanceType<typeof LoginDialog>>();
       class="header-toolbar justify-between"
       :class="{ opened: isMenuOpened, column: isMobile }"
     >
-      <div class="header-buttons" :class="{ column: isMobile }">
-        <router-link
-          class="header-router"
+      <div class="header-buttons" :class="{ 'column items-start': isMobile }">
+        <HeaderBtn
           v-for="(link, index) in buttonLinks"
           :key="index"
-          :to="''"
-        >
-          <HeaderBtn
-            v-model="currentLinkIndex"
-            :id="index"
-            :label="link.label"
-          ></HeaderBtn>
-        </router-link>
+          v-model="currentLinkIndex"
+          :id="index"
+          :label="link.label"
+          class="header-btn"
+        ></HeaderBtn>
       </div>
 
       <div class="auth">
@@ -120,7 +115,7 @@ let login = ref<InstanceType<typeof LoginDialog>>();
     padding: 1.8rem 3.5rem;
 
     .header-buttons {
-      .header-router {
+      .header-btn {
         margin-right: 1.5rem;
         text-decoration: unset;
 
@@ -139,7 +134,8 @@ let login = ref<InstanceType<typeof LoginDialog>>();
 
   &.compact {
     .header-toolbar {
-      padding: 0.6rem 3.5rem;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
     }
   }
 
@@ -207,6 +203,14 @@ let login = ref<InstanceType<typeof LoginDialog>>();
     .header-toolbar {
       width: 90rem;
       margin: 0 auto;
+    }
+  }
+  @media (max-width: $screen-lg) {
+    .header-toolbar {
+      padding-left: 8rem;
+    }
+    .logo {
+      left: 2.4rem;
     }
   }
 }

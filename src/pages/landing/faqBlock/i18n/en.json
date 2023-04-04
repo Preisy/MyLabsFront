@@ -5,32 +5,32 @@
         "title": "FAQ",
         "howItWorks": {
           "title": "How it works?",
-          "step_1": "Отправка задания",
-          "step_2": "Оценка стоимости",
-          "step_3": "Выполнение заказа",
-          "step_4": "Поддержка до конца",
-          "step_5": "Хорошая оценка"
+          "step_1": "Submitting a job 📩",
+          "step_2": "Cost estimate 💶",
+          "step_3": "Fulfillment of an order 🛠️",
+          "step_4": "Support to the end ❤️",
+          "step_5": "Good mark ✅"
         },
         "QA": {
           "card_1": {
-            "Q": "Узнает ли мой учитель, что я списал?",
-            "A": ""
+            "Q": "Will my teacher know that I cheat?",
+            "A": "Lorem ipsum dolor sit amet"
           },
           "card_2": {
-            "Q": "Как быстро выполнят мой заказ?",
-            "A": ""
+            "Q": "How fast work will be completed?",
+            "A": "Lorem ipsum dolor sit amet"
           },
           "card_3": {
-            "Q": " Что будет, если учитель найдет ошибку в работе?",
-            "A": ""
+            "Q": "What happens if the teacher finds a mistake in the work?",
+            "A": "Lorem ipsum dolor sit amet"
           },
           "card_4": {
-            "Q": "Как происходит оплата?",
-            "A": ""
+            "Q": "How is payment made?",
+            "A": "Lorem ipsum dolor sit amet"
           },
           "card_5": {
-            "Q": "Можно ли нам доверять?",
-            "A": ""
+            "Q": "Can we be trusted?",
+            "A": "Lorem ipsum dolor sit amet"
           }
         }
       }

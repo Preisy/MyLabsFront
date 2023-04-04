@@ -79,7 +79,7 @@ const props = defineProps<SkillComponentProps>();
     overflow: unset;
 
     @media (max-width: 750px) {
-      margin-left: -6rem;
+      margin-left: -70%;
       width: 250%;
     }
 
@@ -90,6 +90,15 @@ const props = defineProps<SkillComponentProps>();
     .p {
       opacity: 1;
       transition: all 0.15s 0.3s ease-in-out;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .content {
+      .p {
+        font-size: 0.7rem;
+        line-height: 0.75rem;
+      }
     }
   }
 }

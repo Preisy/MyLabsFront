@@ -57,7 +57,11 @@
     .details {
       justify-content: end;
       .column {
-        margin-left: 3.6rem;
+        margin-right: 3.6rem;
+
+        &:last-of-type {
+          margin: 0;
+        }
       }
       .link {
         margin-top: 3.5rem;
@@ -69,6 +73,22 @@
       position: absolute;
       left: 0;
       bottom: 0;
+    }
+  }
+
+  @media (max-width: $screen-md-lg) {
+    .content-wrapper {
+      .title {
+        font-size: 1.5rem;
+      }
+      .details {
+        h4 {
+          font-size: 1.1rem;
+        }
+
+        padding-bottom: 5rem;
+        justify-content: center;
+      }
     }
   }
 
@@ -89,11 +109,7 @@
 
         margin-bottom: 4rem;
         .column {
-          margin-left: 0rem;
-
-          &:last-of-type {
-            margin-left: 2.2rem;
-          }
+          margin-right: 2rem;
         }
       }
     }

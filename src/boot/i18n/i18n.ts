@@ -13,6 +13,10 @@ import { TExamplesBlockI18n } from 'src/pages/landing/examplesBlock';
 import { TFaqBlockI18n } from 'src/pages/landing/faqBlock';
 import { THeaderI18n } from 'src/pages/landing/header/i18n';
 import { TADynamicFormI18n } from 'src/components/ADynamicForm/i18n';
+import { TMainBlockI18n } from 'src/pages/user/main';
+import { TUserHeaderI18n } from 'src/pages/user/header';
+
+const localeStore = useLocaleStore();
 
 export default boot(({ app }) => {
   const localeStore = useLocaleStore();
@@ -29,7 +33,9 @@ export default boot(({ app }) => {
       TFaqBlockI18n,
       TFooterBlockI18n,
       THeaderI18n,
-      TADynamicFormI18n
+      TADynamicFormI18n,
+      TMainBlockI18n,
+      TUserHeaderI18n
     ),
   });
 

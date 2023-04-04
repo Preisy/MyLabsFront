@@ -36,33 +36,45 @@ const props = defineProps<Props>();
 </style>
 
 <style lang="scss">
-.card-btn {
-  --size: 2rem;
-  width: var(--size);
-  height: var(--size);
-  padding: 0 !important;
-  align-items: center !important;
-
-  bottom: 0;
-  position: absolute;
-  right: 0;
-}
-
-.card-header {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.6rem;
-
-  padding: 0 !important;
-  padding-right: 3rem !important;
-}
-
 .qa-card {
   .q-focus-helper {
     display: none;
   }
   .q-hover-helper {
     display: none;
+  }
+
+  .card-btn {
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
+    padding: 0 !important;
+    align-items: center !important;
+
+    bottom: 0;
+    position: absolute;
+    right: 0;
+
+    @media (max-width: $screen-md) {
+      --size: 1.7rem;
+      border-radius: 0.6rem;
+    }
+  }
+
+  .card-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.6rem;
+
+    padding: 0 !important;
+    padding-right: 3rem !important;
+
+    @media (max-width: $screen-md) {
+      font-size: 1.2rem;
+    }
+    @media (max-width: $screen-sm) {
+      font-size: 1rem;
+    }
   }
 }
 </style>

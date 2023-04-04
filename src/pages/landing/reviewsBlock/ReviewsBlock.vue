@@ -62,6 +62,7 @@ const isMobile = computed(() => Screen.lt.sm);
   background-repeat: no-repeat;
   padding: 3.5rem 0;
   padding-bottom: 5.5rem;
+  margin: -2rem 0;
 
   .content-wrapper {
     .title {
@@ -86,11 +87,17 @@ const isMobile = computed(() => Screen.lt.sm);
     }
   }
 
+  @media (max-width: $screen-md-lg) {
+    .content-wrapper {
+      .slider-wrapper {
+        width: 24rem;
+      }
+    }
+  }
+
   @media (max-width: $screen-sm) {
     padding-top: 6rem;
     padding-bottom: 5.5rem;
-
-    margin: -2rem 0;
 
     .content-wrapper {
       .title {

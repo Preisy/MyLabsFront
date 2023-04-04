@@ -37,10 +37,13 @@ onUnmounted(() => window.removeEventListener('resize', choose));
   --scale: 3rem;
   display: grid;
   grid-template: repeat(12, var(--scale)) / repeat(12, var(--scale));
-}
-@media (max-width: 1500px) {
-  .skilltree {
+
+  @media (max-width: $screen-lg) {
     grid-template: repeat(15, var(--scale)) / repeat(7, var(--scale));
+  }
+
+  @media (max-width: $screen-md) {
+    --scale: 2rem;
   }
 }
 </style>

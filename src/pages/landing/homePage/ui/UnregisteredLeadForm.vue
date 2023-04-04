@@ -124,7 +124,7 @@ const onSubmit = handleSubmit.withControlled(
 }
 </style>
 
-<style lang="scss">
+<style scoped lang="scss">
 .clip-button {
   padding: 0.2rem 0.6rem;
 }

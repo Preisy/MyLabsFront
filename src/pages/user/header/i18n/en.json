@@ -1,0 +1,14 @@
+{
+  "pages": {
+    "user": {
+      "header": {
+        "home": "Home",
+        "tasks": "Tasks",
+        "referrals": "Referrals",
+        "settings": "Settings",
+        "contacts": "Contacts",
+        "inviteFriend": "Invite friend"
+      }
+    }
+  }
+}

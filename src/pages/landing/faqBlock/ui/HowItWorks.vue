@@ -62,8 +62,13 @@ const steps = [
     margin-bottom: 2.5rem;
   }
 
+  @media (max-width: $screen-lg) {
+    width: 25rem;
+  }
+
   @media (max-width: $screen-sm) {
     --margin-right: 0;
+    padding: 0.8rem;
     width: 100%;
     margin-bottom: 1.5rem;
   }

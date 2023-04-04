@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import DialogWrapper from './DialogWrapper.vue';
-import { UserCredsSchema } from 'src/model/userCreds';
+import { UserCreds, UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from './types';
 import { omit } from 'lodash';
 import * as yup from 'yup';
 import { getSchema } from 'src/global/utils';
 import { useI18n } from 'vue-i18n';
-
+import { useAuthStore } from 'src/stores/AuthStore';
+import { AuthService } from 'src/service/AuthService';
 
 let dialog = ref<InstanceType<typeof DialogWrapper>>();
 defineExpose({
@@ -15,11 +16,30 @@ defineExpose({
 });
 const { t } = useI18n();
 
+const signupData = ref<UserCreds>({
+  email: '',
+  name: '',
+  contact: '',
+  password: '',
+});
+
 const signupDialogData: DialogData[] = [
   {
     title: t('pages.landing.header.auth.signup.1'),
     schema: getSchema(omit(UserCredsSchema, 'password')),
-    onSubmit: () => true,
+    onSubmit: (values, ctx) => {
+      const _values = values as Record<keyof UserCreds, string>;
+      if (_values.contact || !_values.email || !_values.name) {
+        debugger;
+        return false;
+      }
+
+      signupData.value.email = _values.email;
+      signupData.value.name = _values.name;
+      signupData.value.contact = _values.contact;
+
+      return true;
+    },
   },
   {
     title: t('pages.landing.header.auth.signup.2'),
@@ -40,9 +60,18 @@ const signupDialogData: DialogData[] = [
         !values['password'] ||
         values['password'] !== values['password_confirmation']
       ) {
-        ctx.setFieldError('password_confirmation', 'Passwords must be the same');
+        ctx.setFieldError(
+          'password_confirmation',
+          'Passwords must be the same'
+        );
         return false;
       }
+
+      const password = (values as Record<keyof UserCreds, string>).password;
+      if (!password) return false;
+
+      //Todo: useAuthStore().askCode();
+
       return true;
     },
   },
@@ -55,7 +84,12 @@ const signupDialogData: DialogData[] = [
         rules: yup.string().required(),
       },
     ],
-    onSubmit: () => {
+    onSubmit: (values) => {
+      const code = values['code'];
+      if (!code) return false;
+
+      //useAuthStore().checkCode();
+
       return true;
     },
   },

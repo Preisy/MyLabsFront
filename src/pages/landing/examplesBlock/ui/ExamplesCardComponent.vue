@@ -9,7 +9,7 @@ interface CardProps {
 const props = defineProps<CardProps>();
 </script>
 <template>
-  <div class="card">
+  <div class="card column justify-between">
     <div class="title-wrapper row items-center no-wrap">
       <img class="title-icon" :src="props.imgSrc" alt="" />
       <h4 class="title">{{ props.title }}</h4>
@@ -60,6 +60,12 @@ const props = defineProps<CardProps>();
     .icon {
       font-size: 1.2rem;
       margin-right: 0.5rem;
+    }
+  }
+
+  @media (max-width: $screen-md) {
+    .details {
+      font-size: 0.9rem;
     }
   }
 

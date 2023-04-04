@@ -108,7 +108,11 @@ defineProps<Props>();
       z-index: 1;
 
       .step-num {
-        margin-right: 1rem;
+        margin-right: 0.3rem;
+        font-size: 1.2rem;
+      }
+      .label {
+        font-size: 0.85rem;
       }
     }
   }
