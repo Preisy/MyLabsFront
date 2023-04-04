@@ -1,7 +1,6 @@
 import * as yup from 'yup';
 import { map } from 'lodash';
 
-
 export function isVisible(el: HTMLElement | undefined) {
   if (!el) return false;
 

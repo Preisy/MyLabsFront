@@ -1,39 +1,57 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { isVisible } from 'src/global/utils';
 
 const root = ref<HTMLDivElement>();
 const counter = ref(0);
 
+let start = 18;
 let end = -2;
-let margin = ref<number>(0);
+let height = ref<number>();
 
-const scrollHandler = () => {
-  if (!root.value || !isVisible(root.value)) return;
-  const bcr = root.value?.getBoundingClientRect();
+const updateHeight = () => {
+  if (!root.value) return;
+  const bcr = root.value.getBoundingClientRect();
+
   const centerBcr = bcr.bottom - bcr.height / 2;
+
   const delta = centerBcr - document.documentElement.clientHeight / 2;
-  let newMargin = Math.round((Math.abs(delta) / 80) * 10) / 10;
-  if (newMargin < Math.abs(end)) margin.value = end;
-  else margin.value = -newMargin;
+
+  let newHeight = Math.round((- Math.abs(delta) * 20 / 1000 - 1) * 10) / 10;
+  // console.log(newHeight);
+
+  if (Math.abs(newHeight) < Math.abs(end)) height.value = end;
+  else height.value = newHeight;
 };
+
+const animateScroll = () => {
+  updateHeight()
+  requestAnimationFrame(animateScroll)
+}
+
+// let a = new IntersectionObserver(() => {
+//   console.log('obs');
+
+// }, {
+//   // root: root.value,
+//   threshold: 0.5
+// })
+
+onMounted(() => animateScroll())
 
 const isMobile = Screen.lt.sm;
 </script>
 
 <template>
-  <div
-    class="counterpage"
-    ref="root"
-    :class="{ mobile: isMobile }"
-    :style="{ margin: `${margin}rem` }"
-  >
-    <QScrollObserver @scroll="scrollHandler" />
-    <div class="content-wrapper structure">
+  <div class="counterpage" ref="root" :class="{ mobile: isMobile }">
+    <!-- <QScrollObserver @scroll="scrollHandler" /> -->
+    <div class="content-wrapper structure" :style="{ /*height: `${height}rem`*/ margin: `${height}rem 0` }">
       <h1 class="counter text-primary text-center">
         <span class="counter__number">{{ counter }}</span>
         {{ $t('pages.landing.counterPage.amount') }}
+        <!-- {{ height }} -->
+
       </h1>
     </div>
   </div>
@@ -48,13 +66,23 @@ const isMobile = Screen.lt.sm;
   z-index: 0;
   //transition: 0.3s all ease-in-out;
 
-  margin: -8rem auto;
+  margin: -2rem auto;
   // will-change: margin;
 
+  .structure {
+    padding: 5rem 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    height: 36rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .content-wrapper {
-    padding: 15rem 0;
 
     .counter {
+      height: fit-content;
       color: $primary;
       text-align: center;
     }
