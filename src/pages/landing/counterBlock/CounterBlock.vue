@@ -1,58 +1,52 @@
 <script setup lang="ts">
-import { QScrollObserver, Screen } from 'quasar';
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+import { QScrollObserver, QResizeObserver, Screen } from 'quasar';
 import { onMounted, ref } from 'vue';
 import { isVisible } from 'src/global/utils';
+import throttle from 'lodash/throttle';
 
 const root = ref<HTMLDivElement>();
-const counter = ref(0);
+let content = ref<HTMLDivElement>()
 
-let start = 18;
 let end = 35;
-let height = ref<number>();
+let height = ref<number>(18);
+let coordY = 0;
+const changeCoordY = () => {
+  let fs = parseFloat(getComputedStyle(document.body).fontSize)
+  let relativeTop = fs * 36 / 2;
+  content.value?.getBoundingClientRect().top! + window.scrollY + relativeTop
+}
+onMounted(() => {
+  let fs = parseFloat(getComputedStyle(document.body).fontSize)
+  let relativeTop = fs * 36 / 2;
+  coordY = content.value?.getBoundingClientRect().top! + window.scrollY + relativeTop
+})
 
 const updateHeight = () => {
-  if (!root.value) return;
-  const bcr = root.value.getBoundingClientRect();
-
-  const centerBcr = bcr.bottom - bcr.height / 2;
-
+  if (!root.value || !isVisible(root.value)) return;
+  const centerBcr = coordY - window.scrollY
   const delta = centerBcr - document.documentElement.clientHeight / 2;
 
   let newHeight = Math.round((- Math.abs(delta) * 30 / 1000 + 40) * 10) / 10;
-  // console.log(newHeight);
   if (newHeight === height.value) return;
-
   if (Math.abs(newHeight) > Math.abs(end)) height.value = end;
   else height.value = newHeight;
 };
-
-const animateScroll = () => {
-  updateHeight()
-  requestAnimationFrame(animateScroll)
-}
-
-// let a = new IntersectionObserver(() => {
-//   console.log('obs');
-
-// }, {
-//   // root: root.value,
-//   threshold: 0.5
-// })
-
-onMounted(() => animateScroll())
+const animateScroll = throttle(updateHeight, 15);
 
 const isMobile = Screen.lt.sm;
+const counter = ref(0);
 </script>
 
 <template>
   <div class="counterpage" ref="root" :class="{ mobile: isMobile }">
-    <!-- <QScrollObserver @scroll="scrollHandler" /> -->
-    <div class="content-wrapper structure" :style="{ height: `${height}rem` }">
+    <QScrollObserver @scroll="animateScroll" />
+    <QResizeObserver @resize="changeCoordY" />
+    <div class="content-wrapper structure" ref="content" :style="{ height: `${height}rem` }">
       <h1 class="counter text-primary text-center">
         <span class="counter__number">{{ counter }}</span>
+        &nbsp;
         {{ $t('pages.landing.counterPage.amount') }}
-        <!-- {{ height }} -->
-
       </h1>
     </div>
   </div>
@@ -68,7 +62,7 @@ const isMobile = Screen.lt.sm;
   //transition: 0.3s all ease-in-out;
 
   margin: -2rem auto;
-  will-change: height;
+  // will-change: height;
 
   .structure {
     padding: 5rem 0;
