@@ -7,7 +7,7 @@ const root = ref<HTMLDivElement>();
 const counter = ref(0);
 
 let start = 18;
-let end = -2;
+let end = 35;
 let height = ref<number>();
 
 const updateHeight = () => {
@@ -18,10 +18,11 @@ const updateHeight = () => {
 
   const delta = centerBcr - document.documentElement.clientHeight / 2;
 
-  let newHeight = Math.round((- Math.abs(delta) * 20 / 1000 - 1) * 10) / 10;
+  let newHeight = Math.round((- Math.abs(delta) * 30 / 1000 + 40) * 10) / 10;
   // console.log(newHeight);
+  if (newHeight === height.value) return;
 
-  if (Math.abs(newHeight) < Math.abs(end)) height.value = end;
+  if (Math.abs(newHeight) > Math.abs(end)) height.value = end;
   else height.value = newHeight;
 };
 
@@ -46,7 +47,7 @@ const isMobile = Screen.lt.sm;
 <template>
   <div class="counterpage" ref="root" :class="{ mobile: isMobile }">
     <!-- <QScrollObserver @scroll="scrollHandler" /> -->
-    <div class="content-wrapper structure" :style="{ /*height: `${height}rem`*/ margin: `${height}rem 0` }">
+    <div class="content-wrapper structure" :style="{ height: `${height}rem` }">
       <h1 class="counter text-primary text-center">
         <span class="counter__number">{{ counter }}</span>
         {{ $t('pages.landing.counterPage.amount') }}
@@ -67,7 +68,7 @@ const isMobile = Screen.lt.sm;
   //transition: 0.3s all ease-in-out;
 
   margin: -2rem auto;
-  // will-change: margin;
+  will-change: height;
 
   .structure {
     padding: 5rem 0;
