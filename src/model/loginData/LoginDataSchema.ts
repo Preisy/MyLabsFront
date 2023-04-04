@@ -1,4 +1,3 @@
-import * as yup from 'yup';
 import { UserCredsSchema } from '../userCreds';
 
 export const LoginDataSchema = {

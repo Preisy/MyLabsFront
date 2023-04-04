@@ -49,24 +49,13 @@ defineExpose({
 <template>
   <ADialog ref="dialog">
     <div v-if="i != dialogs.length" class="content-wrapper">
-      <img
-        src="src/assets/header/floor.svg"
-        class="floor"
-        alt=""
-        ref="floor"
-        @click="close"
-        :class="{ showed: isOpened }"
-      />
+      <img src="src/assets/header/floor.svg" class="floor" alt="" ref="floor" @click="close"
+        :class="{ showed: isOpened }" />
       <h4 class="title">
         {{ dialogs[i].title }}
       </h4>
       <div class="body-wrapper">
-        <ADynamicForm
-          :schema="dialogs[i].schema"
-          :on-submit="onSubmit"
-          class="form"
-          button-width="9rem"
-        />
+        <ADynamicForm :schema="dialogs[i].schema" :on-submit="onSubmit" class="form" button-width="9rem" />
       </div>
       <div class="page-counter">{{ i + 1 }} / {{ dialogs.length + 1 }}</div>
     </div>
@@ -77,10 +66,11 @@ defineExpose({
 <style scoped lang="scss">
 .content-wrapper {
   width: 23rem;
-  padding: 2rem;
+  padding: 3.5rem 2rem;
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
   // position: relative;
 
   .floor {
@@ -92,8 +82,9 @@ defineExpose({
     opacity: 0;
     // transition: opacity 0.1s ease-in-out;
   }
+
   .showed {
-    transition: opacity 0.3s 0.1s ease-in-out;
+    transition: opacity 0.3s 0.2s ease-in-out;
 
     opacity: 1;
   }
@@ -106,6 +97,7 @@ defineExpose({
     line-height: 2rem;
     margin-bottom: 1.3rem;
   }
+
   .body-wrapper {
     margin-bottom: 1rem;
   }
@@ -113,6 +105,7 @@ defineExpose({
   .controls-wrapper {
     margin-bottom: 0.75rem;
   }
+
   .page-counter {
     width: min-content;
     white-space: nowrap;
@@ -129,7 +122,7 @@ defineExpose({
 </style>
 
 <style>
-.q-dialog__inner > div {
+.q-dialog__inner>div {
   overflow: unset;
 }
 </style>

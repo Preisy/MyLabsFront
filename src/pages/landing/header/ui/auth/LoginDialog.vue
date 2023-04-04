@@ -35,37 +35,20 @@ const onSubmit = () => {
   <div>
     <ADialog ref="dialog">
       <div class="content-wrapper">
-        <img
-          src="src/assets/header/floor.svg"
-          class="floor"
-          alt=""
-          ref="floor"
-          @click="close"
-          :class="{ showed: isOpened }"
-        />
+        <img src="src/assets/header/floor.svg" class="floor" alt="" ref="floor" @click="close"
+          :class="{ showed: isOpened }" />
         <h4 class="title">
           {{ $t('pages.landing.header.auth.login.1') }}
         </h4>
         <div class="body-wrapper">
-          <ADynamicForm
-            :schema="schema"
-            :on-submit="onSubmit"
-            class="form"
-            button-width="9rem"
-          />
-          <ABtn
-            :label="$t('pages.landing.header.auth.login.btn')"
-            color="grey"
-            text-color="dark"
-            class="restore"
-            width="9rem"
-            @click="
+          <ADynamicForm :schema="schema" :on-submit="onSubmit" class="form" button-width="9rem" />
+          <ABtn :label="$t('pages.landing.header.auth.login.btn')" color="grey" text-color="dark" class="restore"
+            width="9rem" @click="
               () => {
                 dialog?.close();
                 restore?.open();
               }
-            "
-          ></ABtn>
+            "></ABtn>
         </div>
       </div>
       <!-- <SuccessDialog v-else :i="dialogs.length + 1" @close="close()" /> -->
@@ -77,11 +60,12 @@ const onSubmit = () => {
 <style scoped lang="scss">
 .content-wrapper {
   width: 23rem;
-  padding: 2rem;
+  padding: 3.5rem 2rem;
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
-  
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
+
   .floor {
     user-select: none;
     position: absolute;
@@ -91,8 +75,9 @@ const onSubmit = () => {
     opacity: 0;
     // transition: opacity 0.1s ease-in-out;
   }
+
   .showed {
-    transition: opacity 0.3s 0.1s ease-in-out;
+    transition: opacity 0.3s 0.2s ease-in-out;
 
     opacity: 1;
   }
@@ -106,9 +91,11 @@ const onSubmit = () => {
     line-height: 2rem;
     margin-bottom: 1.3rem;
   }
+
   .body-wrapper {
     margin-bottom: 1rem;
   }
+
   .restore {
     margin: 0 auto 1rem;
     display: block;
