@@ -1,108 +1,38 @@
 <script setup lang="ts">
-import ACarousel from 'src/components/ACarousel.vue';
-import { ref } from 'vue';
 import TaskCard from './ui/TaskCard.vue';
+import { chunk } from 'lodash';
+import { exampleCards } from './ui/Card';
 
-const i = ref<string>('0');
-const inProgressCards = [
-  {
-    title: 'Backup system',
-    price: 3000,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3100,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3200,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-];
-
-const doneWorksCards = [
-  {
-    title: 'Backup system',
-    price: 3000,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3100,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3200,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3000,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3100,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-  {
-    title: 'Backup system',
-    price: 3200,
-    date: '19.03.23',
-    link: '#',
-    imgSrc: '#',
-  },
-];
+// const i = ref<string>('0');
+const cards = exampleCards;
 </script>
 
 <template>
   <div class="work-block bg-primary">
     <div class="content-wrapper structure">
-      <div class="titles row justify-between">
-        <h1 class="title text-accent">В процессе</h1>
-        <h1 class="title">Старые работы</h1>
-      </div>
       <div class="cards row justify-between">
-        <div class="in-progress column">
+        <div class="in-progress column items-center">
+          <h1 class="title text-accent">В процессе</h1>
           <TaskCard
-            v-for="(card, index) in inProgressCards"
+            v-for="(card, index) in cards.inProgress"
             :key="index"
-            :title="card.title"
-            :price="card.price.toString()"
-            :date="card.date"
-            :img-src="card.imgSrc"
-            :link="card.link"
+            :card="card"
           ></TaskCard>
         </div>
-        <div class="done column">
-          <TaskCard
-            v-for="(card, index) in doneWorksCards"
+        <div class="done column items-center">
+          <h1 class="title">Старые работы</h1>
+          <div
+            class="slide row"
+            v-for="(slide, index) in chunk(cards.done, 2)"
             :key="index"
-            :title="card.title"
-            :price="card.price.toString()"
-            :date="card.date"
-            :img-src="card.imgSrc"
-            :link="card.link"
-          ></TaskCard>
+          >
+            <TaskCard
+              class="card"
+              v-for="(card, index) in slide"
+              :key="index"
+              :card="card"
+            ></TaskCard>
+          </div>
         </div>
       </div>
     </div>
@@ -111,11 +41,26 @@ const doneWorksCards = [
 
 <style scoped lang="scss">
 .work-block {
-  margin-top: -5rem;
+  background-color: $primary;
   border-radius: 2rem;
 
-  .titles {
-    padding-top: 2rem;
+  .structure {
+    padding: 0;
+  }
+
+  .title {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  .done {
+    .card:first-of-type {
+      margin-right: 2rem;
+    }
   }
 }
 </style>

@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import DialogWrapper from './DialogWrapper.vue';
 import ADialog from 'src/components/ADialog';
 import { getSchema } from 'src/global/utils';
-import { LoginData, LoginDataSchema } from 'src/model/loginData';
+import { LoginDataSchema } from 'src/model/loginData';
 import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
-import { AuthService } from 'src/service/AuthService';
-import { GenericFormData } from 'axios';
-import { SubmissionContext } from 'vee-validate';
 import { useAuthStore } from 'src/stores/AuthStore';
 
 let isOpened = ref(false);
@@ -30,14 +27,10 @@ const close = () => {
 
 let schema = getSchema(LoginDataSchema);
 
-type LoginKeys = 'email' | 'password';
-const onSubmit = (
-  values: Record<LoginKeys, string>,
-  ctx: SubmissionContext<Record<string, unknown>>
-) => {
+const onSubmit = (values: Record<string, unknown>) => {
   useAuthStore().login({
-    email: values.email,
-    password: values.password,
+    email: values['email'] as string,
+    password: values['password'] as string,
   });
 };
 </script>
@@ -46,20 +39,37 @@ const onSubmit = (
   <div>
     <ADialog ref="dialog">
       <div class="content-wrapper">
-        <img src="src/assets/header/floor.svg" class="floor" alt="" ref="floor" @click="close"
-          :class="{ showed: isOpened }" />
-        <h4 class="title">
+        <img
+          src="src/assets/header/floor.svg"
+          class="floor"
+          alt=""
+          ref="floor"
+          @click="close"
+          :class="{ showed: isOpened }"
+        />
+        <h2 class="title">
           {{ $t('pages.landing.header.auth.login.1') }}
-        </h4>
+        </h2>
         <div class="body-wrapper">
-          <ADynamicForm :schema="schema" :on-submit="onSubmit" class="form" button-width="9rem" />
-          <ABtn :label="$t('pages.landing.header.auth.login.btn')" color="grey" text-color="dark" class="restore"
-            width="9rem" @click="
+          <ADynamicForm
+            :schema="schema"
+            :on-submit="onSubmit"
+            class="form"
+            button-width="9rem"
+          />
+          <ABtn
+            :label="$t('pages.landing.header.auth.login.btn')"
+            color="grey"
+            text-color="dark"
+            class="restore"
+            width="9rem"
+            @click="
               () => {
                 dialog?.close();
                 restore?.open();
               }
-            "></ABtn>
+            "
+          ></ABtn>
         </div>
       </div>
       <!-- <SuccessDialog v-else :i="dialogs.length + 1" @close="close()" /> -->

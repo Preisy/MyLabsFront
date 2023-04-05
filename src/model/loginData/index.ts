@@ -1,2 +1,2 @@
-export * from './LoginData'
-export * from './LoginDataSchema'
+export * from './LoginData';
+export * from './LoginDataSchema';

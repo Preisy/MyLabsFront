@@ -43,9 +43,9 @@ const onSubmit = () => {
           @click="close"
           :class="{ showed: isOpened }"
         />
-        <h4 class="title">
+        <h2 class="title">
           {{ $t('pages.landing.header.auth.login.1') }}
-        </h4>
+        </h2>
         <div class="body-wrapper">
           <ADynamicForm
             :schema="schema"
@@ -81,7 +81,7 @@ const onSubmit = () => {
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
-  
+
   .floor {
     user-select: none;
     position: absolute;

@@ -1,4 +1,4 @@
-import ADynamicForm from './ADynamicForm.vue'
-export default ADynamicForm
+import ADynamicForm from './ADynamicForm.vue';
+export default ADynamicForm;
 
-export * from './types'
+export * from './types';

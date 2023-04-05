@@ -24,7 +24,8 @@ const props = defineProps<SlideProps>();
   }
 
   @media (max-width: $screen-md) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 15rem;
+    justify-content: center;
   }
 
   @media (max-width: $screen-sm) {

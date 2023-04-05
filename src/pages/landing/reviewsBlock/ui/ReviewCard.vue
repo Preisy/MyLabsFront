@@ -12,7 +12,7 @@ const props = defineProps<Props>();
   <div class="review-card">
     <div class="head row items-center">
       <img class="profile-img" :src="props.imgSrc" />
-      <h4>{{ props.name }}</h4>
+      <h2>{{ props.name }}</h2>
     </div>
     <p class="details">{{ props.details }}</p>
   </div>

@@ -60,9 +60,11 @@ const isMobile = computed(() => Screen.lt.sm);
   background: url('src/assets/digital_background.png');
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 3.5rem 0;
-  padding-bottom: 5.5rem;
   margin: -2rem 0;
+
+  .structure {
+    padding: 5.5rem 0;
+  }
 
   .content-wrapper {
     .title {

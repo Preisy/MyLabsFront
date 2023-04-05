@@ -8,7 +8,7 @@
       </h1>
       <div class="details row">
         <div class="contacts column">
-          <h4>{{ $t('pages.landing.footerBlock.contacts') }}</h4>
+          <h2>{{ $t('pages.landing.footerBlock.contacts') }}</h2>
           <a href="#" class="tg link text-primary">
             {{ $t('pages.landing.footerBlock.tg') }}
           </a>
@@ -17,7 +17,7 @@
           </a>
         </div>
         <div class="info column">
-          <h4>{{ $t('pages.landing.footerBlock.information') }}</h4>
+          <h2>{{ $t('pages.landing.footerBlock.information') }}</h2>
           <a href="#" class="about-us link text-primary">
             {{ $t('pages.landing.footerBlock.about') }}
           </a>
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="copyright">
-        <h4>© 2022—2023 MyLabs</h4>
+        <h2>© 2022—2023 MyLabs</h2>
       </div>
     </div>
   </div>

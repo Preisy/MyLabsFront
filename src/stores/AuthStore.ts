@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types/State';
 import { UserCreds } from 'src/model/UserCreds/UserCreds';
+import { CodeCheckData } from 'src/model/codeCheckData/codeCheckData';
 import { LoginData } from 'src/model/loginData/LoginData';
 import { AuthService } from 'src/service/AuthService';
 
@@ -38,11 +39,22 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   };
 
+  const checkCode = async (data: CodeCheckData) => {
+    state = 'loading';
+    const res = await AuthService.checkCode(data);
+    if ('error' in res) {
+      state = 'error';
+    } else {
+      state = 'success';
+    }
+  };
+
   return {
     isAuth,
     state,
     login,
     logout,
     signup,
+    checkCode,
   };
 });

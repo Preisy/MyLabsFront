@@ -8,7 +8,6 @@ import * as yup from 'yup';
 import { getSchema } from 'src/global/utils';
 import { useI18n } from 'vue-i18n';
 
-
 let dialog = ref<InstanceType<typeof DialogWrapper>>();
 defineExpose({
   open: () => dialog.value?.open(),
@@ -40,7 +39,10 @@ const signupDialogData: DialogData[] = [
         !values['password'] ||
         values['password'] !== values['password_confirmation']
       ) {
-        ctx.setFieldError('password_confirmation', 'Passwords must be the same');
+        ctx.setFieldError(
+          'password_confirmation',
+          'Passwords must be the same'
+        );
         return false;
       }
       return true;

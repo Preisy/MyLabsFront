@@ -8,11 +8,12 @@ interface CardProps {
 
 const props = defineProps<CardProps>();
 </script>
+
 <template>
   <div class="card column justify-between">
     <div class="title-wrapper row items-center no-wrap">
       <img class="title-icon" :src="props.imgSrc" alt="" />
-      <h4 class="title">{{ props.title }}</h4>
+      <h2 class="title">{{ props.title }}</h2>
     </div>
     <div class="details">
       <div class="time">
@@ -32,6 +33,7 @@ const props = defineProps<CardProps>();
     </div>
   </div>
 </template>
+
 <style scoped lang="scss">
 .card {
   background-color: $primary;
@@ -39,6 +41,11 @@ const props = defineProps<CardProps>();
   padding: 1.5rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 2rem 0 #00000020;
+  min-width: 12.1rem;
+
+  @media (max-width: $screen-lg) {
+    padding: 0.9rem;
+  }
 
   .title-wrapper {
     margin-bottom: 2.5rem;
@@ -61,16 +68,10 @@ const props = defineProps<CardProps>();
       font-size: 1.2rem;
       margin-right: 0.5rem;
     }
-  }
 
-  @media (max-width: $screen-md) {
-    .details {
-      font-size: 0.9rem;
+    @media (max-width: $screen-md) {
+      font-size: 1rem;
     }
-  }
-
-  @media (max-width: $screen-sm) {
-    box-shadow: 0 0 0.8rem 0 #00000040;
   }
 }
 </style>

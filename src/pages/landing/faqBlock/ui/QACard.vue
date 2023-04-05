@@ -32,6 +32,19 @@ const props = defineProps<Props>();
     margin: 0;
     margin-top: 1rem;
   }
+  @media (max-width: $screen-md) {
+    padding: 0.8rem;
+    .answer {
+      font-size: 1rem;
+      margin-top: 0.8rem;
+    }
+  }
+  @media (max-width: $screen-sm) {
+    .answer {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+  }
 }
 </style>
 
@@ -70,10 +83,10 @@ const props = defineProps<Props>();
     padding-right: 3rem !important;
 
     @media (max-width: $screen-md) {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
     @media (max-width: $screen-sm) {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 }

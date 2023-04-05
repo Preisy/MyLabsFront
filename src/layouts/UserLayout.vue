@@ -1,31 +1,40 @@
 <script setup lang="ts">
 import UserHeaderComponent from 'src/pages/user/header';
 import MainBlock from 'src/pages/user/main/MainBlock.vue';
-import WorkBlock from 'src/pages/user/work/WorkBlock.vue';
-import { ref } from 'vue';
-
-const routes = [{ path: '/foo', component: WorkBlock }];
-
-const components = {
-  work: WorkBlock,
-};
-
-const activeComponent = ref(components.work);
 </script>
 
 <template>
-  <q-layout view="lHh lpr lff">
+  <q-layout class="user-page" view="lHh lpr lff">
     <!-- <UserHeaderComponent /> -->
     <UserHeaderComponent />
 
     <q-page-container class="no-padding">
-      <MainBlock />
+      <MainBlock class="main" />
 
-      <KeepAlive>
-        <component :is="activeComponent" />
-      </KeepAlive>
+      <div class="subblock">
+        <router-view></router-view>
+      </div>
     </q-page-container>
   </q-layout>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.user-page {
+  --main-height: 60vh;
+  --overlap: 4rem;
+  --subblock-height: calc(100vh - var(--main-height) + var(--overlap));
+
+  overflow: hidden;
+
+  .main {
+    height: var(--main-height);
+  }
+  .subblock {
+    height: var(--subblock-height);
+    margin-top: calc(-1 * var(--overlap));
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+}
+</style>

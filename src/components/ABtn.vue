@@ -3,17 +3,18 @@ import { ref } from 'vue';
 
 interface ButtonProps {
   label: string;
-  color?: string;
-  textColor?: string;
+  theme?: 'dark' | 'light';
   type?: 'button' | 'reset' | 'submit';
-  width?: string
+  width?: string;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  color: 'dark',
-  textColor: 'primary',
+  theme: 'dark',
   type: 'button',
 });
+
+const color = props.theme === 'dark' ? 'dark' : 'grey';
+const textColor = props.theme === 'dark' ? 'primary' : 'dark';
 
 const emits = defineEmits<{
   (e: 'click', val: boolean): void;
@@ -25,13 +26,13 @@ const state = ref<boolean>(false);
   <q-btn
     class="br-15px text-weight-600 btn"
     unelevated
-    :color="props.color"
-    :text-color="props.textColor"
+    :color="color"
+    :text-color="textColor"
     no-caps
     :label="props.label"
     :type="props.type"
     @click="emits('click', state)"
-    :style="{width: width}"
+    :style="{ width: width }"
   />
 </template>
 

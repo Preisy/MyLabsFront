@@ -3,6 +3,7 @@ interface Props {
   modelValue: number;
   id: number;
   label: string;
+  to?: string;
 }
 
 const props = defineProps<Props>();
@@ -18,6 +19,7 @@ defineEmits<{
     color="dark"
     no-caps
     flat
+    :to="to"
     :label="props.label"
     @click="$emit('update:modelValue', props.id)"
   />

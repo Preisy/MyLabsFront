@@ -7,7 +7,7 @@ import { useAuthStore } from './stores/AuthStore';
 Screen.setSizes({ sm: 600, md: 1200 });
 
 const router = ref<Router>();
-router.value?.beforeEach((to, from) => {
+router.value?.beforeEach((to) => {
   // instead of having to check every route record with
   // to.matched.some(record => record.meta.requiresAuth)
   if (to.meta.auth && !useAuthStore().isAuth) {

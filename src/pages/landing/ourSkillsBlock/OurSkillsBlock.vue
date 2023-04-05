@@ -47,9 +47,6 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
   }
 
   .content-wrapper {
-    padding-top: 7rem;
-    padding-bottom: 1rem;
-
     .title {
       margin-bottom: 3rem;
     }
@@ -113,7 +110,6 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
   @media (min-width: $screen-xl) {
     .content-wrapper {
       .content {
-        width: fit-content;
         justify-content: center;
 
         .description {

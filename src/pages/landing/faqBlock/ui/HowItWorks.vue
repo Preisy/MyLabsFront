@@ -29,9 +29,9 @@ const steps = [
 
 <template>
   <div class="how-it-works bg-primary">
-    <h4 class="title">
+    <h2 class="title">
       {{ $t('pages.landing.faqBlock.howItWorks.title') }}
-    </h4>
+    </h2>
     <div class="steps">
       <StepComponent
         v-for="(step, index) in steps"
@@ -71,6 +71,10 @@ const steps = [
     padding: 0.8rem;
     width: 100%;
     margin-bottom: 1.5rem;
+
+    .title {
+      margin-bottom: 1rem;
+    }
   }
 }
 </style>

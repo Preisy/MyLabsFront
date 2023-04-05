@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import { getSchema } from 'src/global/utils';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from 'src/stores/AuthStore';
-import { AuthService } from 'src/service/AuthService';
+import { CodeCheckData } from 'src/model/codeCheckData/codeCheckData';
 
 let dialog = ref<InstanceType<typeof DialogWrapper>>();
 defineExpose({
@@ -27,10 +27,9 @@ const signupDialogData: DialogData[] = [
   {
     title: t('pages.landing.header.auth.signup.1'),
     schema: getSchema(omit(UserCredsSchema, 'password')),
-    onSubmit: (values, ctx) => {
+    onSubmit: (values) => {
       const _values = values as Record<keyof UserCreds, string>;
       if (_values.contact || !_values.email || !_values.name) {
-        debugger;
         return false;
       }
 
@@ -70,7 +69,7 @@ const signupDialogData: DialogData[] = [
       const password = (values as Record<keyof UserCreds, string>).password;
       if (!password) return false;
 
-      //Todo: useAuthStore().askCode();
+      useAuthStore().signup(signupData.value);
 
       return true;
     },
@@ -88,7 +87,11 @@ const signupDialogData: DialogData[] = [
       const code = values['code'];
       if (!code) return false;
 
-      //useAuthStore().checkCode();
+      const codeCheckData: CodeCheckData = {
+        code: code as string,
+        email: signupData.value.email,
+      };
+      useAuthStore().checkCode(codeCheckData);
 
       return true;
     },

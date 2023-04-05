@@ -49,13 +49,24 @@ defineExpose({
 <template>
   <ADialog ref="dialog">
     <div v-if="i != dialogs.length" class="content-wrapper">
-      <img src="src/assets/header/floor.svg" class="floor" alt="" ref="floor" @click="close"
-        :class="{ showed: isOpened }" />
-      <h4 class="title">
+      <img
+        src="src/assets/header/floor.svg"
+        class="floor"
+        alt=""
+        ref="floor"
+        @click="close"
+        :class="{ showed: isOpened }"
+      />
+      <h2 class="title">
         {{ dialogs[i].title }}
-      </h4>
+      </h2>
       <div class="body-wrapper">
-        <ADynamicForm :schema="dialogs[i].schema" :on-submit="onSubmit" class="form" button-width="9rem" />
+        <ADynamicForm
+          :schema="dialogs[i].schema"
+          :on-submit="onSubmit"
+          class="form"
+          button-width="9rem"
+        />
       </div>
       <div class="page-counter">{{ i + 1 }} / {{ dialogs.length + 1 }}</div>
     </div>
@@ -122,7 +133,7 @@ defineExpose({
 </style>
 
 <style>
-.q-dialog__inner>div {
+.q-dialog__inner > div {
   overflow: unset;
 }
 </style>

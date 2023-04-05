@@ -29,7 +29,8 @@ const { errorMessage, value } = useField<string | number | undefined>(
     :bg-color="props.bgColor"
     :error="!!errorMessage"
     :error-message="errorMessage"
-    class="br-15px ainput"
+    hide-bottom-space
+    class="ainput"
     filled
     dense
     :color="color"
@@ -40,17 +41,29 @@ const { errorMessage, value } = useField<string | number | undefined>(
 
 <style lang="scss">
 .ainput {
-  &.q-field--dense .q-field__control {
-    height: 2.25rem !important;
-    border-radius: 0.75rem !important;
+  // &.q-field--dense .q-field__control {
+  //   height: 2.25rem !important;
+  //   border-radius: 0.75rem !important;
+  // }
+  // &.q-field--dense .q-field__label {
+  //   font-size: 0.8rem !important;
+  //   top: 13px !important;
+  // }
+  &.q-field--filled .q-field__control:after {
+    display: none;
   }
-  &.q-field--dense .q-field__label {
-    font-size: 0.8rem !important;
-    top: 13px !important;
+  .q-field__control {
+    border-radius: 0.75rem;
   }
-  &.q-field--filled.q-field--highlighted .q-field__control:after {
-    margin-left: 0.6rem !important;
-    margin-right: 0.6rem !important;
+  .q-field__bottom {
+    white-space: nowrap !important;
+    position: absolute;
+    padding: 0;
+    padding-top: 2px;
+    padding-left: 12px;
+  }
+  &.q-field--error {
+    margin-bottom: 5px !important;
   }
 }
 </style>

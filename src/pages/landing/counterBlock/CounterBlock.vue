@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { QScrollObserver, Screen } from 'quasar';
+import { Screen } from 'quasar';
 import { onMounted, ref } from 'vue';
-import { isVisible } from 'src/global/utils';
 
 const root = ref<HTMLDivElement>();
 const counter = ref(0);
 
-let start = 18;
+// let start = 18;
 let end = 35;
 let height = ref<number>();
 
@@ -18,7 +17,7 @@ const updateHeight = () => {
 
   const delta = centerBcr - document.documentElement.clientHeight / 2;
 
-  let newHeight = Math.round((- Math.abs(delta) * 30 / 1000 + 40) * 10) / 10;
+  let newHeight = Math.round(((-Math.abs(delta) * 30) / 1000 + 40) * 10) / 10;
   // console.log(newHeight);
   if (newHeight === height.value) return;
 
@@ -27,9 +26,9 @@ const updateHeight = () => {
 };
 
 const animateScroll = () => {
-  updateHeight()
-  requestAnimationFrame(animateScroll)
-}
+  updateHeight();
+  requestAnimationFrame(animateScroll);
+};
 
 // let a = new IntersectionObserver(() => {
 //   console.log('obs');
@@ -39,7 +38,7 @@ const animateScroll = () => {
 //   threshold: 0.5
 // })
 
-onMounted(() => animateScroll())
+onMounted(() => animateScroll());
 
 const isMobile = Screen.lt.sm;
 </script>
@@ -52,7 +51,6 @@ const isMobile = Screen.lt.sm;
         <span class="counter__number">{{ counter }}</span>
         {{ $t('pages.landing.counterPage.amount') }}
         <!-- {{ height }} -->
-
       </h1>
     </div>
   </div>
@@ -71,7 +69,7 @@ const isMobile = Screen.lt.sm;
   will-change: height;
 
   .structure {
-    padding: 5rem 0;
+    padding: 12rem 0;
     margin-left: auto !important;
     margin-right: auto !important;
     height: 36rem;
@@ -81,7 +79,6 @@ const isMobile = Screen.lt.sm;
   }
 
   .content-wrapper {
-
     .counter {
       height: fit-content;
       color: $primary;
@@ -91,7 +88,7 @@ const isMobile = Screen.lt.sm;
 
   @media (max-width: $screen-sm) {
     .content-wrapper {
-      padding: 7rem 0;
+      padding: 8rem 0;
     }
   }
 }

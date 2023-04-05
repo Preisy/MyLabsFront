@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import {
-  SubmissionContext,
-  useForm,
-} from 'vee-validate';
+import { SubmissionContext, useForm } from 'vee-validate';
 import AInput from 'components/AInput.vue';
 import ABtn from 'components/ABtn.vue';
 import ASelect from 'components/ASelect.vue';
 import { LabTypes } from 'src/global/LabTypes';
 import { TaskSchema } from 'src/model/task';
 import { UserCreds, UserCredsSchema } from 'src/model/userCreds';
-import omit from 'lodash/omit'
+import omit from 'lodash/omit';
+import { useAuthStore } from 'src/stores/AuthStore';
 
-type UnregisteredLeadForm = Omit<UserCreds, 'password'>
+type UnregisteredLeadForm = Omit<UserCreds, 'password'>;
 const UnregisteredLeadFormSchema = {
   ...TaskSchema,
   ...omit(UserCredsSchema, 'password'),
@@ -25,7 +23,8 @@ const onSubmit = handleSubmit.withControlled(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (values, ctx: SubmissionContext<UnregisteredLeadForm>) => {
     console.log(JSON.stringify(values, null, 2));
-  });
+  }
+);
 </script>
 
 <template>
@@ -78,6 +77,7 @@ const onSubmit = handleSubmit.withControlled(
     >
       <div class="form-line">
         <a-input
+          v-if="!useAuthStore().isAuth"
           :label="col.label"
           :name="col.name"
           :placeholder="col.placeholder"
@@ -95,6 +95,7 @@ const onSubmit = handleSubmit.withControlled(
       />
       <a-btn
         class="col-5 btn"
+        theme="dark"
         :label="$t('pages.landing.homePage.form.order')"
         type="submit"
       ></a-btn>
@@ -117,9 +118,6 @@ const onSubmit = handleSubmit.withControlled(
 
   @media (max-width: $screen-sm) {
     width: 100%;
-    .form-line {
-      margin-bottom: 0;
-    }
   }
 }
 </style>

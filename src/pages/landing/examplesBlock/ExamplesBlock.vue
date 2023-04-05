@@ -74,15 +74,13 @@ const _slides = computed(() => {
 
   border-radius: 0 0 2rem 2rem;
 
-  .content-wrapper {
-    padding: 8rem 0;
+  .structure {
+    padding-bottom: 5rem;
+  }
 
+  .content-wrapper {
     .title {
       margin-bottom: 3.5rem;
-    }
-
-    .slider-wrapper {
-      // background: radial-gradient(#00000010 15%, transparent 75%);
     }
   }
 
@@ -94,23 +92,28 @@ const _slides = computed(() => {
     position: absolute;
     width: var(--width);
     bottom: 0;
-    left: 0;
-    transform: translate(-50%, 59%);
+    left: 50%;
+    transform: translate(-100%, 59%);
     z-index: -1;
     user-select: none;
   }
 
   @media (max-width: $screen-sm) {
-    .content-wrapper {
-      padding: 6rem 0;
-
-      .title {
-        line-height: unset;
-      }
-    }
-
     .bg-image {
       --width: 50rem;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.examples {
+  .slider-wrapper {
+    .q-panel-parent {
+      overflow: unset;
+    }
+    .scroll {
+      overflow: unset;
     }
   }
 }

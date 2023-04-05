@@ -1,34 +1,33 @@
 <script setup lang="ts">
-import { QScrollObserver, Screen } from 'quasar';
+import { Screen } from 'quasar';
 import { computed, ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
 import { SignUpDialog, LoginDialog } from './ui';
 import HeaderBtn from './ui';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+console.log(route.path);
+console.log(route.params);
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
 
 const buttonLinks = [
-  { label: t('pages.user.header.home'), value: 'possibilities' },
-  { label: t('pages.landing.header.examples'), value: 'examples' },
-  { label: t('pages.landing.header.reviews'), value: 'reviews' },
-  { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
+  { label: t('pages.user.header.home'), value: '/' },
+  { label: t('pages.user.header.tasks'), value: '/mpc/tasks' },
+  { label: t('pages.user.header.referrals'), value: '/mpc/referrals' },
+  { label: t('pages.user.header.settings'), value: '/mpc/settings' },
 ];
 
 const isMobile = computed(() => Screen.lt.md);
 const isMenuOpened = ref(false);
-
-let signup = ref<InstanceType<typeof SignUpDialog>>();
-let login = ref<InstanceType<typeof LoginDialog>>();
 </script>
 
 <template>
-  <q-header
-    class="header"
-    :class="{ compact: isCompact && !isMobile, mobile: isMobile }"
-  >
-    <img src="src/assets/my_labs_logo.png" alt="" class="logo" />
+  <q-header class="header" :class="{ mobile: isMobile }">
+    <img src="/src/assets/my_labs_logo.png" alt="" class="logo" />
 
     <q-toolbar
       class="header-toolbar justify-between"
@@ -40,6 +39,7 @@ let login = ref<InstanceType<typeof LoginDialog>>();
           :key="index"
           v-model="currentLinkIndex"
           :id="index"
+          :to="link.value"
           :label="link.label"
           class="header-btn"
         ></HeaderBtn>
@@ -51,12 +51,10 @@ let login = ref<InstanceType<typeof LoginDialog>>();
           color="grey"
           text-color="dark"
           :label="$t('pages.user.header.contacts')"
-          @click="login?.open()"
         ></ABtn>
         <ABtn
           class="auth-signup"
           :label="$t('pages.user.header.inviteFriend')"
-          @click="signup?.open()"
         ></ABtn>
         <LoginDialog ref="login" />
         <SignUpDialog ref="signup" />

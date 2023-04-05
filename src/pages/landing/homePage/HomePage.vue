@@ -36,9 +36,12 @@ import ATypingText from 'components/ATypingText.vue';
   position: relative;
   z-index: 1;
 
+  .structure {
+    padding: 12rem 0;
+  }
+
   .content-wrapper {
     position: relative;
-    margin: 14rem auto 9rem;
 
     .description {
       line-height: 2.9rem;
@@ -51,7 +54,6 @@ import ATypingText from 'components/ATypingText.vue';
 
     .homepage-img {
       position: absolute;
-      top: 0;
       left: 50%;
       z-index: -1;
       .man-on-chair {
@@ -75,8 +77,8 @@ import ATypingText from 'components/ATypingText.vue';
   }
 
   @media (min-width: $screen-xl) {
-    .content-wrapper {
-      min-width: 70%;
+    .structure {
+      padding-bottom: 6rem;
     }
   }
 
@@ -86,7 +88,7 @@ import ATypingText from 'components/ATypingText.vue';
         width: 100%;
       }
       .homepage-img {
-        top: 8rem;
+        bottom: 2rem;
       }
     }
   }
@@ -94,7 +96,7 @@ import ATypingText from 'components/ATypingText.vue';
   @media (max-width: $screen-md-lg) {
     .content-wrapper {
       .homepage-img {
-        top: 10rem;
+        bottom: 8rem;
         left: 60%;
         .man-on-chair {
           width: 27.5rem;
@@ -104,16 +106,18 @@ import ATypingText from 'components/ATypingText.vue';
   }
 
   @media (max-width: $screen-md) {
+    .structure {
+      padding: 6rem 0;
+    }
+
     .content-wrapper {
       text-align: center;
       position: unset;
-      margin-top: 6rem;
 
       .homepage-img {
-        top: unset;
         left: 50%;
         transform: translate(-50%, 50%);
-        bottom: 0;
+        bottom: -2rem;
       }
       .form-homepage {
         margin: 0 auto;
@@ -122,18 +126,19 @@ import ATypingText from 'components/ATypingText.vue';
   }
 
   @media (max-width: $screen-sm) {
+    .structure {
+      padding: 4rem 0;
+    }
     .content-wrapper {
-      margin: 1.5rem auto;
       display: flex;
       flex-direction: column;
 
       .homepage-img {
         position: relative;
         width: 120%;
-        top: unset;
         left: -10%;
         right: auto;
-        margin-top: 2rem;
+        bottom: 0;
 
         transform: unset;
 

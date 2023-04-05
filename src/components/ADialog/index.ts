@@ -1,2 +1,2 @@
-import ADialog from './ADialog.vue'
+import ADialog from './ADialog.vue';
 export default ADialog;

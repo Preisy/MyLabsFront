@@ -47,9 +47,9 @@ import QAComponent from './ui/QAComponent.vue';
 
     width: var(--width);
 
-    right: 0;
     bottom: 0;
-    transform: translate(50%, 58%);
+    right: 50%;
+    transform: translate(100%, 58%);
   }
 
   @media (max-width: $screen-md-lg) {
@@ -69,9 +69,6 @@ import QAComponent from './ui/QAComponent.vue';
     .content-wrapper {
       padding: 3.5rem 0;
 
-      .title {
-        margin-bottom: 1.5rem;
-      }
       .content {
         flex-direction: column;
       }

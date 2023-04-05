@@ -8,14 +8,30 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/mpc',
+    path: '/mpc/',
     component: () => import('layouts/UserLayout.vue'),
+    children: [
+      {
+        path: ':catchAll(.*)*',
+        component: () => import('/src/pages/user/work/WorkBlock.vue'),
+      },
+      {
+        path: 'tasks',
+        component: () => import('/src/pages/user/work/WorkBlock.vue'),
+      },
+      {
+        path: 'referrals',
+        component: () => import('/src/pages/user/referrals/ReferralsBlock.vue'),
+      },
+      {
+        path: 'settings',
+        component: () => import('/src/pages/user/settings/SettingsBlock.vue'),
+      },
+    ],
     meta: {
-      auth: true
-    }
+      auth: true,
+    },
   },
-
-
 
   // Always leave this as last one,
   // but you can also remove it

@@ -22,7 +22,7 @@ defineProps<Props>();
       class="step-content row items-end"
       :class="{ 'stuck-left': !(num % 2) }"
     >
-      <h4 class="step-num">{{ num + 1 }}.</h4>
+      <h2 class="step-num">{{ num + 1 }}.</h2>
       <span class="label">{{ label }}</span>
       <q-icon class="icon" :name="icon"></q-icon>
     </div>

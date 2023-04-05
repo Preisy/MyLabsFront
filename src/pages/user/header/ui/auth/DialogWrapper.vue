@@ -57,9 +57,9 @@ defineExpose({
         @click="close"
         :class="{ showed: isOpened }"
       />
-      <h4 class="title">
+      <h2 class="title">
         {{ dialogs[i].title }}
-      </h4>
+      </h2>
       <div class="body-wrapper">
         <ADynamicForm
           :schema="dialogs[i].schema"

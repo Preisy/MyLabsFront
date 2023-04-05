@@ -13,7 +13,7 @@ const balance = ref<number>(3000);
       <div class="column items-center text-primary">
         <p class="balance">{{ $t('pages.user.main.balance') }}</p>
         <h1 class="balance-count">{{ balance }}</h1>
-        <img class="profile-icon" src="src/assets/user/profile.png" alt="" />
+        <img class="profile-icon" src="/src/assets/user/profile.png" alt="" />
         <ABtn
           class="br-15px q-px-xl glow"
           color="grey"
@@ -33,10 +33,11 @@ const balance = ref<number>(3000);
     #bfcdf3 100%
   );
   overflow: hidden;
-  .content-wrapper {
-    margin-top: 8rem;
-    margin-bottom: 7rem;
 
+  .structure {
+    padding: 6rem;
+  }
+  .content-wrapper {
     .balance-count {
       margin-bottom: 1rem;
     }

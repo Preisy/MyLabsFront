@@ -16,8 +16,6 @@ import { TADynamicFormI18n } from 'src/components/ADynamicForm/i18n';
 import { TMainBlockI18n } from 'src/pages/user/main';
 import { TUserHeaderI18n } from 'src/pages/user/header';
 
-const localeStore = useLocaleStore();
-
 export default boot(({ app }) => {
   const localeStore = useLocaleStore();
 

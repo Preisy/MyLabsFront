@@ -5,11 +5,10 @@ import { SubmissionContext, useForm } from 'vee-validate';
 import { fromPairs, map } from 'lodash';
 import FieldProps from './types';
 
-type LoginKeys = 'email' | 'password';
 interface ADynamicFormProps {
   schema: FieldProps[];
   onSubmit: (
-    values: Record<LoginKeys, string>,
+    values: Record<string, unknown>,
     ctx: SubmissionContext<Record<string, unknown>>
   ) => void;
   buttonWidth?: string;
@@ -29,7 +28,7 @@ const { handleSubmit, values } = useForm({
 defineExpose({ values });
 
 const onSubmit = handleSubmit.withControlled((values, ctx) => {
-  props.onSubmit(values as Record<LoginKeys, string>, ctx);
+  props.onSubmit(values, ctx);
 });
 </script>
 
@@ -54,5 +53,6 @@ const onSubmit = handleSubmit.withControlled((values, ctx) => {
 <style scoped lang="scss">
 .a-input {
   width: 100%;
+  margin-bottom: 0.7rem;
 }
 </style>

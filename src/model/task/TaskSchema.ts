@@ -6,6 +6,7 @@ export const TaskSchema = {
   type: yup.string().oneOf(LabTypes).required().label('Type'),
   deadline: yup
     .date()
+    .typeError('Expected type date')
     .required()
     .min(new Date(), 'Date must be greater than today')
     .label('Deadline'),

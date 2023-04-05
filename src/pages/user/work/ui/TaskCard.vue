@@ -1,41 +1,40 @@
 <script setup lang="ts">
-interface CardProps {
-  title: string;
-  imgSrc: string;
-  date: string;
-  price: string;
-  link: string;
+import { CardModel } from './Card';
+
+interface Props {
+  card: CardModel;
 }
 
-const props = defineProps<CardProps>();
+const props = defineProps<Props>();
 </script>
 <template>
   <div class="card">
-    <div class="title-wrapper row items-center no-wrap">
-      <img class="title-icon" :src="props.imgSrc" alt="" />
-      <h4 class="title">{{ props.title }}</h4>
+    <div class="row justify-between items-start fit-content">
+      <div class="title-wrapper row items-center no-wrap">
+        <img class="title-icon" :src="props.card.imgSrc" alt="" />
+        <h2 class="title">{{ props.card.title }}</h2>
+      </div>
+
+      <q-btn icon="attachment" color="grey" text-color="dark"></q-btn>
     </div>
-    <div class="details">
+    <div class="details row justify-between">
       <div class="price">
         <q-icon class="icon" color="accent" name="currency_ruble" />
         <span>
-          {{ props.price }}
+          {{ props.card.price }}
         </span>
       </div>
       <div class="date">
-        <q-icon class="icon" color="accent" name="update" />
         <span>
-          {{ props.date }}
+          {{ props.card.date }}
         </span>
       </div>
-    </div>
-    <div class="link">
-      <q-btn icon="clip" color="grey" text-color="dark"></q-btn>
     </div>
   </div>
 </template>
 <style scoped lang="scss">
 .card {
+  position: relative;
   background-color: $primary;
   box-sizing: border-box;
   padding: 1.5rem;
@@ -44,6 +43,7 @@ const props = defineProps<CardProps>();
 
   .title-wrapper {
     margin-bottom: 2.5rem;
+    width: 80%;
 
     .title-icon {
       --size: 1.2rem;
@@ -63,6 +63,16 @@ const props = defineProps<CardProps>();
       font-size: 1.2rem;
       margin-right: 0.5rem;
     }
+
+    .date {
+      font-weight: 700;
+    }
+  }
+
+  .link {
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
   }
 
   @media (max-width: $screen-sm) {

@@ -12,7 +12,7 @@ defineEmits<{
 
 <template>
   <div class="content-wrapper">
-    <h4 class="title">{{ $t('pages.landing.header.auth.success.title') }}</h4>
+    <h2 class="title">{{ $t('pages.landing.header.auth.success.title') }}</h2>
     <div class="body-wrapper">
       <p>{{ $t('pages.landing.header.auth.success.text') }}</p>
       <img

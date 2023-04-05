@@ -6,6 +6,7 @@ import { QScrollDetailsEvent } from 'src/global/types';
 import { SignUpDialog, LoginDialog } from './ui';
 import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
+import { useAuthStore } from 'src/stores/AuthStore';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
@@ -55,17 +56,22 @@ let login = ref<InstanceType<typeof LoginDialog>>();
 
       <div class="auth">
         <ABtn
+          v-if="!useAuthStore().isAuth"
           class="auth-login q-px-xl"
-          color="grey"
-          text-color="dark"
+          theme="light"
           :label="$t('pages.landing.header.login')"
           @click="login?.open()"
         ></ABtn>
         <ABtn
+          v-if="!useAuthStore().isAuth"
           class="auth-signup"
+          theme="dark"
           :label="$t('pages.landing.header.signup')"
           @click="signup?.open()"
         ></ABtn>
+        <q-btn flat v-if="useAuthStore().isAuth" to="mpc/tasks">
+          <img class="profile-icon" src="src/assets/user/profile.png" />
+        </q-btn>
         <LoginDialog ref="login" />
         <SignUpDialog ref="signup" />
       </div>
@@ -124,6 +130,25 @@ let login = ref<InstanceType<typeof LoginDialog>>();
         }
       }
     }
+    .bg-prevent {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 100%;
+      transition: 0.2s ease-in-out all;
+
+      &.open {
+        bottom: 0;
+        background-color: #ffffff99;
+      }
+    }
+  }
+
+  .profile-icon {
+    --size: 2.25rem;
+    width: var(--size);
+    height: var(--size);
   }
 
   .auth {
@@ -177,25 +202,6 @@ let login = ref<InstanceType<typeof LoginDialog>>();
       justify-content: flex-end;
       position: relative;
       z-index: 2;
-    }
-  }
-
-  .header-toolbar {
-    transition: 0.2s all ease-in-out;
-    padding: 2.8rem 3.5rem;
-
-    .bg-prevent {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 100%;
-      transition: 0.2s ease-in-out all;
-
-      &.open {
-        bottom: 0;
-        background-color: #ffffff99;
-      }
     }
   }
 
