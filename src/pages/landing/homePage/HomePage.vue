@@ -2,6 +2,15 @@
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
 import ATypingText from 'components/ATypingText.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
+import { onMounted, ref } from 'vue';
+import { $api } from 'src/boot/axios';
+
+let a = ref('123');
+
+onMounted(async () => {
+  a.value = await $api.get('/users');
+  console.log(a.value);
+});
 </script>
 
 <template>
