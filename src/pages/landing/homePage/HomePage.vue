@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
 import ATypingText from 'components/ATypingText.vue';
+import { onMounted, ref } from 'vue';
+import { $api } from 'src/boot/axios';
+
+let a = ref('123')
+
+onMounted(async () => {
+  a.value = await $api.get('/users')
+  console.log(a.value);
+})
+
 </script>
 
 <template>
