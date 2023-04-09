@@ -8,7 +8,10 @@ import throttle from 'lodash/throttle';
 const root = ref<HTMLDivElement>();
 let content = ref<HTMLDivElement>()
 
-let end = 35;
+let min = 20;
+let max = 37;
+let k = -30;
+let b = 40;
 let height = ref<number>(18);
 let coordY = 0;
 const changeCoordY = () => {
@@ -27,12 +30,14 @@ const updateHeight = () => {
   const centerBcr = coordY - window.scrollY
   const delta = centerBcr - document.documentElement.clientHeight / 2;
 
-  let newHeight = Math.round((- Math.abs(delta) * 30 / 1000 + 40) * 10) / 10;
+  let newHeight = Math.round((Math.abs(delta) * k / 1000 + b) * 10) / 10;
   if (newHeight === height.value) return;
-  if (Math.abs(newHeight) > Math.abs(end)) height.value = end;
+  if (Math.abs(newHeight) > Math.abs(max)) height.value = max;
+  if (Math.abs(newHeight) < Math.abs(min)) height.value = min;
   else height.value = newHeight;
 };
 const animateScroll = throttle(updateHeight, 15);
+animateScroll();
 
 const isMobile = Screen.lt.sm;
 const counter = ref(0);
@@ -55,11 +60,9 @@ const counter = ref(0);
 <style scoped lang="scss">
 .counterpage {
   background: url('src/assets/digital_background.png');
-  // background-size: cover;
   background-position: center;
   position: relative;
   z-index: 0;
-  //transition: 0.3s all ease-in-out;
 
   margin: -2rem auto;
   // will-change: height;
