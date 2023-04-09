@@ -11,8 +11,12 @@ import MainBlock from 'src/pages/user/main/MainBlock.vue';
     <q-page-container class="no-padding">
       <MainBlock class="main" />
 
-      <div class="subblock">
-        <router-view></router-view>
+      <div class="subblock bg-primary">
+        <router-view v-slot="{ Component }">
+          <transition name="fade">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </div>
     </q-page-container>
   </q-layout>
@@ -20,21 +24,30 @@ import MainBlock from 'src/pages/user/main/MainBlock.vue';
 
 <style scoped lang="scss">
 .user-page {
-  --main-height: 60vh;
+  --main-height: 50vh;
   --overlap: 4rem;
   --subblock-height: calc(100vh - var(--main-height) + var(--overlap));
 
   overflow: hidden;
 
   .main {
-    height: var(--main-height);
+    height: fit-content;
+    max-height: var(--main-height);
   }
   .subblock {
     height: var(--subblock-height);
     margin-top: calc(-1 * var(--overlap));
+    border-radius: 2rem;
+  }
 
-    overflow-x: hidden;
-    overflow-y: scroll;
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 }
 </style>

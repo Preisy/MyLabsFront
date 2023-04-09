@@ -1,10 +1,10 @@
 import type { AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import { useAuthStore } from 'src/stores/AuthStore';
 
-const authStore = useAuthStore();
-
-export const baseURL = 'http://localhost:8000/api';
+const isDevelop = true;
+export const baseURL = isDevelop
+  ? 'http://185.182.111.172:8080/api/dev'
+  : 'http://localhost:8000/api';
 
 export const axiosConfig: AxiosRequestConfig = {
   withCredentials: true,
@@ -14,14 +14,15 @@ export const axiosConfig: AxiosRequestConfig = {
 export const $api = axios.create(axiosConfig);
 
 $api.interceptors.request.use((config) => {
-  if (config.headers)
+  if (config.headers) {
     config.headers.Authorization = `Bearer ${localStorage.getItem(
       'access_token'
     )}`;
+  }
   return config;
 });
 
 $api.interceptors.response.use(undefined, (error) => {
-  if (error.response?.status === 401) authStore.logout();
+  // if (error.response?.status === 401) authStore.logout();
   throw error;
 });

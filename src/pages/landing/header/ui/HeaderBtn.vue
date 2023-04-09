@@ -3,12 +3,18 @@ interface Props {
   modelValue: number;
   id: number;
   label: string;
+  target: string;
 }
 
 const props = defineProps<Props>();
-defineEmits<{
+const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void;
 }>();
+
+function onclick() {
+  emit('update:modelValue', props.id);
+  document.querySelector(`#${props.target}`)?.scrollIntoView(true);
+}
 </script>
 
 <template>
@@ -19,7 +25,7 @@ defineEmits<{
     no-caps
     flat
     :label="props.label"
-    @click="$emit('update:modelValue', props.id)"
+    @click="onclick"
   />
 </template>
 

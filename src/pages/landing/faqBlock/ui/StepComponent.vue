@@ -75,6 +75,7 @@ defineProps<Props>();
     .step-num {
       font-size: 1.6rem;
       line-height: 1.4rem;
+      margin: 0%;
     }
     .label {
       --font-size: 1rem;

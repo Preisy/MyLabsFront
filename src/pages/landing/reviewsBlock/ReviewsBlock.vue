@@ -28,7 +28,7 @@ const isMobile = computed(() => Screen.lt.sm);
 </script>
 
 <template>
-  <div class="reviews">
+  <div id="reviews" class="reviews reviews-header-link">
     <div class="content-wrapper structure">
       <h1 class="title text-primary text-center">
         {{ $t('pages.landing.reviewsPage.title') }}
@@ -105,7 +105,6 @@ const isMobile = computed(() => Screen.lt.sm);
       .title {
         padding: 0;
         margin-bottom: 2.5rem;
-        line-height: unset;
       }
       .slider-wrapper {
         width: 100%;

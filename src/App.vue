@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { Router } from 'vue-router';
 import { useAuthStore } from './stores/AuthStore';
 
-Screen.setSizes({ sm: 600, md: 1200 });
+Screen.setSizes({ sm: 600, md: 900, lg: 1200 });
 
 const router = ref<Router>();
 router.value?.beforeEach((to) => {

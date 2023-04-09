@@ -3,11 +3,12 @@ import { ref } from 'vue';
 import DialogWrapper from './DialogWrapper.vue';
 import ADialog from 'src/components/ADialog';
 import { getSchema } from 'src/global/utils';
-import { LoginDataSchema } from 'src/model/loginData';
+import { LoginData, LoginDataSchema } from 'src/model/loginData';
 import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
+import { useDialogStore } from 'src/stores/DialogStore';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
@@ -28,9 +29,9 @@ const close = () => {
 let schema = getSchema(LoginDataSchema);
 
 const onSubmit = (values: Record<string, unknown>) => {
-  useAuthStore().login({
-    email: values['email'] as string,
-    password: values['password'] as string,
+  const loginPromise = useAuthStore().login(values as unknown as LoginData);
+  loginPromise.then(() => {
+    window.location.reload();
   });
 };
 </script>
@@ -54,6 +55,8 @@ const onSubmit = (values: Record<string, unknown>) => {
           <ADynamicForm
             :schema="schema"
             :on-submit="onSubmit"
+            :btn-label="$t('pages.landing.header.login')"
+            :state="useDialogStore().loginState"
             class="form"
             button-width="9rem"
           />

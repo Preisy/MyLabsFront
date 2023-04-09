@@ -34,7 +34,7 @@ const _slides = computed(() => {
 </script>
 
 <template>
-  <div class="examples bg-base">
+  <div id="examples" class="examples bg-base">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.examplesBlock.title') }}
@@ -92,8 +92,8 @@ const _slides = computed(() => {
     position: absolute;
     width: var(--width);
     bottom: 0;
-    left: 50%;
-    transform: translate(-100%, 59%);
+    right: 50%;
+    transform: translateY(59%);
     z-index: -1;
     user-select: none;
   }

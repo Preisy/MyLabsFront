@@ -35,19 +35,24 @@ const balance = ref<number>(3000);
   overflow: hidden;
 
   .structure {
-    padding: 6rem;
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
   }
   .content-wrapper {
+    .balance {
+      font-size: 1rem;
+    }
     .balance-count {
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
     .profile-icon {
-      --size: 8rem;
+      --size: 6rem;
       width: var(--size);
       height: var(--size);
       border-radius: 100%;
 
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .glow {

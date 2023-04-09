@@ -4,7 +4,7 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
 </script>
 
 <template>
-  <div class="our-skills bg-base">
+  <div id="possibilities" class="our-skills bg-base possibilities-header-link">
     <div class="content-wrapper structure">
       <h1 class="title text-center">
         {{ $t('pages.landing.ourSkillsBlock.title') }}

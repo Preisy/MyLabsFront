@@ -4,7 +4,7 @@ import QAComponent from './ui/QAComponent.vue';
 </script>
 
 <template>
-  <div class="faqblock bg-primary">
+  <div id="FAQ" class="faqblock bg-primary">
     <div class="content-wrapper structure text-center">
       <h1 class="title">{{ $t('pages.landing.faqBlock.title') }}</h1>
       <div class="content">
@@ -48,8 +48,8 @@ import QAComponent from './ui/QAComponent.vue';
     width: var(--width);
 
     bottom: 0;
-    right: 50%;
-    transform: translate(100%, 58%);
+    left: 50%;
+    transform: translateY(58%);
   }
 
   @media (max-width: $screen-md-lg) {

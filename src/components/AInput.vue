@@ -8,6 +8,7 @@ interface ButtonProps {
   bgColor?: string;
   labelColor?: string;
   placeholder?: string;
+  initValue?: string;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -15,11 +16,14 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   bgColor: 'info',
   labelColor: 'dark',
   placeholder: '',
+  initValue: '',
 });
 
 const { errorMessage, value } = useField<string | number | undefined>(
   props.name
 );
+// if (props.initValue) value.value = props.initValue ?? '';
+
 // const { errorMessage, value } = useField(toRef(props, 'name'));
 </script>
 
@@ -63,7 +67,7 @@ const { errorMessage, value } = useField<string | number | undefined>(
     padding-left: 12px;
   }
   &.q-field--error {
-    margin-bottom: 5px !important;
+    margin-bottom: 15px !important;
   }
 }
 </style>

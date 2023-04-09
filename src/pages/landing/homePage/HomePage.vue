@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
 import ATypingText from 'components/ATypingText.vue';
+import { useAuthStore } from 'src/stores/AuthStore';
 </script>
 
 <template>
@@ -22,7 +23,10 @@ import ATypingText from 'components/ATypingText.vue';
       <h1 class="description">
         <ATypingText :text="$t('pages.landing.homePage.title')" />
       </h1>
-      <UnregisteredLeadForm class="form-homepage" />
+      <UnregisteredLeadForm
+        :class="{ isAuth: useAuthStore().isAuth }"
+        class="form-homepage"
+      />
     </div>
   </div>
 </template>
@@ -76,6 +80,10 @@ import ATypingText from 'components/ATypingText.vue';
     }
   }
 
+  .isAuth.form-homepage {
+    margin-top: 7rem;
+  }
+
   @media (min-width: $screen-xl) {
     .structure {
       padding-bottom: 6rem;
@@ -89,6 +97,10 @@ import ATypingText from 'components/ATypingText.vue';
       }
       .homepage-img {
         bottom: 2rem;
+
+        .man-on-chair {
+          width: 32rem;
+        }
       }
     }
   }
@@ -96,7 +108,7 @@ import ATypingText from 'components/ATypingText.vue';
   @media (max-width: $screen-md-lg) {
     .content-wrapper {
       .homepage-img {
-        bottom: 8rem;
+        bottom: 6rem;
         left: 60%;
         .man-on-chair {
           width: 27.5rem;
@@ -120,7 +132,10 @@ import ATypingText from 'components/ATypingText.vue';
         bottom: -2rem;
       }
       .form-homepage {
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5rem;
+        margin-bottom: 4rem;
       }
     }
   }
@@ -151,6 +166,11 @@ import ATypingText from 'components/ATypingText.vue';
         line-height: 1.5rem;
         width: 100%;
         padding: 0;
+      }
+
+      .form-homepage {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
       }
     }
   }

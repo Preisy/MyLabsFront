@@ -5,31 +5,34 @@ import { ref } from 'vue';
 import { DialogData } from './types';
 import { SubmissionContext } from 'vee-validate';
 import SuccessDialog from './SuccessDialog.vue';
+import { useDialogStore } from 'src/stores/DialogStore';
 
 interface Props {
   dialogs: DialogData[];
 }
 const props = defineProps<Props>();
+let i = ref(0);
+let dialog = ref<InstanceType<typeof ADialog>>();
+let floor = ref<HTMLImageElement>();
+let isOpened = ref(false);
 
 defineEmits<{
   (e: 'close'): void;
 }>();
-
-let i = ref(0);
 let onSubmit = (
   values: Record<string, unknown>,
   ctx: SubmissionContext<Record<string, unknown>>
 ) => {
-  if (!props.dialogs[i.value].onSubmit(values, ctx)) return;
-  dialog.value?.close();
-  ++i.value;
-  setTimeout(() => dialog.value?.open(), 200);
+  const submitResult = props.dialogs[i.value].onSubmit(values, ctx);
+
+  submitResult.then((val) => {
+    if (!val) return;
+    dialog.value?.close();
+    ++i.value;
+    setTimeout(() => dialog.value?.open(), 0);
+  });
 };
 
-let floor = ref<HTMLImageElement>();
-let isOpened = ref(false);
-
-let dialog = ref<InstanceType<typeof ADialog>>();
 const close = () => {
   floor.value?.classList.remove('showed');
   dialog.value?.close();
@@ -43,6 +46,16 @@ defineExpose({
     setTimeout(() => (isOpened.value = true), 0);
   },
   close,
+});
+
+// const stores = useDialogStore().stores;
+
+// watch(useDialogStore(), () => {
+//   console.log(useDialogStore().restoreState);
+// });
+
+useDialogStore().$subscribe((mutation) => {
+  console.log(mutation);
 });
 </script>
 
@@ -64,6 +77,8 @@ defineExpose({
         <ADynamicForm
           :schema="dialogs[i].schema"
           :on-submit="onSubmit"
+          :btn-label="dialogs[i].btnLabel"
+          :state="dialogs[i].state.value"
           class="form"
           button-width="9rem"
         />
@@ -105,7 +120,6 @@ defineExpose({
   }
 
   .title {
-    line-height: 2rem;
     margin-bottom: 1.3rem;
   }
 
@@ -130,9 +144,6 @@ defineExpose({
   background-color: #ffffff99;
   backdrop-filter: blur(0.4rem);
 }
-</style>
-
-<style>
 .q-dialog__inner > div {
   overflow: unset;
 }

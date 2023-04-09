@@ -1,0 +1,10 @@
+{
+  "pages": {
+    "user": {
+      "settings": {
+        "applyBtn": "Изменить",
+        "changePassword": "Сменить пароль"
+      }
+    }
+  }
+}

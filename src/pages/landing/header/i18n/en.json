@@ -8,6 +8,7 @@
         "FAQ": "FAQ",
         "login": "Login",
         "signup": "Signup",
+        "next": "Next",
         "auth": {
           "signup": {
             "1": "Get opportunities after registration",

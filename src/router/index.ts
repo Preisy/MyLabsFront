@@ -39,7 +39,7 @@ export default route(function (/* { store, ssrContext } */) {
     const requiresAuth = to.matched.some((record) => record.meta.auth);
 
     const authStore = useAuthStore();
-    if (requiresAuth && !authStore.isAuth) {
+    if (requiresAuth && !authStore.checkAuth()) {
       Router.push({ path: '/', replace: true });
     } else {
       return true;

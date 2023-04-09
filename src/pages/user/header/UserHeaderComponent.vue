@@ -2,17 +2,20 @@
 import { Screen } from 'quasar';
 import { computed, ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
-import { SignUpDialog, LoginDialog } from './ui';
 import HeaderBtn from './ui';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
-const route = useRoute();
-console.log(route.path);
-console.log(route.params);
+const routerPath = ref(useRoute().path);
+const routerMap: Record<string, number> = {
+  '/': 0,
+  '/mpc/tasks': 1,
+  '/mpc/referrals': 2,
+  '/mpc/settings': 3,
+};
 
 const { t } = useI18n();
-const currentLinkIndex = ref(0);
+const currentLinkIndex = ref(routerMap[routerPath.value]);
 
 const buttonLinks = [
   { label: t('pages.user.header.home'), value: '/' },
@@ -21,7 +24,7 @@ const buttonLinks = [
   { label: t('pages.user.header.settings'), value: '/mpc/settings' },
 ];
 
-const isMobile = computed(() => Screen.lt.md);
+const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
 </script>
 
@@ -56,8 +59,6 @@ const isMenuOpened = ref(false);
           class="auth-signup"
           :label="$t('pages.user.header.inviteFriend')"
         ></ABtn>
-        <LoginDialog ref="login" />
-        <SignUpDialog ref="signup" />
       </div>
     </q-toolbar>
 
@@ -102,7 +103,7 @@ const isMenuOpened = ref(false);
 
   .header-toolbar {
     transition: 0.2s all ease-in-out;
-    padding: 1.1rem 3.5rem;
+    padding: 0.5rem 3.5rem;
 
     .header-buttons {
       .header-btn {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SimpleState } from 'src/global/types';
 import { ref } from 'vue';
 
 interface ButtonProps {
@@ -6,6 +7,7 @@ interface ButtonProps {
   theme?: 'dark' | 'light';
   type?: 'button' | 'reset' | 'submit';
   width?: string;
+  loadingState?: SimpleState;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -19,6 +21,7 @@ const textColor = props.theme === 'dark' ? 'primary' : 'dark';
 const emits = defineEmits<{
   (e: 'click', val: boolean): void;
 }>();
+
 const state = ref<boolean>(false);
 </script>
 
@@ -33,6 +36,7 @@ const state = ref<boolean>(false);
     :type="props.type"
     @click="emits('click', state)"
     :style="{ width: width }"
+    :loading="props.loadingState === 'loading'"
   />
 </template>
 

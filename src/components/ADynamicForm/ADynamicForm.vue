@@ -4,6 +4,8 @@ import AInput from 'src/components/AInput.vue';
 import { SubmissionContext, useForm } from 'vee-validate';
 import { fromPairs, map } from 'lodash';
 import FieldProps from './types';
+import { SimpleState } from 'src/global/types';
+// import { Ref, computed } from 'vue';
 
 interface ADynamicFormProps {
   schema: FieldProps[];
@@ -12,6 +14,8 @@ interface ADynamicFormProps {
     ctx: SubmissionContext<Record<string, unknown>>
   ) => void;
   buttonWidth?: string;
+  btnLabel: string;
+  state: SimpleState;
 }
 const props = defineProps<ADynamicFormProps>();
 
@@ -43,9 +47,10 @@ const onSubmit = handleSubmit.withControlled((values, ctx) => {
     />
 
     <ABtn
-      :label="$t('components.ADynamicForm.next')"
+      :label="props.btnLabel"
       type="submit"
       :width="buttonWidth"
+      :loading-state="props.state"
     />
   </form>
 </template>

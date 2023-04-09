@@ -44,7 +44,6 @@ defineEmits<{
   border-radius: 1.5rem;
 
   .title {
-    line-height: 2rem;
     margin-bottom: 0.6rem;
   }
   .body-wrapper {

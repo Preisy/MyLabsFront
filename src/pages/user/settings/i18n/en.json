@@ -1,0 +1,10 @@
+{
+  "pages": {
+    "user": {
+      "settings": {
+        "applyBtn": "Apply",
+        "changePassword": "Change password"
+      }
+    }
+  }
+}

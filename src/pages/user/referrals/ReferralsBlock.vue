@@ -1,13 +1,74 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { chunk } from 'lodash';
+import { FriendCardModel, defaultCards } from './ui/FriendCardModel';
+import FriendCard from './ui/FriendCard.vue';
+import { computed } from 'vue';
+import { Screen } from 'quasar';
+
+interface Props {
+  cards: FriendCardModel[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  cards: () => defaultCards,
+});
+
+const chunkCount = computed(() => {
+  return Screen.lt.md ? 1 : 2;
+});
+</script>
 
 <template>
-  <div class="referrals bg-red flex flex-center">
-    <h1>REFERALLS PLACEHOLDER</h1>
+  <div class="referrals bg-primary">
+    <div class="content-wrapper structure">
+      <h1 class="title text-center">{{ $t('pages.user.referrals.title') }}</h1>
+      <q-scroll-area class="friends-scroller">
+        <div class="friends-list column">
+          <div
+            class="slide row justify-center no-wrap"
+            v-for="(slide, index) in chunk(props.cards, chunkCount)"
+            :key="index"
+          >
+            <FriendCard
+              v-for="(card, index) in slide"
+              :key="index"
+              :card="card"
+              class="referral-card"
+            />
+          </div>
+        </div>
+      </q-scroll-area>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .referrals {
   height: 100%;
+
+  .structure {
+    padding-top: 2rem;
+  }
+
+  .friends-scroller {
+    box-sizing: border-box;
+    height: 25rem;
+    margin-top: -2rem;
+
+    @media (max-width: $screen-md) {
+      height: calc(var(--subblock-height) + 4rem);
+    }
+  }
+  .friends-list {
+    margin: 2rem;
+    .slide {
+      margin-bottom: 1.5rem;
+      gap: 1.5rem;
+    }
+
+    .referral-card {
+      flex: 1;
+    }
+  }
 }
 </style>

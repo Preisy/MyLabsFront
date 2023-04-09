@@ -12,19 +12,21 @@ const { t } = useI18n();
 const currentLinkIndex = ref(0);
 
 const buttonLinks = [
-  { label: t('pages.landing.header.possibilities'), value: 'possibilities' },
+  {
+    label: t('pages.landing.header.possibilities'),
+    value: 'possibilities',
+  },
   { label: t('pages.landing.header.examples'), value: 'examples' },
   { label: t('pages.landing.header.reviews'), value: 'reviews' },
   { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
 ];
-
 const isCompact = ref(false);
 const scrollHandler = (details: QScrollDetailsEvent) => {
   const top = details.position.top;
   isCompact.value = top > 100;
 };
 
-const isMobile = computed(() => Screen.lt.md);
+const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
@@ -50,6 +52,7 @@ let login = ref<InstanceType<typeof LoginDialog>>();
           v-model="currentLinkIndex"
           :id="index"
           :label="link.label"
+          :target="link.value"
           class="header-btn"
         ></HeaderBtn>
       </div>

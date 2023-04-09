@@ -67,7 +67,7 @@ const { errorMessage, value } = useField(props.name);
     padding-left: 12px;
   }
   &.q-field--error {
-    margin-bottom: 5px !important;
+    margin-bottom: 15px !important;
   }
 }
 </style>

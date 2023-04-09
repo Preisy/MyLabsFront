@@ -47,7 +47,6 @@
     position: relative;
 
     .title {
-      line-height: 3rem;
       text-align: center;
       width: 100%;
       margin: 0 auto;

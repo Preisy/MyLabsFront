@@ -15,10 +15,13 @@ import { THeaderI18n } from 'src/pages/landing/header/i18n';
 import { TADynamicFormI18n } from 'src/components/ADynamicForm/i18n';
 import { TMainBlockI18n } from 'src/pages/user/main';
 import { TUserHeaderI18n } from 'src/pages/user/header';
+import { TReferralsBlockI18n } from 'src/pages/user/referrals';
+import { TSettingsBlockI18n } from 'src/pages/user/settings';
 
 export default boot(({ app }) => {
-  const localeStore = useLocaleStore();
+  // Set i18n instance on app
 
+  const localeStore = useLocaleStore();
   const i18n = createI18n({
     locale: localeStore.locale, // todo switch
     legacy: false,
@@ -33,10 +36,11 @@ export default boot(({ app }) => {
       THeaderI18n,
       TADynamicFormI18n,
       TMainBlockI18n,
-      TUserHeaderI18n
+      TUserHeaderI18n,
+      TReferralsBlockI18n,
+      TSettingsBlockI18n
     ),
   });
 
-  // Set i18n instance on app
   app.use(i18n);
 });

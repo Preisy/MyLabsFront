@@ -9,13 +9,18 @@ const props = defineProps<Props>();
 </script>
 <template>
   <div class="card">
-    <div class="row justify-between items-start fit-content">
+    <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap">
         <img class="title-icon" :src="props.card.imgSrc" alt="" />
         <h2 class="title">{{ props.card.title }}</h2>
       </div>
 
-      <q-btn icon="attachment" color="grey" text-color="dark"></q-btn>
+      <q-btn
+        icon="attachment"
+        color="grey"
+        text-color="dark"
+        class="attachment-btn br-15px"
+      />
     </div>
     <div class="details row justify-between">
       <div class="price">
@@ -37,12 +42,29 @@ const props = defineProps<Props>();
   position: relative;
   background-color: $primary;
   box-sizing: border-box;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 1.5rem;
-  box-shadow: 0 0 2rem 0 #00000020;
+  box-shadow: 0 0 1rem 0 #00000020;
+  max-width: 15rem;
+
+  @media (max-width: $screen-lg) {
+    max-width: 13rem;
+  }
+  @media (max-width: $screen-md) {
+    max-width: 12rem;
+    padding: 0.8rem;
+    box-shadow: 0 0 0.8rem 0 #00000020;
+  }
+  @media (max-width: $screen-sm) {
+    max-width: 10rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 0.4rem 0 #00000020;
+    border-radius: 0.7rem;
+  }
 
   .title-wrapper {
-    margin-bottom: 2.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
     width: 80%;
 
     .title-icon {
@@ -53,12 +75,36 @@ const props = defineProps<Props>();
       user-select: none;
 
       margin-right: 0.4rem;
+      margin-top: 0.3rem;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      line-height: 1.35rem;
+      margin-bottom: 0.5rem;
+
+      @media (max-width: $screen-sm) {
+        font-size: 1rem;
+        line-height: 1.05rem;
+      }
+    }
+  }
+
+  .attachment-btn {
+    padding: 0.5rem;
+
+    @media (max-width: $screen-sm) {
+      padding: 0.3rem;
+      font-size: 0.8rem;
     }
   }
 
   .details {
     font-size: 1.2rem;
 
+    @media (max-width: $screen-lg) {
+      font-size: 0.9rem;
+    }
     .icon {
       font-size: 1.2rem;
       margin-right: 0.5rem;
@@ -73,10 +119,6 @@ const props = defineProps<Props>();
     --size: 2rem;
     width: var(--size);
     height: var(--size);
-  }
-
-  @media (max-width: $screen-sm) {
-    box-shadow: 0 0 0.8rem 0 #00000040;
   }
 }
 </style>

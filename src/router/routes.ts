@@ -11,10 +11,10 @@ const routes: RouteRecordRaw[] = [
     path: '/mpc/',
     component: () => import('layouts/UserLayout.vue'),
     children: [
-      {
-        path: ':catchAll(.*)*',
-        component: () => import('/src/pages/user/work/WorkBlock.vue'),
-      },
+      // {
+      //   path: '/:catchAll(.*)*',
+      //   component: () => import('/src/pages/user/work/WorkBlock.vue'),
+      // },
       {
         path: 'tasks',
         component: () => import('/src/pages/user/work/WorkBlock.vue'),
@@ -31,6 +31,10 @@ const routes: RouteRecordRaw[] = [
     meta: {
       auth: true,
     },
+  },
+  {
+    path: '/confirm',
+    component: () => import('layouts/ConfirmLayout.vue'),
   },
 
   // Always leave this as last one,
