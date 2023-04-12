@@ -23,7 +23,12 @@
     "src/pages/landing/homePage/i18n",
     "src/pages/landing/reviewsBlock/i18n",
     "src/pages/landing/header/i18n",
-    "src/components/ADynamicForm/i18n"
+    "src/components/ADynamicForm/i18n",
+    "src/pages/user/settings/i18n",
+    "src/pages/user/referrals/i18n",
+    "src/pages/user/main/i18n",
+    "src/pages/user/header/i18n",
+    "src/pages/user/work/i18n"
   ],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested"

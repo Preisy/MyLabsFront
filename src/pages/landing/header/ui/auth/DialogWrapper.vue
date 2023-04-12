@@ -5,7 +5,6 @@ import { ref } from 'vue';
 import { DialogData } from './types';
 import { SubmissionContext } from 'vee-validate';
 import SuccessDialog from './SuccessDialog.vue';
-import { useDialogStore } from 'src/stores/DialogStore';
 
 interface Props {
   dialogs: DialogData[];
@@ -46,16 +45,6 @@ defineExpose({
     setTimeout(() => (isOpened.value = true), 0);
   },
   close,
-});
-
-// const stores = useDialogStore().stores;
-
-// watch(useDialogStore(), () => {
-//   console.log(useDialogStore().restoreState);
-// });
-
-useDialogStore().$subscribe((mutation) => {
-  console.log(mutation);
 });
 </script>
 

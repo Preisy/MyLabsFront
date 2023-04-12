@@ -1,9 +1,11 @@
+export type TaskType = 'Cpp' | 'C' | 'Cs';
 export interface CardModel {
+  duration: number;
+  price: number;
+  priority: number;
   title: string;
-  imgSrc: string;
-  date: string;
-  price: string;
-  link: string;
+  type: TaskType;
+  // files: File[];
 }
 
 export const exampleCards: {
@@ -13,68 +15,77 @@ export const exampleCards: {
   inProgress: [
     {
       title: 'Backup system',
-      price: '3000',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3000,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3100',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3100,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3200',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3200,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
   ],
   done: [
     {
       title: 'Backup system',
-      price: '3000',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3000,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3100',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3100,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3200',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3200,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3000',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3000,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3100',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3100,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
     {
       title: 'Backup system',
-      price: '3200',
-      date: '19.03.23',
-      link: '#',
-      imgSrc: '../src/assets/ourSkills/c++icon.png',
+      price: 3200,
+      duration: 22,
+      // files: [],
+      type: 'Cpp',
+      priority: 0,
     },
   ],
 };

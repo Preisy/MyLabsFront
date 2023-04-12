@@ -5,6 +5,7 @@ import ABtn from 'components/ABtn.vue';
 import HeaderBtn from './ui';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import InviteDialog from './ui/InviteDialog.vue';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
@@ -23,6 +24,9 @@ const buttonLinks = [
   { label: t('pages.user.header.referrals'), value: '/mpc/referrals' },
   { label: t('pages.user.header.settings'), value: '/mpc/settings' },
 ];
+
+const inviteDialog = ref<InstanceType<typeof InviteDialog>>();
+// const contactsDialog = ref<InstanceType<typeof ContactsDialog>>();
 
 const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
@@ -58,9 +62,12 @@ const isMenuOpened = ref(false);
         <ABtn
           class="auth-signup"
           :label="$t('pages.user.header.inviteFriend')"
+          @click="inviteDialog?.open()"
         ></ABtn>
       </div>
     </q-toolbar>
+
+    <InviteDialog ref="inviteDialog" />
 
     <div v-if="isMobile" class="btn-holder">
       <q-btn

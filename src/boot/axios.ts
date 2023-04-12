@@ -15,19 +15,24 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 
+// const authStore = useAuthStore();
 const baseURL = '/api';
+// const baseURL = 'http://185.182.111.172:8080/api/dev';
 export const axiosConfig: AxiosRequestConfig = {
   withCredentials: true,
   baseURL,
 };
 const $api = axios.create(axiosConfig);
 
-const authStore = useAuthStore();
 $api.interceptors.request.use((config) => {
   if (
     config.headers &&
-    !config.url?.startsWith('/api/health') &&
-    !config.url?.startsWith('/api/signup') &&
+    !config.url?.startsWith('/labs/quantity') &&
+    !config.url?.startsWith('/labs') &&
+    !config.url?.startsWith('/reviews') &&
+    !config.url?.startsWith('/health') &&
+    !config.url?.startsWith('/signup') &&
+    !config.url?.startsWith('/signup/confirm') &&
     !config.url?.startsWith('/login')
   )
     config.headers.Authorization = `Bearer ${localStorage.getItem(
@@ -36,7 +41,7 @@ $api.interceptors.request.use((config) => {
   return config;
 });
 $api.interceptors.response.use(undefined, (error) => {
-  if (error.response?.status === 401) authStore.logout();
+  // if (error.response?.status === 401) authStore.logout();
   throw error;
 });
 

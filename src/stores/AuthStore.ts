@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types/State';
 import { UserCreds } from 'src/model/UserCreds/UserCreds';
-import { CodeCheckData } from 'src/model/codeCheckData/codeCheckData';
+import { signupConfirmData } from 'src/model/signupConfirmData/signupConfirmData';
 import { LoginData } from 'src/model/loginData/LoginData';
 import { AuthService } from 'src/service/AuthService';
 import { ref } from 'vue';
-import { useDialogStore } from './DialogStore';
-import { User } from 'src/model/User/User';
+import { useDialogStore } from '../pages/landing/header/store/DialogStore';
 
 export const useAuthStore = defineStore('authStore', () => {
   const dialogStore = useDialogStore();
@@ -19,6 +18,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const login = async (data: LoginData) => {
     dialogStore.loginState = 'loading';
     const res = await AuthService.login(data);
+    console.log(res);
     if ('error' in res) {
       isAuth = false;
       dialogStore.loginState = 'error';
@@ -61,9 +61,9 @@ export const useAuthStore = defineStore('authStore', () => {
       return true;
     }
   };
-  const checkCode = async (data: CodeCheckData) => {
+  const signupConfirm = async (data: signupConfirmData) => {
     dialogStore.codeApproveState = 'loading';
-    const res = await AuthService.checkCode(data);
+    const res = await AuthService.signupConfirm(data);
     if ('error' in res) {
       dialogStore.codeApproveState = 'error';
       return false;
@@ -85,28 +85,15 @@ export const useAuthStore = defineStore('authStore', () => {
     }
   };
 
-  const changeCreds = async (creds: User) => {
-    dialogStore.changeCredsState = 'loading';
-    const res = await AuthService.changeCreds(creds);
-    if ('error' in res) {
-      dialogStore.changeCredsState = 'error';
-      return false;
-    } else {
-      dialogStore.changeCredsState = 'success';
-      return true;
-    }
-  };
-
   return {
     isAuth,
     state,
     login,
     logout,
     signup,
-    checkCode,
+    signupConfirm,
     checkAuth,
     restore,
     changePassword,
-    changeCreds,
   };
 });

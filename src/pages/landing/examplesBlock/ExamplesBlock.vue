@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import ExamplesCardComponent from './ui/ExamplesCardComponent.vue';
 import SlideComponent from './ui/CarouselSlide.vue';
-import { computed, ref } from 'vue';
-import { slides } from './cards';
+import { computed, onMounted, ref } from 'vue';
+import Card, { CardType } from './cards';
 import ACarousel from 'src/components/ACarousel.vue';
 import { Screen } from 'quasar';
+import { chunk } from 'lodash';
+import { useExamplesStore } from './store/ExamplesStore';
 
-const slider_index = ref('1');
+const slider_index = ref('0');
 
 const cardsInOneSlide = computed(() => {
   // console.log(Screen.width);
@@ -17,19 +19,43 @@ const cardsInOneSlide = computed(() => {
   return 6;
 });
 
+const slides = ref<Card[]>();
+
 const _slides = computed(() => {
-  let result = [];
-  const slidesCount = slides.length / cardsInOneSlide.value;
+  // let result = [];
+  // const slidesCount = slides.length / cardsInOneSlide.value;
 
-  for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
-    const slide = [];
-    for (let card_i = 0; card_i < cardsInOneSlide.value; card_i++)
-      slide.push(slides[slide_i * cardsInOneSlide.value + card_i]);
+  // for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
+  //   const slide = [];
+  //   for (let card_i = 0; card_i < cardsInOneSlide.value; card_i++)
+  //     slide.push(slides[slide_i * cardsInOneSlide.value + card_i]);
 
-    result.push(slide);
+  //   result.push(slide);
+  // }
+
+  // return result;
+  if (!slides.value) return;
+  return chunk(slides.value, cardsInOneSlide.value);
+});
+
+const toIconImg = (c: CardType) => {
+  switch (c) {
+    case 'Cpp':
+      return 'src/assets/examples/cpp.png';
+    case 'C':
+      return 'src/assets/examples/c_lang.png';
+    case 'Python':
+      return 'src/assets/examples/python_lang.png';
+    case 'C#':
+      return 'src/assets/examples/cs_lang.png';
   }
+};
 
-  return result;
+const examplesStore = useExamplesStore();
+onMounted(async () => {
+  const cards = await examplesStore.getLabs();
+  if ('error' in cards) return;
+  slides.value = cards;
 });
 </script>
 
@@ -41,7 +67,7 @@ const _slides = computed(() => {
       </h1>
       <ACarousel
         v-model="slider_index"
-        :slides-count="_slides.length"
+        :slides-count="_slides?.length ?? 0"
         control-theme="dark"
         class="slider-wrapper"
       >
@@ -53,10 +79,10 @@ const _slides = computed(() => {
           <ExamplesCardComponent
             v-for="(card, index) in slide"
             :key="index"
-            :img-src="card.imgSrc"
+            :img-src="toIconImg(card.type)"
             :title="card.title"
-            :time="card.time"
-            :price="card.price"
+            :time="card.duration.toString()"
+            :price="card.price.toString()"
           ></ExamplesCardComponent>
         </SlideComponent>
       </ACarousel>

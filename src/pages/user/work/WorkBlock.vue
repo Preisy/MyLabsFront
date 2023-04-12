@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import TaskCard from './ui/TaskCard.vue';
-import { chunk } from 'lodash';
-import { exampleCards } from './ui/Card';
+import { chunk, filter } from 'lodash';
+import { CardModel } from './ui/Card';
 import { Screen } from 'quasar';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { useTaskStore } from './store/TaskStore';
 
-const cards = exampleCards;
+const cards = ref<CardModel[]>();
 const chunkSize = computed(() => {
   return Screen.lt.md ? 1 : 2;
+});
+
+const taskService = useTaskStore();
+onMounted(async () => {
+  const tasks = await taskService.getTasks();
+  if ('error' in tasks) return;
+  cards.value = tasks;
 });
 </script>
 
@@ -16,8 +24,10 @@ const chunkSize = computed(() => {
     <div class="content-wrapper structure">
       <div class="cards column">
         <div class="titles row">
-          <h1 class="title text-accent">В процессе</h1>
-          <h1 class="title">Старые работы</h1>
+          <h1 class="title text-accent q-ml-lg">
+            {{ $t('pages.user.work.inProgress') }}
+          </h1>
+          <h1 class="title q-mr-lg">{{ $t('pages.user.work.oldWorks') }}</h1>
         </div>
         <div class="cards column">
           <q-scroll-area class="task-scroller">
@@ -25,7 +35,7 @@ const chunkSize = computed(() => {
               <div class="in-progress">
                 <TaskCard
                   class="card"
-                  v-for="(card, index) in cards.inProgress"
+                  v-for="(card, index) in filter(cards, (card: CardModel)=>card.priority===0)"
                   :key="index"
                   :card="card"
                 />
@@ -33,7 +43,7 @@ const chunkSize = computed(() => {
               <div class="done">
                 <div
                   class="slide row justify-center no-wrap"
-                  v-for="(slide, index) in chunk(cards.done, chunkSize)"
+                  v-for="(slide, index) in chunk(filter(cards, (card: CardModel)=>card.priority!==0), chunkSize)"
                   :key="index"
                 >
                   <TaskCard
@@ -111,11 +121,11 @@ const chunkSize = computed(() => {
     }
 
     .titles {
-      justify-content: space-around;
+      // justify-content: space-around;
     }
 
     .task-scroller .task-wrapper {
-      justify-content: space-around;
+      // justify-content: space-around;
     }
   }
   @media (max-width: $screen-sm) {

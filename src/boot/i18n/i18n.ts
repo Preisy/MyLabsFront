@@ -17,6 +17,7 @@ import { TMainBlockI18n } from 'src/pages/user/main';
 import { TUserHeaderI18n } from 'src/pages/user/header';
 import { TReferralsBlockI18n } from 'src/pages/user/referrals';
 import { TSettingsBlockI18n } from 'src/pages/user/settings';
+import { TWorkBlockI18n } from 'src/pages/user/work';
 
 export default boot(({ app }) => {
   // Set i18n instance on app
@@ -38,7 +39,8 @@ export default boot(({ app }) => {
       TMainBlockI18n,
       TUserHeaderI18n,
       TReferralsBlockI18n,
-      TSettingsBlockI18n
+      TSettingsBlockI18n,
+      TWorkBlockI18n
     ),
   });
 

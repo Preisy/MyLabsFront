@@ -16,7 +16,6 @@ const props = defineProps<SlideProps>();
 .slide {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
   gap: 1.5rem;
 
   @media (max-width: $screen-sm) {

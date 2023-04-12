@@ -11,8 +11,8 @@ const props = defineProps<CardProps>();
 
 <template>
   <div class="card column justify-between">
-    <div class="title-wrapper row items-center no-wrap">
-      <img class="title-icon" :src="props.imgSrc" alt="" />
+    <div class="title-wrapper row items-start no-wrap">
+      <img class="title-icon q-mt-sm" :src="props.imgSrc" alt="" />
       <h2 class="title">{{ props.title }}</h2>
     </div>
     <div class="details">

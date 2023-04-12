@@ -1,47 +1,29 @@
 <script setup lang="ts">
-import { useAuthStore } from 'src/stores/AuthStore';
-import { useDialogStore } from 'src/stores/DialogStore';
-import { useForm } from 'vee-validate';
 import ABtn from 'src/components/ABtn.vue';
-import AInput from 'src/components/AInput.vue';
-import { useI18n } from 'vue-i18n';
 import { UserCredsSchema } from 'src/model/UserCreds';
 import omit from 'lodash/omit';
 import { User } from 'src/model/User/User';
-
-const { t } = useI18n();
-
-const schema = [
-  {
-    label: t('pages.landing.homePage.form.name'),
-    name: 'name',
-    placeholder: 'Иван Красавцев',
-  },
-  {
-    label: t('pages.landing.homePage.form.contacts'),
-    name: 'contact',
-    placeholder: 'Telegram: bykrasavcev',
-  },
-  {
-    label: t('pages.landing.homePage.form.email'),
-    name: 'email',
-    placeholder: 'Krsavcevivan@gmail.com',
-  },
-];
+import ADynamicForm from 'src/components/ADynamicForm';
+import { onMounted, ref } from 'vue';
+import { getSchema } from 'src/global/utils';
+import { useUserStore } from './store/UserStore';
+import { assign } from 'lodash';
 
 const validateSchema = omit(UserCredsSchema, 'password');
-const { handleSubmit } = useForm<typeof validateSchema>({
-  validationSchema: validateSchema,
-});
+// const dialogStore = useDialogStore();
 
-const dialogStore = useDialogStore();
+const userStore = useUserStore();
 
-const onsubmit = handleSubmit.withControlled((values) => {
-  console.log(JSON.stringify(values, null, 2));
-  useAuthStore().changeCreds(values as unknown as User);
+const onsubmit = (values: Record<string, unknown>): void => {
+  console.log(values);
+  userStore.changeCreds(values as unknown as User);
+};
 
-  // dialogStore.setUser(values);
-  // signupDialog.value?.open();
+const userform = ref<InstanceType<typeof ADynamicForm>>();
+onMounted(async () => {
+  const creds = await userStore.getCreds();
+  if ('error' in creds) return;
+  assign(userform.value, creds);
 });
 </script>
 
@@ -55,7 +37,7 @@ const onsubmit = handleSubmit.withControlled((values) => {
           alt=""
         />
       </div>
-      <form class="form full-width column items-center" @submit="onsubmit">
+      <!-- <form class="form full-width column items-center" @submit="onsubmit">
         <div class="form-wrapper full-width">
           <template v-for="(col, i) in schema" :key="i">
             <div class="form-line">
@@ -75,7 +57,16 @@ const onsubmit = handleSubmit.withControlled((values) => {
           :loading-state="dialogStore.changeCredsState"
           type="submit"
         />
-      </form>
+      </form> -->
+
+      <ADynamicForm
+        ref="userform"
+        :schema="getSchema(validateSchema)"
+        :on-submit="onsubmit"
+        :btn-label="$t('pages.user.settings.applyBtn')"
+        :state="userStore.changeCredsState"
+      />
+
       <ABtn
         class="change-password-btn"
         theme="light"

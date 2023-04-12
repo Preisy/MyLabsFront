@@ -4,7 +4,6 @@ interface SuccessDialogProps {
   i: number;
 }
 defineProps<SuccessDialogProps>();
-
 defineEmits<{
   (e: 'close'): void;
 }>();
@@ -25,6 +24,7 @@ defineEmits<{
     <div class="controls-wrapper">
       <ABtn
         class="q-px-xl"
+        to="/"
         :label="$t('pages.landing.header.auth.success.button')"
         @click="$emit('close')"
       />

@@ -1,30 +1,42 @@
 <script setup lang="ts">
 import CarouselSlide from './ui/CarouselSlide.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ReviewCard from './ui/ReviewCard.vue';
-import { slides } from './cards';
+import Review from './cards';
 import ACarousel from 'src/components/ACarousel.vue';
 import { Screen } from 'quasar';
+import { chunk } from 'lodash';
+import { useReviewsStore } from './store/ReviewsStore';
 
 const carousel_val = ref('0');
 
+const isMobile = computed(() => Screen.lt.sm);
+
+const reviews = ref<Review[]>();
+
 const _slides = computed(() => {
-  let result = [];
   const cardsInOneSlide = isMobile.value ? 1 : 2;
-  const slidesCount = slides.length / cardsInOneSlide;
-
-  for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
-    const slide = [];
-    for (let card_i = 0; card_i < cardsInOneSlide; card_i++)
-      slide.push(slides[slide_i * cardsInOneSlide + card_i]);
-
-    result.push(slide);
-  }
-
-  return result;
+  if (!reviews.value) return;
+  return chunk(reviews.value, cardsInOneSlide);
 });
 
-const isMobile = computed(() => Screen.lt.sm);
+const reviewsStore = useReviewsStore();
+onMounted(async () => {
+  const result: Review[] = [];
+  const rawReviews = await reviewsStore.getReviews();
+  if ('error' in rawReviews) return;
+
+  rawReviews.forEach((record) => {
+    const review: Review = {
+      name: record.first_name + ' ' + record.second_name,
+      details: record.text,
+      imgSrc: record.photo_200,
+      link: record.userUrl,
+    };
+    result.push(review);
+  });
+  reviews.value = result;
+});
 </script>
 
 <template>
@@ -34,7 +46,7 @@ const isMobile = computed(() => Screen.lt.sm);
         {{ $t('pages.landing.reviewsPage.title') }}
       </h1>
       <div class="slider-wrapper">
-        <ACarousel v-model="carousel_val" :slides-count="_slides.length">
+        <ACarousel v-model="carousel_val" :slides-count="_slides?.length ?? 0">
           <CarouselSlide
             v-for="(slide, index) in _slides"
             :key="index"
@@ -43,10 +55,10 @@ const isMobile = computed(() => Screen.lt.sm);
             <ReviewCard
               v-for="(card, index) in slide"
               :key="index"
-              :class="{ pos_top: index % 2 === 0, pos_bottom: index % 2 === 1 }"
               :name="card.name"
               :details="card.details"
               :img-src="card.imgSrc"
+              :link="card.link"
             ></ReviewCard>
           </CarouselSlide>
         </ACarousel>

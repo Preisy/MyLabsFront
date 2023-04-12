@@ -1,8 +1,8 @@
 import { storeToRefs } from 'pinia';
-import { CodeCheckData } from 'src/model/codeCheckData/codeCheckData';
+import { signupConfirmData } from 'src/model/signupConfirmData/signupConfirmData';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
-import { useDialogStore } from 'src/stores/DialogStore';
+import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
 
 const authStore = useAuthStore();
@@ -26,11 +26,11 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
       const code = values['secret code'];
       if (!code) return new Promise((resolve) => resolve(false));
 
-      const codeCheckData: CodeCheckData = {
+      const codeCheckData: signupConfirmData = {
         code: code as string,
         email: dialogStore.userCreds.email,
       };
-      return authStore.checkCode(codeCheckData);
+      return authStore.signupConfirm(codeCheckData);
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).codeApproveState,

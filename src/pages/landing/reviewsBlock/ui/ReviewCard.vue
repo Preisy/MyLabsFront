@@ -1,18 +1,21 @@
 <script setup lang="ts">
-interface Props {
+interface Review {
   name: string;
   details: string;
   imgSrc: string;
+  link: string;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<Review>();
 </script>
 
 <template>
   <div class="review-card">
-    <div class="head row items-center">
-      <img class="profile-img" :src="props.imgSrc" />
-      <h2>{{ props.name }}</h2>
+    <div class="head row items-center no-wrap">
+      <a :href="props.link">
+        <img class="profile-img" :src="props.imgSrc" />
+      </a>
+      <h2 class="name">{{ props.name }}</h2>
     </div>
     <p class="details">{{ props.details }}</p>
   </div>
@@ -31,6 +34,12 @@ const props = defineProps<Props>();
       --size: 3.5rem;
       width: var(--size);
       height: var(--size);
+      border-radius: 100%;
+    }
+
+    .name {
+      margin: 0;
+      margin-left: 0.5rem;
     }
   }
 

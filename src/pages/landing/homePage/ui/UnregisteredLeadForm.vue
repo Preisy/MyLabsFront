@@ -11,7 +11,7 @@ import { useAuthStore } from 'src/stores/AuthStore';
 import { SignUpDialog } from '../../header/ui';
 import { ref } from 'vue';
 import { Nullable } from 'src/global/types';
-import { useDialogStore } from 'src/stores/DialogStore';
+import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 
 type UnregisteredLeadForm = Omit<UserCreds, 'password'>;
 const UnregisteredLeadFormSchema = {

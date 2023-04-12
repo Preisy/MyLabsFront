@@ -8,7 +8,7 @@ import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
-import { useDialogStore } from 'src/stores/DialogStore';
+import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
@@ -25,13 +25,12 @@ const close = () => {
   dialog.value?.close();
   isOpened.value = false;
 };
-
 let schema = getSchema(LoginDataSchema);
 
 const onSubmit = (values: Record<string, unknown>) => {
   const loginPromise = useAuthStore().login(values as unknown as LoginData);
-  loginPromise.then(() => {
-    window.location.reload();
+  loginPromise.then((result) => {
+    if (result) window.location.reload();
   });
 };
 </script>

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { Screen } from 'quasar';
 import { onMounted, ref } from 'vue';
+import { useCounterStore } from './store/CounterStore';
 
 const root = ref<HTMLDivElement>();
-const counter = ref(0);
+const counter = ref('...');
 
 // let start = 18;
 let end = 35;
@@ -30,16 +31,15 @@ const animateScroll = () => {
   requestAnimationFrame(animateScroll);
 };
 
-// let a = new IntersectionObserver(() => {
-//   console.log('obs');
+const counterStore = useCounterStore();
 
-// }, {
-//   // root: root.value,
-//   threshold: 0.5
-// })
+onMounted(async () => {
+  animateScroll();
 
-onMounted(() => animateScroll());
-
+  const quantity = await counterStore.getLabsQuantity();
+  if ('error' in quantity) return;
+  counter.value = quantity.quantity.toString();
+});
 const isMobile = Screen.lt.sm;
 </script>
 

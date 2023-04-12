@@ -1,17 +1,27 @@
 <script setup lang="ts">
-import { CardModel } from './Card';
+import { CardModel, TaskType } from './Card';
 
 interface Props {
   card: CardModel;
 }
-
 const props = defineProps<Props>();
+
+const taskTypeToImg = (v: TaskType) => {
+  switch (v) {
+    case 'Cpp':
+      return '/src/assets/cardTypes/c++icon.png';
+    case 'C':
+      return '/src/assets/cardTypes/cicon.png';
+    case 'Cs':
+      return '/src/assets/cardTypes/csicon.png';
+  }
+};
 </script>
 <template>
   <div class="card">
     <div class="row justify-between items-start fit-content no-wrap">
-      <div class="title-wrapper row items-center no-wrap">
-        <img class="title-icon" :src="props.card.imgSrc" alt="" />
+      <div class="title-wrapper row items-center no-wrap q-mr-sm">
+        <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
         <h2 class="title">{{ props.card.title }}</h2>
       </div>
 
@@ -31,7 +41,7 @@ const props = defineProps<Props>();
       </div>
       <div class="date">
         <span>
-          {{ props.card.date }}
+          {{ props.card.duration }}
         </span>
       </div>
     </div>

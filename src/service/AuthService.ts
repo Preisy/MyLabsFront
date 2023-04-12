@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { $api, baseURL } from 'src/http';
-import { CodeCheckData } from 'src/model/codeCheckData/codeCheckData';
+import { $api } from 'src/boot/axios';
+import { signupConfirmData } from 'src/model/signupConfirmData/signupConfirmData';
 import { LoginData } from 'src/model/loginData/LoginData';
 import { Token } from 'src/model/Token/Token';
 import { User } from 'src/model/User/User';
@@ -10,16 +9,9 @@ import { UserCreds } from 'src/model/UserCreds/UserCreds';
 export const AuthService = {
   async login(creds: LoginData) {
     try {
-      // const response = await $api.post(baseURL + '/login', creds);
-      // console.log(response.data);
-      const response = await new Promise<{ data: Token }>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            data: { token: 'asdsf' },
-          });
-        }, 1000);
-        //   /// fetch(URL, creds);
-      });
+      console.log(creds);
+      const response = await $api.post('/login', creds);
+      console.log(response.data);
 
       return response;
     } catch (e: unknown) {
@@ -28,29 +20,19 @@ export const AuthService = {
   },
   async signup(creds: UserCreds) {
     try {
-      const response = await new Promise<{ data: Token }>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            data: { token: 'asdsf' },
-          });
-        }, 1000);
-      });
+      const response = await $api.post('/signup', creds);
+      console.log(response.data);
+
       return response;
     } catch (e: unknown) {
       return { error: e };
     }
   },
-  async checkCode(data: CodeCheckData) {
+  async signupConfirm(data: signupConfirmData) {
     try {
-      const response = await new Promise<{ data: { result: string } }>(
-        (resolve) => {
-          setTimeout(() => {
-            resolve({
-              data: { result: 'confirm' },
-            });
-          }, 1000);
-        }
-      );
+      const response = await $api.post('/signup/confirm', data);
+      console.log(response.data);
+
       return response;
     } catch (e: unknown) {
       return { error: e };
@@ -73,22 +55,6 @@ export const AuthService = {
     }
   },
   async сhangePassword(data: LoginData) {
-    try {
-      const response = await new Promise<{ data: { result: string } }>(
-        (resolve) => {
-          setTimeout(() => {
-            resolve({
-              data: { result: 'confirm' },
-            });
-          }, 1000);
-        }
-      );
-      return response;
-    } catch (e: unknown) {
-      return { error: e };
-    }
-  },
-  async changeCreds(data: User) {
     try {
       const response = await new Promise<{ data: { result: string } }>(
         (resolve) => {
