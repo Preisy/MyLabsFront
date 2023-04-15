@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Frontend web application",
   "productName": "MyLabs",
-  "author": "Preisy",
+  "author": "Preisy & max2556",
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0"
