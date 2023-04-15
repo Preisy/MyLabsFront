@@ -6,9 +6,15 @@ import { LoginData } from 'src/model/loginData/LoginData';
 import { AuthService } from 'src/service/AuthService';
 import { ref } from 'vue';
 import { useDialogStore } from '../pages/landing/header/store/DialogStore';
+import changePasswordData from 'src/model/changePassword/changePasswordData';
+
+export const logoutFunc = () => {
+  useAuthStore().logout();
+}
 
 export const useAuthStore = defineStore('authStore', () => {
   const dialogStore = useDialogStore();
+  const invitedById = ref<string>()
 
   let isAuth = !!localStorage.getItem('access_token');
   const state = ref<SimpleState>('unset');
@@ -22,13 +28,15 @@ export const useAuthStore = defineStore('authStore', () => {
     if ('error' in res) {
       isAuth = false;
       dialogStore.loginState = 'error';
-      return false;
+      // return false;
     } else {
-      localStorage.setItem('access_token', res.data.token);
+      localStorage.setItem('access_token', res.token);
       isAuth = true;
       dialogStore.loginState = 'success';
-      return true;
+      // return true;
     }
+
+    return res;
   };
   const logout = () => {
     localStorage.removeItem('access_token');
@@ -42,47 +50,51 @@ export const useAuthStore = defineStore('authStore', () => {
     if ('error' in res) {
       isAuth = false;
       dialogStore.signupState = 'error';
-      return false;
     } else {
-      localStorage.setItem('access_token', res.data.token);
       isAuth = true;
       dialogStore.signupState = 'success';
-      return true;
     }
+
+    return res;
   };
   const restore = async (creds: Pick<UserCreds, 'email'>) => {
     dialogStore.restoreState = 'loading';
     const res = await AuthService.restore(creds);
     if ('error' in res) {
       dialogStore.restoreState = 'error';
-      return false;
     } else {
       dialogStore.restoreState = 'success';
-      return true;
     }
+
+    return res;
   };
   const signupConfirm = async (data: signupConfirmData) => {
     dialogStore.codeApproveState = 'loading';
     const res = await AuthService.signupConfirm(data);
     if ('error' in res) {
       dialogStore.codeApproveState = 'error';
-      return false;
     } else {
+      localStorage.setItem('access_token', res.token);
       dialogStore.codeApproveState = 'success';
-      return true;
     }
+
+    return res;
   };
-  const changePassword = async (creds: LoginData) => {
+  const changePassword = async (creds: changePasswordData) => {
     dialogStore.passwordState = 'loading';
     const res = await AuthService.сhangePassword(creds);
-    const loginRes = await AuthService.login(creds);
+    const loginCreds: LoginData = {
+      email: creds.email,
+      password: creds.newPassword
+    }
+    const loginRes = await AuthService.login(loginCreds);
     if ('error' in res || 'error' in loginRes) {
       dialogStore.passwordState = 'error';
-      return false;
     } else {
       dialogStore.passwordState = 'success';
-      return true;
     }
+
+    return res;
   };
 
   return {
@@ -95,5 +107,6 @@ export const useAuthStore = defineStore('authStore', () => {
     checkAuth,
     restore,
     changePassword,
+    invitedById
   };
 });

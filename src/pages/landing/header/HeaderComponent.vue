@@ -7,6 +7,7 @@ import { SignUpDialog, LoginDialog } from './ui';
 import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
+import LangSwitch from './ui/LangSwitch.vue';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
@@ -31,6 +32,9 @@ const isMenuOpened = ref(false);
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
 let login = ref<InstanceType<typeof LoginDialog>>();
+
+const isSignupOpened = computed(() => signup.value?.isOpened);
+const isLoginOpened = computed(() => login.value?.isOpened);
 </script>
 
 <template>
@@ -54,24 +58,40 @@ let login = ref<InstanceType<typeof LoginDialog>>();
           :label="link.label"
           :target="link.value"
           class="header-btn"
-        ></HeaderBtn>
+        />
       </div>
 
-      <div class="auth">
-        <ABtn
-          v-if="!useAuthStore().isAuth"
-          class="auth-login q-px-xl"
-          theme="light"
-          :label="$t('pages.landing.header.login')"
-          @click="login?.open()"
-        ></ABtn>
-        <ABtn
-          v-if="!useAuthStore().isAuth"
-          class="auth-signup"
-          theme="dark"
-          :label="$t('pages.landing.header.signup')"
-          @click="signup?.open()"
-        ></ABtn>
+      <div
+        class="right-btns"
+        :class="{ row: !isMobile, 'column reverse': isMobile }"
+      >
+        <LangSwitch class="q-mr-md" />
+        <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-login q-px-xl"
+            theme="light"
+            :label="$t('pages.landing.header.login')"
+            @click="
+              if (!isSignupOpened) {
+                login?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-signup"
+            theme="dark"
+            :label="$t('pages.landing.header.signup')"
+            @click="
+              if (!isLoginOpened) {
+                signup?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
+        </div>
         <q-btn flat v-if="useAuthStore().isAuth" to="mpc/tasks">
           <img class="profile-icon" src="src/assets/user/profile.png" />
         </q-btn>
@@ -90,9 +110,13 @@ let login = ref<InstanceType<typeof LoginDialog>>();
       />
     </div>
 
-    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" />
+    <div
+      v-if="isMobile"
+      class="bg-prevent"
+      :class="{ open: isMenuOpened }"
+      @click="isMenuOpened = false"
+    />
   </q-header>
-
   <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
 
@@ -106,6 +130,7 @@ let login = ref<InstanceType<typeof LoginDialog>>();
   // background-repeat: no-repeat;
 
   position: fixed;
+  z-index: 9999;
 
   .logo {
     --width: 4rem;
@@ -133,18 +158,18 @@ let login = ref<InstanceType<typeof LoginDialog>>();
         }
       }
     }
-    .bg-prevent {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 100%;
-      transition: 0.2s ease-in-out all;
+  }
+  .bg-prevent {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 100%;
+    transition: 0.2s ease-in-out all;
 
-      &.open {
-        bottom: 0;
-        background-color: #ffffff99;
-      }
+    &.open {
+      bottom: 0;
+      background-color: #ffffff99;
     }
   }
 
@@ -154,7 +179,7 @@ let login = ref<InstanceType<typeof LoginDialog>>();
     height: var(--size);
   }
 
-  .auth {
+  .right-btns {
     .auth-login {
       margin-right: 0.75rem;
     }

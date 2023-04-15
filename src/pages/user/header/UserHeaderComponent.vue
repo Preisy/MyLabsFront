@@ -49,7 +49,7 @@ const isMenuOpened = ref(false);
           :to="link.value"
           :label="link.label"
           class="header-btn"
-        ></HeaderBtn>
+        />
       </div>
 
       <div class="auth">
@@ -58,12 +58,15 @@ const isMenuOpened = ref(false);
           color="grey"
           text-color="dark"
           :label="$t('pages.user.header.contacts')"
-        ></ABtn>
+        />
         <ABtn
           class="auth-signup"
           :label="$t('pages.user.header.inviteFriend')"
-          @click="inviteDialog?.open()"
-        ></ABtn>
+          @click="
+            inviteDialog?.open();
+            isMenuOpened = false;
+          "
+        />
       </div>
     </q-toolbar>
 
@@ -95,6 +98,7 @@ const isMenuOpened = ref(false);
   // background-repeat: no-repeat;
 
   position: fixed;
+  z-index: 9999;
 
   .logo {
     --width: 4rem;

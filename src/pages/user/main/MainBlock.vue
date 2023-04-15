@@ -2,9 +2,12 @@
 import ABtn from 'src/components/ABtn.vue';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import OrderDialog from './ui/OrderDialog.vue';
 
 const { t } = useI18n();
 const balance = ref<number>(3000);
+
+const orderDialog = ref<InstanceType<typeof OrderDialog>>();
 </script>
 
 <template>
@@ -19,8 +22,10 @@ const balance = ref<number>(3000);
           color="grey"
           text-color="dark"
           :label="t('pages.user.main.order')"
+          @click="orderDialog?.open()"
         />
       </div>
+      <OrderDialog ref="orderDialog" />
     </div>
   </div>
 </template>
@@ -44,7 +49,7 @@ const balance = ref<number>(3000);
     }
     .balance-count {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0rem;
     }
     .profile-icon {
       --size: 6rem;

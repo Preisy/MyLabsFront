@@ -25,7 +25,7 @@ import MainBlock from 'src/pages/user/main/MainBlock.vue';
 <style scoped lang="scss">
 .user-page {
   --main-height: 50vh;
-  --overlap: 4rem;
+  --overlap: 3rem;
   --subblock-height: calc(100vh - var(--main-height) + var(--overlap));
 
   overflow: hidden;

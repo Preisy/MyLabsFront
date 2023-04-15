@@ -3,7 +3,10 @@
     "user": {
       "main": {
         "balance": "Баланс",
-        "order": "Заказать"
+        "order": "Заказать",
+        "order-dialog": {
+          "title": "Новый заказ"
+        }
       }
     }
   }

@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import { chunk } from 'lodash';
-import { FriendCardModel, defaultCards } from './ui/FriendCardModel';
+import { defaultCards } from './ui/FriendCardModel';
 import FriendCard from './ui/FriendCard.vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { Screen } from 'quasar';
+import { ReferralFriend } from './service/ReferralService';
+import { useReferralStore } from './store/ReferralStore';
 
-interface Props {
-  cards: FriendCardModel[];
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  cards: () => defaultCards,
-});
-
+const referralStore = useReferralStore();
 const chunkCount = computed(() => {
   return Screen.lt.md ? 1 : 2;
+});
+
+const referrals = ref<ReferralFriend[]>();
+referralStore.getReferrals().then((val) => {
+  if ('error' in val) {
+    console.warn('For some reason cant fetch referrals');
+    return;
+  }
+  referrals.value = val;
 });
 </script>
 
@@ -26,7 +30,7 @@ const chunkCount = computed(() => {
         <div class="friends-list column">
           <div
             class="slide row justify-center no-wrap"
-            v-for="(slide, index) in chunk(props.cards, chunkCount)"
+            v-for="(slide, index) in chunk(defaultCards, chunkCount)"
             :key="index"
           >
             <FriendCard
@@ -52,11 +56,11 @@ const chunkCount = computed(() => {
 
   .friends-scroller {
     box-sizing: border-box;
-    height: 25rem;
+    height: calc(var(--subblock-height) - 5rem);
     margin-top: -2rem;
 
     @media (max-width: $screen-md) {
-      height: calc(var(--subblock-height) + 4rem);
+      height: calc(var(--subblock-height) - 5rem);
     }
   }
   .friends-list {

@@ -12,6 +12,10 @@ import { SignUpDialog } from '../../header/ui';
 import { ref } from 'vue';
 import { Nullable } from 'src/global/types';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
+import { useOrderStore } from 'src/stores/OrderStore';
+import FileAttachDialog from './FileAttachDialog.vue';
+import { useFileStore } from '../store/FileStore';
+import { computed } from 'vue';
 
 type UnregisteredLeadForm = Omit<UserCreds, 'password'>;
 const UnregisteredLeadFormSchema = {
@@ -25,13 +29,32 @@ const { handleSubmit } = useForm<UnregisteredLeadForm>({
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
+const orderStore = useOrderStore();
 
+const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
 const onSubmit = handleSubmit.withControlled((values) => {
   console.log(JSON.stringify(values, null, 2));
-  dialogStore.setUser(values);
-  signupDialog.value?.open();
+
+  if (!authStore.isAuth) {
+    //Todo: what to do with order data(deadline, task, type)
+    dialogStore.setUser(values);
+    signupDialog.value?.open();
+  }
+  orderStore.sendOrder(values);
 });
+
+const isFileDialogOpen = ref(false);
+const fileDialogOpen = () => {
+  fileDialog.value?.open();
+  isFileDialogOpen.value = !isFileDialogOpen.value;
+};
+
+defineExpose({
+  isFileDialogOpen,
+});
+
+const filesCount = computed(() => useFileStore().filesList.length);
 </script>
 
 <template>
@@ -43,12 +66,21 @@ const onSubmit = handleSubmit.withControlled((values) => {
           :label="$t('pages.landing.homePage.form.task')"
           name="text"
         />
-        <q-btn
-          class="clip-button btn br-15px"
-          text-color="dark"
-          color="grey"
-          icon="attach_file"
-        />
+        <div class="file-btn-wrapper">
+          <q-btn
+            class="clip-button btn br-15px"
+            text-color="dark"
+            color="grey"
+            icon="attach_file"
+            @click="fileDialogOpen"
+          />
+          <p
+            v-if="filesCount !== 0"
+            class="indicator bg-green text-primary text-center"
+          >
+            {{ filesCount }}
+          </p>
+        </div>
       </div>
       <div class="form-line row">
         <a-select
@@ -110,6 +142,7 @@ const onSubmit = handleSubmit.withControlled((values) => {
       </div>
     </form>
 
+    <FileAttachDialog ref="fileDialog" />
     <SignUpDialog :start="1" ref="signupDialog" />
   </div>
 </template>
@@ -127,14 +160,31 @@ const onSubmit = handleSubmit.withControlled((values) => {
     }
   }
 
+  .file-btn-wrapper {
+    position: relative;
+
+    .indicator {
+      --size: 1rem;
+      position: absolute;
+
+      font-size: 0.6rem;
+      padding-top: 0.2rem;
+      width: var(--size);
+      height: var(--size);
+
+      top: 0;
+      right: 0;
+
+      transform: translate(50%, -50%);
+      border-radius: 100%;
+    }
+  }
+
   @media (max-width: $screen-sm) {
     width: 100%;
   }
-}
-</style>
-
-<style scoped lang="scss">
-.clip-button {
-  padding: 0.2rem 0.6rem;
+  .clip-button {
+    padding: 0.2rem 0.6rem;
+  }
 }
 </style>

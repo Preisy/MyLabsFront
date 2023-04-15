@@ -6,7 +6,7 @@ import { User } from 'src/model/User/User';
 import ADynamicForm from 'src/components/ADynamicForm';
 import { onMounted, ref } from 'vue';
 import { getSchema } from 'src/global/utils';
-import { useUserStore } from './store/UserStore';
+import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
 
 const validateSchema = omit(UserCredsSchema, 'password');
@@ -22,8 +22,15 @@ const onsubmit = (values: Record<string, unknown>): void => {
 const userform = ref<InstanceType<typeof ADynamicForm>>();
 onMounted(async () => {
   const creds = await userStore.getCreds();
+  console.log(creds);
   if ('error' in creds) return;
-  assign(userform.value, creds);
+
+  const userData: User = {
+    email: creds.email,
+    name: creds.uname,
+    contact: creds.contact,
+  };
+  assign(userform.value?.values, userData);
 });
 </script>
 
@@ -60,6 +67,7 @@ onMounted(async () => {
       </form> -->
 
       <ADynamicForm
+        class="full-width text-center form"
         ref="userform"
         :schema="getSchema(validateSchema)"
         :on-submit="onsubmit"
@@ -81,17 +89,16 @@ onMounted(async () => {
   .structure {
     padding-top: 4rem;
     width: 20rem;
+  }
+  .profile-pic {
+    --size: 3rem;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 100%;
+  }
 
-    .profile-pic {
-      --size: 3rem;
-      width: var(--size);
-      height: var(--size);
-      border-radius: 100%;
-    }
-
-    .apply-btn {
-      flex: 0;
-    }
+  .form {
+    margin-bottom: 2rem;
   }
 }
 </style>

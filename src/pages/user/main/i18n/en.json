@@ -3,7 +3,10 @@
     "user": {
       "main": {
         "balance": "Balance",
-        "order": "Order"
+        "order": "Order",
+        "order-dialog": {
+          "title": "New order"
+        }
       }
     }
   }

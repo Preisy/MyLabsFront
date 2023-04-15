@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { CardModel, TaskType } from './Card';
+import { LabModel, TaskType } from './Card';
 
 interface Props {
-  card: CardModel;
+  card: LabModel;
 }
 const props = defineProps<Props>();
 
@@ -24,24 +24,11 @@ const taskTypeToImg = (v: TaskType) => {
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
         <h2 class="title">{{ props.card.title }}</h2>
       </div>
-
-      <q-btn
-        icon="attachment"
-        color="grey"
-        text-color="dark"
-        class="attachment-btn br-15px"
-      />
     </div>
     <div class="details row justify-between">
-      <div class="price">
-        <q-icon class="icon" color="accent" name="currency_ruble" />
-        <span>
-          {{ props.card.price }}
-        </span>
-      </div>
       <div class="date">
         <span>
-          {{ props.card.duration }}
+          {{ props.card.date }}
         </span>
       </div>
     </div>
@@ -102,6 +89,7 @@ const taskTypeToImg = (v: TaskType) => {
 
   .attachment-btn {
     padding: 0.5rem;
+    min-width: fit-content;
 
     @media (max-width: $screen-sm) {
       padding: 0.3rem;

@@ -4,6 +4,8 @@ import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
+import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
+import { createErrorResponse } from 'src/model/response/responseGenerators';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
@@ -24,13 +26,13 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
     ],
     onSubmit: (values) => {
       const code = values['secret code'];
-      if (!code) return new Promise((resolve) => resolve(false));
+      if (!code) return createErrorResponse('No secret code present');
 
       const codeCheckData: signupConfirmData = {
         code: code as string,
         email: dialogStore.userCreds.email,
       };
-      return authStore.signupConfirm(codeCheckData);
+      return authStore.signupConfirm(codeCheckData) as unifiedApiPromise;
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).codeApproveState,

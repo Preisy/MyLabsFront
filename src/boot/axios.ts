@@ -1,6 +1,8 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { useAuthStore } from 'src/stores/AuthStore';
+// import { useAuthStore } from 'src/stores/AuthStore';
+import { logoutFunc } from 'src/stores/AuthStore';
+import { appendRequest, registerBadResponse, resolveRequest } from 'src/stores/LoadingStore';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -22,9 +24,12 @@ export const axiosConfig: AxiosRequestConfig = {
   withCredentials: true,
   baseURL,
 };
+
 const $api = axios.create(axiosConfig);
 
 $api.interceptors.request.use((config) => {
+  const timeout = 10000;
+  // console.log(config)
   if (
     config.headers &&
     !config.url?.startsWith('/labs/quantity') &&
@@ -38,10 +43,28 @@ $api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem(
       'access_token'
     )}`;
+
+  config.timeout = timeout;
+
+
+  if (
+    config.url?.startsWith('/labs/quantity') ||
+    config.url?.startsWith('/labs') ||
+    config.url?.startsWith('/reviews')
+  ) appendRequest(config);
   return config;
 });
-$api.interceptors.response.use(undefined, (error) => {
-  // if (error.response?.status === 401) authStore.logout();
+
+$api.interceptors.response.use((value) => {
+  // console.log(value);
+  resolveRequest(value.config)
+  return value;
+}, (error) => {
+  // console.log(error)
+  resolveRequest(error.config)
+  registerBadResponse(error);
+  if (error.response?.status === 401) logoutFunc();
+  // authStore.logout();
   throw error;
 });
 

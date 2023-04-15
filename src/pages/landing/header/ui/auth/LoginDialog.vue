@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import DialogWrapper from './DialogWrapper.vue';
+import { computed, ref } from 'vue';
 import ADialog from 'src/components/ADialog';
 import { getSchema } from 'src/global/utils';
 import { LoginData, LoginDataSchema } from 'src/model/loginData';
@@ -9,16 +8,21 @@ import RestorePasswordDialog from './RestorePasswordDialog.vue';
 import ABtn from 'src/components/ABtn.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
+import { AxiosError } from 'axios';
+import AErrPopup from 'src/components/AErrPopup.vue';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
 let restore = ref<InstanceType<typeof RestorePasswordDialog>>();
-let dialog = ref<InstanceType<typeof DialogWrapper>>();
+let dialog = ref<InstanceType<typeof ADialog>>();
+
+const isDialogOpened = computed(() => dialog.value?.isOpen);
 defineExpose({
   open: () => {
     dialog.value?.open();
     setTimeout(() => (isOpened.value = true), 0);
   },
+  isOpened: isDialogOpened,
 });
 const close = () => {
   floor.value?.classList.remove('showed');
@@ -27,11 +31,19 @@ const close = () => {
 };
 let schema = getSchema(LoginDataSchema);
 
-const onSubmit = (values: Record<string, unknown>) => {
-  const loginPromise = useAuthStore().login(values as unknown as LoginData);
-  loginPromise.then((result) => {
-    if (result) window.location.reload();
-  });
+const errorResponse = ref<AxiosError>();
+const popup = ref<InstanceType<typeof AErrPopup>>();
+const onSubmit = async (values: Record<string, unknown>) => {
+  const loginResponse = await useAuthStore().login(
+    values as unknown as LoginData
+  );
+  if ('error' in loginResponse) {
+    console.log(loginResponse);
+    errorResponse.value = loginResponse.error as AxiosError;
+    popup.value?.show();
+    return;
+  }
+  window.location.reload();
 };
 </script>
 
@@ -72,6 +84,11 @@ const onSubmit = (values: Record<string, unknown>) => {
               }
             "
           ></ABtn>
+          <AErrPopup
+            class="errorPopup"
+            :axios-err="errorResponse"
+            ref="popup"
+          />
         </div>
       </div>
       <!-- <SuccessDialog v-else :i="dialogs.length + 1" @close="close()" /> -->
@@ -82,6 +99,7 @@ const onSubmit = (values: Record<string, unknown>) => {
 
 <style scoped lang="scss">
 .content-wrapper {
+  position: relative;
   width: 23rem;
   padding: 3.5rem 2rem;
   padding-bottom: 0.5rem;
@@ -92,8 +110,8 @@ const onSubmit = (values: Record<string, unknown>) => {
   .floor {
     user-select: none;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -100%;
+    right: -160%;
     z-index: -1;
     opacity: 0;
     // transition: opacity 0.1s ease-in-out;
@@ -104,21 +122,17 @@ const onSubmit = (values: Record<string, unknown>) => {
 
     opacity: 1;
   }
-
   .form {
     text-align: center;
     margin-bottom: 1rem;
   }
-
   .title {
     line-height: 2rem;
     margin-bottom: 1.3rem;
   }
-
   .body-wrapper {
     margin-bottom: 1rem;
   }
-
   .restore {
     margin: 0 auto 1rem;
     display: block;

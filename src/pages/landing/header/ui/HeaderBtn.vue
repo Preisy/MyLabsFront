@@ -24,6 +24,7 @@ function onclick() {
     color="dark"
     no-caps
     flat
+    :ripple="false"
     :label="props.label"
     @click="onclick"
   />
@@ -57,21 +58,13 @@ function onclick() {
     width: var(--highlight-width);
   }
 }
-</style>
 
-<style lang="scss">
-.header-btn:hover,
-.header-btn:focus,
-.header-btn:active {
+.header-btn:hover::v-deep,
+.header-btn:focus::v-deep,
+.header-btn:active::v-deep {
   .q-focus-helper {
     background: $primary !important;
     opacity: 0 !important;
-  }
-}
-
-.header-btn {
-  .q-ripple {
-    display: none;
   }
 }
 </style>

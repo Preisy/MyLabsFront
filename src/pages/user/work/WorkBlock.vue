@@ -1,21 +1,37 @@
 <script setup lang="ts">
-import TaskCard from './ui/TaskCard.vue';
-import { chunk, filter } from 'lodash';
-import { CardModel } from './ui/Card';
+import TaskCard from './ui/LabCard.vue';
+import { chunk } from 'lodash';
+import { LabModel, OrderModel } from './ui/Card';
 import { Screen } from 'quasar';
 import { computed, onMounted, ref } from 'vue';
-import { useTaskStore } from './store/TaskStore';
+import { useLabsStore } from 'src/stores/LabsStore';
+import { useOrderStore } from 'src/stores/OrderStore';
 
-const cards = ref<CardModel[]>();
+const cards = ref<{ orders: OrderModel[]; labs: LabModel[] }>({
+  orders: [],
+  labs: [],
+});
 const chunkSize = computed(() => {
   return Screen.lt.md ? 1 : 2;
 });
 
-const taskService = useTaskStore();
+const labsStore = useLabsStore();
+const orderStore = useOrderStore();
 onMounted(async () => {
-  const tasks = await taskService.getTasks();
-  if ('error' in tasks) return;
-  cards.value = tasks;
+  if (!cards.value) return;
+
+  const labs = await labsStore.getLabs();
+  const orders = await orderStore.getOrders();
+  if ('error' in labs) {
+    console.warn('For some reason cant fetch labs');
+    return;
+  }
+  if ('error' in orders) {
+    console.warn('For some reason cant fetch labs');
+    return;
+  }
+  cards.value.labs = labs;
+  cards.value.orders = orders;
 });
 </script>
 
@@ -35,7 +51,7 @@ onMounted(async () => {
               <div class="in-progress">
                 <TaskCard
                   class="card"
-                  v-for="(card, index) in filter(cards, (card: CardModel)=>card.priority===0)"
+                  v-for="(card, index) in cards.orders"
                   :key="index"
                   :card="card"
                 />
@@ -43,7 +59,7 @@ onMounted(async () => {
               <div class="done">
                 <div
                   class="slide row justify-center no-wrap"
-                  v-for="(slide, index) in chunk(filter(cards, (card: CardModel)=>card.priority!==0), chunkSize)"
+                  v-for="(slide, index) in chunk(cards.labs, chunkSize)"
                   :key="index"
                 >
                   <TaskCard
@@ -96,6 +112,8 @@ onMounted(async () => {
       margin-bottom: 1rem;
       margin-left: auto;
       margin-right: auto;
+
+      min-width: 8rem;
     }
   }
 

@@ -7,6 +7,7 @@ import { UserService } from '../service/UserService';
 export const useUserStore = defineStore('userStore', () => {
   const changeCredsState = ref<SimpleState>('unset');
   const getCredsState = ref<SimpleState>('unset');
+  const userData = ref<User>();
 
   const changeCreds = async (creds: User) => {
     changeCredsState.value = 'loading';
@@ -15,6 +16,7 @@ export const useUserStore = defineStore('userStore', () => {
       changeCredsState.value = 'error';
     } else {
       changeCredsState.value = 'success';
+      userData.value = creds
     }
 
     return res;
@@ -27,6 +29,7 @@ export const useUserStore = defineStore('userStore', () => {
       getCredsState.value = 'error';
     } else {
       getCredsState.value = 'success';
+      userData.value = { name: res.uname, ...res };
     }
 
     return res;

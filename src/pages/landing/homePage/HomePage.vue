@@ -2,6 +2,9 @@
 import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm.vue';
 import ATypingText from 'components/ATypingText.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
+import { ref } from 'vue';
+
+const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
 </script>
 
 <template>
@@ -20,11 +23,18 @@ import { useAuthStore } from 'src/stores/AuthStore';
         />
       </div>
 
-      <h1 class="description">
+      <h1
+        class="description"
+        :class="{ isFileDialogOpen: leadForm?.isFileDialogOpen }"
+      >
         <ATypingText :text="$t('pages.landing.homePage.title')" />
       </h1>
       <UnregisteredLeadForm
-        :class="{ isAuth: useAuthStore().isAuth }"
+        ref="leadForm"
+        :class="{
+          isAuth: useAuthStore().isAuth,
+          isFileDialogOpen: leadForm?.isFileDialogOpen,
+        }"
         class="form-homepage"
       />
     </div>
@@ -39,6 +49,11 @@ import { useAuthStore } from 'src/stores/AuthStore';
 
   position: relative;
   z-index: 1;
+
+  .isFileDialogOpen {
+    position: relative;
+    z-index: 10000;
+  }
 
   .structure {
     padding: 12rem 0;

@@ -9,9 +9,9 @@ export const useLocaleStore = defineStore('localeStore', () => {
 
   const locale = ref<Locale>(localStorage.getItem('locale') as Locale);
   watch(
-    () => locale,
-    (state) => {
-      localStorage.setItem('locale', state.value);
+    locale,
+    (value) => {
+      localStorage.setItem('locale', value);
     }
   );
 

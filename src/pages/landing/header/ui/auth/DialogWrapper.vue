@@ -5,6 +5,8 @@ import { ref } from 'vue';
 import { DialogData } from './types';
 import { SubmissionContext } from 'vee-validate';
 import SuccessDialog from './SuccessDialog.vue';
+import AErrPopup from 'src/components/AErrPopup.vue';
+import { AxiosError } from 'axios';
 
 interface Props {
   dialogs: DialogData[];
@@ -13,30 +15,35 @@ const props = defineProps<Props>();
 let i = ref(0);
 let dialog = ref<InstanceType<typeof ADialog>>();
 let floor = ref<HTMLImageElement>();
-let isOpened = ref(false);
+const isOpened = ref(false);
+
+const popup = ref<InstanceType<typeof AErrPopup>>();
+const errorResponse = ref<AxiosError>();
 
 defineEmits<{
   (e: 'close'): void;
 }>();
-let onSubmit = (
+let onSubmit = async (
   values: Record<string, unknown>,
   ctx: SubmissionContext<Record<string, unknown>>
 ) => {
-  const submitResult = props.dialogs[i.value].onSubmit(values, ctx);
+  const submitResult = await props.dialogs[i.value].onSubmit(values, ctx);
 
-  submitResult.then((val) => {
-    if (!val) return;
-    dialog.value?.close();
-    ++i.value;
-    setTimeout(() => dialog.value?.open(), 0);
-  });
+  if ('error' in submitResult) {
+    errorResponse.value = submitResult.error as AxiosError;
+    popup.value?.show();
+    return;
+  }
+
+  dialog.value?.close();
+  ++i.value;
+  setTimeout(() => dialog.value?.open(), 0);
 };
 
 const close = () => {
   floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;
-  isOpened.value = false;
 };
 defineExpose({
   open: () => {
@@ -45,11 +52,12 @@ defineExpose({
     setTimeout(() => (isOpened.value = true), 0);
   },
   close,
+  isOpened: isOpened,
 });
 </script>
 
 <template>
-  <ADialog ref="dialog">
+  <ADialog ref="dialog" @close="isOpened = false">
     <div v-if="i != dialogs.length" class="content-wrapper">
       <img
         src="src/assets/header/floor.svg"
@@ -73,6 +81,7 @@ defineExpose({
         />
       </div>
       <div class="page-counter">{{ i + 1 }} / {{ dialogs.length + 1 }}</div>
+      <AErrPopup class="errorPopup" :axios-err="errorResponse" ref="popup" />
     </div>
     <SuccessDialog v-else :i="dialogs.length + 1" @close="close()" />
   </ADialog>
@@ -86,13 +95,13 @@ defineExpose({
   background: $primary;
   border-radius: 1.5rem;
   box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
-  // position: relative;
+  position: relative;
 
   .floor {
     user-select: none;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -100%;
+    right: -160%;
     z-index: -1;
     opacity: 0;
     // transition: opacity 0.1s ease-in-out;

@@ -17,6 +17,7 @@ defineExpose({
   close: () => {
     _close(undefined);
   },
+  isOpen,
 });
 const _close = (event: unknown) => {
   isOpen.value = false;

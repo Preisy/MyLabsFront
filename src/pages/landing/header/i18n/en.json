@@ -9,6 +9,7 @@
         "login": "Login",
         "signup": "Signup",
         "next": "Next",
+        "lang": "Lang",
         "auth": {
           "signup": {
             "1": "Get opportunities after registration",
