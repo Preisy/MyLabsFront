@@ -59,10 +59,10 @@ function onclick() {
   }
 }
 
-.header-btn:hover:deep,
-.header-btn:focus:deep,
-.header-btn:active:deep {
-  .q-focus-helper {
+.header-btn:hover,
+.header-btn:focus,
+.header-btn:active {
+  :deep(.q-focus-helper) {
     background: $primary !important;
     opacity: 0 !important;
   }

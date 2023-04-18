@@ -36,9 +36,6 @@ interface UnregisteredLeadForm {
   promoName: string | null;
 }
 
-// const a:UserCreds
-
-// type UnregisteredLeadForm =  Omit<UserCreds, 'password'>;
 const UnregisteredLeadFormSchema = {
   ...TaskSchema,
   ...omit(UserCredsSchema, 'password'),

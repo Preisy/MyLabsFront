@@ -18,6 +18,11 @@ export interface ProfileResponse {
   photo: Photo
 }
 
+export interface ChangeData {
+  code: string,
+  newPassword: string,
+  email: string
+}
 
 export const UserService = {
   async changeCreds(data: User) {
@@ -40,6 +45,27 @@ export const UserService = {
     try {
       const response = await $api.post('/me/photo', photo);
       return response;
+    } catch (e: unknown) {
+      return { error: e };
+    }
+  },
+  async changePassword(changeData: ChangeData) {
+    try {
+      const response = await $api.post('/password/reset', changeData);
+      return response;
+    } catch (e: unknown) {
+      return { error: e };
+    }
+  },
+  async getPhoto() {
+    try {
+      const response = await $api.get('/me/photo', { responseType: 'arraybuffer' });
+
+      const imageData = response.data;
+      const imageBlob = new Blob([imageData], { type: 'image/jpeg' });
+      const imageUrlObject = URL.createObjectURL(imageBlob);
+
+      return { image: imageUrlObject };
     } catch (e: unknown) {
       return { error: e };
     }

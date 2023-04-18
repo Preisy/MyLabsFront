@@ -1,5 +1,4 @@
 import { storeToRefs } from 'pinia';
-import { signupConfirmData } from 'src/model/signupConfirmData/signupConfirmData';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';

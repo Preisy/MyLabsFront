@@ -1,9 +1,8 @@
 import { pick } from 'lodash';
 import { storeToRefs } from 'pinia';
 import { getSchema } from 'src/global/utils';
-import { UserCreds, UserCredsSchema } from 'src/model/UserCreds';
+import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
-import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { createSuccessResponse } from 'src/model/response/responseGenerators';
 

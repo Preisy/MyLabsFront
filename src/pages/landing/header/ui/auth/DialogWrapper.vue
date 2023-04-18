@@ -10,8 +10,11 @@ import { AxiosError } from 'axios';
 
 interface Props {
   dialogs: DialogData[];
+  needLast?: boolean;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  needLast: true,
+});
 let i = ref(0);
 let dialog = ref<InstanceType<typeof ADialog>>();
 let floor = ref<HTMLImageElement>();
@@ -19,6 +22,15 @@ const isOpened = ref(false);
 
 const popup = ref<InstanceType<typeof AErrPopup>>();
 const errorResponse = ref<AxiosError>();
+const dialogsLen = props.needLast
+  ? props.dialogs.length + 1
+  : props.dialogs.length;
+
+const close = () => {
+  floor.value?.classList.remove('showed');
+  dialog.value?.close();
+  i.value = 0;
+};
 
 defineEmits<{
   (e: 'close'): void;
@@ -37,14 +49,15 @@ let onSubmit = async (
 
   dialog.value?.close();
   ++i.value;
+  console.log(i.value);
+  console.log(props.dialogs.length);
+  if (!props.needLast && i.value === props.dialogs.length) {
+    close();
+    return;
+  }
   setTimeout(() => dialog.value?.open(), 0);
 };
 
-const close = () => {
-  floor.value?.classList.remove('showed');
-  dialog.value?.close();
-  i.value = 0;
-};
 defineExpose({
   open: () => {
     dialog.value?.open();
@@ -60,7 +73,7 @@ defineExpose({
   <ADialog ref="dialog" @close="isOpened = false">
     <div v-if="i != dialogs.length" class="content-wrapper">
       <img
-        src="src/assets/header/floor.svg"
+        src="/src/assets/header/floor.svg"
         class="floor"
         alt=""
         ref="floor"
@@ -80,10 +93,14 @@ defineExpose({
           button-width="9rem"
         />
       </div>
-      <div class="page-counter">{{ i + 1 }} / {{ dialogs.length + 1 }}</div>
+      <div class="page-counter">{{ i + 1 }} / {{ dialogsLen }}</div>
       <AErrPopup class="errorPopup" :axios-err="errorResponse" ref="popup" />
     </div>
-    <SuccessDialog v-else :i="dialogs.length + 1" @close="close()" />
+    <SuccessDialog
+      v-else-if="needLast"
+      :i="dialogs.length + 1"
+      @close="close()"
+    />
   </ADialog>
 </template>
 
