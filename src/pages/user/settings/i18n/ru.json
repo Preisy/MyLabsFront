@@ -3,7 +3,17 @@
     "user": {
       "settings": {
         "applyBtn": "Изменить",
-        "changePassword": "Сменить пароль"
+        "changePassword": "Сменить пароль",
+        "dialogs": {
+          "attention": {
+            "title": "Вы уверены?",
+            "btn": "Продолжить"
+          },
+          "password": {
+            "title": "Проверьте электронную почту!",
+            "btn": "Подтвердить"
+          }
+        }
       }
     }
   }

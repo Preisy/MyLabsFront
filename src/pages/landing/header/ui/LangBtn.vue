@@ -59,10 +59,10 @@ const onclick = () => {
   }
 }
 
-.lang-btn:hover:deep,
-.lang-btn:focus:deep,
-.lang-btn:active:deep {
-  .q-focus-helper {
+.lang-btn:hover,
+.lang-btn:focus,
+.lang-btn:active {
+  :deep(.q-focus-helper) {
     background: $primary !important;
     opacity: 0 !important;
   }

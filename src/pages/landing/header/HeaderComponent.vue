@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
 import { SignUpDialog, LoginDialog } from './ui';
@@ -8,7 +8,6 @@ import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
 import LangSwitch from './ui/LangSwitch.vue';
-import { Photo } from 'src/service/UserService';
 import { useUserStore } from 'src/stores/UserStore';
 import defaultPhoto from 'src/assets/Labs_square_icon.png';
 
@@ -32,7 +31,7 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
 
 const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
-const photo = ref<Photo>();
+const authStore = useAuthStore();
 const userStore = useUserStore();
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
@@ -41,12 +40,8 @@ let login = ref<InstanceType<typeof LoginDialog>>();
 const isSignupOpened = computed(() => signup.value?.isOpened);
 const isLoginOpened = computed(() => login.value?.isOpened);
 
-userStore.getCreds().then((profile) => {
-  if ('error' in profile) {
-    console.warn('Cant fetch user profile(photo)');
-    return;
-  }
-  photo.value = profile.photo;
+onMounted(async () => {
+  if (!userStore.userPhotoUrl && authStore.isAuth) userStore.getPhoto();
 });
 </script>
 
@@ -111,7 +106,10 @@ userStore.getCreds().then((profile) => {
           v-if="useAuthStore().isAuth"
           to="mpc/tasks"
         >
-          <img class="user-photo" :src="photo?.filename ?? defaultPhoto" />
+          <img
+            class="user-photo"
+            :src="userStore.userPhotoUrl ?? defaultPhoto"
+          />
         </q-btn>
         <LoginDialog ref="login" />
         <SignUpDialog ref="signup" />

@@ -59,14 +59,15 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
   padding: 0;
   font-size: 0.6rem;
 }
-.date-input:deep {
-  &.q-field--filled .q-field__control:after {
+.date-input {
+  &.q-field--filled :deep(.q-field__control:after) {
     display: none;
   }
-  .q-field__control {
+
+  :deep(.q-field__control) {
     border-radius: 0.75rem;
   }
-  .q-field__bottom {
+  :deep(.q-field__bottom) {
     white-space: nowrap !important;
     position: absolute;
     padding: 0;

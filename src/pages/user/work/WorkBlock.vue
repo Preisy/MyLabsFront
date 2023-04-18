@@ -68,7 +68,8 @@ const getOrders = async () => {
               </div>
               <div class="done">
                 <div
-                  class="slide row justify-center no-wrap"
+                  class="slide justify-center no-wrap"
+                  :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
                   v-for="(slide, index) in chunk(cards.labs, chunkSize)"
                   :key="index"
                 >
@@ -134,26 +135,10 @@ const getOrders = async () => {
     }
   }
 
-  // &.middle-screen {
-  //   .done {
-  //     .task-scroller {
-  //       width: 16rem;
-  //     }
-  //   }
-  // }
-
   @media (max-width: $screen-md) {
     .title {
       font-size: 1.6rem;
       line-height: 1.6rem;
-    }
-
-    .titles {
-      // justify-content: space-around;
-    }
-
-    .task-scroller .task-wrapper {
-      // justify-content: space-around;
     }
   }
   @media (max-width: $screen-sm) {

@@ -115,12 +115,6 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
               :options="LabTypes"
               name="type"
             />
-            <!-- <a-input
-              class="col-4"
-              :label="$t('pages.landing.homePage.form.deadline')"
-              name="deadline"
-              :init-value="getToday()"
-            /> -->
             <ADatePicker class="col-5" name="deadline" />
           </div>
           <div class="form-line row">

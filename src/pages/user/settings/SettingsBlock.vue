@@ -9,12 +9,12 @@ import { getSchema } from 'src/global/utils';
 import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
 import defaultPhoto from 'src/assets/Labs_square_icon.png';
-import { Photo } from 'src/service/UserService';
+import PasswordChangeDialog from './ui/PasswordChangeDialog.vue';
 
 const userStore = useUserStore();
 const validateSchema = omit(UserCredsSchema, 'password');
 const userform = ref<InstanceType<typeof ADynamicForm>>();
-const photo = ref<Photo>();
+const passwordChangeDialog = ref<InstanceType<typeof PasswordChangeDialog>>();
 
 const onsubmit = (values: Record<string, unknown>): void => {
   console.log(values);
@@ -31,7 +31,7 @@ onMounted(async () => {
     name: creds.uname,
     contact: creds.contact,
   };
-  photo.value = creds.photo;
+  if (!userStore.userPhotoUrl) userStore.getPhoto();
   assign(userform.value?.values, userData);
 });
 </script>
@@ -42,31 +42,10 @@ onMounted(async () => {
       <div class="img-holder">
         <img
           class="profile-pic q-mb-md"
-          :src="photo?.filename ?? defaultPhoto"
+          :src="userStore.userPhotoUrl ?? defaultPhoto"
           alt=""
         />
       </div>
-      <!-- <form class="form full-width column items-center" @submit="onsubmit">
-        <div class="form-wrapper full-width">
-          <template v-for="(col, i) in schema" :key="i">
-            <div class="form-line">
-              <a-input
-                :label="col.label"
-                :name="col.name"
-                :placeholder="col.placeholder"
-                :init-value="col.placeholder"
-                class="col full-width q-mb-md"
-              />
-            </div>
-          </template>
-        </div>
-        <ABtn
-          class="apply-btn q-mb-xl"
-          :label="$t('pages.user.settings.applyBtn')"
-          :loading-state="dialogStore.changeCredsState"
-          type="submit"
-        />
-      </form> -->
 
       <ADynamicForm
         class="full-width text-center form"
@@ -81,8 +60,10 @@ onMounted(async () => {
         class="change-password-btn"
         theme="light"
         :label="$t('pages.user.settings.changePassword')"
+        @click="passwordChangeDialog?.open()"
       />
     </div>
+    <PasswordChangeDialog ref="passwordChangeDialog" />
   </div>
 </template>
 

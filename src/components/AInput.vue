@@ -44,14 +44,14 @@ const { errorMessage, value } = useField<string | number | undefined>(
 </template>
 
 <style scoped lang="scss">
-.ainput:deep {
-  &.q-field--filled .q-field__control:after {
+.ainput {
+  &.q-field--filled :deep(.q-field__control:after) {
     display: none;
   }
-  .q-field__control {
+  :deep(.q-field__control) {
     border-radius: 0.75rem;
   }
-  .q-field__bottom {
+  :deep(.q-field__bottom) {
     white-space: nowrap !important;
     position: absolute;
     padding: 0;

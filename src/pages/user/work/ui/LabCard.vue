@@ -1,22 +1,11 @@
 <script setup lang="ts">
-import { LabType } from 'src/global/LabTypes';
+import { taskTypeToImg } from 'src/global/LabTypes';
 import { LabModel } from './Card';
 
 interface Props {
   card: LabModel;
 }
 const props = defineProps<Props>();
-
-const taskTypeToImg = (v: LabType) => {
-  switch (v) {
-    case 'Cpp':
-      return '/src/assets/cardTypes/c++icon.png';
-    case 'C':
-      return '/src/assets/cardTypes/cicon.png';
-    case 'C#':
-      return '/src/assets/cardTypes/csicon.png';
-  }
-};
 </script>
 <template>
   <div class="card">
@@ -50,6 +39,7 @@ const taskTypeToImg = (v: LabType) => {
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
   max-width: 15rem;
+  min-width: 8rem;
 
   @media (max-width: $screen-lg) {
     max-width: 13rem;

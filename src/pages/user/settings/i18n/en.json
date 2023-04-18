@@ -3,7 +3,17 @@
     "user": {
       "settings": {
         "applyBtn": "Apply",
-        "changePassword": "Change password"
+        "changePassword": "Change password",
+        "dialogs": {
+          "attention": {
+            "title": "Are you sure?",
+            "btn": "Continue"
+          },
+          "password": {
+            "title": "Check email for code!",
+            "btn": "Change"
+          }
+        }
       }
     }
   }
