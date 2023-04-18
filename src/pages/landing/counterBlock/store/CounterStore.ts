@@ -9,6 +9,7 @@ export const useCounterStore = defineStore('counterStore', () => {
   const getLabsQuantity = async () => {
     labsQuantityState.value = 'loading';
     const res = await CounterService.getLabsQuantity();
+
     if ('error' in res) {
       labsQuantityState.value = 'error';
     } else {

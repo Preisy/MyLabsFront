@@ -5,10 +5,11 @@ import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
 import { createErrorResponse } from 'src/model/response/responseGenerators';
+import changePasswordData from 'src/model/changePassword/changePasswordData';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
-export const PasswordScheme = (t: (arg: string) => string): DialogData => {
+export const PasswordRestoreScheme = (t: (arg: string) => string): DialogData => {
   return {
     title: t('pages.landing.header.auth.signup.2'),
     schema: [
@@ -35,13 +36,12 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
         return createErrorResponse('Password mismatch');
       }
 
-      const signData = dialogStore.userCreds;
-      const storeId = authStore.invitedById;
-      if (storeId) signData.invitedById = storeId;
-
       dialogStore.setPassword(values);
-      console.log(signData)
-      return authStore.signup(signData) as unifiedApiPromise;
+      const restoreData: Pick<changePasswordData, 'email'> =
+      {
+        email: dialogStore.userCreds.email
+      }
+      return authStore.restore(restoreData) as unifiedApiPromise;
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).signupState,

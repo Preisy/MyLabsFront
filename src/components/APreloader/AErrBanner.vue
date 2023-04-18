@@ -8,7 +8,7 @@ const generateStyle = (i: number) => {
 </script>
 
 <template>
-  <q-banner inline-actions class="error-banner text-white bg-red">
+  <q-banner inline-actions class="error-banner text-white bg-error">
     Error
     <template v-slot:action>
       <q-btn flat color="white" label="OK" />

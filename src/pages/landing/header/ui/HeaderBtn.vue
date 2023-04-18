@@ -59,9 +59,9 @@ function onclick() {
   }
 }
 
-.header-btn:hover::v-deep,
-.header-btn:focus::v-deep,
-.header-btn:active::v-deep {
+.header-btn:hover:deep,
+.header-btn:focus:deep,
+.header-btn:active:deep {
   .q-focus-helper {
     background: $primary !important;
     opacity: 0 !important;

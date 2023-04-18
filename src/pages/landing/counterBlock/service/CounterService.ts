@@ -1,7 +1,7 @@
 import { $api } from 'src/boot/axios';
 
 export interface LabsQuantityResponse {
-  quantity: number;
+  property: string;
 }
 export const CounterService = {
   async getLabsQuantity() {

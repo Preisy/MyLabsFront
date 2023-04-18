@@ -43,7 +43,7 @@ const onSubmit = async (values: Record<string, unknown>) => {
     popup.value?.show();
     return;
   }
-  window.location.reload();
+  window.location.href = '/mpc/tasks';
 };
 </script>
 
@@ -83,7 +83,7 @@ const onSubmit = async (values: Record<string, unknown>) => {
                 restore?.open();
               }
             "
-          ></ABtn>
+          />
           <AErrPopup
             class="errorPopup"
             :axios-err="errorResponse"

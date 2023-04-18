@@ -44,10 +44,6 @@ const myId = ref(0);
       <h2 class="title">{{ $t('pages.user.header.dialogs.invite.title') }}</h2>
       <div class="body-wrapper">
         <p class="desc">{{ $t('pages.user.header.dialogs.invite.desc') }}</p>
-        <!-- 
-          TODO: Invite link 
-          https://my-labs.ru?ref=....number....
-        -->
         <p class="text-center ref-link">https://my-labs.ru?ref={{ myId }}</p>
         <img
           class="heart-img"
@@ -69,17 +65,20 @@ const myId = ref(0);
 
 <style scoped lang="scss">
 .content-wrapper {
+  position: relative;
+
   width: 23rem;
   padding: 2rem;
   padding-bottom: 0.5rem;
   background: $primary;
   border-radius: 1.5rem;
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
 
   .floor {
     user-select: none;
     position: absolute;
-    top: 0;
-    right: -5rem;
+    top: -70%;
+    right: -90%;
     z-index: -1;
     opacity: 0.5;
     rotate: -100deg;

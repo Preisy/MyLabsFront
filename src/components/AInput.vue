@@ -43,16 +43,8 @@ const { errorMessage, value } = useField<string | number | undefined>(
   />
 </template>
 
-<style lang="scss">
-.ainput {
-  // &.q-field--dense .q-field__control {
-  //   height: 2.25rem !important;
-  //   border-radius: 0.75rem !important;
-  // }
-  // &.q-field--dense .q-field__label {
-  //   font-size: 0.8rem !important;
-  //   top: 13px !important;
-  // }
+<style scoped lang="scss">
+.ainput:deep {
   &.q-field--filled .q-field__control:after {
     display: none;
   }

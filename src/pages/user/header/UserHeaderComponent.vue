@@ -82,7 +82,12 @@ const isMenuOpened = ref(false);
       />
     </div>
 
-    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" />
+    <div
+      @click="isMenuOpened = false"
+      v-if="isMobile"
+      class="bg-prevent"
+      :class="{ open: isMenuOpened }"
+    />
   </q-header>
 
   <!-- <ADialogHolder ref="dialogComp" /> -->
@@ -172,6 +177,20 @@ const isMenuOpened = ref(false);
       justify-content: flex-end;
       position: relative;
       z-index: 2;
+    }
+
+    .bg-prevent {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 100%;
+      transition: 0.2s ease-in-out all;
+
+      &.open {
+        bottom: 0;
+        background-color: #ffffff99;
+      }
     }
   }
 

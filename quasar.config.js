@@ -43,7 +43,7 @@ module.exports = configure(function (/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
-      // 'fontawesome-v6',
+      'fontawesome-v6',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -101,6 +101,7 @@ module.exports = configure(function (/* ctx */) {
       proxy: {
         '/api': {
           target: 'http://185.182.111.172:8080/api/dev',
+          // target: 'https://50a6-46-39-55-146.ngrok-free.app/api',
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(/^\/api/, ''),

@@ -3,20 +3,25 @@ import { remove } from 'lodash';
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue';
 
+const compare = (lhs: InternalAxiosRequestConfig, rhs: InternalAxiosRequestConfig) =>
+    lhs.data == rhs.data && lhs.url == rhs.url && lhs.method == rhs.method && lhs.params == rhs.params
+
 export function appendRequest(v: InternalAxiosRequestConfig) {
     useLoadingStore().pendingRequests?.push(v);
 }
 export function resolveRequest(v: InternalAxiosRequestConfig) {
     if (!useLoadingStore().pendingRequests) return;
 
-    const compare = (lhs: InternalAxiosRequestConfig, rhs: InternalAxiosRequestConfig) =>
-        lhs.data == rhs.data && lhs.url == rhs.url && lhs.method == rhs.method && lhs.params == rhs.params
-
     remove(useLoadingStore().pendingRequests as InternalAxiosRequestConfig[], (r) => compare(r, v))
 }
 
 export function registerBadResponse(v: AxiosError) {
-    useLoadingStore().badLoads.push(v);
+    const config = v.config;
+    if (!config) return;
+
+    if (useLoadingStore().pendingRequests.find((rhs) => compare(config, rhs))) {
+        useLoadingStore().badLoads.push(v);
+    }
 }
 
 export const useLoadingStore = defineStore('loadingStore', () => {

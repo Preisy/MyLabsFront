@@ -34,6 +34,7 @@ $api.interceptors.request.use((config) => {
     config.headers &&
     !config.url?.startsWith('/labs/quantity') &&
     !config.url?.startsWith('/labs') &&
+    !config.url?.startsWith('/api/labs') &&
     !config.url?.startsWith('/reviews') &&
     !config.url?.startsWith('/health') &&
     !config.url?.startsWith('/signup') &&
@@ -44,6 +45,7 @@ $api.interceptors.request.use((config) => {
       'access_token'
     )}`;
 
+  config.headers['ngrok-skip-browser-warning'] = 'skip-browser-warning';
   config.timeout = timeout;
 
 
@@ -56,15 +58,16 @@ $api.interceptors.request.use((config) => {
 });
 
 $api.interceptors.response.use((value) => {
-  // console.log(value);
   resolveRequest(value.config)
   return value;
 }, (error) => {
-  // console.log(error)
-  resolveRequest(error.config)
+
+  //порядок ПИЗДЕЦ важен. Не меняйте местами пожалуйста
   registerBadResponse(error);
+  resolveRequest(error.config)
+
   if (error.response?.status === 401) logoutFunc();
-  // authStore.logout();
+
   throw error;
 });
 

@@ -3,4 +3,5 @@ export interface UserCreds {
   email: string;
   contact: string;
   password: string;
+  invitedById: string
 }

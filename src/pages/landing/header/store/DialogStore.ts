@@ -17,6 +17,7 @@ export const useDialogStore = defineStore('dialogStore', () => {
     contact: '',
     email: '',
     password: '',
+    invitedById: '1'
   });
 
   const setEmail = (data: Record<string, unknown>) => {

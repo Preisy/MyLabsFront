@@ -24,14 +24,15 @@ const reviewsStore = useReviewsStore();
 onMounted(async () => {
   const result: Review[] = [];
   const rawReviews = await reviewsStore.getReviews();
+
   if ('error' in rawReviews) return;
 
   rawReviews.forEach((record) => {
     const review: Review = {
-      name: record.first_name + ' ' + record.second_name,
+      name: record.first_name + ' ' + record.last_name,
       details: record.text,
       imgSrc: record.photo_200,
-      link: record.userUrl,
+      link: record.commentUrl,
     };
     result.push(review);
   });

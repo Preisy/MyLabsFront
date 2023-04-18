@@ -1,24 +1,35 @@
 <script setup lang="ts">
 import { chunk } from 'lodash';
-import { defaultCards } from './ui/FriendCardModel';
+// import { defaultCards } from './ui/FriendCardModel';
 import FriendCard from './ui/FriendCard.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { Screen } from 'quasar';
-import { ReferralFriend } from './service/ReferralService';
 import { useReferralStore } from './store/ReferralStore';
+import { useUserStore } from 'src/stores/UserStore';
+import { FriendCardModel } from './ui/FriendCardModel';
 
+const userStore = useUserStore();
 const referralStore = useReferralStore();
 const chunkCount = computed(() => {
   return Screen.lt.md ? 1 : 2;
 });
 
-const referrals = ref<ReferralFriend[]>();
-referralStore.getReferrals().then((val) => {
-  if ('error' in val) {
+const referrals = ref<FriendCardModel[]>();
+onMounted(async () => {
+  const user = await userStore.getCreds();
+  if ('error' in user) {
+    console.log(user);
+    return;
+  }
+  const refs = await referralStore.getReferrals(
+    user.id ?? userStore.userData?.id
+  );
+
+  if ('error' in refs) {
     console.warn('For some reason cant fetch referrals');
     return;
   }
-  referrals.value = val;
+  referrals.value = refs;
 });
 </script>
 
@@ -30,7 +41,7 @@ referralStore.getReferrals().then((val) => {
         <div class="friends-list column">
           <div
             class="slide row justify-center no-wrap"
-            v-for="(slide, index) in chunk(defaultCards, chunkCount)"
+            v-for="(slide, index) in chunk(referrals, chunkCount)"
             :key="index"
           >
             <FriendCard

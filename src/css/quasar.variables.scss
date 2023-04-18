@@ -19,7 +19,12 @@ $primary: #ffffff;
 $dark: #0f0b33;
 $info: #bfcdf3;
 $accent: #2ba84a;
+$error: #c10015;
 
 .bg-grey {
   background-color: #eaeaee !important;
+}
+
+.bg-error {
+  background-color: $error !important;
 }

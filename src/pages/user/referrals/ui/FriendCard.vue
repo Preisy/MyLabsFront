@@ -12,12 +12,12 @@ defineProps<Props>();
   <div class="friend-card bg-primary br-15px">
     <div class="content-wrapper column justify-between">
       <div class="name row items-center no-wrap">
-        <img :src="card.imgSrc" class="profile-img" />
+        <img :src="card.photo" class="profile-img" />
         <h2 class="title">{{ card.name }}</h2>
       </div>
       <div class="price-wrapper row">
         <q-icon class="icon" name="currency_ruble" />
-        <p class="value">{{ card.value }}</p>
+        <p class="value">{{ card.profit }}</p>
       </div>
     </div>
   </div>

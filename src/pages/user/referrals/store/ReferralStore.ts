@@ -6,8 +6,8 @@ import { ReferralService } from '../service/ReferralService';
 export const useReferralStore = defineStore('referralStore', () => {
     const referralState = ref<SimpleState>('unset');
 
-    const getReferrals = async () => {
-        const res = await ReferralService.getReferrals();
+    const getReferrals = async (id: number) => {
+        const res = await ReferralService.getReferrals(id);
         console.log(res);
         if ('error' in res) {
             referralState.value = 'error';

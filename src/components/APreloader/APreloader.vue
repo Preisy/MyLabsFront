@@ -4,8 +4,8 @@ import { useLoadingStore } from 'src/stores/LoadingStore';
 import AMyLabsLogo from './AMyLabsLogo.vue';
 const loadStore = useLoadingStore();
 
-const isLoading = computed(() => loadStore.isLoading);
 const badResponses = loadStore.badLoads;
+const isLoading = computed(() => loadStore.isLoading);
 const isErrors = computed(() => badResponses.length !== 0);
 const isClicked = ref(false);
 const showBanner = computed(() => isErrors.value && !isClicked.value);

@@ -24,8 +24,8 @@ defineExpose({
 
 const errText = computed(() => {
   if (!props.axiosErr) return '';
-  const err = props.axiosErr.response?.data as Error;
-  return err ? err.message : props.axiosErr.message;
+  const err = (props.axiosErr.response?.data as Error).message;
+  return err ? err : props.axiosErr.message;
 });
 </script>
 
@@ -39,8 +39,8 @@ const errText = computed(() => {
     @hide="isAppearing = false"
   >
 </q-popup-proxy> -->
-  <q-banner class="bg-red-3 popup" :class="{ hide: !isShown }">
-    {{ errText }}
+  <q-banner class="bg-error text-primary popup" :class="{ hide: !isShown }">
+    <p class="text">{{ errText }}</p>
   </q-banner>
 </template>
 
@@ -61,6 +61,12 @@ const errText = computed(() => {
 
   &.hide {
     opacity: 0;
+  }
+
+  .text {
+    font-size: 600;
+    margin: 0;
+    font-size: 0.8rem;
   }
 }
 </style>

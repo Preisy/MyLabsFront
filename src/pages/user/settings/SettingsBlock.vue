@@ -8,18 +8,19 @@ import { onMounted, ref } from 'vue';
 import { getSchema } from 'src/global/utils';
 import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
-
-const validateSchema = omit(UserCredsSchema, 'password');
-// const dialogStore = useDialogStore();
+import defaultPhoto from 'src/assets/Labs_square_icon.png';
+import { Photo } from 'src/service/UserService';
 
 const userStore = useUserStore();
+const validateSchema = omit(UserCredsSchema, 'password');
+const userform = ref<InstanceType<typeof ADynamicForm>>();
+const photo = ref<Photo>();
 
 const onsubmit = (values: Record<string, unknown>): void => {
   console.log(values);
   userStore.changeCreds(values as unknown as User);
 };
 
-const userform = ref<InstanceType<typeof ADynamicForm>>();
 onMounted(async () => {
   const creds = await userStore.getCreds();
   console.log(creds);
@@ -30,6 +31,7 @@ onMounted(async () => {
     name: creds.uname,
     contact: creds.contact,
   };
+  photo.value = creds.photo;
   assign(userform.value?.values, userData);
 });
 </script>
@@ -40,7 +42,7 @@ onMounted(async () => {
       <div class="img-holder">
         <img
           class="profile-pic q-mb-md"
-          src="https://picsum.photos/200"
+          :src="photo?.filename ?? defaultPhoto"
           alt=""
         />
       </div>

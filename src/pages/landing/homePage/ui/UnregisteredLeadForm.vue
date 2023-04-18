@@ -3,9 +3,9 @@ import { useForm } from 'vee-validate';
 import AInput from 'components/AInput.vue';
 import ABtn from 'components/ABtn.vue';
 import ASelect from 'components/ASelect.vue';
-import { LabTypes } from 'src/global/LabTypes';
+import { LabType, LabTypes } from 'src/global/LabTypes';
 import { TaskSchema } from 'src/model/task';
-import { UserCreds, UserCredsSchema } from 'src/model/userCreds';
+import { UserCredsSchema } from 'src/model/userCreds';
 import omit from 'lodash/omit';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { SignUpDialog } from '../../header/ui';
@@ -16,20 +16,41 @@ import { useOrderStore } from 'src/stores/OrderStore';
 import FileAttachDialog from './FileAttachDialog.vue';
 import { useFileStore } from '../store/FileStore';
 import { computed } from 'vue';
-
-type UnregisteredLeadForm = Omit<UserCreds, 'password'>;
-const UnregisteredLeadFormSchema = {
-  ...TaskSchema,
-  ...omit(UserCredsSchema, 'password'),
-};
-
-const { handleSubmit } = useForm<UnregisteredLeadForm>({
-  validationSchema: UnregisteredLeadFormSchema,
-});
+import ADatePicker from 'src/components/ADatePicker.vue';
+import { keys, pick } from 'lodash';
+import OrderData from 'src/model/order/OrderData';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
 const orderStore = useOrderStore();
+
+interface UnregisteredLeadForm {
+  name: string;
+  email: string;
+  contact: string;
+  password: string;
+  invitedById: string;
+  taskText: string;
+  type: LabType;
+  deadline: string;
+  promoName: string | null;
+}
+
+// const a:UserCreds
+
+// type UnregisteredLeadForm =  Omit<UserCreds, 'password'>;
+const UnregisteredLeadFormSchema = {
+  ...TaskSchema,
+  ...omit(UserCredsSchema, 'password'),
+};
+const schema = authStore.isAuth ? TaskSchema : UnregisteredLeadFormSchema;
+
+console.log(orderStore.loadOrder());
+
+const { handleSubmit } = useForm<UnregisteredLeadForm>({
+  validationSchema: schema,
+  initialValues: orderStore.orderData,
+});
 
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
@@ -38,10 +59,23 @@ const onSubmit = handleSubmit.withControlled((values) => {
 
   if (!authStore.isAuth) {
     //Todo: what to do with order data(deadline, task, type)
-    dialogStore.setUser(values);
+    dialogStore.setUser(pick(values, keys(UserCredsSchema)));
     signupDialog.value?.open();
+    orderStore.saveOrder(values as unknown as OrderData);
+    return;
   }
-  orderStore.sendOrder(values);
+
+  const sendData: Omit<OrderData, 'files'> = {
+    taskText: values.taskText,
+    deadline: values.deadline.split('/').reverse().join('/'),
+    promoName: values.promoName ?? null,
+    type: values.type,
+  };
+
+  console.log(sendData);
+  // if (!'promo')
+  orderStore.sendOrder(sendData);
+  orderStore.clearOrderCache();
 });
 
 const isFileDialogOpen = ref(false);
@@ -64,7 +98,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
         <a-input
           class="col"
           :label="$t('pages.landing.homePage.form.task')"
-          name="text"
+          name="taskText"
         />
         <div class="file-btn-wrapper">
           <q-btn
@@ -89,11 +123,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
           :options="LabTypes"
           name="type"
         />
-        <a-input
-          class="col-4"
-          :label="$t('pages.landing.homePage.form.deadline')"
-          name="deadline"
-        />
+        <ADatePicker class="col-5" name="deadline" />
       </div>
       <template
         v-for="(col, i) in [
@@ -131,7 +161,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
           class="col"
           bgColor="grey"
           :label="$t('pages.landing.homePage.form.promo')"
-          name="promocode"
+          name="promoName"
         />
         <a-btn
           class="col-5 btn"

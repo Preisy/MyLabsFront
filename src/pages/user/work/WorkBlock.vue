@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import TaskCard from './ui/LabCard.vue';
 import { chunk } from 'lodash';
 import { LabModel, OrderModel } from './ui/Card';
 import { Screen } from 'quasar';
 import { computed, onMounted, ref } from 'vue';
 import { useLabsStore } from 'src/stores/LabsStore';
 import { useOrderStore } from 'src/stores/OrderStore';
+import OrderCard from './ui/OrderCard.vue';
+import LabCard from './ui/LabCard.vue';
 
 const cards = ref<{ orders: OrderModel[]; labs: LabModel[] }>({
   orders: [],
@@ -20,19 +21,28 @@ const orderStore = useOrderStore();
 onMounted(async () => {
   if (!cards.value) return;
 
+  getLabs();
+  getOrders();
+});
+
+const getLabs = async () => {
   const labs = await labsStore.getLabs();
-  const orders = await orderStore.getOrders();
   if ('error' in labs) {
     console.warn('For some reason cant fetch labs');
     return;
   }
-  if ('error' in orders) {
-    console.warn('For some reason cant fetch labs');
+  cards.value.labs = labs;
+};
+const getOrders = async () => {
+  const orders = await orderStore.getOrders();
+  console.log(orders);
+  console.log(orderStore.currentOrders);
+  if ('error' in orders || !orderStore.currentOrders) {
+    console.warn('For some reason cant fetch orders');
     return;
   }
-  cards.value.labs = labs;
-  cards.value.orders = orders;
-});
+  cards.value.orders = orderStore.currentOrders;
+};
 </script>
 
 <template>
@@ -49,7 +59,7 @@ onMounted(async () => {
           <q-scroll-area class="task-scroller">
             <div class="task-wrapper row no-wrap">
               <div class="in-progress">
-                <TaskCard
+                <OrderCard
                   class="card"
                   v-for="(card, index) in cards.orders"
                   :key="index"
@@ -62,7 +72,7 @@ onMounted(async () => {
                   v-for="(slide, index) in chunk(cards.labs, chunkSize)"
                   :key="index"
                 >
-                  <TaskCard
+                  <LabCard
                     class="card"
                     v-for="(card, index) in slide"
                     :key="index"

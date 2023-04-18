@@ -1,49 +1,51 @@
 <script setup lang="ts">
-import { OrderModel, TaskType } from './Card';
+import { LabType } from 'src/global/LabTypes';
+import { OrderModel } from './Card';
+import FileDisplayDialog from './FileDisplayDialog.vue';
+import { ref } from 'vue';
 
 interface Props {
   card: OrderModel;
 }
 const props = defineProps<Props>();
 
-const taskTypeToImg = (v: TaskType) => {
+const taskTypeToImg = (v: LabType) => {
   switch (v) {
     case 'Cpp':
       return '/src/assets/cardTypes/c++icon.png';
     case 'C':
       return '/src/assets/cardTypes/cicon.png';
-    case 'Cs':
+    case 'C#':
       return '/src/assets/cardTypes/csicon.png';
   }
 };
+
+const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
 </script>
 <template>
   <div class="card">
     <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap q-mr-sm">
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
-        <h2 class="title">{{ props.card.title }}</h2>
+        <h2 class="title">{{ props.card.taskText.slice(0, 16) }}</h2>
+      </div>
+    </div>
+    <div class="details row justify-between items-end">
+      <div class="date">
+        <span>
+          {{ props.card.deadline }}
+        </span>
       </div>
       <q-btn
         icon="attachment"
         color="grey"
         text-color="dark"
         class="attachment-btn br-15px"
+        @click="fileDisplay?.open"
+        v-if="card.taskFiles.length > 0"
       />
     </div>
-    <div class="details row justify-between">
-      <div class="price">
-        <q-icon class="icon" color="accent" name="currency_ruble" />
-        <span>
-          {{ props.card.price }}
-        </span>
-      </div>
-      <div class="date">
-        <span>
-          {{ props.card.date }}
-        </span>
-      </div>
-    </div>
+    <file-display-dialog ref="fileDisplay" :files="card.taskFiles" />
   </div>
 </template>
 <style scoped lang="scss">
@@ -73,7 +75,7 @@ const taskTypeToImg = (v: TaskType) => {
 
   .title-wrapper {
     align-items: flex-start;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     width: 80%;
 
     .title-icon {

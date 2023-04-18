@@ -4,9 +4,14 @@ interface SuccessDialogProps {
   i: number;
 }
 defineProps<SuccessDialogProps>();
-defineEmits<{
+const emit = defineEmits<{
   (e: 'close'): void;
 }>();
+
+const onclick = () => {
+  emit('close');
+  window.location.reload();
+};
 </script>
 
 <template>
@@ -26,7 +31,7 @@ defineEmits<{
         class="q-px-xl"
         to="/"
         :label="$t('pages.landing.header.auth.success.button')"
-        @click="$emit('close')"
+        @click="onclick"
       />
     </div>
     <div class="page-counter">{{ i }} / {{ i }}</div>

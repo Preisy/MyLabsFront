@@ -4,10 +4,11 @@ import { QUploader } from 'quasar';
 import { ref } from 'vue';
 import { remove } from 'lodash';
 import { useFileStore } from '../store/FileStore';
+import { FileExtensionMap, FileTypeMap } from './TypeToIconMap';
 
 const fileStore = useFileStore();
-const dialog = ref<InstanceType<typeof ADialog>>();
 const uploader = ref<InstanceType<typeof QUploader>>();
+const dialog = ref<InstanceType<typeof ADialog>>();
 
 defineExpose({
   open: () => {
@@ -27,6 +28,23 @@ const onadded = (values: readonly File[]) => {
 const onremove = (values: readonly File[]) => {
   remove(fileStore.filesList, (v) => values.indexOf(v) !== -1);
 };
+
+const getFileIco = (file: File) => {
+  const ext = file.name.slice(file.name.lastIndexOf('.'), file.name.length);
+  // console.log(ext);
+  if (ext in FileExtensionMap) {
+    const ico = FileExtensionMap[ext as keyof typeof FileExtensionMap];
+    // console.log(ico);
+    return ico;
+  }
+
+  for (let type in FileTypeMap) {
+    const ico = FileTypeMap[type as keyof typeof FileTypeMap];
+    if (file.name.includes(type)) return ico;
+  }
+
+  return 'fa-file';
+};
 </script>
 
 <template>
@@ -40,15 +58,11 @@ const onremove = (values: readonly File[]) => {
       @added="onadded"
       @removed="onremove"
     >
-      <template #header>
-        <div class="header">
-          <h2 class="title text-center">Добавьте файлы</h2>
-        </div>
-      </template>
+      <template #header> </template>
       <template v-slot:list="scope">
         <div
           v-if="scope.files.length === 0"
-          class="placeholder flex flex-center full-height text-center"
+          class="placeholder flex flex-center fill full-height text-center"
         >
           Перетащите <br />
           файлы
@@ -60,7 +74,8 @@ const onremove = (values: readonly File[]) => {
             v-for="file in <File[]>scope.files"
             :key="file.name"
           >
-            <q-item class="file"></q-item>
+            <q-icon class="file" :name="`fa-solid ${getFileIco(file)}`" />
+
             <q-btn
               class="delete-btn"
               icon="close"
@@ -99,6 +114,7 @@ const onremove = (values: readonly File[]) => {
     width: auto;
     min-height: 20rem;
     max-height: 70vh;
+    min-width: 13rem;
     border-radius: 1.5rem;
   }
 
@@ -111,8 +127,11 @@ const onremove = (values: readonly File[]) => {
 
   .placeholder {
     padding: 1rem;
-    border: 0.2rem $dark dashed;
     border-radius: 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
   }
 
   .files-grid {
@@ -146,6 +165,7 @@ const onremove = (values: readonly File[]) => {
         height: var(--size);
         border-radius: 1rem;
         background-color: #d9d9d9;
+        font-size: 3rem;
       }
       .filename {
         font-size: 0.7rem;
@@ -171,7 +191,7 @@ const onremove = (values: readonly File[]) => {
     }
   }
 
-  .drag-n-drop::v-deep .q-uploader__dnd {
+  .drag-n-drop:deep .q-uploader__dnd {
     border-radius: 1.5rem !important;
   }
 }

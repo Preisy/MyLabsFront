@@ -8,6 +8,9 @@ import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
 import LangSwitch from './ui/LangSwitch.vue';
+import { Photo } from 'src/service/UserService';
+import { useUserStore } from 'src/stores/UserStore';
+import defaultPhoto from 'src/assets/Labs_square_icon.png';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
@@ -29,12 +32,22 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
 
 const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
+const photo = ref<Photo>();
+const userStore = useUserStore();
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
 let login = ref<InstanceType<typeof LoginDialog>>();
 
 const isSignupOpened = computed(() => signup.value?.isOpened);
 const isLoginOpened = computed(() => login.value?.isOpened);
+
+userStore.getCreds().then((profile) => {
+  if ('error' in profile) {
+    console.warn('Cant fetch user profile(photo)');
+    return;
+  }
+  photo.value = profile.photo;
+});
 </script>
 
 <template>
@@ -92,8 +105,13 @@ const isLoginOpened = computed(() => login.value?.isOpened);
             "
           />
         </div>
-        <q-btn flat v-if="useAuthStore().isAuth" to="mpc/tasks">
-          <img class="profile-icon" src="src/assets/user/profile.png" />
+        <q-btn
+          class="photo-wrapper-btn"
+          flat
+          v-if="useAuthStore().isAuth"
+          to="mpc/tasks"
+        >
+          <img class="user-photo" :src="photo?.filename ?? defaultPhoto" />
         </q-btn>
         <LoginDialog ref="login" />
         <SignUpDialog ref="signup" />
@@ -173,10 +191,15 @@ const isLoginOpened = computed(() => login.value?.isOpened);
     }
   }
 
-  .profile-icon {
-    --size: 2.25rem;
-    width: var(--size);
-    height: var(--size);
+  .photo-wrapper-btn {
+    width: min-content;
+    .user-photo {
+      --size: 2.25rem;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 100%;
+      box-shadow: 0 0 4px 0 #00000066;
+    }
   }
 
   .right-btns {

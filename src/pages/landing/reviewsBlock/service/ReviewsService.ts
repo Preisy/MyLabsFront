@@ -4,9 +4,9 @@ export interface ReviewResponse {
   first_name: string;
   from_id: number;
   photo_200: string;
-  second_name: string;
+  last_name: string;
   text: string;
-  userUrl: string;
+  commentUrl: string;
 }
 
 export const ReviewsService = {

@@ -7,6 +7,7 @@ import { UserService } from '../service/UserService';
 export const useUserStore = defineStore('userStore', () => {
   const changeCredsState = ref<SimpleState>('unset');
   const getCredsState = ref<SimpleState>('unset');
+  const setPhotoState = ref<SimpleState>('unset');
   const userData = ref<User>();
 
   const changeCreds = async (creds: User) => {
@@ -35,10 +36,25 @@ export const useUserStore = defineStore('userStore', () => {
     return res;
   };
 
+
+  const setProfilePhoto = async (photo: File) => {
+    setPhotoState.value = 'loading';
+    const res = await UserService.setProfilePhoto(photo);
+    if ('error' in res) {
+      setPhotoState.value = 'error';
+    } else {
+      setPhotoState.value = 'success';
+    }
+
+    return res;
+  };
+
   return {
     changeCreds,
     getCreds,
     changeCredsState,
     getCredsState,
+    setProfilePhoto,
+    userData,
   };
 });

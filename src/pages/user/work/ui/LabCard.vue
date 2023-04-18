@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { LabModel, TaskType } from './Card';
+import { LabType } from 'src/global/LabTypes';
+import { LabModel } from './Card';
 
 interface Props {
   card: LabModel;
 }
 const props = defineProps<Props>();
 
-const taskTypeToImg = (v: TaskType) => {
+const taskTypeToImg = (v: LabType) => {
   switch (v) {
     case 'Cpp':
       return '/src/assets/cardTypes/c++icon.png';
     case 'C':
       return '/src/assets/cardTypes/cicon.png';
-    case 'Cs':
+    case 'C#':
       return '/src/assets/cardTypes/csicon.png';
   }
 };
@@ -26,6 +27,12 @@ const taskTypeToImg = (v: TaskType) => {
       </div>
     </div>
     <div class="details row justify-between">
+      <div class="price">
+        <q-icon class="icon" color="accent" name="currency_ruble" />
+        <span>
+          {{ props.card.price }}
+        </span>
+      </div>
       <div class="date">
         <span>
           {{ props.card.date }}

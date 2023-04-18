@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import DialogWrapper from './DialogWrapper.vue';
 import { DialogData } from './types';
-import { RestoreScheme, CodeScheme, PasswordScheme } from 'src/model/dialogs';
+import { RestoreScheme } from 'src/model/dialogs';
 import { useI18n } from 'vue-i18n';
+import { CodeRestoreScheme } from 'src/model/dialogs/schemes/CodeRestoreScheme';
+import { PasswordRestoreScheme } from 'src/model/dialogs/schemes/PasswordRestoreScheme';
 
 const { t } = useI18n();
 
@@ -14,8 +16,8 @@ defineExpose({
 
 const signupDialogData: DialogData[] = [
   RestoreScheme(t),
-  CodeScheme(t),
-  PasswordScheme(t),
+  PasswordRestoreScheme(t),
+  CodeRestoreScheme(t),
 ];
 </script>
 

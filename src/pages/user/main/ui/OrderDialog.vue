@@ -8,41 +8,76 @@ import { TaskSchema } from 'src/model/task';
 import { ref } from 'vue';
 import { useForm } from 'vee-validate';
 import { useOrderStore } from 'src/stores/OrderStore';
-import { LabModel } from '../../work/ui/Card';
 import { AxiosError } from 'axios';
 import AErrPopup from 'src/components/AErrPopup.vue';
+import ADatePicker from 'src/components/ADatePicker.vue';
+import OrderData from 'src/model/order/OrderData';
+import FileAttachDialog from 'src/pages/landing/homePage/ui/FileAttachDialog.vue';
+import { FileModel } from '../../work/ui/Card';
 
 const dialog = ref<InstanceType<typeof ADialog>>();
 const orderStore = useOrderStore();
 const popup = ref<InstanceType<typeof AErrPopup>>();
 const errorResponse = ref<AxiosError>();
+const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 
 defineExpose({
   open: () => {
     dialog.value?.open();
-    setTimeout(() => (isOpened.value = true), 0);
   },
 });
-const isOpened = ref(false);
+
 const close = () => {
   dialog.value?.close();
-  isOpened.value = false;
 };
 
-const { handleSubmit } = useForm<Omit<LabModel, 'priority'>>({
+const { handleSubmit } = useForm<OrderData>({
   validationSchema: TaskSchema,
 });
 
 const onSubmit = handleSubmit.withControlled(async (values) => {
   console.log(JSON.stringify(values, null, 2));
 
-  const sendResp = await orderStore.sendOrder(values);
+  const reqData: Omit<OrderData, 'files'> = {
+    deadline: values.deadline.split('/').reverse().join('/'),
+    promoName: values.promoName ?? null,
+    taskText: values.taskText,
+    type: values.type,
+  };
+
+  const sendResp = await orderStore.sendOrder(reqData);
+  console.log(sendResp);
   if ('error' in sendResp) {
-    console.log(sendResp);
     errorResponse.value = sendResp.error as AxiosError;
     popup.value?.show();
     return;
   }
+
+  const filesSendResp = await orderStore.sendOrderFiles(
+    values.files,
+    sendResp.data.id
+  );
+  if ('error' in filesSendResp) {
+    console.warn('Cant upload files');
+    return;
+  }
+
+  const taskFiles: FileModel[] = [];
+  values.files.forEach((file, index) => {
+    taskFiles.push({
+      filename: file.name,
+      createdAt: file.lastModified.toLocaleString(),
+      id: index,
+    });
+  });
+
+  orderStore.currentOrders.push({
+    deadline: reqData.deadline,
+    taskFiles: taskFiles,
+    taskText: reqData.taskText,
+    type: reqData.type,
+  });
+  dialog.value?.close();
 });
 </script>
 
@@ -63,13 +98,14 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
             <a-input
               class="col"
               :label="$t('pages.landing.homePage.form.task')"
-              name="text"
+              name="taskText"
             />
             <q-btn
               class="clip-button btn br-15px"
               text-color="dark"
               color="grey"
               icon="attach_file"
+              @click="fileDialog?.open()"
             />
           </div>
           <div class="form-line row">
@@ -79,29 +115,33 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
               :options="LabTypes"
               name="type"
             />
-            <a-input
+            <!-- <a-input
               class="col-4"
               :label="$t('pages.landing.homePage.form.deadline')"
               name="deadline"
-            />
+              :init-value="getToday()"
+            /> -->
+            <ADatePicker class="col-5" name="deadline" />
           </div>
           <div class="form-line row">
             <a-input
               class="col"
               bgColor="grey"
               :label="$t('pages.landing.homePage.form.promo')"
-              name="promocode"
+              name="promoName"
             />
             <a-btn
               class="col-5 btn"
               theme="dark"
               :label="$t('pages.landing.homePage.form.order')"
               type="submit"
-            ></a-btn>
+              :loading-state="orderStore.orderState"
+            />
           </div>
         </form>
       </div>
       <AErrPopup class="errorPopup" :axios-err="errorResponse" ref="popup" />
+      <FileAttachDialog ref="fileDialog" />
     </div>
   </ADialog>
 </template>

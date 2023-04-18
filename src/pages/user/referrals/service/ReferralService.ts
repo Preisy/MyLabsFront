@@ -1,15 +1,10 @@
 import { $api } from 'src/boot/axios';
+import { FriendCardModel } from '../ui/FriendCardModel';
 
-export interface ReferralFriend {
-    name: string,
-    photo: string,
-    profit: string
-}
 export const ReferralService = {
-    async getReferrals() {
+    async getReferrals(id: number) {
         try {
-            //TODO: wait until referrals done
-            const { data } = await $api.get<ReferralFriend[]>('/referrals');
+            const { data } = await $api.get<FriendCardModel[]>(`/users/${id}/invited`);
             return data;
         } catch (e: unknown) {
             return { error: e };

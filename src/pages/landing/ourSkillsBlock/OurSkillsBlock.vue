@@ -13,11 +13,11 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
         <OurSkillsDescription />
         <div class="skills-diagram">
           <SkillTreeComponent class="skills"></SkillTreeComponent>
-          <img
+          <!-- <img
             class="blue-shadow"
             src="/src/assets/ourSkills/blue_shadow.svg"
             alt=""
-          />
+          /> -->
         </div>
       </div>
     </div>

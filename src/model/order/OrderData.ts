@@ -1,6 +1,9 @@
+import { LabType } from 'src/global/LabTypes';
+
 export default interface OrderData {
-    username: string,
-    contacts: string,
     deadline: string,
-    taskText: string
+    taskText: string,
+    type: LabType,
+    promoName: string | null,
+    files: File[]
 }

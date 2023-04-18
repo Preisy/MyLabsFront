@@ -45,6 +45,7 @@ export const useAuthStore = defineStore('authStore', () => {
     return true;
   };
   const signup = async (creds: UserCreds) => {
+    // console.log(creds)
     dialogStore.signupState = 'loading';
     const res = await AuthService.signup(creds);
     if ('error' in res) {
@@ -57,9 +58,12 @@ export const useAuthStore = defineStore('authStore', () => {
 
     return res;
   };
+
+
   const restore = async (creds: Pick<UserCreds, 'email'>) => {
     dialogStore.restoreState = 'loading';
     const res = await AuthService.restore(creds);
+
     if ('error' in res) {
       dialogStore.restoreState = 'error';
     } else {
@@ -70,6 +74,8 @@ export const useAuthStore = defineStore('authStore', () => {
   };
   const signupConfirm = async (data: signupConfirmData) => {
     dialogStore.codeApproveState = 'loading';
+    console.log(data);
+
     const res = await AuthService.signupConfirm(data);
     if ('error' in res) {
       dialogStore.codeApproveState = 'error';
@@ -83,12 +89,14 @@ export const useAuthStore = defineStore('authStore', () => {
   const changePassword = async (creds: changePasswordData) => {
     dialogStore.passwordState = 'loading';
     const res = await AuthService.сhangePassword(creds);
-    const loginCreds: LoginData = {
-      email: creds.email,
-      password: creds.newPassword
-    }
-    const loginRes = await AuthService.login(loginCreds);
-    if ('error' in res || 'error' in loginRes) {
+    // const loginCreds: LoginData = {
+    //   email: creds.email,
+    //   password: creds.newPassword
+    // }
+    // const loginRes = await AuthService.login(loginCreds);
+    if ('error' in res
+      // || 'error' in loginRes
+    ) {
       dialogStore.passwordState = 'error';
     } else {
       dialogStore.passwordState = 'success';

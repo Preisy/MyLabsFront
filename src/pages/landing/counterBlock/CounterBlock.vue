@@ -38,7 +38,9 @@ onMounted(async () => {
 
   const quantity = await counterStore.getLabsQuantity();
   if ('error' in quantity) return;
-  counter.value = quantity.quantity.toString();
+  console.log(quantity);
+
+  counter.value = quantity.property;
 });
 const isMobile = Screen.lt.sm;
 </script>
