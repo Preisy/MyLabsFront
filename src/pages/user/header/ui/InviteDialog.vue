@@ -78,7 +78,7 @@ const myId = ref(0);
     user-select: none;
     position: absolute;
     top: -70%;
-    right: -90%;
+    right: -160%;
     z-index: -1;
     opacity: 0.5;
     rotate: -100deg;

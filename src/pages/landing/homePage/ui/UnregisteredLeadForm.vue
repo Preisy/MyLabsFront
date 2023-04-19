@@ -183,7 +183,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
     margin-bottom: 0.75rem;
 
     .btn {
-      height: 2.25rem;
+      height: 40px;
     }
   }
 

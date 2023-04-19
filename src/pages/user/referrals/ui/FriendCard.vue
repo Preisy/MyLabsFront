@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import defaultPhoto from 'src/assets/Labs_square_icon.png';
 import { FriendCardModel } from './FriendCardModel';
+import { onMounted, ref } from 'vue';
+import { useReferralStore } from '../store/ReferralStore';
 
 interface Props {
   card: FriendCardModel;
 }
+const props = defineProps<Props>();
 
-defineProps<Props>();
+const referralStore = useReferralStore();
+const photo = ref<string>();
+
+onMounted(async () => {
+  const userPhoto = await referralStore.getFriendPhoto(props.card.id);
+  if ('error' in userPhoto) {
+    console.warn(`Cant fetch user(${props.card.id}) photo`);
+    return;
+  }
+
+  photo.value = userPhoto.photo;
+});
 </script>
 
 <template>

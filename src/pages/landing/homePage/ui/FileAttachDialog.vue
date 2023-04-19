@@ -63,7 +63,9 @@ const getFileIco = (file: File) => {
         <div
           v-if="scope.files.length === 0"
           class="placeholder flex flex-center fill full-height text-center"
+          @click="uploader?.pickFiles"
         >
+          <q-uploader-add-trigger />
           Перетащите <br />
           файлы
         </div>

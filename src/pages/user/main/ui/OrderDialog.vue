@@ -115,13 +115,22 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
               :label="$t('pages.landing.homePage.form.task')"
               name="taskText"
             />
-            <q-btn
-              class="clip-button btn br-15px"
-              text-color="dark"
-              color="grey"
-              icon="attach_file"
-              @click="fileDialog?.open()"
-            />
+            <div class="file-btn-wrapper">
+              <q-btn
+                class="clip-button btn br-15px"
+                text-color="dark"
+                color="grey"
+                icon="attach_file"
+                @click="fileDialog?.open()"
+              />
+
+              <p
+                v-if="fileStore.filesList.length !== 0"
+                class="indicator bg-green text-primary text-center"
+              >
+                {{ fileStore.filesList.length }}
+              </p>
+            </div>
           </div>
           <div class="form-line row">
             <a-select
@@ -177,6 +186,26 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     // transition: opacity 0.1s ease-in-out;
   }
 
+  .file-btn-wrapper {
+    position: relative;
+
+    .indicator {
+      --size: 1rem;
+      position: absolute;
+
+      font-size: 0.6rem;
+      padding-top: 0.2rem;
+      width: var(--size);
+      height: var(--size);
+
+      top: 0;
+      right: 0;
+
+      transform: translate(50%, -50%);
+      border-radius: 100%;
+    }
+  }
+
   .title {
     margin-bottom: 0.6rem;
   }
@@ -188,7 +217,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
       margin-bottom: 0.75rem;
 
       .btn {
-        height: 2.25rem;
+        height: 40px;
       }
     }
 

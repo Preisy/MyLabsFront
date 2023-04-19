@@ -100,8 +100,8 @@ module.exports = configure(function (/* ctx */) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'http://185.182.111.172:8080/api/dev',
-          // target: 'https://50a6-46-39-55-146.ngrok-free.app/api',
+          // target: 'http://185.182.111.172:8080/api/dev',
+          target: 'https://2a11-46-39-55-196.ngrok-free.app/api',
           changeOrigin: true,
           secure: false,
           rewrite: (path) => path.replace(/^\/api/, ''),

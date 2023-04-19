@@ -125,7 +125,7 @@ const getOrders = async () => {
       margin-left: auto;
       margin-right: auto;
 
-      min-width: 8rem;
+      // min-width: 10rem;
     }
   }
 

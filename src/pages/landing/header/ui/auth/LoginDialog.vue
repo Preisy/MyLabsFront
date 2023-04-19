@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import ADialog from 'src/components/ADialog';
-import { getSchema } from 'src/global/utils';
 import { LoginData, LoginDataSchema } from 'src/model/loginData';
 import ADynamicForm from 'src/components/ADynamicForm';
 import RestorePasswordDialog from './RestorePasswordDialog.vue';
@@ -10,6 +9,7 @@ import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { AxiosError } from 'axios';
 import AErrPopup from 'src/components/AErrPopup.vue';
+import FieldProps from 'src/components/ADynamicForm/types';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
@@ -29,7 +29,19 @@ const close = () => {
   dialog.value?.close();
   isOpened.value = false;
 };
-let schema = getSchema(LoginDataSchema);
+let schema: FieldProps[] = [
+  {
+    label: 'email',
+    name: 'email',
+    rules: LoginDataSchema.email,
+  },
+  {
+    label: 'password',
+    name: 'password',
+    rules: LoginDataSchema.password,
+    type: 'password',
+  },
+];
 
 const errorResponse = ref<AxiosError>();
 const popup = ref<InstanceType<typeof AErrPopup>>();

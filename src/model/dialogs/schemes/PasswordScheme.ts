@@ -16,11 +16,13 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
         label: 'password',
         name: 'password',
         rules: UserCredsSchema.password,
+        type: 'password'
       },
       {
         label: 'password confirmation',
         name: 'password_confirmation',
         rules: UserCredsSchema.password,
+        type: 'password'
       },
     ],
     onSubmit: (values, ctx) => {

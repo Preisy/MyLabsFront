@@ -44,6 +44,7 @@ const onSubmit = handleSubmit.withControlled((values, ctx) => {
       :key="i"
       :name="field.name"
       :label="field.label"
+      :type="field.type"
     />
 
     <ABtn

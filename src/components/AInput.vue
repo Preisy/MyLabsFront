@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { QInputProps } from 'quasar';
 import { useField } from 'vee-validate';
 
 interface ButtonProps {
@@ -9,6 +10,7 @@ interface ButtonProps {
   labelColor?: string;
   placeholder?: string;
   initValue?: string;
+  type?: QInputProps['type'];
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -40,6 +42,7 @@ const { errorMessage, value } = useField<string | number | undefined>(
     :color="color"
     :label="props.label"
     :label-color="props.labelColor"
+    :type="type as QInputProps['type'] "
   />
 </template>
 

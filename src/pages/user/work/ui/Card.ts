@@ -7,6 +7,7 @@ export interface FileModel {
 }
 
 export interface LabModel {
+  id: number
   date: string;
   price: number,
   title: string;
@@ -18,7 +19,8 @@ export interface OrderModel {
   type: LabType,
   taskText: string,
   deadline: string,
-  taskFiles: FileModel[]
+  taskFiles: FileModel[],
+  id: number
 }
 
 

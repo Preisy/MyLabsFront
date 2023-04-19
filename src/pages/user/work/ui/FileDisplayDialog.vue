@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import ADialog from 'src/components/ADialog';
+import { exportFile } from 'quasar';
 import {
   FileExtensionMap,
   FileTypeMap,
 } from 'src/pages/landing/homePage/ui/TypeToIconMap';
 import { ref } from 'vue';
 import { FileModel } from './Card';
+import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
 
 interface FileDisplayDialogProps {
   files: FileModel[];
+  orderId: number;
 }
-defineProps<FileDisplayDialogProps>();
+const props = defineProps<FileDisplayDialogProps>();
 
 const dialog = ref<InstanceType<typeof ADialog>>();
+const fileStore = useFileStore();
 
 defineExpose({
   open: () => {
@@ -39,13 +43,27 @@ const getFileIco = (file: FileModel) => {
   }
   return 'fa-file';
 };
+
+const downloadFile = async (file: FileModel) => {
+  const responseFile = await fileStore.downloadFile(props.orderId, file);
+  if ('error' in downloadFile) {
+    console.log(downloadFile);
+    return;
+  }
+
+  exportFile(file.filename, responseFile.blob);
+};
 </script>
 
 <template>
   <ADialog ref="dialog" class="file-display">
     <div class="files-grid bg-primary">
       <div class="file-wrapper" v-for="file in files" :key="file.filename">
-        <q-icon class="file" :name="`fa-solid ${getFileIco(file)}`" />
+        <q-icon
+          class="file"
+          :name="`fa-solid ${getFileIco(file)}`"
+          @click="downloadFile(file)"
+        />
 
         <p class="filename text-center">
           {{ file.filename.slice(0, 8) + '...' }}
@@ -85,6 +103,10 @@ const getFileIco = (file: FileModel) => {
         border-radius: 1rem;
         background-color: #d9d9d9;
         font-size: 3rem;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
       .filename {
         font-size: 0.7rem;

@@ -34,7 +34,11 @@ const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
         v-if="card.taskFiles.length > 0"
       />
     </div>
-    <file-display-dialog ref="fileDisplay" :files="card.taskFiles" />
+    <file-display-dialog
+      ref="fileDisplay"
+      :files="card.taskFiles"
+      :order-id="card.id"
+    />
   </div>
 </template>
 <style scoped lang="scss">
@@ -46,7 +50,6 @@ const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
   max-width: 15rem;
-  min-width: 8rem;
 
   @media (max-width: $screen-lg) {
     max-width: 13rem;
@@ -94,6 +97,7 @@ const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
   .attachment-btn {
     padding: 0.5rem;
     min-width: fit-content;
+    margin-left: 0.5rem;
 
     @media (max-width: $screen-sm) {
       padding: 0.3rem;
