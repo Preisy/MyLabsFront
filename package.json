@@ -9,13 +9,16 @@
     "dev": "quasar dev",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"./src/**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "quasar build",
+    "deploy": "push-dir --dir=dist/spa --remote=gh-pages --branch=gh-pages --force"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.11",
+    "push-dir": "^0.4.1",
     "quasar": "^2.6.0",
     "vee-validate": "^4.8.4",
     "vue": "^3.0.0",
