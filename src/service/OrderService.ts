@@ -23,7 +23,6 @@ export const OrderService = {
     async getOrders() {
         try {
             const { data } = await $api.get<OrderModel[]>('/users/orders');
-            console.log(data);
 
             return data;
         } catch (e: unknown) {
@@ -32,9 +31,11 @@ export const OrderService = {
     },
     async sendOrderFile(file: File, orderId: number) {
         try {
+            const formdata = new FormData();
+            formdata.append('file', file);
             const response = await $api.post<FileData>(
-                `/users/${orderId}/files`,
-                file,
+                `/orders/${orderId}/files`,
+                formdata,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'

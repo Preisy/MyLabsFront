@@ -27,6 +27,7 @@ onMounted(async () => {
 
 const getLabs = async () => {
   const labs = await labsStore.getLabs();
+
   if ('error' in labs) {
     console.warn('For some reason cant fetch labs');
     return;

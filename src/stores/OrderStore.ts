@@ -44,7 +44,6 @@ export const useOrderStore = defineStore('orderStore', () => {
         files.forEach(async (file) => {
             const res = await OrderService.sendOrderFile(file, orderId);
 
-            console.log(res);
             if ('error' in res) {
                 loadFilesState.value = 'error';
                 return;
