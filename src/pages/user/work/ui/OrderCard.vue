@@ -9,6 +9,7 @@ interface Props {
 }
 const props = defineProps<Props>();
 const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
+// console.log(props.card);
 </script>
 <template>
   <div class="card">

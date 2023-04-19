@@ -1,16 +1,16 @@
 export interface FriendCardModel {
   photo: string;
-  name: string;
-  profit: number;
+  uname: string;
+  balance: number;
 }
 
 export const defaultCards: FriendCardModel[] = [
-  { photo: 'https://picsum.photos/200', name: 'Рита Афанасьева', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Макс Григорьев', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Алексей Н.', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Артем', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Артем', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Алексей Н.', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Макс Григорьев', profit: 500 },
-  { photo: 'https://picsum.photos/200', name: 'Рита Афанасьева', profit: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Рита Афанасьева', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Макс Григорьев', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Алексей Н.', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Артем', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Артем', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Алексей Н.', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Макс Григорьев', balance: 500 },
+  { photo: 'https://picsum.photos/200', uname: 'Рита Афанасьева', balance: 500 },
 ];

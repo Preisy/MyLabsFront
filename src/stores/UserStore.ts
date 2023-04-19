@@ -52,6 +52,7 @@ export const useUserStore = defineStore('userStore', () => {
       setPhotoState.value = 'error';
     } else {
       setPhotoState.value = 'success';
+      getPhoto();
     }
 
     return res;

@@ -43,7 +43,14 @@ export const UserService = {
   },
   async setProfilePhoto(photo: File) {
     try {
-      const response = await $api.post('/me/photo', photo);
+      const formdata = new FormData();
+      formdata.append('file', photo);
+      console.log(formdata);
+      const response = await $api.post('/me/photo', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       return response;
     } catch (e: unknown) {
       return { error: e };

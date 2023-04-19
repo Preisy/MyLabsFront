@@ -32,7 +32,8 @@ export type LabType =
 
 
 export const taskTypeToImg = (v: string) => {
-  const type: LabType = LabEnum[parseInt(v)] as unknown as LabType
+  let type: LabType = LabEnum[parseInt(v)] as unknown as LabType
+  if (!type) type = v as LabType;
 
   switch (type) {
     case 'Cpp':
@@ -48,7 +49,7 @@ export const taskTypeToImg = (v: string) => {
     case 'Microsoft':
       return '/src/assets/cardTypes/officeicon.png';
     case 'Python':
-      return '/src/assets/cardTypes/pythonicon.png';
+      return '/src/assets/cardTypes/pyhtonicon.png';
     case 'Web':
       return '/src/assets/cardTypes/react.svg';
   }

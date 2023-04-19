@@ -14,12 +14,14 @@ import ADatePicker from 'src/components/ADatePicker.vue';
 import OrderData from 'src/model/order/OrderData';
 import FileAttachDialog from 'src/pages/landing/homePage/ui/FileAttachDialog.vue';
 import { FileModel } from '../../work/ui/Card';
+import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
 
 const dialog = ref<InstanceType<typeof ADialog>>();
 const orderStore = useOrderStore();
 const popup = ref<InstanceType<typeof AErrPopup>>();
 const errorResponse = ref<AxiosError>();
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
+const fileStore = useFileStore();
 
 defineExpose({
   open: () => {
@@ -34,6 +36,31 @@ const close = () => {
 const { handleSubmit } = useForm<OrderData>({
   validationSchema: TaskSchema,
 });
+
+const filesProcessing = async (
+  files: File[],
+  id: number
+): Promise<FileModel[]> => {
+  console.log(files);
+  if (!files) return [];
+
+  const filesSendResp = await orderStore.sendOrderFiles(files, id);
+  if ('error' in filesSendResp) {
+    console.warn('Cant upload files');
+    return [];
+  }
+
+  const taskFiles: FileModel[] = [];
+  files.forEach((file, index) => {
+    taskFiles.push({
+      filename: file.name,
+      createdAt: file.lastModified.toLocaleString(),
+      id: index,
+    });
+  });
+
+  return taskFiles;
+};
 
 const onSubmit = handleSubmit.withControlled(async (values) => {
   console.log(JSON.stringify(values, null, 2));
@@ -53,23 +80,10 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     return;
   }
 
-  const filesSendResp = await orderStore.sendOrderFiles(
-    values.files,
+  const taskFiles = await filesProcessing(
+    fileStore.filesList,
     sendResp.data.id
   );
-  if ('error' in filesSendResp) {
-    console.warn('Cant upload files');
-    return;
-  }
-
-  const taskFiles: FileModel[] = [];
-  values.files.forEach((file, index) => {
-    taskFiles.push({
-      filename: file.name,
-      createdAt: file.lastModified.toLocaleString(),
-      id: index,
-    });
-  });
 
   orderStore.currentOrders.push({
     deadline: reqData.deadline,
@@ -78,6 +92,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     type: reqData.type,
   });
   dialog.value?.close();
+  fileStore.clearFiles();
 });
 </script>
 

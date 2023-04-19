@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import defaultPhoto from 'src/assets/Labs_square_icon.png';
 import { FriendCardModel } from './FriendCardModel';
 
 interface Props {
@@ -12,12 +13,12 @@ defineProps<Props>();
   <div class="friend-card bg-primary br-15px">
     <div class="content-wrapper column justify-between">
       <div class="name row items-center no-wrap">
-        <img :src="card.photo" class="profile-img" />
-        <h2 class="title">{{ card.name }}</h2>
+        <img :src="card.photo ?? defaultPhoto" class="profile-img" />
+        <h2 class="title">{{ card.uname }}</h2>
       </div>
       <div class="price-wrapper row">
         <q-icon class="icon" name="currency_ruble" />
-        <p class="value">{{ card.profit }}</p>
+        <p class="value">{{ card.balance }}</p>
       </div>
     </div>
   </div>

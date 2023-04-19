@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types';
 import { ref } from 'vue';
 import { FileService } from '../service/FileService';
+import { remove } from 'lodash';
 
 export const useFileStore = defineStore('fileStore', () => {
     const fileUploadState = ref<SimpleState>('unset');
@@ -23,9 +24,14 @@ export const useFileStore = defineStore('fileStore', () => {
         }
     }
 
+    const clearFiles = () => {
+        remove(filesList, () => true)
+    }
+
     return {
         filesList,
         fileUploadState,
-        uploadFiles
+        uploadFiles,
+        clearFiles
     }
 })
