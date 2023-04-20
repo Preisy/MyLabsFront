@@ -3,6 +3,8 @@ import ADialog from 'src/components/ADialog';
 import ABtn from 'src/components/ABtn.vue';
 import { ref } from 'vue';
 import { useUserStore } from 'src/stores/UserStore';
+import floor from 'assets/header/floor.svg';
+import heart from 'assets/pop_up/heart.png';
 
 let dialog = ref<InstanceType<typeof ADialog>>();
 let isOpened = ref(false);
@@ -32,24 +34,13 @@ const myId = ref(0);
 <template>
   <ADialog ref="dialog">
     <div class="content-wrapper">
-      <img
-        src="assets/header/floor.svg"
-        class="floor"
-        alt=""
-        ref="floor"
-        @click="close"
-      />
+      <img :src="floor" class="floor" alt="" ref="floor" @click="close" />
 
       <h2 class="title">{{ $t('pages.user.header.dialogs.invite.title') }}</h2>
       <div class="body-wrapper">
         <p class="desc">{{ $t('pages.user.header.dialogs.invite.desc') }}</p>
         <p class="text-center ref-link">https://my-labs.ru?ref={{ myId }}</p>
-        <img
-          class="heart-img"
-          src="assets/pop_up/heart.png"
-          alt=""
-          loading="eager"
-        />
+        <img class="heart-img" :src="heart" alt="" loading="eager" />
       </div>
       <div class="controls-wrapper">
         <ABtn
