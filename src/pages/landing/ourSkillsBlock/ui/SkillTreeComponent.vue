@@ -44,6 +44,7 @@ onUnmounted(() => window.removeEventListener('resize', choose));
 
   @media (max-width: $screen-md) {
     --scale: 2rem;
+    font-size: 0.55rem;
   }
 }
 </style>
