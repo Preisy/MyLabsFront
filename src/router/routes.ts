@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/dev',
     component: () => import('layouts/LandingLayout.vue'),
     // children: [{ path: '', component: () => import('pages/LandingPage.vue') }],
   },
@@ -42,11 +42,16 @@ const routes: RouteRecordRaw[] = [
   },
 
 
-  // Always leave this as last one,
-  // but you can also remove it
+  // // Always leave this as last one,
+  // // but you can also remove it
+  // {
+  //   path: '/:catchAll(.*)*',
+  //   component: () => import('pages/NotFoundPage.vue'),
+  // },
+
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/NotFoundPage.vue'),
+    component: () => import('layouts/SoonLayout.vue'),
   },
 ];
 
