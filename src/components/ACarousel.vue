@@ -71,6 +71,8 @@ const isMobile = Screen.lt.sm;
 .slider {
   height: auto;
   background: transparent;
+
+  overflow: hidden;
 }
 
 .controls {

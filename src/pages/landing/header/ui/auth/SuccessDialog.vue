@@ -26,7 +26,7 @@ const onclick = () => {
     <div class="controls-wrapper">
       <ABtn
         class="q-px-xl"
-        to="/"
+        to="/#"
         :label="$t('pages.landing.header.auth.success.button')"
         @click="onclick"
       />

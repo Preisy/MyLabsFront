@@ -38,7 +38,9 @@ $api.interceptors.request.use((config) => {
     !config.url?.startsWith('/health') &&
     !config.url?.startsWith('/signup') &&
     !config.url?.startsWith('/signup/confirm') &&
-    !config.url?.startsWith('/login')
+    !config.url?.startsWith('/login') &&
+    !config.url?.startsWith('/password/forget') &&
+    !config.url?.startsWith('/password/reset')
   )
     config.headers.Authorization = `Bearer ${localStorage.getItem(
       'access_token'

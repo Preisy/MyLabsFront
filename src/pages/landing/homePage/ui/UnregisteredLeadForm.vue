@@ -49,7 +49,8 @@ const { handleSubmit } = useForm<UnregisteredLeadForm>({
 
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
-const onSubmit = handleSubmit.withControlled((values) => {
+const fileStore = useFileStore();
+const onSubmit = handleSubmit.withControlled(async (values) => {
   if (!authStore.isAuth) {
     dialogStore.setUser(pick(values, keys(UserCredsSchema)));
     signupDialog.value?.open();
@@ -64,7 +65,13 @@ const onSubmit = handleSubmit.withControlled((values) => {
     type: values.type,
   };
 
-  orderStore.sendOrder(sendData);
+  const orderResponse = await orderStore.sendOrder(sendData);
+  if ('error' in orderResponse) {
+    console.warn('Something went wrong with order');
+    return;
+  }
+
+  orderStore.sendOrderFiles(fileStore.filesList, orderResponse.data.id);
   orderStore.clearOrderCache();
 });
 

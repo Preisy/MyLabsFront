@@ -1,34 +1,40 @@
 <script setup lang="ts">
-import { User } from 'src/model/User/User';
-import { RestoreScheme } from 'src/model/dialogs';
 import DialogWrapper from 'src/pages/landing/header/ui/auth/DialogWrapper.vue';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
-import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { CodeRestoreScheme } from 'src/model/dialogs/schemes/CodeRestoreScheme';
 import { PasswordRestoreScheme } from 'src/model/dialogs/schemes/PasswordRestoreScheme';
+import changePasswordData from 'src/model/changePassword/changePasswordData';
+import { useResetStore } from 'src/stores/ResetStore';
 
 const { t } = useI18n();
 const dialog = ref<InstanceType<typeof DialogWrapper>>();
-const dialogStore = useDialogStore();
+const resetStore = useResetStore();
 
-let resetDialogData: DialogData[] = [
-  PasswordRestoreScheme(t),
-  CodeRestoreScheme(t),
-];
+let resetDialogData: DialogData[] = [PasswordRestoreScheme(t)];
 onMounted(() => {
   dialog.value?.open();
-  const email = useRoute().query as Pick<User, 'email'>;
-  dialogStore.setEmail(email);
+  const query = useRoute().query;
+  console.log(query);
+
+  const email = query as Pick<changePasswordData, 'email'>;
+  const code = query as Pick<changePasswordData, 'code'>;
+
+  resetStore.setCode(code);
+  resetStore.setEmail(email);
+  console.log(resetStore.changeData);
 });
 </script>
 
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <DialogWrapper :dialogs="resetDialogData" ref="dialog" />
+      <DialogWrapper
+        :closable="false"
+        :dialogs="resetDialogData"
+        ref="dialog"
+      />
     </q-page-container>
   </q-layout>
 </template>

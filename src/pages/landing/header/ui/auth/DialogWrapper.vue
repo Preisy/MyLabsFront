@@ -12,9 +12,11 @@ import floorImg from 'assets/header/floor.svg';
 interface Props {
   dialogs: DialogData[];
   needLast?: boolean;
+  closable?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   needLast: true,
+  closable: true,
 });
 let i = ref(0);
 let dialog = ref<InstanceType<typeof ADialog>>();
@@ -28,6 +30,7 @@ const dialogsLen = props.needLast
   : props.dialogs.length;
 
 const close = () => {
+  if (!props.closable) return;
   floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;

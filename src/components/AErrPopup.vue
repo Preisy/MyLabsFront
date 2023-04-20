@@ -24,7 +24,10 @@ defineExpose({
 
 const errText = computed(() => {
   if (!props.axiosErr) return '';
-  const err = (props.axiosErr.response?.data as Error).message;
+
+  // console.log(props.axiosErr);
+
+  const err = (props.axiosErr.response?.data as Error)?.message;
   return err ? err : props.axiosErr.message;
 });
 </script>

@@ -33,7 +33,6 @@ const getPhoto = async () => {
 
 watch(file, async (newPhoto) => {
   if (!newPhoto) return;
-  const res = await userStore.setProfilePhoto(newPhoto);
 
   file.value = undefined;
 });
