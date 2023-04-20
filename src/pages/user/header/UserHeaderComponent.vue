@@ -6,6 +6,7 @@ import HeaderBtn from './ui';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import InviteDialog from './ui/InviteDialog.vue';
+import mylabslogo from 'assets/my_labs_logo.png';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
@@ -34,7 +35,7 @@ const isMenuOpened = ref(false);
 
 <template>
   <q-header class="header" :class="{ mobile: isMobile }">
-    <img src="/src/assets/my_labs_logo.png" alt="" class="logo" />
+    <img :src="mylabslogo" alt="" class="logo" />
 
     <q-toolbar
       class="header-toolbar justify-between"
@@ -97,10 +98,6 @@ const isMenuOpened = ref(false);
 .header {
   border-radius: 0 0 2rem 2rem;
   background-color: $primary;
-  // background: url('src/assets/my_labs_logo.png');
-  // background-size: 4rem 2.25rem;
-  // background-position: 50% 50%;
-  // background-repeat: no-repeat;
 
   position: fixed;
   z-index: 9999;

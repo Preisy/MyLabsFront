@@ -12,7 +12,6 @@ export const SignupScheme = (t: (arg: string) => string): DialogData => ({
   schema: getSchema(omit(UserCredsSchema, 'password')),
   onSubmit: (values) => {
     dialogStore.setUser(values);
-    console.log(values);
     return createSuccessResponse('success');
   },
   btnLabel: t('pages.landing.header.next'),

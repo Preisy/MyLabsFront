@@ -9,7 +9,6 @@ export const useReferralStore = defineStore('referralStore', () => {
 
     const getReferrals = async (id: number) => {
         const res = await ReferralService.getReferrals(id);
-        console.log(res);
         if ('error' in res) {
             referralState.value = 'error';
         } else {
@@ -21,7 +20,6 @@ export const useReferralStore = defineStore('referralStore', () => {
 
     const getFriendPhoto = async (id: number) => {
         const res = await ReferralService.getFriendPhoto(id);
-        console.log(res);
         if ('error' in res) {
             photoState.value = 'error';
         } else {

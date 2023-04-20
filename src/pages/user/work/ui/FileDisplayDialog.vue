@@ -8,6 +8,8 @@ import {
 import { ref } from 'vue';
 import { FileModel } from './Card';
 import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
+import AErrPopup from 'src/components/AErrPopup.vue';
+import { AxiosError } from 'axios';
 
 interface FileDisplayDialogProps {
   files: FileModel[];
@@ -44,10 +46,14 @@ const getFileIco = (file: FileModel) => {
   return 'fa-file';
 };
 
+const response = ref<AxiosError>();
+const errPopup = ref<InstanceType<typeof AErrPopup>>();
+
 const downloadFile = async (file: FileModel) => {
   const responseFile = await fileStore.downloadFile(props.orderId, file);
-  if ('error' in downloadFile) {
-    console.log(downloadFile);
+  if ('error' in responseFile) {
+    response.value = responseFile.error as AxiosError;
+    errPopup.value?.show();
     return;
   }
 
@@ -69,6 +75,12 @@ const downloadFile = async (file: FileModel) => {
           {{ file.filename.slice(0, 8) + '...' }}
         </p>
       </div>
+      <AErrPopup
+        class="err-popup"
+        :axios-err="response"
+        ref="errPopup"
+        :timeout="2000"
+      />
     </div>
   </ADialog>
 </template>
@@ -78,6 +90,7 @@ const downloadFile = async (file: FileModel) => {
   width: fit-content;
   .files-grid {
     --size: 5rem;
+    position: relative;
 
     display: grid;
     grid-template-columns: var(--size) var(--size);
@@ -90,7 +103,7 @@ const downloadFile = async (file: FileModel) => {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
-    overflow: hidden;
+    // overflow: hidden;
     padding: 1rem;
 
     .file-wrapper {
@@ -113,6 +126,13 @@ const downloadFile = async (file: FileModel) => {
         font-weight: 700;
       }
     }
+  }
+
+  .err-popup {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0rem;
   }
 }
 </style>

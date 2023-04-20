@@ -45,7 +45,6 @@ export const UserService = {
     try {
       const formdata = new FormData();
       formdata.append('file', photo);
-      console.log(formdata);
       const response = await $api.post('/me/photo', formdata, {
         headers: {
           'Content-Type': 'multipart/form-data'

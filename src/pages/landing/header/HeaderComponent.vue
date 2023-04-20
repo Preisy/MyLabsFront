@@ -9,7 +9,8 @@ import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
 import LangSwitch from './ui/LangSwitch.vue';
 import { useUserStore } from 'src/stores/UserStore';
-import defaultPhoto from 'src/assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/Labs_square_icon.png';
+import mylabsLogo from 'assets/my_labs_logo.png';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
@@ -51,7 +52,7 @@ onMounted(async () => {
     :class="{ compact: isCompact && !isMobile, mobile: isMobile }"
   >
     <QScrollObserver axis="vertical" @scroll="scrollHandler" />
-    <img src="src/assets/my_labs_logo.png" alt="" class="logo" />
+    <img :src="mylabsLogo" alt="" class="logo" />
 
     <q-toolbar
       class="header-toolbar justify-between"
@@ -140,7 +141,7 @@ onMounted(async () => {
 .header {
   border-radius: 0 0 2rem 2rem;
   background-color: $primary;
-  // background: url('src/assets/my_labs_logo.png');
+  // background: url('assets/my_labs_logo.png');
   // background-size: 4rem 2.25rem;
   // background-position: 50% 50%;
   // background-repeat: no-repeat;

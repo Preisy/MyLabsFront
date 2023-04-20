@@ -8,7 +8,7 @@ import { onMounted, ref } from 'vue';
 import { getSchema } from 'src/global/utils';
 import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
-import defaultPhoto from 'src/assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/Labs_square_icon.png';
 import PasswordChangeDialog from './ui/PasswordChangeDialog.vue';
 
 const userStore = useUserStore();
@@ -17,13 +17,11 @@ const userform = ref<InstanceType<typeof ADynamicForm>>();
 const passwordChangeDialog = ref<InstanceType<typeof PasswordChangeDialog>>();
 
 const onsubmit = (values: Record<string, unknown>): void => {
-  console.log(values);
   userStore.changeCreds(values as unknown as User);
 };
 
 onMounted(async () => {
   const creds = await userStore.getCreds();
-  console.log(creds);
   if ('error' in creds) return;
 
   const userData: User = {

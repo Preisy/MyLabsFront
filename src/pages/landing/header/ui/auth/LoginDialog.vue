@@ -10,6 +10,7 @@ import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { AxiosError } from 'axios';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import FieldProps from 'src/components/ADynamicForm/types';
+import floorImg from 'assets/header/floor.svg';
 
 let isOpened = ref(false);
 let floor = ref<HTMLImageElement>();
@@ -50,7 +51,6 @@ const onSubmit = async (values: Record<string, unknown>) => {
     values as unknown as LoginData
   );
   if ('error' in loginResponse) {
-    console.log(loginResponse);
     errorResponse.value = loginResponse.error as AxiosError;
     popup.value?.show();
     return;
@@ -64,7 +64,7 @@ const onSubmit = async (values: Record<string, unknown>) => {
     <ADialog ref="dialog">
       <div class="content-wrapper">
         <img
-          src="src/assets/header/floor.svg"
+          :src="floorImg"
           class="floor"
           alt=""
           ref="floor"

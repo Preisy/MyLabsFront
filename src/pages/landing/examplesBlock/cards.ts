@@ -1,17 +1,18 @@
-export type CardType = 'Cpp' | 'C' | 'Python' | 'C#';
+import { LabType } from 'src/global/LabTypes';
+
 export default interface Card {
   duration: number;
   price: number;
   title: string;
-  type: CardType;
+  type: LabType;
 }
 
 class CardClass implements Card {
   title: string;
   duration: number;
   price: number;
-  type: CardType;
-  constructor(title: string, duration: number, price: number, type: CardType) {
+  type: LabType;
+  constructor(title: string, duration: number, price: number, type: LabType) {
     this.title = title;
     this.duration = duration;
     this.price = price;

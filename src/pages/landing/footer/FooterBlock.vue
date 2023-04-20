@@ -35,7 +35,7 @@
 
 <style scoped lang="scss">
 .footer {
-  background: url('src/assets/digital_background.png');
+  background: url('assets/digital_background.png');
   background-size: cover;
   background-repeat: no-repeat;
   overflow: hidden;

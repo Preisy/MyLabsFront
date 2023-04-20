@@ -16,7 +16,6 @@ export const useFileStore = defineStore('fileStore', () => {
 
         fileUploadState.value = 'loading';
         const res = await FileService.uploadFiles(_files);
-        console.log(res);
         if ('error' in res) {
             fileUploadState.value = 'error';
             return res;
@@ -33,7 +32,6 @@ export const useFileStore = defineStore('fileStore', () => {
     const downloadFile = async (orderId: number, filename: FileModel) => {
         fileDownloadState.value = 'loading';
         const res = await FileService.downloadFile(orderId, filename);
-        console.log(res);
         if ('error' in res) {
             fileDownloadState.value = 'error';
         } else {

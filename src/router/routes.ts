@@ -36,6 +36,11 @@ const routes: RouteRecordRaw[] = [
     path: '/confirm',
     component: () => import('layouts/ConfirmLayout.vue'),
   },
+  {
+    path: '/reset',
+    component: () => import('layouts/ResetLayout.vue'),
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it

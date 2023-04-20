@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HowItWorks from './ui/HowItWorks.vue';
 import QAComponent from './ui/QAComponent.vue';
+import manOnChair from 'assets/man_on_chair_alt.png';
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import QAComponent from './ui/QAComponent.vue';
         <QAComponent class="col"></QAComponent>
       </div>
     </div>
-    <img class="bg-img" src="src/assets/man_on_chair_alt.png" alt="" />
+    <img class="bg-img" :src="manOnChair" alt="" />
   </div>
 </template>
 

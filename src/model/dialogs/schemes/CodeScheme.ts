@@ -32,7 +32,6 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
         code: code as string,
         email: dialogStore.userCreds.email,
       };
-      console.log(codeCheckData);
 
       return authStore.signupConfirm(codeCheckData) as unifiedApiPromise;
     },

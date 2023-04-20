@@ -16,7 +16,6 @@ const showBanner = computed(() => isErrors.value && !isClicked.value);
     class="preloader fit flex flex-center"
     :class="{ shown: (isLoading || isErrors) && !isClicked }"
   >
-    <!-- <img src="src/assets/my_labs_logo.png" class="logo" /> -->
     <AMyLabsLogo class="preloader-logo" :stop="isErrors" />
 
     <q-banner

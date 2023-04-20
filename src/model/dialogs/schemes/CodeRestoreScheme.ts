@@ -33,7 +33,6 @@ export const CodeRestoreScheme = (t: (arg: string) => string): DialogData => {
         email: dialogStore.userCreds.email,
         newPassword: dialogStore.userCreds.password
       };
-      console.log(changeData);
 
       return authStore.changePassword(changeData) as unifiedApiPromise;
     },

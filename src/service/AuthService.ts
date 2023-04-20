@@ -23,9 +23,7 @@ export interface SignupConfirmResponse {
 export const AuthService = {
   async login(creds: LoginData) {
     try {
-      console.log(creds);
       const { data } = await $api.post<LoginResponse>('/login', creds);
-      console.log(data);
 
       return data;
     } catch (e: unknown) {
@@ -35,7 +33,6 @@ export const AuthService = {
   async signup(creds: UserCreds) {
     try {
       const { data } = await $api.post<SignupResponse>('/signup', creds);
-      console.log(data);
 
       return data;
     } catch (e: unknown) {
@@ -45,7 +42,6 @@ export const AuthService = {
   async signupConfirm(signData: signupConfirmData) {
     try {
       const { data } = await $api.post<SignupConfirmResponse>('/signup/confirm', signData);
-      console.log(data);
 
       return data;
     } catch (e: unknown) {

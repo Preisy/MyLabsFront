@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ABtn from 'src/components/ABtn.vue';
+import heartImg from 'assets/pop_up/heart.png';
+
 interface SuccessDialogProps {
   i: number;
 }
@@ -19,12 +21,7 @@ const onclick = () => {
     <h2 class="title">{{ $t('pages.landing.header.auth.success.title') }}</h2>
     <div class="body-wrapper">
       <p>{{ $t('pages.landing.header.auth.success.text') }}</p>
-      <img
-        class="heart-img"
-        src="src/assets/pop_up/heart.png"
-        alt=""
-        loading="eager"
-      />
+      <img class="heart-img" :src="heartImg" alt="" loading="eager" />
     </div>
     <div class="controls-wrapper">
       <ABtn

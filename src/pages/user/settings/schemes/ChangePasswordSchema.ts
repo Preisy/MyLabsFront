@@ -50,7 +50,6 @@ export const ChangePasswordSchema = (t: (arg: string) => string): DialogData => 
             userStore.changePasswordData.code = values['code'] as string;
             userStore.changePasswordData.newPassword = values['password'] as string;
 
-            console.log(userStore.changePasswordData)
             return userStore.changePassword(userStore.changePasswordData) as unifiedApiPromise;
         },
         btnLabel: t('pages.user.settings.dialogs.password.btn'),

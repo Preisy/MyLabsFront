@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import defaultPhoto from 'src/assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/Labs_square_icon.png';
 import { FriendCardModel } from './FriendCardModel';
 import { onMounted, ref } from 'vue';
 import { useReferralStore } from '../store/ReferralStore';

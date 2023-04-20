@@ -70,7 +70,7 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .reviews {
-  background: url('src/assets/digital_background.png');
+  background: url('assets/digital_background.png');
   background-size: cover;
   background-repeat: no-repeat;
   margin: -2rem 0;

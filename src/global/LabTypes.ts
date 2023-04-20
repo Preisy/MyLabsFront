@@ -1,3 +1,12 @@
+import cppImg from 'assets/cardTypes/c++icon.png'
+import cImg from 'assets/cardTypes/cicon.png'
+import csImg from 'assets/cardTypes/csicon.png'
+import pythonImg from 'assets/cardTypes/pyhtonicon.png'
+import javaImg from 'assets/cardTypes/javaicon.png'
+import linuxImg from 'assets/cardTypes/linuxicon.png'
+import officeImg from 'assets/cardTypes/officeicon.png'
+import webImg from 'assets/cardTypes/react.svg'
+
 export const LabTypes = [
   'C',
   'Cpp',
@@ -37,20 +46,20 @@ export const taskTypeToImg = (v: string) => {
 
   switch (type) {
     case 'Cpp':
-      return '/src/assets/cardTypes/c++icon.png';
+      return cppImg;
     case 'C':
-      return '/src/assets/cardTypes/cicon.png';
+      return cImg;
     case 'C#':
-      return '/src/assets/cardTypes/csicon.png';
+      return csImg;
     case 'Java':
-      return '/src/assets/cardTypes/javaicon.png';
+      return javaImg;
     case 'Linux':
-      return '/src/assets/cardTypes/linuxicon.png';
+      return linuxImg;
     case 'Microsoft':
-      return '/src/assets/cardTypes/officeicon.png';
+      return officeImg;
     case 'Python':
-      return '/src/assets/cardTypes/pyhtonicon.png';
+      return pythonImg;
     case 'Web':
-      return '/src/assets/cardTypes/react.svg';
+      return webImg;
   }
 };

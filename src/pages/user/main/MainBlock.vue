@@ -4,7 +4,7 @@ import { onMounted, ref, watch } from 'vue';
 import OrderDialog from './ui/OrderDialog.vue';
 import { useUserStore } from 'src/stores/UserStore';
 import { QFile } from 'quasar';
-import defaultPhoto from 'src/assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/Labs_square_icon.png';
 
 const userStore = useUserStore();
 const filepicker = ref<InstanceType<typeof QFile>>();
@@ -32,10 +32,8 @@ const getPhoto = async () => {
 };
 
 watch(file, async (newPhoto) => {
-  console.log(newPhoto);
   if (!newPhoto) return;
   const res = await userStore.setProfilePhoto(newPhoto);
-  console.log(res);
 
   file.value = undefined;
 });

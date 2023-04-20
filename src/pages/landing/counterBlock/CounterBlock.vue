@@ -19,7 +19,6 @@ const updateHeight = () => {
   const delta = centerBcr - document.documentElement.clientHeight / 2;
 
   let newHeight = Math.round(((-Math.abs(delta) * 30) / 1000 + 40) * 10) / 10;
-  // console.log(newHeight);
   if (newHeight === height.value) return;
 
   if (Math.abs(newHeight) > Math.abs(end)) height.value = end;
@@ -38,7 +37,6 @@ onMounted(async () => {
 
   const quantity = await counterStore.getLabsQuantity();
   if ('error' in quantity) return;
-  console.log(quantity);
 
   counter.value = quantity.property;
 });
@@ -60,7 +58,7 @@ const isMobile = Screen.lt.sm;
 
 <style scoped lang="scss">
 .counterpage {
-  background: url('src/assets/digital_background.png');
+  background: url('assets/digital_background.png');
   // background-size: cover;
   background-position: center;
   position: relative;

@@ -2,16 +2,17 @@
 import ExamplesCardComponent from './ui/ExamplesCardComponent.vue';
 import SlideComponent from './ui/CarouselSlide.vue';
 import { computed, onMounted, ref } from 'vue';
-import Card, { CardType } from './cards';
+import Card from './cards';
 import ACarousel from 'src/components/ACarousel.vue';
 import { Screen } from 'quasar';
 import { chunk } from 'lodash';
 import { useExamplesStore } from './store/ExamplesStore';
+import { taskTypeToImg } from 'src/global/LabTypes';
+import manOnChair from 'assets/man_on_chair_alt.png';
 
 const slider_index = ref('0');
 
 const cardsInOneSlide = computed(() => {
-  // console.log(Screen.width);
   if (Screen.lt.sm) return 1;
 
   if (Screen.width <= 900) return 3;
@@ -22,34 +23,9 @@ const cardsInOneSlide = computed(() => {
 const slides = ref<Card[]>();
 
 const _slides = computed(() => {
-  // let result = [];
-  // const slidesCount = slides.length / cardsInOneSlide.value;
-
-  // for (let slide_i = 0; slide_i < slidesCount; slide_i++) {
-  //   const slide = [];
-  //   for (let card_i = 0; card_i < cardsInOneSlide.value; card_i++)
-  //     slide.push(slides[slide_i * cardsInOneSlide.value + card_i]);
-
-  //   result.push(slide);
-  // }
-
-  // return result;
   if (!slides.value) return;
   return chunk(slides.value, cardsInOneSlide.value);
 });
-
-const toIconImg = (c: CardType) => {
-  switch (c) {
-    case 'Cpp':
-      return 'src/assets/examples/cpp.png';
-    case 'C':
-      return 'src/assets/examples/c_lang.png';
-    case 'Python':
-      return 'src/assets/examples/python_lang.png';
-    case 'C#':
-      return 'src/assets/examples/cs_lang.png';
-  }
-};
 
 const examplesStore = useExamplesStore();
 onMounted(async () => {
@@ -79,7 +55,7 @@ onMounted(async () => {
           <ExamplesCardComponent
             v-for="(card, index) in slide"
             :key="index"
-            :img-src="toIconImg(card.type)"
+            :img-src="taskTypeToImg(card.type)"
             :title="card.title"
             :time="card.duration.toString()"
             :price="card.price.toString()"
@@ -87,7 +63,7 @@ onMounted(async () => {
         </SlideComponent>
       </ACarousel>
     </div>
-    <img class="bg-image" src="src/assets/man_on_chair_alt.png" alt="" />
+    <img class="bg-image" :src="manOnChair" alt="" />
   </div>
 </template>
 

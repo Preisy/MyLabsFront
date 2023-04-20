@@ -11,9 +11,7 @@ export interface FileData {
 export const OrderService = {
     async sendOrder(order: OrderData) {
         try {
-            console.log(order);
             const response = await $api.post('/orders', order);
-            console.log(response.data);
 
             return response;
         } catch (e: unknown) {
@@ -42,7 +40,6 @@ export const OrderService = {
                     }
                 })
 
-            console.log(response);
 
             return response;
         } catch (e: unknown) {

@@ -2,6 +2,7 @@
 import ABtn from 'src/components/ABtn.vue';
 import LangBtn from './LangBtn.vue';
 import { ref } from 'vue';
+import langSwitchLight from 'assets/header/langSwitchLight.svg';
 
 const isShown = ref<boolean>(false);
 const toggleExtend = () => {
@@ -31,11 +32,7 @@ const toggleExtend = () => {
         <LangBtn class="popup-brn" label="Eng" locale="en-US" />
         <LangBtn class="popup-brn" label="Рус" locale="ru-RU" />
       </div>
-      <img
-        src="src/assets/header/langSwitchLight.svg"
-        class="light"
-        :class="{ hide: !isShown }"
-      />
+      <img :src="langSwitchLight" class="light" :class="{ hide: !isShown }" />
     </div>
   </div>
 </template>

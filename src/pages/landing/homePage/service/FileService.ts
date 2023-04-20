@@ -5,7 +5,6 @@ export const FileService = {
     async uploadFiles(files: File[]) {
         try {
             const response = await $api.post('/login', files);
-            console.log(response.data);
 
             return response;
         } catch (e: unknown) {
@@ -15,7 +14,6 @@ export const FileService = {
     async downloadFile(orderId: number, filename: FileModel) {
         try {
             const response = await $api.get(`/orders/${orderId}/files/${filename.filename}`, { responseType: 'blob' });
-            console.log(response.data);
 
             const link = URL.createObjectURL(response.data)
 

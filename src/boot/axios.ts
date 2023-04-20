@@ -29,7 +29,6 @@ const $api = axios.create(axiosConfig);
 
 $api.interceptors.request.use((config) => {
   const timeout = 10000;
-  // console.log(config)
   if (
     config.headers &&
     !config.url?.startsWith('/labs/quantity') &&

@@ -24,7 +24,6 @@ export const useAuthStore = defineStore('authStore', () => {
   const login = async (data: LoginData) => {
     dialogStore.loginState = 'loading';
     const res = await AuthService.login(data);
-    console.log(res);
     if ('error' in res) {
       isAuth = false;
       dialogStore.loginState = 'error';
@@ -45,7 +44,6 @@ export const useAuthStore = defineStore('authStore', () => {
     return true;
   };
   const signup = async (creds: UserCreds) => {
-    // console.log(creds)
     dialogStore.signupState = 'loading';
     const res = await AuthService.signup(creds);
     if ('error' in res) {
@@ -74,7 +72,6 @@ export const useAuthStore = defineStore('authStore', () => {
   };
   const signupConfirm = async (data: signupConfirmData) => {
     dialogStore.codeApproveState = 'loading';
-    console.log(data);
 
     const res = await AuthService.signupConfirm(data);
     if ('error' in res) {

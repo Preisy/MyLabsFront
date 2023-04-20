@@ -31,10 +31,8 @@ const onremove = (values: readonly File[]) => {
 
 const getFileIco = (file: File) => {
   const ext = file.name.slice(file.name.lastIndexOf('.'), file.name.length);
-  // console.log(ext);
   if (ext in FileExtensionMap) {
     const ico = FileExtensionMap[ext as keyof typeof FileExtensionMap];
-    // console.log(ico);
     return ico;
   }
 

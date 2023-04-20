@@ -36,8 +36,7 @@ const getLabs = async () => {
 };
 const getOrders = async () => {
   const orders = await orderStore.getOrders();
-  console.log(orders);
-  console.log(orderStore.currentOrders);
+
   if ('error' in orders || !orderStore.currentOrders) {
     console.warn('For some reason cant fetch orders');
     return;

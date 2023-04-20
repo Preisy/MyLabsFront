@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import leftLine from 'assets/faq_block/left_line.png';
+
 interface Props {
   num: number;
   isLast: boolean;
@@ -12,11 +14,7 @@ defineProps<Props>();
 <template>
   <div class="step row" :class="{ last: isLast }">
     <div class="img-wrapper">
-      <img
-        class="line"
-        :class="{ reverse: num % 2 }"
-        src="src/assets/faq_block/left_line.png"
-      />
+      <img class="line" :class="{ reverse: num % 2 }" :src="leftLine" />
     </div>
     <div
       class="step-content row items-end"

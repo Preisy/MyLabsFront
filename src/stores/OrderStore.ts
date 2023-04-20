@@ -14,7 +14,6 @@ export const useOrderStore = defineStore('orderStore', () => {
 
     const sendOrder = async (order: Record<string, unknown> | OrderData) => {
         const res = await OrderService.sendOrder(order as unknown as OrderData);
-        console.log(res);
         if ('error' in res) {
             orderState.value = 'error';
         } else {
@@ -26,12 +25,11 @@ export const useOrderStore = defineStore('orderStore', () => {
 
     const getOrders = async () => {
         const res = await OrderService.getOrders();
-        console.log(res);
         if ('error' in res) {
             orderState.value = 'error';
         } else {
             orderState.value = 'success';
-            currentOrders.value = res as unknown as OrderModel[];
+            currentOrders.value = res;
         }
 
         return res;

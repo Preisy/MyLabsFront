@@ -7,6 +7,7 @@ import { SubmissionContext } from 'vee-validate';
 import SuccessDialog from './SuccessDialog.vue';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import { AxiosError } from 'axios';
+import floorImg from 'assets/header/floor.svg';
 
 interface Props {
   dialogs: DialogData[];
@@ -49,8 +50,6 @@ let onSubmit = async (
 
   dialog.value?.close();
   ++i.value;
-  console.log(i.value);
-  console.log(props.dialogs.length);
   if (!props.needLast && i.value === props.dialogs.length) {
     close();
     return;
@@ -73,7 +72,7 @@ defineExpose({
   <ADialog ref="dialog" @close="isOpened = false">
     <div v-if="i != dialogs.length" class="content-wrapper">
       <img
-        src="/src/assets/header/floor.svg"
+        :src="floorImg"
         class="floor"
         alt=""
         ref="floor"

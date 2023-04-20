@@ -10,7 +10,6 @@ const props = defineProps<LangBtnProps>();
 
 const localeStore = useLocaleStore();
 const onclick = () => {
-  console.log(props.locale);
   localeStore.setLocale(props.locale);
   setTimeout(() => {
     window.location.reload();

@@ -17,7 +17,6 @@ defineExpose({
     dialog.value?.open();
 
     const creds = await userStore.getCreds();
-    console.log(creds);
     if ('error' in creds) {
       console.warn('Cant fetch userdata');
       return;
@@ -34,7 +33,7 @@ const myId = ref(0);
   <ADialog ref="dialog">
     <div class="content-wrapper">
       <img
-        src="/src/assets/header/floor.svg"
+        src="assets/header/floor.svg"
         class="floor"
         alt=""
         ref="floor"
@@ -47,7 +46,7 @@ const myId = ref(0);
         <p class="text-center ref-link">https://my-labs.ru?ref={{ myId }}</p>
         <img
           class="heart-img"
-          src="/src/assets/pop_up/heart.png"
+          src="assets/pop_up/heart.png"
           alt=""
           loading="eager"
         />

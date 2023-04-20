@@ -3,6 +3,8 @@ import UnregisteredLeadForm from 'pages/landing/homePage/ui/UnregisteredLeadForm
 import ATypingText from 'components/ATypingText.vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { ref } from 'vue';
+import manOnChair from 'assets/homepage/man_on_chair.png';
+import floor from 'assets/homepage/floor_shadow.svg';
 
 const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
 </script>
@@ -11,16 +13,8 @@ const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
   <div class="homepage">
     <div class="structure content-wrapper">
       <div class="homepage-img">
-        <img
-          src="src/assets/homepage/man_on_chair.png"
-          class="man-on-chair"
-          alt=""
-        />
-        <img
-          src="src/assets/homepage/floor_shadow.svg"
-          class="floor-light"
-          alt=""
-        />
+        <img :src="manOnChair" class="man-on-chair" alt="" />
+        <img :src="floor" class="floor-light" alt="" />
       </div>
 
       <h1

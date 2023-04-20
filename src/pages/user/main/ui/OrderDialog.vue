@@ -41,7 +41,6 @@ const filesProcessing = async (
   files: File[],
   id: number
 ): Promise<FileModel[]> => {
-  console.log(files);
   if (!files) return [];
 
   const filesSendResp = await orderStore.sendOrderFiles(files, id);
@@ -63,8 +62,6 @@ const filesProcessing = async (
 };
 
 const onSubmit = handleSubmit.withControlled(async (values) => {
-  console.log(JSON.stringify(values, null, 2));
-
   const reqData: Omit<OrderData, 'files'> = {
     deadline: values.deadline.split('/').reverse().join('/'),
     promoName: values.promoName ?? null,
@@ -73,7 +70,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
   };
 
   const sendResp = await orderStore.sendOrder(reqData);
-  console.log(sendResp);
+
   if ('error' in sendResp) {
     errorResponse.value = sendResp.error as AxiosError;
     popup.value?.show();
@@ -90,6 +87,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     taskFiles: taskFiles,
     taskText: reqData.taskText,
     type: reqData.type,
+    id: sendResp.data.id,
   });
   dialog.value?.close();
   fileStore.clearFiles();
@@ -100,7 +98,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
   <ADialog ref="dialog">
     <div class="content-wrapper">
       <img
-        src="/src/assets/header/floor.svg"
+        src="assets/header/floor.svg"
         class="floor"
         alt=""
         ref="floor"

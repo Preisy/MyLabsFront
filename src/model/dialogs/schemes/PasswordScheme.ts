@@ -42,7 +42,6 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
       if (storeId) signData.invitedById = storeId;
 
       dialogStore.setPassword(values);
-      console.log(signData)
       return authStore.signup(signData) as unifiedApiPromise;
     },
     btnLabel: t('pages.landing.header.next'),

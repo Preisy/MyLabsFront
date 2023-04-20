@@ -18,7 +18,6 @@ const referrals = ref<FriendCardModel[]>();
 onMounted(async () => {
   const user = await userStore.getCreds();
   if ('error' in user) {
-    console.log(user);
     return;
   }
   const refs = await referralStore.getReferrals(

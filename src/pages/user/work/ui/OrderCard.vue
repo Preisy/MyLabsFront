@@ -7,16 +7,17 @@ import { ref } from 'vue';
 interface Props {
   card: OrderModel;
 }
+
 const props = defineProps<Props>();
 const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
-// console.log(props.card);
 </script>
+
 <template>
   <div class="card">
     <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap q-mr-sm">
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
-        <h2 class="title">{{ props.card.taskText.slice(0, 16) }}</h2>
+        <h2 class="title">{{ props.card.taskText.slice(0, 10) }}...</h2>
       </div>
     </div>
     <div class="details row justify-between items-end">

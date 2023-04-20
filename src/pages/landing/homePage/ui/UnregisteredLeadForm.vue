@@ -42,8 +42,6 @@ const UnregisteredLeadFormSchema = {
 };
 const schema = authStore.isAuth ? TaskSchema : UnregisteredLeadFormSchema;
 
-console.log(orderStore.loadOrder());
-
 const { handleSubmit } = useForm<UnregisteredLeadForm>({
   validationSchema: schema,
   initialValues: orderStore.orderData,
@@ -52,10 +50,7 @@ const { handleSubmit } = useForm<UnregisteredLeadForm>({
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
 const onSubmit = handleSubmit.withControlled((values) => {
-  console.log(JSON.stringify(values, null, 2));
-
   if (!authStore.isAuth) {
-    //Todo: what to do with order data(deadline, task, type)
     dialogStore.setUser(pick(values, keys(UserCredsSchema)));
     signupDialog.value?.open();
     orderStore.saveOrder(values as unknown as OrderData);
@@ -69,8 +64,6 @@ const onSubmit = handleSubmit.withControlled((values) => {
     type: values.type,
   };
 
-  console.log(sendData);
-  // if (!'promo')
   orderStore.sendOrder(sendData);
   orderStore.clearOrderCache();
 });
