@@ -1,6 +1,10 @@
+<script setup lang="ts">
+import image from 'src/assets/soon.svg';
+</script>
+
 <template>
   <div class="content">
-    <img class="icon" src="src/assets/soon.svg" alt="">
+    <img class="icon" :src="image" alt="">
   </div>
 </template>
 
