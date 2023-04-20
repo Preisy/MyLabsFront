@@ -216,7 +216,7 @@ onMounted(async () => {
 
   &.mobile {
     --header-height: 3rem;
-    border-radius: 0;
+    border-radius: 0 0 1rem 1rem;
     height: var(--header-height);
 
     .logo {

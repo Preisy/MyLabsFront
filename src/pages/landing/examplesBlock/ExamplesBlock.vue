@@ -86,6 +86,16 @@ onMounted(async () => {
     }
   }
 
+  .slider-wrapper {
+    overflow: hidden;
+    :deep(.q-panel-parent) {
+      overflow: unset;
+    }
+    :deep(.scroll) {
+      overflow: unset;
+    }
+  }
+
   .bg-image {
     --width: 75rem;
     --aspect-ratio: 1.58371;
@@ -103,19 +113,6 @@ onMounted(async () => {
   @media (max-width: $screen-sm) {
     .bg-image {
       --width: 50rem;
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-.examples {
-  .slider-wrapper {
-    .q-panel-parent {
-      overflow: unset;
-    }
-    .scroll {
-      overflow: unset;
     }
   }
 }
