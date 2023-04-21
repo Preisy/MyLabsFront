@@ -13,9 +13,9 @@ const referralStore = useReferralStore();
 const photo = ref<string>();
 
 onMounted(async () => {
-  const userPhoto = await referralStore.getFriendPhoto(props.card.id);
+  const userPhoto = await referralStore.getFriendPhoto(props.card.invitedUser.id);
   if ('error' in userPhoto) {
-    console.warn(`Cant fetch user(${props.card.id}) photo`);
+    console.warn(`Cant fetch user(${props.card.invitedUser.id}) photo`);
     return;
   }
 
@@ -27,12 +27,12 @@ onMounted(async () => {
   <div class="friend-card bg-primary br-15px">
     <div class="content-wrapper column justify-between">
       <div class="name row items-center no-wrap">
-        <img :src="card.photo ?? defaultPhoto" class="profile-img" />
-        <h2 class="title">{{ card.uname }}</h2>
+        <img :src="card.invitedUser.photo ?? defaultPhoto" class="profile-img" />
+        <h2 class="title">{{ card.invitedUser.uname }}</h2>
       </div>
       <div class="price-wrapper row">
         <q-icon class="icon" name="currency_ruble" />
-        <p class="value">{{ card.balance }}</p>
+        <p class="value">{{ card.deductions }}</p>
       </div>
     </div>
   </div>
@@ -47,8 +47,10 @@ onMounted(async () => {
   .content-wrapper {
     height: 100%;
   }
+
   .name {
     margin-bottom: 0.8rem;
+
     .title {
       margin-bottom: 0;
       margin-left: 0.5rem;
@@ -56,6 +58,7 @@ onMounted(async () => {
       // font-size: 1.4rem;
       // line-height: 1.5rem;
     }
+
     .profile-img {
       --size: 3.75rem;
       width: var(--size);
@@ -63,6 +66,7 @@ onMounted(async () => {
       border-radius: 100%;
     }
   }
+
   .price-wrapper {
     .icon {
       font-size: 1.3rem;
