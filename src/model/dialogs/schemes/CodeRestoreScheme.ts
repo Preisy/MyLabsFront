@@ -1,9 +1,8 @@
 import { storeToRefs } from 'pinia';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
-import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
-import { createErrorResponse, createSuccessResponse } from 'src/model/response/responseGenerators';
+import { createErrorResponse, createSuccessResponse } from 'src/global/utils/responseGenerators';
 import { useResetStore } from 'src/stores/ResetStore';
 
 

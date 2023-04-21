@@ -191,7 +191,7 @@ const getFileIco = (file: File) => {
     }
   }
 
-  .drag-n-drop:deep .q-uploader__dnd {
+  .drag-n-drop :deep(.q-uploader__dnd) {
     border-radius: 1.5rem !important;
   }
 }

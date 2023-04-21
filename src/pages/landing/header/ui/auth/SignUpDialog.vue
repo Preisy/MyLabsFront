@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DialogWrapper from './DialogWrapper.vue';
+import DialogWrapper from '../../../../../components/AModalDialog.vue';
 import { DialogData } from './types';
-import { SignupScheme, CodeScheme, PasswordScheme } from 'src/model/dialogs';
+import {
+  SignupScheme,
+  CodeScheme,
+  PasswordScheme,
+} from 'src/model/dialogs/schemes';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { useAuthStore } from 'src/stores/AuthStore';

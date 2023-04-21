@@ -5,7 +5,7 @@ import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { useResetStore } from 'src/stores/ResetStore';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
+import { unifiedApiPromise } from 'src/global/types/unifiedApiResponse';
 
 const dialogStore = useDialogStore();
 const resetStore = useResetStore();

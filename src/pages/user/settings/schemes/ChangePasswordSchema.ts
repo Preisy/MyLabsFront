@@ -1,8 +1,8 @@
 import { storeToRefs } from 'pinia';
 import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
-import { createErrorResponse } from 'src/model/response/responseGenerators';
+import { unifiedApiPromise } from 'src/global/types/unifiedApiResponse';
+import { createErrorResponse } from 'src/global/utils/responseGenerators';
 import { useUserStore } from 'src/stores/UserStore';
 import * as yup from 'yup';
 

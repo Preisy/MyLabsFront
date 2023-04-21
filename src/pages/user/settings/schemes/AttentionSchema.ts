@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
-import { createSuccessResponse } from 'src/model/response/responseGenerators';
+import { createSuccessResponse } from 'src/global/utils/responseGenerators';
 
 const dialogStore = useDialogStore();
 

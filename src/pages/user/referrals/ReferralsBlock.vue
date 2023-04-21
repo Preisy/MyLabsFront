@@ -29,7 +29,7 @@ onMounted(async () => {
     return;
   }
   console.log(refs);
-  
+
   referrals.value = refs;
 });
 </script>
@@ -40,9 +40,17 @@ onMounted(async () => {
       <h1 class="title text-center">{{ $t('pages.user.referrals.title') }}</h1>
       <q-scroll-area class="friends-scroller">
         <div class="friends-list column">
-          <div class="slide row justify-center no-wrap" v-for="(slide, index) in chunk(referrals, chunkCount)"
-            :key="index">
-            <FriendCard v-for="(card, index) in slide" :key="index" :card="card" class="referral-card" />
+          <div
+            class="slide row justify-center no-wrap"
+            v-for="(slide, index) in chunk(referrals, chunkCount)"
+            :key="index"
+          >
+            <FriendCard
+              v-for="(card, index) in slide"
+              :key="index"
+              :card="card"
+              class="referral-card"
+            />
           </div>
         </div>
       </q-scroll-area>
@@ -53,7 +61,7 @@ onMounted(async () => {
 <style scoped lang="scss">
 .referrals {
   height: 100%;
-
+  border-radius: 2rem;
   .structure {
     padding-top: 2rem;
   }

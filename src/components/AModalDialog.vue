@@ -2,9 +2,9 @@
 import ADialog from 'src/components/ADialog';
 import ADynamicForm from 'src/components/ADynamicForm';
 import { ref } from 'vue';
-import { DialogData } from './types';
+import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { SubmissionContext } from 'vee-validate';
-import SuccessDialog from './SuccessDialog.vue';
+import SuccessDialog from 'src/pages/landing/header/ui/auth/SuccessDialog.vue';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import { AxiosError } from 'axios';
 import floorImg from 'assets/header/floor.svg';

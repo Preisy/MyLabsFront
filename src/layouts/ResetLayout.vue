@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DialogWrapper from 'src/pages/landing/header/ui/auth/DialogWrapper.vue';
+import AModalDialog from 'src/components/AModalDialog.vue';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -9,7 +9,7 @@ import changePasswordData from 'src/model/changePassword/changePasswordData';
 import { useResetStore } from 'src/stores/ResetStore';
 
 const { t } = useI18n();
-const dialog = ref<InstanceType<typeof DialogWrapper>>();
+const dialog = ref<InstanceType<typeof AModalDialog>>();
 const resetStore = useResetStore();
 
 let resetDialogData: DialogData[] = [PasswordRestoreScheme(t)];
@@ -30,11 +30,7 @@ onMounted(() => {
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <DialogWrapper
-        :closable="false"
-        :dialogs="resetDialogData"
-        ref="dialog"
-      />
+      <AModalDialog :closable="false" :dialogs="resetDialogData" ref="dialog" />
     </q-page-container>
   </q-layout>
 </template>

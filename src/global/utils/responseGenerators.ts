@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import { unifiedApiPromise } from './unifiedApiResponse'
+import { unifiedApiPromise } from 'src/global/types/unifiedApiResponse'
 
 export function createSuccessResponse(msg: string): unifiedApiPromise {
     return new Promise((resolve) => resolve({ status: msg }))

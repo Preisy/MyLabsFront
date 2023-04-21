@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DialogWrapper from 'src/pages/landing/header/ui/auth/DialogWrapper.vue';
+import DialogWrapper from 'src/components/AModalDialog.vue';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useI18n } from 'vue-i18n';
 import { ChangePasswordSchema } from '../schemes/ChangePasswordSchema';

@@ -13,9 +13,9 @@ import AErrPopup from 'src/components/AErrPopup.vue';
 import ADatePicker from 'src/components/ADatePicker.vue';
 import OrderData from 'src/model/order/OrderData';
 import FileAttachDialog from 'src/pages/landing/homePage/ui/FileAttachDialog.vue';
-import { FileModel } from '../../work/ui/Card';
+import { FileModel } from 'src/pages/user/work/ui/Card';
 import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
-import floor from 'assets/header/floor.svg';
+import floorImg from 'assets/header/floor.svg';
 
 const dialog = ref<InstanceType<typeof ADialog>>();
 const orderStore = useOrderStore();
@@ -98,7 +98,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
 <template>
   <ADialog ref="dialog">
     <div class="content-wrapper">
-      <img :src="floor" class="floor" alt="" ref="floor" @click="close" />
+      <img :src="floorImg" class="floor" alt="" ref="floor" @click="close" />
       <h2 class="title">{{ $t('pages.user.main.order-dialog.title') }}</h2>
       <div class="body-wrapper">
         <form class="form" @submit="onSubmit">
@@ -176,7 +176,6 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     right: -130%;
     z-index: -1;
     opacity: 0.5;
-    // transition: opacity 0.1s ease-in-out;
   }
 
   .file-btn-wrapper {

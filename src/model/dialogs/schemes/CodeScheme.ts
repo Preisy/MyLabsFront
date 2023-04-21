@@ -4,8 +4,8 @@ import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
-import { createErrorResponse } from 'src/model/response/responseGenerators';
+import { unifiedApiPromise } from 'src/global/types/unifiedApiResponse';
+import { createErrorResponse } from 'src/global/utils/responseGenerators';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();

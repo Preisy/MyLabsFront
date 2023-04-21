@@ -1,6 +1,6 @@
 import FieldProps from 'src/components/ADynamicForm/types';
 import { SimpleState } from 'src/global/types';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
+import { unifiedApiPromise } from 'src/global/types/unifiedApiResponse';
 import { SubmissionContext } from 'vee-validate';
 import { Ref } from 'vue';
 
