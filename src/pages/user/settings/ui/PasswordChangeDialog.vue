@@ -7,6 +7,7 @@ import { ChangePasswordSchema } from '../schemes/ChangePasswordSchema';
 import { useUserStore } from 'src/stores/UserStore';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { AttentionSchema } from '../schemes/AttentionSchema';
+import { Router } from 'src/router';
 
 const { t } = useI18n();
 
@@ -34,10 +35,13 @@ const dialogSchemas: DialogData[] = [
   AttentionSchema(t),
   ChangePasswordSchema(t),
 ];
+
+const onComplete = () => { Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload()) }
 </script>
 
 <template>
-  <DialogWrapper :dialogs="dialogSchemas" :need-last="false" ref="dialog" />
+  <DialogWrapper :dialogs="dialogSchemas" :need-last="false" ref="dialog"
+    :on-complete="onComplete" />
 </template>
 
 <style scoped lang="scss"></style>

@@ -11,6 +11,7 @@ import floorImg from 'assets/header/floor.svg';
 
 interface Props {
   dialogs: DialogData[];
+  onComplete?: () => void;
   needLast?: boolean;
   closable?: boolean;
 }
@@ -101,7 +102,12 @@ defineExpose({
     <SuccessDialog
       v-else-if="needLast"
       :i="dialogs.length + 1"
-      @close="close()"
+      @close="
+        () => {
+          close();
+          props.onComplete?.();
+        }
+      "
     />
   </ADialog>
 </template>
@@ -161,6 +167,7 @@ defineExpose({
   background-color: #ffffff99;
   backdrop-filter: blur(0.4rem);
 }
+
 .q-dialog__inner > div {
   overflow: unset;
 }

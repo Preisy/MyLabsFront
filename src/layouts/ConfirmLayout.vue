@@ -7,6 +7,7 @@ import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import { Router } from 'src/router';
 
 const { t } = useI18n();
 const dialog = ref<InstanceType<typeof AModalDialog>>();
@@ -18,12 +19,20 @@ onMounted(() => {
   const email = useRoute().query as Pick<User, 'email'>;
   dialogStore.setEmail(email);
 });
+
+const onComplete = () => {
+  Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+};
 </script>
 
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <AModalDialog :dialogs="signupDialogData" ref="dialog" />
+      <AModalDialog
+        :dialogs="signupDialogData"
+        ref="dialog"
+        :on-complete="onComplete"
+      />
     </q-page-container>
   </q-layout>
 </template>

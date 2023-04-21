@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DialogWrapper from '../../../../../components/AModalDialog.vue';
+import AModalDialog from 'src/components/AModalDialog.vue';
 import { DialogData } from './types';
 import {
   SignupScheme,
@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useRoute } from 'vue-router';
+import { Router } from 'src/router';
 
 const { t } = useI18n();
 interface Props {
@@ -19,7 +20,7 @@ interface Props {
 const props = defineProps<Props>();
 const authStore = useAuthStore();
 
-let dialog = ref<InstanceType<typeof DialogWrapper>>();
+let dialog = ref<InstanceType<typeof AModalDialog>>();
 const isDialogOpened = computed(() => dialog.value?.isOpened);
 
 if ('ref' in useRoute().query)
@@ -43,10 +44,18 @@ if (props.start)
     props.start,
     signupDialogData.length
   );
+
+const onComplete = () => {
+  Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+};
 </script>
 
 <template>
-  <DialogWrapper :dialogs="signupDialogData" ref="dialog" />
+  <AModalDialog
+    :dialogs="signupDialogData"
+    ref="dialog"
+    :on-complete="onComplete"
+  />
 </template>
 
 <style scoped lang="scss"></style>

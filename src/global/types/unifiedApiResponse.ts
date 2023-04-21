@@ -1,2 +1,2 @@
-export type unifiedApiResponse = Record<string, unknown> | { error: unknown }
-export type unifiedApiPromise = Promise<unifiedApiResponse>
+export type UnifiedApiResponse = Record<string, unknown> | { error: unknown };
+export type UnifiedApiPromise = Promise<UnifiedApiResponse>;
