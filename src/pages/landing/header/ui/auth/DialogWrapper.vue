@@ -11,6 +11,7 @@ import floorImg from 'assets/header/floor.svg';
 
 interface Props {
   dialogs: DialogData[];
+  onComplete?: () => void;
   needLast?: boolean;
   closable?: boolean;
 }
@@ -74,35 +75,18 @@ defineExpose({
 <template>
   <ADialog ref="dialog" @close="isOpened = false">
     <div v-if="i != dialogs.length" class="content-wrapper">
-      <img
-        :src="floorImg"
-        class="floor"
-        alt=""
-        ref="floor"
-        @click="close"
-        :class="{ showed: isOpened }"
-      />
+      <img :src="floorImg" class="floor" alt="" ref="floor" @click="close" :class="{ showed: isOpened }" />
       <h2 class="title">
         {{ dialogs[i].title }}
       </h2>
       <div class="body-wrapper">
-        <ADynamicForm
-          :schema="dialogs[i].schema"
-          :on-submit="onSubmit"
-          :btn-label="dialogs[i].btnLabel"
-          :state="dialogs[i].state.value"
-          class="form"
-          button-width="9rem"
-        />
+        <ADynamicForm :schema="dialogs[i].schema" :on-submit="onSubmit" :btn-label="dialogs[i].btnLabel"
+          :state="dialogs[i].state.value" class="form" button-width="9rem" />
       </div>
       <div class="page-counter">{{ i + 1 }} / {{ dialogsLen }}</div>
       <AErrPopup class="errorPopup" :axios-err="errorResponse" ref="popup" />
     </div>
-    <SuccessDialog
-      v-else-if="needLast"
-      :i="dialogs.length + 1"
-      @close="close()"
-    />
+    <SuccessDialog v-else-if="needLast" :i="dialogs.length + 1" @close="() => { close(); props.onComplete?.(); }" />
   </ADialog>
 </template>
 
@@ -161,7 +145,8 @@ defineExpose({
   background-color: #ffffff99;
   backdrop-filter: blur(0.4rem);
 }
-.q-dialog__inner > div {
+
+.q-dialog__inner>div {
   overflow: unset;
 }
 </style>

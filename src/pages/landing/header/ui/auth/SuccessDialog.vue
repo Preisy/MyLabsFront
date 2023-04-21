@@ -11,8 +11,10 @@ const emit = defineEmits<{
 }>();
 
 const onclick = () => {
+  // debugger;
   emit('close');
-  window.location.reload();
+  // debugger;
+  // setTimeout(() => window.location.reload(), 0);
 };
 </script>
 
@@ -24,12 +26,7 @@ const onclick = () => {
       <img class="heart-img" :src="heartImg" alt="" loading="eager" />
     </div>
     <div class="controls-wrapper">
-      <ABtn
-        class="q-px-xl"
-        to="/#"
-        :label="$t('pages.landing.header.auth.success.button')"
-        @click="onclick"
-      />
+      <ABtn class="q-px-xl" :label="$t('pages.landing.header.auth.success.button')" @click="onclick" />
     </div>
     <div class="page-counter">{{ i }} / {{ i }}</div>
   </div>
@@ -48,8 +45,10 @@ const onclick = () => {
   .title {
     margin-bottom: 0.6rem;
   }
+
   .body-wrapper {
     margin-bottom: 1rem;
+
     p {
       font-size: 1.3rem;
       margin-bottom: 1rem;
@@ -60,11 +59,13 @@ const onclick = () => {
     margin-bottom: 0.75rem;
     text-align: center;
   }
+
   .heart-img {
     height: 6.2rem;
     margin: 0 auto;
     display: block;
   }
+
   .page-counter {
     width: min-content;
     white-space: nowrap;

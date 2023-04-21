@@ -3,7 +3,7 @@ import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
+import { UnifiedApiPromise } from 'src/model/response/unifiedApiResponse';
 import { createErrorResponse } from 'src/model/response/responseGenerators';
 
 const authStore = useAuthStore();
@@ -16,13 +16,13 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
         label: 'password',
         name: 'password',
         rules: UserCredsSchema.password,
-        type: 'password'
+        type: 'password',
       },
       {
         label: 'password confirmation',
         name: 'password_confirmation',
         rules: UserCredsSchema.password,
-        type: 'password'
+        type: 'password',
       },
     ],
     onSubmit: (values, ctx) => {
@@ -42,7 +42,7 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
       if (storeId) signData.invitedById = storeId;
 
       dialogStore.setPassword(values);
-      return authStore.signup(signData) as unifiedApiPromise;
+      return authStore.signup(signData) as UnifiedApiPromise;
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).signupState,

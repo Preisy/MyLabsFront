@@ -4,7 +4,7 @@ import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
-import { unifiedApiPromise } from 'src/model/response/unifiedApiResponse';
+import { UnifiedApiPromise } from 'src/model/response/unifiedApiResponse';
 import { createErrorResponse } from 'src/model/response/responseGenerators';
 
 const authStore = useAuthStore();
@@ -33,7 +33,7 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
         email: dialogStore.userCreds.email,
       };
 
-      return authStore.signupConfirm(codeCheckData) as unifiedApiPromise;
+      return authStore.signupConfirm(codeCheckData) as UnifiedApiPromise;
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).codeApproveState,

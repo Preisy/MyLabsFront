@@ -7,6 +7,7 @@ import { useRoute } from 'vue-router';
 import { PasswordRestoreScheme } from 'src/model/dialogs/schemes/PasswordRestoreScheme';
 import changePasswordData from 'src/model/changePassword/changePasswordData';
 import { useResetStore } from 'src/stores/ResetStore';
+import { Router } from 'src/router'
 
 const { t } = useI18n();
 const dialog = ref<InstanceType<typeof DialogWrapper>>();
@@ -25,16 +26,15 @@ onMounted(() => {
   resetStore.setEmail(email);
   console.log(resetStore.changeData);
 });
+
+
 </script>
 
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <DialogWrapper
-        :closable="false"
-        :dialogs="resetDialogData"
-        ref="dialog"
-      />
+      <DialogWrapper :closable="false" :dialogs="resetDialogData" ref="dialog"
+        :on-complete="() => { Router.replace({ path: '/mpc/tasks' }) }" />
     </q-page-container>
   </q-layout>
 </template>

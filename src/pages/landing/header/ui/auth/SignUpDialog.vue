@@ -7,6 +7,7 @@ import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useRoute } from 'vue-router';
+import { Router } from 'src/router';
 
 const { t } = useI18n();
 interface Props {
@@ -39,10 +40,13 @@ if (props.start)
     props.start,
     signupDialogData.length
   );
+
+const onComplete = () => { Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload()) }
 </script>
 
 <template>
-  <DialogWrapper :dialogs="signupDialogData" ref="dialog" />
+  <DialogWrapper :dialogs="signupDialogData" ref="dialog"
+    :on-complete="onComplete" />
 </template>
 
 <style scoped lang="scss"></style>
