@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "landing": {
+      "footerBlock": {
+        "title": "«MyLabs» — Secure online service with trusted experts for your labs",
+        "contacts": "Contacts",
+        "information": "Information",
+        "tg": "Telegram",
+        "vk": "Vkontakte",
+        "about": "About us",
+        "referral": "Referral program"
+      }
+    }
+  }
+}

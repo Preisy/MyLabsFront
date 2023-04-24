@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "landing": {
+      "examplesBlock": {
+        "title": "Примеры работ",
+        "card": {
+          "hours": "часов",
+          "roubles": "рублей"
+        }
+      }
+    }
+  }
+}

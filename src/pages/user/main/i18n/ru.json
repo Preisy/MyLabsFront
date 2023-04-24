@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "user": {
+      "main": {
+        "balance": "Баланс",
+        "order": "Заказать",
+        "order-dialog": {
+          "title": "Новый заказ"
+        }
+      }
+    }
+  }
+}

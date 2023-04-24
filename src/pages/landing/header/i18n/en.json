@@ -1,0 +1,37 @@
+{
+  "pages": {
+    "landing": {
+      "header": {
+        "possibilities": "Possibilities",
+        "examples": "Work examples",
+        "reviews": "Reviews",
+        "FAQ": "FAQ",
+        "login": "Login",
+        "signup": "Signup",
+        "next": "Next",
+        "lang": "Lang",
+        "auth": {
+          "signup": {
+            "1": "Get opportunities after registration",
+            "2": "Come up with a password!",
+            "3": "Paste the code that will be sent to your email"
+          },
+          "login": {
+            "btn": "Forgot password",
+            "1": "Welcome back!",
+            "restore": {
+              "1": "Don't worry! Recover your password.",
+              "2": "Paste the code that will be sent to your email",
+              "3": "Come up with a password!"
+            }
+          },
+          "success": {
+            "title": "You are a Superman! Congratulations",
+            "text": "Registration is complete, the administrator will write to you soon!",
+            "button": "Complete"
+          }
+        }
+      }
+    }
+  }
+}

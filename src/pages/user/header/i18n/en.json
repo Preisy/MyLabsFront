@@ -1,0 +1,21 @@
+{
+  "pages": {
+    "user": {
+      "header": {
+        "home": "Home",
+        "tasks": "Tasks",
+        "referrals": "Referrals",
+        "settings": "Settings",
+        "contacts": "Contacts",
+        "inviteFriend": "Invite friend",
+        "dialogs": {
+          "invite": {
+            "title": "Invite friends and get money!",
+            "desc": "For each friend you get 10% of his order",
+            "btn": "Wow"
+          }
+        }
+      }
+    }
+  }
+}

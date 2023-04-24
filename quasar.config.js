@@ -37,7 +37,7 @@ module.exports = configure(function (/* ctx */) {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
-      // 'fontawesome-v6',
+      'fontawesome-v6',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -51,7 +51,7 @@ module.exports = configure(function (/* ctx */) {
     build: {
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-        node: 'node16',
+        node: 'node16'
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -94,7 +94,17 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
+      proxy: {
+        '/api': {
+          target: 'http://my-labs.ru/api',
+          // target: 'https://2a11-46-39-55-196.ngrok-free.app/api',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+        cors: false,
+      },
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

@@ -1,0 +1,10 @@
+{
+  "pages": {
+    "user": {
+      "work": {
+        "inProgress": "In progress",
+        "oldWorks": "Old works"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "user": {
+      "main": {
+        "balance": "Balance",
+        "order": "Order",
+        "order-dialog": {
+          "title": "New order"
+        }
+      }
+    }
+  }
+}

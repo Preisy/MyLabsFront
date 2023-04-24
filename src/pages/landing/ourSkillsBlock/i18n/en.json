@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "landing": {
+      "ourSkillsBlock": {
+        "title": "Our skills",
+        "details": "If your language or framework is not listed here, contact us and we will advise you!",
+        "contacts-btn": "Contacts"
+      }
+    }
+  }
+}
