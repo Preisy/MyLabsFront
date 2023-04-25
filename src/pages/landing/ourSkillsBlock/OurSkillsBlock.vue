@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SkillTreeComponent from './ui/SkillTreeComponent.vue';
 import OurSkillsDescription from './ui/OurSkillsDescription.vue';
+import floorImg from 'assets/header/floor.svg';
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
         </div>
       </div>
     </div>
+    <img :src="floorImg" class="floor" alt="" ref="floor" />
   </div>
 </template>
 
@@ -27,6 +29,15 @@ import OurSkillsDescription from './ui/OurSkillsDescription.vue';
   position: relative;
   z-index: 1;
   overflow: hidden;
+
+  .floor {
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: -5%;
+    z-index: -1;
+    opacity: 0.5;
+  }
 
   .skills-diagram {
     position: relative;

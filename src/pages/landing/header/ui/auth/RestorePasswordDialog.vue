@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DialogWrapper from 'src/components/AModalDialog.vue';
+import AModalDialog from 'src/components/AModalDialog.vue';
 import { DialogData } from './types';
 import { RestoreScheme } from 'src/model/dialogs/schemes';
 import { useI18n } from 'vue-i18n';
@@ -10,7 +10,7 @@ import { Router } from 'src/router';
 
 const { t } = useI18n();
 
-let dialog = ref<InstanceType<typeof DialogWrapper>>();
+let dialog = ref<InstanceType<typeof AModalDialog>>();
 defineExpose({
   open: () => dialog.value?.open(),
 });
@@ -27,7 +27,7 @@ const onComplete = () => {
 </script>
 
 <template>
-  <DialogWrapper
+  <AModalDialog
     :dialogs="signupDialogData"
     ref="dialog"
     :on-complete="onComplete"

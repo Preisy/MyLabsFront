@@ -47,7 +47,11 @@ onMounted(async () => {
         {{ $t('pages.landing.reviewsPage.title') }}
       </h1>
       <div class="slider-wrapper">
-        <ACarousel v-model="carousel_val" :slides-count="_slides?.length ?? 0">
+        <ACarousel
+          class="review-slider"
+          v-model="carousel_val"
+          :slides-count="_slides?.length ?? 0"
+        >
           <CarouselSlide
             v-for="(slide, index) in _slides"
             :key="index"
@@ -82,10 +86,11 @@ onMounted(async () => {
   .content-wrapper {
     .title {
       padding-bottom: 3.5rem;
+      margin: 0;
     }
 
     .slider-wrapper {
-      width: 50%;
+      width: 29rem;
       margin: 0 auto;
 
       .slider {
@@ -120,7 +125,7 @@ onMounted(async () => {
         margin-bottom: 2.5rem;
       }
       .slider-wrapper {
-        width: 100%;
+        width: 22rem;
       }
     }
   }

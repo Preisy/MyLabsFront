@@ -126,10 +126,10 @@ defineExpose({
     user-select: none;
     position: absolute;
     top: -100%;
-    right: -160%;
+    right: -140%;
     z-index: -1;
-    opacity: 0;
-    // transition: opacity 0.1s ease-in-out;
+    // opacity: 0;
+    transition: opacity 0.1s ease-in-out;
   }
 
   .showed {

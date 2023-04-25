@@ -13,9 +13,9 @@ import manOnChair from 'assets/man_on_chair_alt.png';
 const slider_index = ref('0');
 
 const cardsInOneSlide = computed(() => {
-  if (Screen.lt.sm) return 1;
+  if (Screen.lt.sm) return 2;
 
-  if (Screen.width <= 900) return 3;
+  if (Screen.width <= 900) return 4;
 
   return 6;
 });
@@ -51,15 +51,17 @@ onMounted(async () => {
           v-for="(slide, index) in _slides"
           :key="index"
           :name="index.toString()"
+          class="slide"
         >
           <ExamplesCardComponent
+            class="example-card"
             v-for="(card, index) in slide"
             :key="index"
             :img-src="taskTypeToImg(card.type)"
             :title="card.title"
             :time="card.duration.toString()"
             :price="card.price.toString()"
-          ></ExamplesCardComponent>
+          />
         </SlideComponent>
       </ACarousel>
     </div>
@@ -94,6 +96,12 @@ onMounted(async () => {
     :deep(.scroll) {
       overflow: unset;
     }
+
+    // .slide {
+    //   .example-card:nth-child(2n-1) {
+    //     justify-self: end;
+    //   }
+    // }
   }
 
   .bg-image {

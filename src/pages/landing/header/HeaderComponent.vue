@@ -47,36 +47,70 @@ onMounted(async () => {
 </script>
 
 <template>
-  <q-header class="header" :class="{ compact: isCompact && !isMobile, mobile: isMobile }">
+  <q-header
+    class="header"
+    :class="{ compact: isCompact && !isMobile, mobile: isMobile }"
+  >
     <QScrollObserver axis="vertical" @scroll="scrollHandler" />
     <img :src="mylabsLogo" alt="" class="logo" />
 
-    <q-toolbar class="header-toolbar justify-between" :class="{ opened: isMenuOpened, column: isMobile }">
+    <q-toolbar
+      class="header-toolbar justify-between"
+      :class="{ opened: isMenuOpened, column: isMobile }"
+    >
       <div class="header-buttons" :class="{ 'column items-start': isMobile }">
-        <HeaderBtn v-for="(link, index) in buttonLinks" :key="index" v-model="currentLinkIndex" :id="index"
-          :label="link.label" :target="link.value" class="header-btn" />
+        <HeaderBtn
+          v-for="(link, index) in buttonLinks"
+          :key="index"
+          v-model="currentLinkIndex"
+          :id="index"
+          :label="link.label"
+          :target="link.value"
+          class="header-btn"
+        />
       </div>
 
-      <div class="right-btns" :class="{ row: !isMobile, 'column reverse': isMobile }">
-        <LangSwitch class="q-mr-md" />
+      <div
+        class="right-btns"
+        :class="{ row: !isMobile, 'column reverse': isMobile }"
+      >
+        <LangSwitch class="q-mr-md right-btn" />
         <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
-          <ABtn v-if="!useAuthStore().isAuth" class="auth-login q-px-xl" theme="light"
-            :label="$t('pages.landing.header.login')" @click="
-                            if (!isSignupOpened) {
-              login?.open();
-              isMenuOpened = false;
-            }
-                          " />
-          <ABtn v-if="!useAuthStore().isAuth" class="auth-signup" theme="dark" :label="$t('pages.landing.header.signup')"
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-login right-btn q-px-xl"
+            theme="light"
+            :label="$t('pages.landing.header.login')"
             @click="
-                            if (!isLoginOpened) {
-              signup?.open();
-              isMenuOpened = false;
-            }
-                          " />
+              if (!isSignupOpened) {
+                login?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-signup right-btn q-px-xl"
+            theme="dark"
+            :label="$t('pages.landing.header.signup')"
+            @click="
+              if (!isLoginOpened) {
+                signup?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
         </div>
-        <q-btn class="photo-wrapper-btn" flat v-if="useAuthStore().isAuth" to="mpc/tasks">
-          <img class="user-photo" :src="userStore.userPhotoUrl ?? defaultPhoto" />
+        <q-btn
+          class="photo-wrapper-btn"
+          flat
+          v-if="useAuthStore().isAuth"
+          to="mpc/tasks"
+        >
+          <img
+            class="user-photo"
+            :src="userStore.userPhotoUrl ?? defaultPhoto"
+          />
         </q-btn>
         <LoginDialog ref="login" />
         <SignUpDialog ref="signup" />
@@ -84,11 +118,21 @@ onMounted(async () => {
     </q-toolbar>
 
     <div v-if="isMobile" class="btn-holder">
-      <q-btn size="1.2rem" flat color="dark" :icon="isMenuOpened ? 'close' : 'menu'"
-        @click="isMenuOpened = !isMenuOpened" />
+      <q-btn
+        size="1.2rem"
+        flat
+        color="dark"
+        :icon="isMenuOpened ? 'close' : 'menu'"
+        @click="isMenuOpened = !isMenuOpened"
+      />
     </div>
 
-    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" @click="isMenuOpened = false" />
+    <div
+      v-if="isMobile"
+      class="bg-prevent"
+      :class="{ open: isMenuOpened }"
+      @click="isMenuOpened = false"
+    />
   </q-header>
   <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
@@ -152,15 +196,18 @@ onMounted(async () => {
 
     .user-photo {
       --size: 2.25rem;
-      --max-size: 2.4rem; 
+      --max-size: 2.4rem;
       max-width: var(--max-size);
-      height: var(--size); 
+      height: var(--size);
       border-radius: 100%;
       box-shadow: 0 0 4px 0 #00000066;
     }
   }
 
   .right-btns {
+    .right-btn {
+      max-width: 10rem;
+    }
     .auth-login {
       margin-right: 0.75rem;
     }

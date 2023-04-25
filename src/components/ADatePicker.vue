@@ -41,8 +41,13 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
     >
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date color="info" v-model="value">
+          <q-popup-proxy
+            class="datepicker-proxy br-15px"
+            cover
+            transition-show="scale"
+            transition-hide="scale"
+          >
+            <q-date class="datepicker" color="info" v-model="value">
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="Close" color="primary" flat />
               </div>
@@ -58,8 +63,7 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
 .date-input {
   padding: 0;
   font-size: 0.6rem;
-}
-.date-input {
+
   &.q-field--filled :deep(.q-field__control:after) {
     display: none;
   }

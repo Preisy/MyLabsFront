@@ -44,9 +44,9 @@ const toggleExtend = () => {
   z-index: 1;
   .popup {
     position: absolute;
-    left: -1rem;
-    right: -1rem;
-    top: 5rem;
+    left: 0rem;
+    right: 0rem;
+    top: 6.5rem;
 
     padding: 0.4rem;
     box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
@@ -55,6 +55,9 @@ const toggleExtend = () => {
     transition: 0.3s all ease-in-out;
     opacity: 1;
     z-index: 2;
+    @media (max-width: $screen-md) {
+      top: 7.2rem;
+    }
 
     &.hide {
       opacity: 0;
@@ -68,7 +71,8 @@ const toggleExtend = () => {
   }
   .light {
     position: absolute;
-    left: 0;
+    left: 4px;
+    right: 0;
     z-index: -1;
     transition: 0.5s all ease-in-out;
     opacity: 0.5;
@@ -77,10 +81,6 @@ const toggleExtend = () => {
     &.hide {
       opacity: 0;
       visibility: hidden;
-    }
-
-    @media (max-width: $screen-md) {
-      left: 0;
     }
   }
 }

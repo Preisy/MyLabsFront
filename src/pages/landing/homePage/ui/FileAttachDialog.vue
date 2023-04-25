@@ -5,6 +5,7 @@ import { ref } from 'vue';
 import { remove } from 'lodash';
 import { useFileStore } from '../store/FileStore';
 import { FileExtensionMap, FileTypeMap } from './TypeToIconMap';
+import floorImg from 'assets/header/floor.svg';
 
 const fileStore = useFileStore();
 const uploader = ref<InstanceType<typeof QUploader>>();
@@ -47,69 +48,86 @@ const getFileIco = (file: File) => {
 
 <template>
   <ADialog ref="dialog" class="file-dialog">
-    <QUploader
-      ref="uploader"
-      multiple
-      color="grey"
-      text-color="dark"
-      class="drag-n-drop"
-      @added="onadded"
-      @removed="onremove"
-    >
-      <template #header> </template>
-      <template v-slot:list="scope">
-        <div
-          v-if="scope.files.length === 0"
-          class="placeholder flex flex-center fill full-height text-center"
-          @click="uploader?.pickFiles"
-        >
-          <q-uploader-add-trigger />
-          Перетащите <br />
-          файлы
-        </div>
-
-        <div v-else class="files-grid">
+    <div class="wrapper">
+      <QUploader
+        ref="uploader"
+        multiple
+        color="grey"
+        text-color="dark"
+        class="drag-n-drop"
+        @added="onadded"
+        @removed="onremove"
+      >
+        <template #header> </template>
+        <template v-slot:list="scope">
           <div
-            class="file-wrapper"
-            v-for="file in <File[]>scope.files"
-            :key="file.name"
-          >
-            <q-icon class="file" :name="`fa-solid ${getFileIco(file)}`" />
-
-            <q-btn
-              class="delete-btn"
-              icon="close"
-              color="red"
-              round
-              size="8px"
-              @click="scope.removeFile(file)"
-            />
-            <p class="filename text-center">
-              {{ file.name.slice(0, 8) + '...' }}
-            </p>
-          </div>
-
-          <q-btn
-            v-if="scope.files.length !== 0"
-            class="add-file"
-            @click="scope.pickFiles"
+            v-if="scope.files.length === 0"
+            class="placeholder flex flex-center fill full-height text-center"
+            @click="uploader?.pickFiles"
           >
             <q-uploader-add-trigger />
-            <q-icon class="icon" name="add" />
-          </q-btn>
-        </div>
-      </template>
-    </QUploader>
+            Перетащите <br />
+            файлы
+          </div>
+
+          <div v-else class="files-grid">
+            <div
+              class="file-wrapper"
+              v-for="file in <File[]>scope.files"
+              :key="file.name"
+            >
+              <q-icon class="file" :name="`fa-solid ${getFileIco(file)}`" />
+
+              <q-btn
+                class="delete-btn"
+                icon="close"
+                color="red"
+                round
+                size="8px"
+                @click="scope.removeFile(file)"
+              />
+              <p class="filename text-center">
+                {{ file.name.slice(0, 8) + '...' }}
+              </p>
+            </div>
+
+            <q-btn
+              v-if="scope.files.length !== 0"
+              class="add-file"
+              @click="scope.pickFiles"
+            >
+              <q-uploader-add-trigger />
+              <q-icon class="icon" name="add" />
+            </q-btn>
+          </div>
+        </template>
+      </QUploader>
+
+      <img
+        :src="floorImg"
+        class="floor"
+        alt=""
+        ref="floor"
+        @click="dialog?.close"
+      />
+    </div>
   </ADialog>
 </template>
 
 <style scoped lang="scss">
 .file-dialog {
+  .wrapper {
+    width: fit-content;
+    height: fit-content;
+
+    position: relative;
+  }
+
   .content-wrapper {
     border-radius: 1.5rem;
   }
   .drag-n-drop {
-    box-shadow: 0 0 1rem 0 #00000044;
+    box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
     // padding: 1.5rem;
     width: auto;
     min-height: 20rem;
@@ -193,6 +211,15 @@ const getFileIco = (file: File) => {
 
   .drag-n-drop :deep(.q-uploader__dnd) {
     border-radius: 1.5rem !important;
+  }
+
+  .floor {
+    user-select: none;
+    position: absolute;
+    top: -100%;
+    right: -315%;
+    z-index: -1;
+    opacity: 0.5;
   }
 }
 </style>

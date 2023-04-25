@@ -31,7 +31,7 @@ const onclick = () => {
 
 <style scoped lang="scss">
 .lang-btn {
-  --highlight-padding: -1rem;
+  --highlight-padding: 0rem;
   --highlight-width: calc(100% + var(--highlight-padding));
   --highlight-middlepoint: calc(var(--highlight-width) / 2);
   --highlight-offset: calc(-1 * var(--highlight-padding) / 2);
@@ -39,6 +39,7 @@ const onclick = () => {
   font-weight: 600;
   height: 1.4rem;
   font-size: 1rem;
+  padding: 0;
 
   &::before {
     content: '';

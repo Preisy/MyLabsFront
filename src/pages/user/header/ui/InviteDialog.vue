@@ -3,7 +3,7 @@ import ADialog from 'src/components/ADialog';
 import ABtn from 'src/components/ABtn.vue';
 import { ref } from 'vue';
 import { useUserStore } from 'src/stores/UserStore';
-import floor from 'assets/header/floor.svg';
+import floorImg from 'assets/header/floor.svg';
 import heart from 'assets/pop_up/heart.png';
 
 let dialog = ref<InstanceType<typeof ADialog>>();
@@ -34,7 +34,7 @@ const myId = ref(0);
 <template>
   <ADialog ref="dialog">
     <div class="content-wrapper">
-      <img :src="floor" class="floor" alt="" ref="floor" @click="close" />
+      <img :src="floorImg" class="floor" alt="" @click="close" />
 
       <h2 class="title">{{ $t('pages.user.header.dialogs.invite.title') }}</h2>
       <div class="body-wrapper">
@@ -67,11 +67,20 @@ const myId = ref(0);
   .floor {
     user-select: none;
     position: absolute;
-    top: -70%;
-    right: -160%;
+    top: -130%;
+    right: -100%;
     z-index: -1;
     opacity: 0.5;
     rotate: -100deg;
+
+    @media (max-width: $screen-md) {
+      top: -135%;
+      right: -160%;
+    }
+    @media (max-width: $screen-sm) {
+      top: -140%;
+      right: -220%;
+    }
     // transition: opacity 0.1s ease-in-out;
   }
 

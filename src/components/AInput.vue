@@ -52,7 +52,7 @@ const { errorMessage, value } = useField<string | number | undefined>(
     display: none;
   }
   :deep(.q-field__control) {
-    border-radius: 0.75rem;
+    border-radius: 15px;
   }
   :deep(.q-field__bottom) {
     white-space: nowrap !important;

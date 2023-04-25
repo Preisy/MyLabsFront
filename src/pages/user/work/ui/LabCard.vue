@@ -38,19 +38,18 @@ const props = defineProps<Props>();
   padding: 1rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
-  max-width: 15rem;
-  min-width: 8rem;
+  width: 15rem;
 
   @media (max-width: $screen-lg) {
-    max-width: 13rem;
+    width: 13rem;
   }
   @media (max-width: $screen-md) {
-    max-width: 12rem;
+    width: 12rem;
     padding: 0.8rem;
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    max-width: 10rem;
+    width: 10rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

@@ -51,7 +51,7 @@ const { errorMessage, value } = useField(props.name);
     display: none;
   }
   .q-field__control {
-    border-radius: 0.75rem;
+    border-radius: 15px;
   }
   .q-field__label {
     left: 10px;

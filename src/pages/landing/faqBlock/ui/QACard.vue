@@ -28,36 +28,13 @@ const props = defineProps<Props>();
 
   margin-bottom: 1.5rem;
 
-  .answer {
-    margin: 0;
-    margin-top: 1rem;
-  }
-  @media (max-width: $screen-md) {
-    padding: 0.8rem;
-    .answer {
-      font-size: 1rem;
-      margin-top: 0.8rem;
-    }
-  }
-  @media (max-width: $screen-sm) {
-    .answer {
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-    }
-  }
-}
-</style>
-
-<style lang="scss">
-.qa-card {
-  .q-focus-helper {
+  &:deep(.q-focus-helper) {
     display: none;
   }
-  .q-hover-helper {
+  &:deep(.q-hover-helper) {
     display: none;
   }
-
-  .card-btn {
+  &:deep(.card-btn) {
     --size: 2rem;
     width: var(--size);
     height: var(--size);
@@ -73,8 +50,10 @@ const props = defineProps<Props>();
       border-radius: 0.6rem;
     }
   }
-
-  .card-header {
+  &:deep(.card-btn > .q-icon) {
+    font-size: calc(var(--size)-0.3rem);
+  }
+  &:deep(.card-header) {
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.6rem;
@@ -87,6 +66,26 @@ const props = defineProps<Props>();
     }
     @media (max-width: $screen-sm) {
       font-size: 1.1rem;
+    }
+  }
+
+  .answer {
+    margin: 0;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  @media (max-width: $screen-md) {
+    padding: 0.8rem;
+    .answer {
+      font-size: 1rem;
+      margin-top: 0.8rem;
+    }
+  }
+  @media (max-width: $screen-sm) {
+    .answer {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
     }
   }
 }

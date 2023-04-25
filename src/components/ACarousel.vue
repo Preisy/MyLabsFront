@@ -53,7 +53,7 @@ const isMobile = Screen.lt.sm;
         :class="btn_classes"
         icon="chevron_left"
         @click="carousel?.previous()"
-      ></QBtn>
+      />
       <div class="counter" :class="text_classes">
         {{ parseInt(model) + 1 }} / {{ slidesCount }}
       </div>
@@ -62,7 +62,7 @@ const isMobile = Screen.lt.sm;
         :class="btn_classes"
         icon="chevron_right"
         @click="carousel?.next()"
-      ></QBtn>
+      />
     </div>
   </div>
 </template>
@@ -82,8 +82,9 @@ const isMobile = Screen.lt.sm;
   }
   .btn {
     --size: 2rem;
-    width: var(--size);
-    height: var(--size);
+    // width: var(--size);
+    // height: var(--size);
+    padding: calc(var(--size) / 4);
   }
 }
 
