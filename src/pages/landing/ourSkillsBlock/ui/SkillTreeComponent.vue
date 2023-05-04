@@ -43,6 +43,11 @@ onUnmounted(() => window.removeEventListener('resize', choose));
   }
 
   @media (max-width: $screen-md) {
+    --scale: 2.7rem;
+    font-size: 0.55rem;
+  }
+
+  @media (max-width: $screen-md) {
     --scale: 2rem;
     font-size: 0.55rem;
   }

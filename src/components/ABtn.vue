@@ -43,6 +43,7 @@ const state = ref<boolean>(false);
 <style scoped lang="scss">
 .btn {
   font-size: 0.8rem;
+  width: 8rem;
 }
 
 .text-weight-600 {

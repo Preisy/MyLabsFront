@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import ABtn from 'src/components/ABtn.vue';
-import LangBtn from './LangBtn.vue';
 import { ref } from 'vue';
 import langSwitchLight from 'assets/header/langSwitchLight.svg';
+import TgIcon from './TgIcon.vue';
+import VkIcon from './VkIcon.vue';
 
 const isShown = ref<boolean>(false);
 const toggleExtend = () => {
@@ -17,11 +18,11 @@ const toggleExtend = () => {
       class="bg-prevent fixed full-width full-height"
       @click="isShown = false"
     />
-    <div class="lang-switch">
+    <div class="contacts">
       <ABtn
         class="toggle-btn"
         theme="light"
-        :label="$t('pages.landing.header.lang')"
+        :label="$t('pages.user.header.contacts')"
         @click="toggleExtend"
       />
 
@@ -29,8 +30,12 @@ const toggleExtend = () => {
         class="popup row justify-around bg-primary"
         :class="{ hide: !isShown }"
       >
-        <LangBtn class="popup-brn" label="Eng" locale="en-US" />
-        <LangBtn class="popup-brn" label="Рус" locale="ru-RU" />
+        <q-btn class="tg-link link">
+          <TgIcon class="icon" path-classes="tg-icon" />
+        </q-btn>
+        <q-btn class="vk-link link">
+          <VkIcon class="icon" path-classes="vk-icon" />
+        </q-btn>
       </div>
       <img :src="langSwitchLight" class="light" :class="{ hide: !isShown }" />
     </div>
@@ -38,7 +43,7 @@ const toggleExtend = () => {
 </template>
 
 <style scoped lang="scss">
-.lang-switch {
+.contacts {
   position: relative;
   z-index: 1;
 
@@ -81,6 +86,25 @@ const toggleExtend = () => {
     &.hide {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+  .link {
+    --size: 3rem;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 100%;
+    padding: 0;
+
+    &:deep(.tg-icon) {
+      fill: #2aabee;
+    }
+    &:deep(.vk-icon) {
+      fill: #4c75a3;
+    }
+
+    .icon {
+      width: var(--size);
+      height: var(--size);
     }
   }
 }

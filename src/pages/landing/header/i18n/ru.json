@@ -2,7 +2,8 @@
   "pages": {
     "landing": {
       "header": {
-        "possibilities": "Возможности",
+        "home": "Начало",
+        "ourskills": "Возможности",
         "examples": "Примеры работ",
         "reviews": "Отзывы",
         "FAQ": "FAQ",

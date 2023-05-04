@@ -11,6 +11,7 @@ interface ButtonProps {
   placeholder?: string;
   initValue?: string;
   type?: QInputProps['type'];
+  autogrow?: boolean;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -19,6 +20,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   labelColor: 'dark',
   placeholder: '',
   initValue: '',
+  autogrow: false,
 });
 
 const { errorMessage, value } = useField<string | number | undefined>(
@@ -35,10 +37,12 @@ const { errorMessage, value } = useField<string | number | undefined>(
     :bg-color="props.bgColor"
     :error="!!errorMessage"
     :error-message="errorMessage"
+    :placeholder="placeholder"
     hide-bottom-space
     class="ainput"
     filled
     dense
+    :autogrow="props.autogrow"
     :color="color"
     :label="props.label"
     :label-color="props.labelColor"

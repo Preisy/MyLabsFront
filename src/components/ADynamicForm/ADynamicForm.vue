@@ -5,7 +5,6 @@ import { SubmissionContext, useForm } from 'vee-validate';
 import { fromPairs, map } from 'lodash';
 import FieldProps from './types';
 import { SimpleState } from 'src/global/types';
-// import { Ref, computed } from 'vue';
 
 interface ADynamicFormProps {
   schema: FieldProps[];
@@ -45,6 +44,7 @@ const onSubmit = handleSubmit.withControlled((values, ctx) => {
       :name="field.name"
       :label="field.label"
       :type="field.type"
+      :placeholder="field.placeholder"
     />
 
     <ABtn

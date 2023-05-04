@@ -2,7 +2,8 @@
   "pages": {
     "landing": {
       "header": {
-        "possibilities": "Possibilities",
+        "home": "Home",
+        "ourskills": "Our skills",
         "examples": "Work examples",
         "reviews": "Reviews",
         "FAQ": "FAQ",

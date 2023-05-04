@@ -10,7 +10,7 @@ const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
 </script>
 
 <template>
-  <div class="homepage">
+  <div class="homepage" id="home">
     <div class="structure content-wrapper">
       <div class="homepage-img">
         <img :src="manOnChair" class="man-on-chair" alt="" />

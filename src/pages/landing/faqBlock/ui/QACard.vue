@@ -24,7 +24,7 @@ const props = defineProps<Props>();
   box-shadow: 0 0 20px 0 #00000030;
   border-radius: 2rem;
 
-  padding: 1rem;
+  padding: 1rem 1.5rem;
 
   margin-bottom: 1.5rem;
 
@@ -76,7 +76,7 @@ const props = defineProps<Props>();
     padding-bottom: 0.5rem;
   }
   @media (max-width: $screen-md) {
-    padding: 0.8rem;
+    padding: 0.8rem 1.2rem;
     .answer {
       font-size: 1rem;
       margin-top: 0.8rem;

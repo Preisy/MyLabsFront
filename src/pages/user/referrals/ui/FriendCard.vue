@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import defaultPhoto from 'assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/user/default_photo.png';
 import { FriendCardModel } from './FriendCardModel';
 import { onMounted, ref } from 'vue';
 import { useReferralStore } from '../store/ReferralStore';
@@ -13,7 +13,9 @@ const referralStore = useReferralStore();
 const photo = ref<string>();
 
 onMounted(async () => {
-  const userPhoto = await referralStore.getFriendPhoto(props.card.invitedUser.id);
+  const userPhoto = await referralStore.getFriendPhoto(
+    props.card.invitedUser.id
+  );
   if ('error' in userPhoto) {
     console.warn(`Cant fetch user(${props.card.invitedUser.id}) photo`);
     return;
@@ -27,7 +29,10 @@ onMounted(async () => {
   <div class="friend-card bg-primary br-15px">
     <div class="content-wrapper column justify-between">
       <div class="name row items-center no-wrap">
-        <img :src="card.invitedUser.photo ?? defaultPhoto" class="profile-img" />
+        <img
+          :src="card.invitedUser.photo ?? defaultPhoto"
+          class="profile-img"
+        />
         <h2 class="title">{{ card.invitedUser.uname }}</h2>
       </div>
       <div class="price-wrapper row">

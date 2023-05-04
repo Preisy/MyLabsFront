@@ -7,6 +7,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import InviteDialog from './ui/InviteDialog.vue';
 import mylabslogo from 'assets/my_labs_logo.png';
+import ContactsModal from './ui/ContactsModal.vue';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
@@ -53,13 +54,14 @@ const isMenuOpened = ref(false);
         />
       </div>
 
-      <div class="auth">
-        <ABtn
+      <div class="auth row">
+        <!-- <ABtn
           class="auth-login q-px-xl"
           color="grey"
           text-color="dark"
           :label="$t('pages.user.header.contacts')"
-        />
+        /> -->
+        <ContactsModal class="q-mr-lg" />
         <ABtn
           class="auth-signup"
           :label="$t('pages.user.header.inviteFriend')"
@@ -138,7 +140,6 @@ const isMenuOpened = ref(false);
 
   &.mobile {
     --header-height: 3rem;
-    border-radius: 0 0 1rem 1rem;
     height: var(--header-height);
 
     .logo {

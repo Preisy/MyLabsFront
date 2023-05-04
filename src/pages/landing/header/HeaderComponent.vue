@@ -9,25 +9,46 @@ import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
 import LangSwitch from './ui/LangSwitch.vue';
 import { useUserStore } from 'src/stores/UserStore';
-import defaultPhoto from 'assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/user/default_photo.png';
 import mylabsLogo from 'assets/my_labs_logo.png';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
 
+const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
-    label: t('pages.landing.header.possibilities'),
+    label: t('pages.landing.header.home'),
+    value: 'home',
+  },
+  {
+    label: t('pages.landing.header.ourskills'),
     value: 'possibilities',
   },
   { label: t('pages.landing.header.examples'), value: 'examples' },
   { label: t('pages.landing.header.reviews'), value: 'reviews' },
   { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
 ];
+
 const isCompact = ref(false);
 const scrollHandler = (details: QScrollDetailsEvent) => {
   const top = details.position.top;
   isCompact.value = top > 100;
+
+  let el: HTMLElement | undefined = undefined;
+  let min = 999999;
+  elements.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    const middlePoint = (rect.top + rect.bottom) / 2;
+    if (middlePoint < 0) return;
+
+    if (middlePoint < min) {
+      min = middlePoint;
+      el = element;
+    }
+  });
+
+  if (el) currentLinkIndex.value = elements.indexOf(el);
 };
 
 const isMobile = computed(() => Screen.lt.lg);
@@ -43,6 +64,16 @@ const isLoginOpened = computed(() => login.value?.isOpened);
 
 onMounted(async () => {
   if (!userStore.userPhotoUrl && authStore.isAuth) userStore.getPhoto();
+
+  for (const links of buttonLinks) {
+    const element = document.querySelector(`#${links.value}`);
+    if (!element) {
+      console.warn(`Navlink element with id:${links.value} not found!`);
+      continue;
+    }
+
+    elements.push(element as HTMLElement);
+  }
 });
 </script>
 
@@ -66,19 +97,19 @@ onMounted(async () => {
           :id="index"
           :label="link.label"
           :target="link.value"
-          class="header-btn"
+          class="header-link"
         />
       </div>
 
       <div
         class="right-btns"
-        :class="{ row: !isMobile, 'column reverse': isMobile }"
+        :class="{ 'row items-center': !isMobile, 'column reverse': isMobile }"
       >
-        <LangSwitch class="q-mr-md right-btn" />
+        <LangSwitch class="q-mr-md right-btn lang-btn" />
         <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
           <ABtn
             v-if="!useAuthStore().isAuth"
-            class="auth-login right-btn q-px-xl"
+            class="auth-login right-btn"
             theme="light"
             :label="$t('pages.landing.header.login')"
             @click="
@@ -90,7 +121,7 @@ onMounted(async () => {
           />
           <ABtn
             v-if="!useAuthStore().isAuth"
-            class="auth-signup right-btn q-px-xl"
+            class="auth-signup right-btn"
             theme="dark"
             :label="$t('pages.landing.header.signup')"
             @click="
@@ -166,7 +197,7 @@ onMounted(async () => {
     padding: 1.8rem 3.5rem;
 
     .header-buttons {
-      .header-btn {
+      .header-link {
         margin-right: 1.5rem;
         text-decoration: unset;
 
@@ -197,7 +228,7 @@ onMounted(async () => {
     .user-photo {
       --size: 2.25rem;
       --max-size: 2.4rem;
-      max-width: var(--max-size);
+      width: var(--max-size);
       height: var(--size);
       border-radius: 100%;
       box-shadow: 0 0 4px 0 #00000066;
@@ -205,9 +236,6 @@ onMounted(async () => {
   }
 
   .right-btns {
-    .right-btn {
-      max-width: 10rem;
-    }
     .auth-login {
       margin-right: 0.75rem;
     }
@@ -222,7 +250,6 @@ onMounted(async () => {
 
   &.mobile {
     --header-height: 3rem;
-    border-radius: 0 0 1rem 1rem;
     height: var(--header-height);
 
     .logo {

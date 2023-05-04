@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { QPopupProxy } from 'quasar';
 import { useField } from 'vee-validate';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 interface ADatePickerProps {
   name: string;
 }
 const props = defineProps<ADatePickerProps>();
 
+const popupProxy = ref<QPopupProxy>();
 const getTomorrow = (): string => {
   const now = new Date();
   const tomorrow = new Date(now.setDate(now.getDate() + 1));
@@ -20,13 +22,6 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
 
 <template>
   <div class="date-wrapper">
-    <!-- <a-input
-      class="col-4"
-      :label="$t('pages.landing.homePage.form.deadline')"
-      name="deadline"
-      :init-value="getTomorrow()"
-    /> -->
-
     <q-input
       class="date-input"
       filled
@@ -42,11 +37,13 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy
+            ref="popupProxy"
             class="datepicker-proxy br-15px"
             cover
             transition-show="scale"
             transition-hide="scale"
           >
+            <div class="bg-prevent" @click="popupProxy?.hide" />
             <q-date class="datepicker" color="info" v-model="value">
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="Close" color="primary" flat />
@@ -60,6 +57,20 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
 </template>
 
 <style scoped lang="scss">
+.datepicker-proxy {
+  .bg-prevent {
+    position: fixed;
+    left: -10000px;
+    right: -10000px;
+    top: -10000px;
+    bottom: -10000px;
+    background-color: #ffffff99;
+  }
+  .datepicker {
+    position: relative;
+    z-index: 2;
+  }
+}
 .date-input {
   padding: 0;
   font-size: 0.6rem;

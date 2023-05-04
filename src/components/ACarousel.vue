@@ -49,7 +49,7 @@ const isMobile = Screen.lt.sm;
 
     <div class="controls row justify-center items-center">
       <QBtn
-        class="btn left br-15px"
+        class="btn left"
         :class="btn_classes"
         icon="chevron_left"
         @click="carousel?.previous()"
@@ -58,7 +58,7 @@ const isMobile = Screen.lt.sm;
         {{ parseInt(model) + 1 }} / {{ slidesCount }}
       </div>
       <QBtn
-        class="btn left br-15px"
+        class="btn left"
         :class="btn_classes"
         icon="chevron_right"
         @click="carousel?.next()"
@@ -81,10 +81,14 @@ const isMobile = Screen.lt.sm;
     margin: 0 1rem;
   }
   .btn {
-    --size: 2rem;
-    // width: var(--size);
-    // height: var(--size);
-    padding: calc(var(--size) / 4);
+    --size: 1rem;
+    padding: calc(var(--size) / 2);
+    font-size: var(--size);
+    border-radius: 0.5rem;
+
+    @media (max-width: $screen-md) {
+      --size: 0.8rem;
+    }
   }
 }
 

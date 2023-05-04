@@ -9,7 +9,7 @@ import webImg from 'assets/cardTypes/react.svg'
 
 export const LabTypes = [
   'C',
-  'Cpp',
+  'C++',
   'C#',
   'Java',
   'Python',
@@ -20,7 +20,7 @@ export const LabTypes = [
 
 export enum LabEnum {
   'C' = 0,
-  'Cpp' = 1,
+  'C++' = 1,
   'C#' = 2,
   'Java' = 3,
   'Python' = 4,

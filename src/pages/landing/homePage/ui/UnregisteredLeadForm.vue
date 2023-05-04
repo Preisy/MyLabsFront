@@ -96,6 +96,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
           class="col"
           :label="$t('pages.landing.homePage.form.task')"
           name="taskText"
+          :autogrow="true"
         />
         <div class="file-btn-wrapper">
           <q-btn

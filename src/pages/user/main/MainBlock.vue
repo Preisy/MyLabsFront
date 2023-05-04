@@ -4,7 +4,7 @@ import { onMounted, ref, watch } from 'vue';
 import OrderDialog from './ui/OrderDialog.vue';
 import { useUserStore } from 'src/stores/UserStore';
 import { QFile } from 'quasar';
-import defaultPhoto from 'assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/user/default_photo.png';
 
 const userStore = useUserStore();
 const filepicker = ref<InstanceType<typeof QFile>>();
