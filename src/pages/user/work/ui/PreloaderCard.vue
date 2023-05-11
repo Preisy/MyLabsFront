@@ -4,35 +4,64 @@ import { ref } from 'vue';
 import CardPopup from './CardPopup.vue';
 
 const popup = ref<InstanceType<typeof QPopupProxy>>();
+const isOpen = ref<boolean>(false);
+const onclick = () => {
+  popup.value?.show();
+  isOpen.value = true;
+};
+const onclose = () => {
+  console.log('close');
+  isOpen.value = false;
+};
 </script>
 
 <template>
-  <div class="card cursor-pointer" @click="popup?.show">
-    <CardPopup
-      ref="popup"
-      :data="{
-        id: 0,
-        date: '05.09.2003',
-        price: 0,
-        title: 'Какое-то крутое задание на очень много текста',
-        type: 'Cpp',
-        files: [],
-      }"
-    />
-    <div class="row justify-between items-start fit-content no-wrap">
-      <div class="title-wrapper row items-center no-wrap q-mr-sm">
-        <div class="title">Здесь будет отображен заказ</div>
+  <div class="card-wrapper">
+    <div
+      class="card-body cursor-pointer"
+      :class="{ open: isOpen }"
+      @click="onclick"
+    >
+      <div class="row justify-between items-start fit-content no-wrap">
+        <div class="title-wrapper row items-center no-wrap q-mr-sm">
+          <div class="title">Здесь будет отображен заказ</div>
+        </div>
+      </div>
+      <div class="details row justify-between items-end">
+        <div class="date" />
+        <div class="price" color="grey" />
       </div>
     </div>
-    <div class="details row justify-between items-end">
-      <div class="date" />
-      <div class="price" color="grey" />
-    </div>
+    <CardPopup
+      @close="onclose"
+      :is-open="isOpen"
+      ref="popup"
+      :data="{
+        taskText: 'Какое-то крутое задание на очень много текста',
+        taskFiles: [
+          {
+            filename: 'abc',
+            createdAt: '0',
+            id: 9,
+          },
+          {
+            filename: 'bcd',
+            createdAt: '0',
+            id: 90,
+          },
+        ],
+        type: 'Cpp',
+        deadline: '29.05.23',
+        id: 0,
+      }"
+    />
   </div>
 </template>
 
 <style scoped lang="scss">
-.card {
+.card-wrapper {
+}
+.card-body {
   position: relative;
   background-color: $primary;
   box-sizing: border-box;
@@ -40,6 +69,10 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
   width: 15rem;
+
+  &.open {
+    z-index: 9999;
+  }
 
   @media (max-width: $screen-lg) {
     max-width: 13rem;
@@ -83,12 +116,5 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
       background: #eaeaea;
     }
   }
-}
-</style>
-
-<style lang="scss">
-.popup {
-  border-radius: 1.5rem;
-  box-shadow: 0 0 2.5rem 0 rgba(191, 205, 243, 0.5);
 }
 </style>
