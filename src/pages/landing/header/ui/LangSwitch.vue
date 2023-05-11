@@ -1,39 +1,11 @@
 <script setup lang="ts">
-import ABtn from 'src/components/ABtn.vue';
 import LangBtn from './LangBtn.vue';
-import { ref } from 'vue';
-import langSwitchLight from 'assets/header/langSwitchLight.svg';
-
-const isShown = ref<boolean>(false);
-const toggleExtend = () => {
-  isShown.value = !isShown.value;
-};
 </script>
 
 <template>
-  <div>
-    <div
-      v-if="isShown"
-      class="bg-prevent fixed full-width full-height"
-      @click="isShown = false"
-    />
-    <div class="lang-switch">
-      <ABtn
-        class="toggle-btn"
-        theme="light"
-        :label="$t('pages.landing.header.lang')"
-        @click="toggleExtend"
-      />
-
-      <div
-        class="popup row justify-around bg-primary"
-        :class="{ hide: !isShown }"
-      >
-        <LangBtn class="popup-brn" label="Eng" locale="en-US" />
-        <LangBtn class="popup-brn" label="Рус" locale="ru-RU" />
-      </div>
-      <img :src="langSwitchLight" class="light" :class="{ hide: !isShown }" />
-    </div>
+  <div class="lang-switch">
+    <LangBtn class="popup-btn" label="Eng" locale="en-US" />
+    <LangBtn class="popup-btn" label="Рус" locale="ru-RU" />
   </div>
 </template>
 
@@ -42,50 +14,8 @@ const toggleExtend = () => {
   position: relative;
   z-index: 1;
 
-  .popup {
-    position: absolute;
-    left: 0rem;
-    right: 0rem;
-    top: 6.5rem;
-
-    padding: 0.4rem;
-    box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
-    border-radius: 1.5rem;
-
-    transition: 0.3s all ease-in-out;
-    opacity: 1;
-    z-index: 2;
-    @media (max-width: $screen-md) {
-      top: 7.2rem;
-    }
-
-    &.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .popup-btn {
-      position: relative;
-      z-index: 100;
-    }
+  .popup-btn:first-of-type {
+    margin-right: 1.5rem;
   }
-  .light {
-    position: absolute;
-    left: 4px;
-    right: 0;
-    z-index: -1;
-    transition: 0.5s all ease-in-out;
-    opacity: 0.5;
-    width: 100%;
-
-    &.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-}
-.bg-prevent {
-  left: 0;
-  top: 0;
 }
 </style>

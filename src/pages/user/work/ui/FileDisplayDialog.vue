@@ -4,10 +4,10 @@ import { exportFile } from 'quasar';
 import {
   FileExtensionMap,
   FileTypeMap,
-} from 'src/pages/landing/homePage/ui/TypeToIconMap';
+} from 'components/AFileDialog/TypeToIconMap';
 import { ref } from 'vue';
 import { FileModel } from './Card';
-import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
+import { useFileStore } from 'stores/FileStore';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import { AxiosError } from 'axios';
 

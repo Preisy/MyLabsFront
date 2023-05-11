@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QPopupProxy } from 'quasar';
+import { QDialog } from 'quasar';
 import { useField } from 'vee-validate';
 import { onMounted, ref } from 'vue';
 
@@ -8,7 +8,6 @@ interface ADatePickerProps {
 }
 const props = defineProps<ADatePickerProps>();
 
-const popupProxy = ref<QPopupProxy>();
 const getTomorrow = (): string => {
   const now = new Date();
   const tomorrow = new Date(now.setDate(now.getDate() + 1));
@@ -17,6 +16,7 @@ const getTomorrow = (): string => {
 const { errorMessage, value } = useField<string | number | undefined>(
   props.name
 );
+const dialog = ref<QDialog>();
 onMounted(() => useField(props.name).setValue(getTomorrow()));
 </script>
 
@@ -35,22 +35,14 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
       :rules="['date']"
     >
       <template v-slot:append>
-        <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy
-            ref="popupProxy"
-            class="datepicker-proxy br-15px"
-            cover
-            transition-show="scale"
-            transition-hide="scale"
-          >
-            <div class="bg-prevent" @click="popupProxy?.hide" />
-            <q-date class="datepicker" color="info" v-model="value">
-              <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
-              </div>
-            </q-date>
-          </q-popup-proxy>
-        </q-icon>
+        <q-icon name="event" class="cursor-pointer" :onclick="dialog?.show" />
+        <q-dialog ref="dialog" class="dialog">
+          <q-date class="datepicker" color="info" v-model="value">
+            <div class="row items-center justify-end">
+              <q-btn v-close-popup label="Close" color="primary" flat />
+            </div>
+          </q-date>
+        </q-dialog>
       </template>
     </q-input>
   </div>

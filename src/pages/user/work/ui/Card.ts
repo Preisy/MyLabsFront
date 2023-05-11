@@ -15,6 +15,11 @@ export interface LabModel {
   files?: File[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isLabModel(v: any) {
+  return ('id' in v) && ('date' in v) && ('price' in v) && ('title' in v) && ('type' in v)
+}
+
 export interface OrderModel {
   type: LabType,
   taskText: string,

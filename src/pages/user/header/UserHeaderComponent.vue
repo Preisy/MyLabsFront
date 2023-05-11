@@ -7,7 +7,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import InviteDialog from './ui/InviteDialog.vue';
 import mylabslogo from 'assets/my_labs_logo.png';
-import ContactsModal from './ui/ContactsModal.vue';
+import ContactsModal from 'components/AContactModal/ContactsModal.vue';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
@@ -100,6 +100,7 @@ const isMenuOpened = ref(false);
 .header {
   border-radius: 0 0 2rem 2rem;
   background-color: $primary;
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
 
   position: fixed;
   z-index: 9999;

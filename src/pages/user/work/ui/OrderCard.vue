@@ -3,6 +3,8 @@ import { taskTypeToImg } from 'src/global/LabTypes';
 import { OrderModel } from './Card';
 import FileDisplayDialog from './FileDisplayDialog.vue';
 import { ref } from 'vue';
+import { QPopupProxy } from 'quasar';
+import CardPopup from './CardPopup.vue';
 
 interface Props {
   card: OrderModel;
@@ -10,10 +12,12 @@ interface Props {
 
 const props = defineProps<Props>();
 const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
+const popup = ref<InstanceType<typeof QPopupProxy>>();
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" @click="popup?.show">
+    <CardPopup ref="popup" :data="card" />
     <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap q-mr-sm">
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />

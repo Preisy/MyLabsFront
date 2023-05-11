@@ -33,15 +33,6 @@ const errText = computed(() => {
 </script>
 
 <template>
-  <!-- <q-popup-proxy
-    no-parent-event
-    ref="popup"
-    class="popup"
-    :class="{ appearing: isAppearing }"
-    @before-show="isAppearing = true"
-    @hide="isAppearing = false"
-  >
-</q-popup-proxy> -->
   <q-banner class="bg-error text-primary popup" :class="{ hide: !isShown }">
     <p class="text">{{ errText }}</p>
   </q-banner>

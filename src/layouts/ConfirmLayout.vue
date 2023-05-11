@@ -29,6 +29,7 @@ const onComplete = () => {
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
       <AModalDialog
+        :is-full="true"
         :dialogs="signupDialogData"
         ref="dialog"
         :on-complete="onComplete"

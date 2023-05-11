@@ -4,29 +4,36 @@ import heartImg from 'assets/pop_up/heart.png';
 
 interface SuccessDialogProps {
   i: number;
+  type: 'full' | 'short';
 }
-defineProps<SuccessDialogProps>();
+const props = defineProps<SuccessDialogProps>();
 const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 
 const onclick = () => {
-  // debugger;
   emit('close');
-  // debugger;
-  // setTimeout(() => window.location.reload(), 0);
 };
+
+const titleText =
+  props.type === 'full'
+    ? 'pages.landing.header.auth.success.full-text'
+    : 'pages.landing.header.auth.success.short-text';
 </script>
 
 <template>
   <div class="content-wrapper">
     <h2 class="title">{{ $t('pages.landing.header.auth.success.title') }}</h2>
     <div class="body-wrapper">
-      <p>{{ $t('pages.landing.header.auth.success.text') }}</p>
+      <p>{{ $t(titleText) }}</p>
       <img class="heart-img" :src="heartImg" alt="" loading="eager" />
     </div>
     <div class="controls-wrapper">
-      <ABtn class="q-px-xl" :label="$t('pages.landing.header.auth.success.button')" @click="onclick" />
+      <ABtn
+        class="q-px-xl"
+        :label="$t('pages.landing.header.auth.success.button')"
+        @click="onclick"
+      />
     </div>
     <div class="page-counter">{{ i }} / {{ i }}</div>
   </div>

@@ -36,12 +36,19 @@ const dialogSchemas: DialogData[] = [
   ChangePasswordSchema(t),
 ];
 
-const onComplete = () => { Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload()) }
+const onComplete = () => {
+  Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+};
 </script>
 
 <template>
-  <AModalDialog :dialogs="dialogSchemas" :need-last="false" ref="dialog"
-    :on-complete="onComplete" />
+  <AModalDialog
+    :is-full="false"
+    :dialogs="dialogSchemas"
+    :need-last="false"
+    ref="dialog"
+    :on-complete="onComplete"
+  />
 </template>
 
 <style scoped lang="scss"></style>

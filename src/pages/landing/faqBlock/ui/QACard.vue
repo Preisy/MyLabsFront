@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Screen } from 'quasar';
+
 interface Props {
   question: string;
   answer: string;
@@ -9,6 +11,7 @@ const props = defineProps<Props>();
 
 <template>
   <q-expansion-item
+    :dense="Screen.lt.sm"
     class="qa-card"
     header-class="card-header"
     expand-icon-class="card-btn bg-dark text-primary br-15px"
@@ -25,7 +28,6 @@ const props = defineProps<Props>();
   border-radius: 2rem;
 
   padding: 1rem 1.5rem;
-
   margin-bottom: 1.5rem;
 
   &:deep(.q-focus-helper) {

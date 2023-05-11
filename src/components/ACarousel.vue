@@ -81,13 +81,13 @@ const isMobile = Screen.lt.sm;
     margin: 0 1rem;
   }
   .btn {
-    --size: 1rem;
+    --size: 0.75rem;
     padding: calc(var(--size) / 2);
     font-size: var(--size);
     border-radius: 0.5rem;
 
     @media (max-width: $screen-md) {
-      --size: 0.8rem;
+      --size: 0.65rem;
     }
   }
 }

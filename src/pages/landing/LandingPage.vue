@@ -6,6 +6,7 @@ import ExamplesBlock from './examplesBlock';
 import ReviewsBlock from './reviewsBlock';
 import FooterBlock from './footer';
 import FaqBlock from './faqBlock';
+import ReferralBlock from './referralBlock/ReferralBlock.vue';
 
 let components = [
   HomePage,
@@ -13,6 +14,7 @@ let components = [
   OurSkillsBlock,
   ExamplesBlock,
   ReviewsBlock,
+  ReferralBlock,
   FaqBlock,
   FooterBlock,
 ];

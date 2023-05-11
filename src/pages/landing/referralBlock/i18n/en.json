@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "landing": {
+      "referral": {
+        "title": "Discount up to 50%",
+        "desc": "Invite friends! Get bonuses! They pay for my orders!",
+        "detailsBtn": "Details"
+      }
+    }
+  }
+}

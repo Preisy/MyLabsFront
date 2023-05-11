@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ButtonComponent from 'components/ABtn.vue';
+import ContactsModal from 'src/components/AContactModal/ContactsModal.vue';
 </script>
 
 <template>
@@ -7,10 +7,7 @@ import ButtonComponent from 'components/ABtn.vue';
     <p class="description-details">
       {{ $t('pages.landing.ourSkillsBlock.details') }}
     </p>
-    <ButtonComponent
-      class="q-px-xl q-py-sm"
-      :label="$t('pages.landing.ourSkillsBlock.contacts-btn')"
-    ></ButtonComponent>
+    <ContactsModal theme="dark" />
   </div>
 </template>
 

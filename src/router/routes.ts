@@ -40,6 +40,10 @@ const routes: RouteRecordRaw[] = [
     path: '/reset',
     component: () => import('layouts/ResetLayout.vue'),
   },
+  {
+    path: '/referral',
+    component: () => import('layouts/ReferralLayout.vue'),
+  },
 
 
   // // Always leave this as last one,

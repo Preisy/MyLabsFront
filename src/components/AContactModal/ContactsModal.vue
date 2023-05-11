@@ -2,8 +2,15 @@
 import ABtn from 'src/components/ABtn.vue';
 import { ref } from 'vue';
 import langSwitchLight from 'assets/header/langSwitchLight.svg';
-import TgIcon from './TgIcon.vue';
-import VkIcon from './VkIcon.vue';
+import ContactBtn from './ContactBtn.vue';
+
+interface Props {
+  theme?: 'light' | 'dark';
+}
+
+withDefaults(defineProps<Props>(), {
+  theme: 'light',
+});
 
 const isShown = ref<boolean>(false);
 const toggleExtend = () => {
@@ -21,7 +28,7 @@ const toggleExtend = () => {
     <div class="contacts">
       <ABtn
         class="toggle-btn"
-        theme="light"
+        :theme="theme"
         :label="$t('pages.user.header.contacts')"
         @click="toggleExtend"
       />
@@ -30,12 +37,8 @@ const toggleExtend = () => {
         class="popup row justify-around bg-primary"
         :class="{ hide: !isShown }"
       >
-        <q-btn class="tg-link link">
-          <TgIcon class="icon" path-classes="tg-icon" />
-        </q-btn>
-        <q-btn class="vk-link link">
-          <VkIcon class="icon" path-classes="vk-icon" />
-        </q-btn>
+        <ContactBtn label="Telegram" href="https://t.me/cockyasfxck" />
+        <ContactBtn label="ВКонтакте" href="https://vk.com/cockyasfxck" />
       </div>
       <img :src="langSwitchLight" class="light" :class="{ hide: !isShown }" />
     </div>
@@ -46,6 +49,7 @@ const toggleExtend = () => {
 .contacts {
   position: relative;
   z-index: 1;
+  width: min-content;
 
   .popup {
     position: absolute;
@@ -69,9 +73,11 @@ const toggleExtend = () => {
       visibility: hidden;
     }
 
-    .popup-btn {
-      position: relative;
-      z-index: 100;
+    .contact-link {
+      font-weight: 600;
+      height: 1.4rem;
+      font-size: 1rem;
+      padding: 0;
     }
   }
   .light {

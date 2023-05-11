@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { taskTypeToImg } from 'src/global/LabTypes';
 import { LabModel } from './Card';
+import { QPopupProxy } from 'quasar';
+import { ref } from 'vue';
+import CardPopup from './CardPopup.vue';
 
 interface Props {
   card: LabModel;
 }
 const props = defineProps<Props>();
+const popup = ref<InstanceType<typeof QPopupProxy>>();
 </script>
 <template>
-  <div class="card">
+  <div class="card cursor-pointer" @click="popup?.show">
+    <CardPopup ref="popup" :data="card" />
     <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap q-mr-sm">
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />

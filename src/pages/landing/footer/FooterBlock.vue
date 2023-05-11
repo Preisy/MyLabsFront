@@ -9,10 +9,10 @@
       <div class="details row">
         <div class="contacts column">
           <h2>{{ $t('pages.landing.footerBlock.contacts') }}</h2>
-          <a href="#" class="tg link text-primary">
+          <a href="https://t.me/cockyasfxck" class="tg link text-primary">
             {{ $t('pages.landing.footerBlock.tg') }}
           </a>
-          <a href="#" class="vk link text-primary">
+          <a href="https://vk.com/cockyasfxck" class="vk link text-primary">
             {{ $t('pages.landing.footerBlock.vk') }}
           </a>
         </div>
@@ -21,7 +21,7 @@
           <a href="#" class="about-us link text-primary">
             {{ $t('pages.landing.footerBlock.about') }}
           </a>
-          <a href="#" class="referral link text-primary">
+          <a href="/referral" class="referral link text-primary">
             {{ $t('pages.landing.footerBlock.referral') }}
           </a>
         </div>

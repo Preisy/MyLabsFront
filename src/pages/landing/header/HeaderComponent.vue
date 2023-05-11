@@ -40,10 +40,10 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
   elements.forEach((element) => {
     const rect = element.getBoundingClientRect();
     const middlePoint = (rect.top + rect.bottom) / 2;
-    if (middlePoint < 0) return;
+    const delta = Math.abs(Screen.height / 2 - middlePoint);
 
-    if (middlePoint < min) {
-      min = middlePoint;
+    if (delta < min) {
+      min = delta;
       el = element;
     }
   });
@@ -144,7 +144,7 @@ onMounted(async () => {
           />
         </q-btn>
         <LoginDialog ref="login" />
-        <SignUpDialog ref="signup" />
+        <SignUpDialog ref="signup" :is-full="false" />
       </div>
     </q-toolbar>
 
@@ -176,7 +176,7 @@ onMounted(async () => {
   // background-size: 4rem 2.25rem;
   // background-position: 50% 50%;
   // background-repeat: no-repeat;
-
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
   position: fixed;
   z-index: 9999;
 

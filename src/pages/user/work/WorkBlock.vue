@@ -7,6 +7,7 @@ import { useLabsStore } from 'src/stores/LabsStore';
 import { useOrderStore } from 'src/stores/OrderStore';
 import OrderCard from './ui/OrderCard.vue';
 import LabCard from './ui/LabCard.vue';
+import PreloaderCard from './ui/PreloaderCard.vue';
 
 const cards = ref<{ orders: OrderModel[]; labs: LabModel[] }>({
   orders: [],
@@ -65,6 +66,9 @@ const getOrders = async () => {
                   :key="index"
                   :card="card"
                 />
+                <template v-if="cards.orders.length === 0">
+                  <PreloaderCard class="card" v-for="index in 2" :key="index" />
+                </template>
               </div>
               <div class="done">
                 <div
@@ -80,6 +84,20 @@ const getOrders = async () => {
                     :card="card"
                   />
                 </div>
+                <template v-if="cards.orders.length === 0">
+                  <div
+                    class="slide justify-center no-wrap"
+                    :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
+                    v-for="slide in [2, 2]"
+                    :key="slide"
+                  >
+                    <PreloaderCard
+                      class="card"
+                      v-for="index in slide"
+                      :key="index"
+                    />
+                  </div>
+                </template>
               </div>
             </div>
           </q-scroll-area>

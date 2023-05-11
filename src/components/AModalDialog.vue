@@ -14,6 +14,7 @@ interface Props {
   onComplete?: () => void;
   needLast?: boolean;
   closable?: boolean;
+  isFull: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   needLast: true,
@@ -102,6 +103,7 @@ defineExpose({
     <SuccessDialog
       v-else-if="needLast"
       :i="dialogs.length + 1"
+      :type="isFull ? 'full' : 'short'"
       @close="
         () => {
           close();

@@ -31,6 +31,7 @@ const onComplete = () => {
     :dialogs="signupDialogData"
     ref="dialog"
     :on-complete="onComplete"
+    :is-full="false"
   />
 </template>
 

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 interface Props {
-  modelValue: number;
-  id: number;
   label: string;
-  to?: string;
+  href?: string;
 }
 
 const props = defineProps<Props>();
@@ -14,20 +12,18 @@ defineEmits<{
 
 <template>
   <q-btn
-    class="header-btn"
-    :class="{ active: id === modelValue }"
+    class="contact-btn"
     color="dark"
     no-caps
     flat
-    :ripple="false"
-    :to="to"
+    :href="href"
     :label="props.label"
-    @click="$emit('update:modelValue', props.id)"
+    :ripple="false"
   />
 </template>
 
 <style scoped lang="scss">
-.header-btn {
+.contact-btn {
   --highlight-padding: 5%;
   --highlight-width: calc(100% + var(--highlight-padding));
   --highlight-middlepoint: calc(var(--highlight-width) / 2);
@@ -56,9 +52,9 @@ defineEmits<{
   }
 }
 
-.header-btn:hover,
-.header-btn:focus,
-.header-btn:active {
+.contact-btn:hover,
+.contact-btn:focus,
+.contact-btn:active {
   :deep(.q-focus-helper) {
     background: $primary !important;
     opacity: 0 !important;

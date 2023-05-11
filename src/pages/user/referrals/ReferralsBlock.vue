@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { chunk } from 'lodash';
-// import { defaultCards } from './ui/FriendCardModel';
 import FriendCard from './ui/FriendCard.vue';
 import { computed, onMounted, ref } from 'vue';
 import { Screen } from 'quasar';
 import { useReferralStore } from './store/ReferralStore';
 import { useUserStore } from 'src/stores/UserStore';
 import { FriendCardModel } from './ui/FriendCardModel';
+import PreloaderCard from './ui/PreloaderCard.vue';
 
 const userStore = useUserStore();
 const referralStore = useReferralStore();
@@ -52,6 +52,15 @@ onMounted(async () => {
               class="referral-card"
             />
           </div>
+          <template v-if="!referrals">
+            <div
+              class="slide row justify-center no-wrap"
+              v-for="chunk in [2, 2]"
+              :key="chunk"
+            >
+              <PreloaderCard v-for="card in chunk" :key="card" />
+            </div>
+          </template>
         </div>
       </q-scroll-area>
     </div>

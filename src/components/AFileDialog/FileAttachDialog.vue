@@ -3,8 +3,8 @@ import ADialog from 'src/components/ADialog';
 import { QUploader } from 'quasar';
 import { ref } from 'vue';
 import { remove } from 'lodash';
-import { useFileStore } from '../store/FileStore';
-import { FileExtensionMap, FileTypeMap } from './TypeToIconMap';
+import { useFileStore } from 'src/stores/FileStore';
+import { getFileIco } from './TypeToIconMap';
 import floorImg from 'assets/header/floor.svg';
 
 const fileStore = useFileStore();
@@ -28,21 +28,6 @@ const onadded = (values: readonly File[]) => {
 
 const onremove = (values: readonly File[]) => {
   remove(fileStore.filesList, (v) => values.indexOf(v) !== -1);
-};
-
-const getFileIco = (file: File) => {
-  const ext = file.name.slice(file.name.lastIndexOf('.'), file.name.length);
-  if (ext in FileExtensionMap) {
-    const ico = FileExtensionMap[ext as keyof typeof FileExtensionMap];
-    return ico;
-  }
-
-  for (let type in FileTypeMap) {
-    const ico = FileTypeMap[type as keyof typeof FileTypeMap];
-    if (file.name.includes(type)) return ico;
-  }
-
-  return 'fa-file';
 };
 </script>
 
