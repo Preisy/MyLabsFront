@@ -1,3 +1,18 @@
+export const getFileIco = (file: File) => {
+    const ext = file.name.slice(file.name.lastIndexOf('.'), file.name.length);
+    if (ext in FileExtensionMap) {
+        const ico = FileExtensionMap[ext as keyof typeof FileExtensionMap];
+        return ico;
+    }
+
+    for (const type in FileTypeMap) {
+        const ico = FileTypeMap[type as keyof typeof FileTypeMap];
+        if (file.name.includes(type)) return ico;
+    }
+
+    return 'fa-file';
+};
+
 export const FileExtensionMap = {
     '.xls': 'fa-file-excel',
     '.xlsx': 'fa-file-excel',

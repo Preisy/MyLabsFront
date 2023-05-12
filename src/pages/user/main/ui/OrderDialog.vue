@@ -12,9 +12,9 @@ import { AxiosError } from 'axios';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import ADatePicker from 'src/components/ADatePicker.vue';
 import OrderData from 'src/model/order/OrderData';
-import FileAttachDialog from 'src/pages/landing/homePage/ui/FileAttachDialog.vue';
+import FileAttachDialog from 'components/AFileDialog/FileAttachDialog.vue';
 import { FileModel } from 'src/pages/user/work/ui/Card';
-import { useFileStore } from 'src/pages/landing/homePage/store/FileStore';
+import { useFileStore } from 'stores/FileStore';
 import floorImg from 'assets/header/floor.svg';
 
 const dialog = ref<InstanceType<typeof ADialog>>();

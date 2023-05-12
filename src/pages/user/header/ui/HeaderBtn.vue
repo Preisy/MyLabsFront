@@ -14,11 +14,12 @@ defineEmits<{
 
 <template>
   <q-btn
-    class="header-btn q-px-xs"
+    class="header-btn"
     :class="{ active: id === modelValue }"
     color="dark"
     no-caps
     flat
+    :ripple="false"
     :to="to"
     :label="props.label"
     @click="$emit('update:modelValue', props.id)"
@@ -35,6 +36,7 @@ defineEmits<{
   font-weight: 600;
   height: 1.4rem;
   font-size: 1rem;
+  padding: 0;
 
   &::before {
     content: '';
@@ -53,21 +55,13 @@ defineEmits<{
     width: var(--highlight-width);
   }
 }
-</style>
 
-<style lang="scss">
 .header-btn:hover,
 .header-btn:focus,
 .header-btn:active {
-  .q-focus-helper {
+  :deep(.q-focus-helper) {
     background: $primary !important;
     opacity: 0 !important;
-  }
-}
-
-.header-btn {
-  .q-ripple {
-    display: none;
   }
 }
 </style>

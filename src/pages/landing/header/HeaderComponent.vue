@@ -9,25 +9,46 @@ import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
 import LangSwitch from './ui/LangSwitch.vue';
 import { useUserStore } from 'src/stores/UserStore';
-import defaultPhoto from 'assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/user/default_photo.png';
 import mylabsLogo from 'assets/my_labs_logo.png';
 
 const { t } = useI18n();
 const currentLinkIndex = ref(0);
 
+const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
-    label: t('pages.landing.header.possibilities'),
+    label: t('pages.landing.header.home'),
+    value: 'home',
+  },
+  {
+    label: t('pages.landing.header.ourskills'),
     value: 'possibilities',
   },
   { label: t('pages.landing.header.examples'), value: 'examples' },
   { label: t('pages.landing.header.reviews'), value: 'reviews' },
   { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
 ];
+
 const isCompact = ref(false);
 const scrollHandler = (details: QScrollDetailsEvent) => {
   const top = details.position.top;
   isCompact.value = top > 100;
+
+  let el: HTMLElement | undefined = undefined;
+  let min = 999999;
+  elements.forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    const middlePoint = (rect.top + rect.bottom) / 2;
+    const delta = Math.abs(Screen.height / 2 - middlePoint);
+
+    if (delta < min) {
+      min = delta;
+      el = element;
+    }
+  });
+
+  if (el) currentLinkIndex.value = elements.indexOf(el);
 };
 
 const isMobile = computed(() => Screen.lt.lg);
@@ -43,52 +64,106 @@ const isLoginOpened = computed(() => login.value?.isOpened);
 
 onMounted(async () => {
   if (!userStore.userPhotoUrl && authStore.isAuth) userStore.getPhoto();
+
+  for (const links of buttonLinks) {
+    const element = document.querySelector(`#${links.value}`);
+    if (!element) {
+      console.warn(`Navlink element with id:${links.value} not found!`);
+      continue;
+    }
+
+    elements.push(element as HTMLElement);
+  }
 });
 </script>
 
 <template>
-  <q-header class="header" :class="{ compact: isCompact && !isMobile, mobile: isMobile }">
+  <q-header
+    class="header"
+    :class="{ compact: isCompact && !isMobile, mobile: isMobile }"
+  >
     <QScrollObserver axis="vertical" @scroll="scrollHandler" />
     <img :src="mylabsLogo" alt="" class="logo" />
 
-    <q-toolbar class="header-toolbar justify-between" :class="{ opened: isMenuOpened, column: isMobile }">
+    <q-toolbar
+      class="header-toolbar justify-between"
+      :class="{ opened: isMenuOpened, column: isMobile }"
+    >
       <div class="header-buttons" :class="{ 'column items-start': isMobile }">
-        <HeaderBtn v-for="(link, index) in buttonLinks" :key="index" v-model="currentLinkIndex" :id="index"
-          :label="link.label" :target="link.value" class="header-btn" />
+        <HeaderBtn
+          v-for="(link, index) in buttonLinks"
+          :key="index"
+          v-model="currentLinkIndex"
+          :id="index"
+          :label="link.label"
+          :target="link.value"
+          class="header-link"
+        />
       </div>
 
-      <div class="right-btns" :class="{ row: !isMobile, 'column reverse': isMobile }">
-        <LangSwitch class="q-mr-md" />
+      <div
+        class="right-btns"
+        :class="{ 'row items-center': !isMobile, 'column reverse': isMobile }"
+      >
+        <LangSwitch class="q-mr-md right-btn lang-btn" />
         <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
-          <ABtn v-if="!useAuthStore().isAuth" class="auth-login q-px-xl" theme="light"
-            :label="$t('pages.landing.header.login')" @click="
-                            if (!isSignupOpened) {
-              login?.open();
-              isMenuOpened = false;
-            }
-                          " />
-          <ABtn v-if="!useAuthStore().isAuth" class="auth-signup" theme="dark" :label="$t('pages.landing.header.signup')"
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-login right-btn"
+            theme="light"
+            :label="$t('pages.landing.header.login')"
             @click="
-                            if (!isLoginOpened) {
-              signup?.open();
-              isMenuOpened = false;
-            }
-                          " />
+              if (!isSignupOpened) {
+                login?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
+          <ABtn
+            v-if="!useAuthStore().isAuth"
+            class="auth-signup right-btn"
+            theme="dark"
+            :label="$t('pages.landing.header.signup')"
+            @click="
+              if (!isLoginOpened) {
+                signup?.open();
+                isMenuOpened = false;
+              }
+            "
+          />
         </div>
-        <q-btn class="photo-wrapper-btn" flat v-if="useAuthStore().isAuth" to="mpc/tasks">
-          <img class="user-photo" :src="userStore.userPhotoUrl ?? defaultPhoto" />
+        <q-btn
+          class="photo-wrapper-btn"
+          flat
+          v-if="useAuthStore().isAuth"
+          to="mpc/tasks"
+        >
+          <img
+            class="user-photo"
+            :src="userStore.userPhotoUrl ?? defaultPhoto"
+          />
         </q-btn>
         <LoginDialog ref="login" />
-        <SignUpDialog ref="signup" />
+        <SignUpDialog ref="signup" :is-full="false" />
       </div>
     </q-toolbar>
 
     <div v-if="isMobile" class="btn-holder">
-      <q-btn size="1.2rem" flat color="dark" :icon="isMenuOpened ? 'close' : 'menu'"
-        @click="isMenuOpened = !isMenuOpened" />
+      <q-btn
+        size="1.2rem"
+        flat
+        color="dark"
+        :icon="isMenuOpened ? 'close' : 'menu'"
+        @click="isMenuOpened = !isMenuOpened"
+      />
     </div>
 
-    <div v-if="isMobile" class="bg-prevent" :class="{ open: isMenuOpened }" @click="isMenuOpened = false" />
+    <div
+      v-if="isMobile"
+      class="bg-prevent"
+      :class="{ open: isMenuOpened }"
+      @click="isMenuOpened = false"
+    />
   </q-header>
   <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
@@ -101,7 +176,7 @@ onMounted(async () => {
   // background-size: 4rem 2.25rem;
   // background-position: 50% 50%;
   // background-repeat: no-repeat;
-
+  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
   position: fixed;
   z-index: 9999;
 
@@ -122,7 +197,7 @@ onMounted(async () => {
     padding: 1.8rem 3.5rem;
 
     .header-buttons {
-      .header-btn {
+      .header-link {
         margin-right: 1.5rem;
         text-decoration: unset;
 
@@ -152,9 +227,9 @@ onMounted(async () => {
 
     .user-photo {
       --size: 2.25rem;
-      --max-size: 2.4rem; 
-      max-width: var(--max-size);
-      height: var(--size); 
+      --max-size: 2.4rem;
+      width: var(--max-size);
+      height: var(--size);
       border-radius: 100%;
       box-shadow: 0 0 4px 0 #00000066;
     }
@@ -175,7 +250,6 @@ onMounted(async () => {
 
   &.mobile {
     --header-height: 3rem;
-    border-radius: 0 0 1rem 1rem;
     height: var(--header-height);
 
     .logo {

@@ -13,8 +13,8 @@ import { ref } from 'vue';
 import { Nullable } from 'src/global/types';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { useOrderStore } from 'src/stores/OrderStore';
-import FileAttachDialog from './FileAttachDialog.vue';
-import { useFileStore } from '../store/FileStore';
+import FileAttachDialog from 'components/AFileDialog/FileAttachDialog.vue';
+import { useFileStore } from 'src/stores/FileStore';
 import { computed } from 'vue';
 import ADatePicker from 'src/components/ADatePicker.vue';
 import { keys, pick } from 'lodash';
@@ -96,6 +96,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
           class="col"
           :label="$t('pages.landing.homePage.form.task')"
           name="taskText"
+          :autogrow="true"
         />
         <div class="file-btn-wrapper">
           <q-btn
@@ -170,7 +171,7 @@ const filesCount = computed(() => useFileStore().filesList.length);
     </form>
 
     <FileAttachDialog ref="fileDialog" />
-    <SignUpDialog :start="1" ref="signupDialog" />
+    <SignUpDialog :start="1" :is-full="true" ref="signupDialog" />
   </div>
 </template>
 

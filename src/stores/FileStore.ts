@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types';
 import { ref } from 'vue';
-import { FileService } from '../service/FileService';
+import { FileService } from 'src/service/FileService';
 import { remove } from 'lodash';
 import { FileModel } from 'src/pages/user/work/ui/Card';
 

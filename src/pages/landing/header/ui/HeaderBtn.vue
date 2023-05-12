@@ -19,7 +19,7 @@ function onclick() {
 
 <template>
   <q-btn
-    class="header-btn q-px-xs"
+    class="header-btn"
     :class="{ active: id === modelValue }"
     color="dark"
     no-caps
@@ -40,6 +40,7 @@ function onclick() {
   font-weight: 600;
   height: 1.4rem;
   font-size: 1rem;
+  padding: 0;
 
   &::before {
     content: '';

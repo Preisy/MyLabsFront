@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import DialogWrapper from 'src/components/AModalDialog.vue';
+import AModalDialog from 'src/components/AModalDialog.vue';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useI18n } from 'vue-i18n';
 import { ChangePasswordSchema } from '../schemes/ChangePasswordSchema';
@@ -11,7 +11,7 @@ import { Router } from 'src/router';
 
 const { t } = useI18n();
 
-let dialog = ref<InstanceType<typeof DialogWrapper>>();
+let dialog = ref<InstanceType<typeof AModalDialog>>();
 const authStore = useAuthStore();
 const userStore = useUserStore();
 defineExpose({
@@ -36,12 +36,19 @@ const dialogSchemas: DialogData[] = [
   ChangePasswordSchema(t),
 ];
 
-const onComplete = () => { Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload()) }
+const onComplete = () => {
+  Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+};
 </script>
 
 <template>
-  <DialogWrapper :dialogs="dialogSchemas" :need-last="false" ref="dialog"
-    :on-complete="onComplete" />
+  <AModalDialog
+    :is-full="false"
+    :dialogs="dialogSchemas"
+    :need-last="false"
+    ref="dialog"
+    :on-complete="onComplete"
+  />
 </template>
 
 <style scoped lang="scss"></style>

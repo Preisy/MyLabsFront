@@ -2,7 +2,8 @@
   "pages": {
     "landing": {
       "header": {
-        "possibilities": "Possibilities",
+        "home": "Home",
+        "ourskills": "Our skills",
         "examples": "Work examples",
         "reviews": "Reviews",
         "FAQ": "FAQ",
@@ -27,7 +28,8 @@
           },
           "success": {
             "title": "You are a Superman! Congratulations",
-            "text": "Registration is complete, the administrator will write to you soon!",
+            "full-text": "Registration is complete, the administrator will write to you soon!",
+            "short-text": "Registration is complete!",
             "button": "Complete"
           }
         }

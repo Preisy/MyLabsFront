@@ -8,7 +8,6 @@ import { onMounted, ref } from 'vue';
 import { getSchema } from 'src/global/utils';
 import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
-import defaultPhoto from 'assets/Labs_square_icon.png';
 import PasswordChangeDialog from './ui/PasswordChangeDialog.vue';
 
 const userStore = useUserStore();
@@ -37,14 +36,6 @@ onMounted(async () => {
 <template>
   <div class="settings">
     <div class="content-wrapper structure column items-center">
-      <div class="img-holder">
-        <img
-          class="profile-pic q-mb-md"
-          :src="userStore.userPhotoUrl ?? defaultPhoto"
-          alt=""
-        />
-      </div>
-
       <ADynamicForm
         class="full-width text-center form"
         ref="userform"
@@ -80,6 +71,10 @@ onMounted(async () => {
 
   .form {
     margin-bottom: 2rem;
+  }
+
+  .change-password-btn {
+    width: 10rem;
   }
 }
 </style>

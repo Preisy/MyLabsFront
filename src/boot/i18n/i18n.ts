@@ -15,9 +15,10 @@ import { THeaderI18n } from 'src/pages/landing/header/i18n';
 import { TADynamicFormI18n } from 'src/components/ADynamicForm/i18n';
 import { TMainBlockI18n } from 'src/pages/user/main';
 import { TUserHeaderI18n } from 'src/pages/user/header';
-import { TReferralsBlockI18n } from 'src/pages/user/referrals';
+import { TReferralsUserBlockI18n } from 'src/pages/user/referrals';
 import { TSettingsBlockI18n } from 'src/pages/user/settings';
 import { TWorkBlockI18n } from 'src/pages/user/work';
+import { TReferralBlockI18n } from 'src/pages/landing/referralBlock/i18n';
 
 export default boot(({ app }) => {
   // Set i18n instance on app
@@ -32,13 +33,14 @@ export default boot(({ app }) => {
       TOurSkillsBlockI18n,
       TExamplesBlockI18n,
       TReviewsBlockI18n,
+      TReferralBlockI18n,
       TFaqBlockI18n,
       TFooterBlockI18n,
       THeaderI18n,
       TADynamicFormI18n,
       TMainBlockI18n,
       TUserHeaderI18n,
-      TReferralsBlockI18n,
+      TReferralsUserBlockI18n,
       TSettingsBlockI18n,
       TWorkBlockI18n
     ),

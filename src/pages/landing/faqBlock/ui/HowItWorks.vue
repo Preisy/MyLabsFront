@@ -29,7 +29,7 @@ const steps = [
 
 <template>
   <div class="how-it-works bg-primary">
-    <h2 class="title">
+    <h2 class="title text-left">
       {{ $t('pages.landing.faqBlock.howItWorks.title') }}
     </h2>
     <div class="steps">

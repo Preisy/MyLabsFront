@@ -16,6 +16,7 @@ import { Router } from 'src/router';
 const { t } = useI18n();
 interface Props {
   start?: number;
+  isFull: boolean;
 }
 const props = defineProps<Props>();
 const authStore = useAuthStore();
@@ -55,6 +56,7 @@ const onComplete = () => {
     :dialogs="signupDialogData"
     ref="dialog"
     :on-complete="onComplete"
+    :is-full="isFull"
   />
 </template>
 

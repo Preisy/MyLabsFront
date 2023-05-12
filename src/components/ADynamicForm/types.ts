@@ -6,4 +6,5 @@ export default interface FieldProps {
   name: string;
   rules: yup.Schema;
   type?: QInputProps['type']
+  placeholder?: string
 }

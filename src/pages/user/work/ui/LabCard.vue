@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { taskTypeToImg } from 'src/global/LabTypes';
 import { LabModel } from './Card';
+import { QPopupProxy } from 'quasar';
+import { ref } from 'vue';
+import CardPopup from './CardPopup.vue';
 
 interface Props {
   card: LabModel;
 }
 const props = defineProps<Props>();
+const popup = ref<InstanceType<typeof QPopupProxy>>();
 </script>
 <template>
-  <div class="card">
+  <div class="card cursor-pointer" @click="popup?.show">
+    <CardPopup ref="popup" :data="card" />
     <div class="row justify-between items-start fit-content no-wrap">
       <div class="title-wrapper row items-center no-wrap q-mr-sm">
         <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
@@ -38,19 +43,18 @@ const props = defineProps<Props>();
   padding: 1rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
-  max-width: 15rem;
-  min-width: 8rem;
+  width: 15rem;
 
   @media (max-width: $screen-lg) {
-    max-width: 13rem;
+    width: 13rem;
   }
   @media (max-width: $screen-md) {
-    max-width: 12rem;
+    width: 12rem;
     padding: 0.8rem;
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    max-width: 10rem;
+    width: 10rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

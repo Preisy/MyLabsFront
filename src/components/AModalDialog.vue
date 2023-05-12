@@ -14,6 +14,7 @@ interface Props {
   onComplete?: () => void;
   needLast?: boolean;
   closable?: boolean;
+  isFull: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   needLast: true,
@@ -102,6 +103,7 @@ defineExpose({
     <SuccessDialog
       v-else-if="needLast"
       :i="dialogs.length + 1"
+      :type="isFull ? 'full' : 'short'"
       @close="
         () => {
           close();
@@ -126,10 +128,10 @@ defineExpose({
     user-select: none;
     position: absolute;
     top: -100%;
-    right: -160%;
+    right: -140%;
     z-index: -1;
-    opacity: 0;
-    // transition: opacity 0.1s ease-in-out;
+    // opacity: 0;
+    transition: opacity 0.1s ease-in-out;
   }
 
   .showed {

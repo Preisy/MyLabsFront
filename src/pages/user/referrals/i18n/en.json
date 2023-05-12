@@ -2,7 +2,8 @@
   "pages": {
     "user": {
       "referrals": {
-        "title": "Invited friends"
+        "title": "Invited friends",
+        "placeholder": "Place for your friends"
       }
     }
   }

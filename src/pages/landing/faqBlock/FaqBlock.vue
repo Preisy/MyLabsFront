@@ -57,9 +57,10 @@ import manOnChair from 'assets/man_on_chair_alt.png';
     .content-wrapper {
       .content {
         flex-direction: column;
+        width: 25rem;
+        margin: 0 auto;
 
         .hiw-faqblock {
-          margin: 0 auto;
           margin-bottom: 2rem;
         }
       }
@@ -72,6 +73,7 @@ import manOnChair from 'assets/man_on_chair_alt.png';
 
       .content {
         flex-direction: column;
+        width: unset;
       }
     }
   }

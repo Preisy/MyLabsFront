@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { QDialog } from 'quasar';
 import { useField } from 'vee-validate';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
 interface ADatePickerProps {
   name: string;
@@ -15,18 +16,12 @@ const getTomorrow = (): string => {
 const { errorMessage, value } = useField<string | number | undefined>(
   props.name
 );
+const dialog = ref<QDialog>();
 onMounted(() => useField(props.name).setValue(getTomorrow()));
 </script>
 
 <template>
   <div class="date-wrapper">
-    <!-- <a-input
-      class="col-4"
-      :label="$t('pages.landing.homePage.form.deadline')"
-      name="deadline"
-      :init-value="getTomorrow()"
-    /> -->
-
     <q-input
       class="date-input"
       filled
@@ -40,26 +35,38 @@ onMounted(() => useField(props.name).setValue(getTomorrow()));
       :rules="['date']"
     >
       <template v-slot:append>
-        <q-icon name="event" class="cursor-pointer">
-          <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-            <q-date color="info" v-model="value">
-              <div class="row items-center justify-end">
-                <q-btn v-close-popup label="Close" color="primary" flat />
-              </div>
-            </q-date>
-          </q-popup-proxy>
-        </q-icon>
+        <q-icon name="event" class="cursor-pointer" :onclick="dialog?.show" />
+        <q-dialog ref="dialog" class="dialog">
+          <q-date class="datepicker" color="info" v-model="value">
+            <div class="row items-center justify-end">
+              <q-btn v-close-popup label="Close" color="primary" flat />
+            </div>
+          </q-date>
+        </q-dialog>
       </template>
     </q-input>
   </div>
 </template>
 
 <style scoped lang="scss">
+.datepicker-proxy {
+  .bg-prevent {
+    position: fixed;
+    left: -10000px;
+    right: -10000px;
+    top: -10000px;
+    bottom: -10000px;
+    background-color: #ffffff99;
+  }
+  .datepicker {
+    position: relative;
+    z-index: 2;
+  }
+}
 .date-input {
   padding: 0;
   font-size: 0.6rem;
-}
-.date-input {
+
   &.q-field--filled :deep(.q-field__control:after) {
     display: none;
   }

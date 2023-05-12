@@ -4,7 +4,7 @@ import { onMounted, ref, watch } from 'vue';
 import OrderDialog from './ui/OrderDialog.vue';
 import { useUserStore } from 'src/stores/UserStore';
 import { QFile } from 'quasar';
-import defaultPhoto from 'assets/Labs_square_icon.png';
+import defaultPhoto from 'assets/user/default_photo.png';
 
 const userStore = useUserStore();
 const filepicker = ref<InstanceType<typeof QFile>>();
@@ -49,6 +49,7 @@ onMounted(async () => {
     <div class="content-wrapper structure">
       <div class="column items-center text-primary">
         <p class="balance">{{ $t('pages.user.main.balance') }}</p>
+        <div class="balance-preloader" v-if="!balance" />
         <h1 class="balance-count">{{ balance }}</h1>
         <q-btn class="change-photo-btn" @click="onChangePhotoClick">
           <img
@@ -87,6 +88,13 @@ onMounted(async () => {
   .content-wrapper {
     .balance {
       font-size: 1rem;
+    }
+    .balance-preloader {
+      width: 8rem;
+      height: 3rem;
+      margin: 0.5rem;
+      border-radius: 1rem;
+      background: #eaeaea;
     }
     .balance-count {
       font-size: 2rem;

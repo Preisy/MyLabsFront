@@ -41,10 +41,14 @@ const props = defineProps<CardProps>();
   padding: 1.5rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 2rem 0 #00000020;
-  min-width: 12.1rem;
+  // width: 20rem;
 
   @media (max-width: $screen-lg) {
     padding: 0.9rem;
+  }
+  @media (max-width: $screen-md) {
+    padding: 0.9rem;
+    box-shadow: 0 0 0.7rem 0 #00000020;
   }
 
   .title-wrapper {
