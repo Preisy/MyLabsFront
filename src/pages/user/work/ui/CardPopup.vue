@@ -13,11 +13,12 @@ interface CardPopupProps {
 
 const props = defineProps<CardPopupProps>();
 const popup = ref<InstanceType<typeof QPopupProxy>>();
-// const popup = ref<InstanceType<typeof ADialog>>();
 const isLab = isLabModel(props.data);
 
 defineExpose({
-  show: () => popup.value?.show(),
+  show: () => {
+    popup.value?.show();
+  },
 });
 const emits = defineEmits<{
   (event: 'close'): void;
@@ -25,14 +26,6 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <!-- <q-popup-proxy no-parent-event class="popup" ref="popup">
-    <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />
-    <DetailedOrderCard v-else :card="(data as OrderModel)" />
-  </q-popup-proxy> -->
-  <!-- <ADialog class="popup" ref="popup" @close="emits('close')">
-    <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />
-    <DetailedOrderCard v-else :card="(data as OrderModel)" />
-  </ADialog> -->
   <div class="popup-wrapper" :class="{ hide: !isOpen }">
     <div class="popup" :class="{ hide: !isOpen }">
       <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />

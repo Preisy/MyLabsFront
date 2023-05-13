@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import AReferral from 'src/components/AReferral/AReferral.vue';
+import ReferralHeader from 'pages/referral/header/ReferralHeader.vue';
 </script>
 
 <template>
-  <div class="referral-page">
-    <AReferral />
-  </div>
+  <q-layout view="lHh lpr lff">
+    <ReferralHeader />
+
+    <q-page-container class="no-padding">
+      <AReferral />
+    </q-page-container>
+  </q-layout>
 </template>
 
 <style scoped lang="scss"></style>

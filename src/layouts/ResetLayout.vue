@@ -30,7 +30,13 @@ onMounted(() => {
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <AModalDialog :closable="false" :dialogs="resetDialogData" ref="dialog" />
+      <AModalDialog
+        :closable="false"
+        :is-full="false"
+        redirect="/dev"
+        :dialogs="resetDialogData"
+        ref="dialog"
+      />
     </q-page-container>
   </q-layout>
 </template>

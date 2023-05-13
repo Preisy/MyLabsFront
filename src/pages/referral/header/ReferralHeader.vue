@@ -1,33 +1,29 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
-import { SignUpDialog, LoginDialog } from './ui';
+import { SignUpDialog, LoginDialog } from 'pages/landing/header/ui/auth';
 import { useI18n } from 'vue-i18n';
 import HeaderBtn from './ui';
 import { useAuthStore } from 'src/stores/AuthStore';
-import LangSwitch from './ui/LangSwitch.vue';
 import { useUserStore } from 'src/stores/UserStore';
 import defaultPhoto from 'assets/user/default_photo.png';
 import mylabsLogo from 'assets/my_labs_logo.png';
 
 const { t } = useI18n();
-const currentLinkIndex = ref(0);
+const currentLinkIndex = ref(1);
 
 const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
-    label: t('pages.landing.header.home'),
-    value: 'home',
+    label: t('pages.referrals.header.home'),
+    value: '/dev',
   },
   {
-    label: t('pages.landing.header.ourskills'),
-    value: 'possibilities',
+    label: t('pages.referrals.header.referrals'),
+    value: '/referrals',
   },
-  { label: t('pages.landing.header.examples'), value: 'examples' },
-  { label: t('pages.landing.header.reviews'), value: 'reviews' },
-  { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
 ];
 
 const isCompact = ref(false);
@@ -53,7 +49,6 @@ const scrollHandler = (details: QScrollDetailsEvent) => {
 
 const isMobile = computed(() => Screen.lt.lg);
 const isMenuOpened = ref(false);
-const authStore = useAuthStore();
 const userStore = useUserStore();
 
 let signup = ref<InstanceType<typeof SignUpDialog>>();
@@ -61,20 +56,6 @@ let login = ref<InstanceType<typeof LoginDialog>>();
 
 const isSignupOpened = computed(() => signup.value?.isOpened);
 const isLoginOpened = computed(() => login.value?.isOpened);
-
-onMounted(async () => {
-  if (!userStore.userPhotoUrl && authStore.isAuth) userStore.getPhoto();
-
-  for (const links of buttonLinks) {
-    const element = document.querySelector(`#${links.value}`);
-    if (!element) {
-      console.warn(`Navlink element with id:${links.value} not found!`);
-      continue;
-    }
-
-    elements.push(element as HTMLElement);
-  }
-});
 </script>
 
 <template>
@@ -97,6 +78,7 @@ onMounted(async () => {
           :id="index"
           :label="link.label"
           :target="link.value"
+          :to="link.value"
           class="header-link"
         />
       </div>
@@ -105,7 +87,6 @@ onMounted(async () => {
         class="right-btns"
         :class="{ 'row items-center': !isMobile, 'column reverse': isMobile }"
       >
-        <LangSwitch class="q-mr-md right-btn lang-btn" />
         <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
           <ABtn
             v-if="!useAuthStore().isAuth"

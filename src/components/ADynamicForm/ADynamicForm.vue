@@ -45,6 +45,7 @@ const onSubmit = handleSubmit.withControlled((values, ctx) => {
       :label="field.label"
       :type="field.type"
       :placeholder="field.placeholder"
+      :is-active="field.isActive"
     />
 
     <ABtn

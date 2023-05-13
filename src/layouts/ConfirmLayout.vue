@@ -32,6 +32,7 @@ const onComplete = () => {
         :is-full="true"
         :dialogs="signupDialogData"
         ref="dialog"
+        redirect="/mpc/tasks"
         :on-complete="onComplete"
       />
     </q-page-container>

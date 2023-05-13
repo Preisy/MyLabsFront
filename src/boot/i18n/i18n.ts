@@ -19,6 +19,7 @@ import { TReferralsUserBlockI18n } from 'src/pages/user/referrals';
 import { TSettingsBlockI18n } from 'src/pages/user/settings';
 import { TWorkBlockI18n } from 'src/pages/user/work';
 import { TReferralBlockI18n } from 'src/pages/landing/referralBlock/i18n';
+import { TReferralHeaderI18n } from 'src/pages/referral/header';
 
 export default boot(({ app }) => {
   // Set i18n instance on app
@@ -34,6 +35,7 @@ export default boot(({ app }) => {
       TExamplesBlockI18n,
       TReviewsBlockI18n,
       TReferralBlockI18n,
+      TReferralHeaderI18n,
       TFaqBlockI18n,
       TFooterBlockI18n,
       THeaderI18n,

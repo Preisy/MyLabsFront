@@ -50,6 +50,9 @@ import heartImg from 'assets/pop_up/heart.png';
 </template>
 
 <style scoped lang="scss">
+.structure {
+  padding-bottom: 8rem;
+}
 .numerical-list {
   list-style: decimal;
   margin-left: 1.1rem;

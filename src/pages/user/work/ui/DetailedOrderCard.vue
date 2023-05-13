@@ -1,11 +1,32 @@
 <script setup lang="ts">
-import { OrderModel } from './Card';
+import { useFileStore } from 'src/stores/FileStore';
+import { FileModel, OrderModel } from './Card';
 import { getFileIco } from 'components/AFileDialog/TypeToIconMap';
+import { AxiosError } from 'axios';
+import { ref } from 'vue';
+import AErrPopup from 'src/components/AErrPopup.vue';
+import { exportFile } from 'quasar';
 
 interface DetailedLabCardProps {
   card: OrderModel;
 }
-defineProps<DetailedLabCardProps>();
+const props = defineProps<DetailedLabCardProps>();
+
+const fileStore = useFileStore();
+const response = ref<AxiosError>();
+const errPopup = ref<InstanceType<typeof AErrPopup>>();
+
+const downloadFile = async (file: FileModel) => {
+  const orderId = props.card.id;
+  const responseFile = await fileStore.downloadFile(orderId, file);
+  if ('error' in responseFile) {
+    response.value = responseFile.error as AxiosError;
+    errPopup.value?.show();
+    return;
+  }
+
+  exportFile(file.filename, responseFile.blob);
+};
 </script>
 
 <template>
@@ -21,8 +42,9 @@ defineProps<DetailedLabCardProps>();
           :key="file.filename"
         >
           <q-icon
-            class="file"
+            class="file cursor-pointer"
             :name="`fa-solid ${getFileIco({ name: file.filename } as unknown as File)}`"
+            @click="downloadFile(file)"
           />
 
           <p class="filename text-center">
@@ -31,6 +53,12 @@ defineProps<DetailedLabCardProps>();
         </div>
       </div>
     </div>
+    <AErrPopup
+      class="err-popup"
+      :axios-err="response"
+      ref="errPopup"
+      :timeout="2000"
+    />
   </div>
 </template>
 
@@ -51,6 +79,7 @@ defineProps<DetailedLabCardProps>();
 
   .files {
     column-gap: 0.5rem;
+    width: max-content;
     .file-wrapper {
       --size: 3rem;
       position: relative;

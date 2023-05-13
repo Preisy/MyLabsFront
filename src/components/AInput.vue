@@ -12,6 +12,7 @@ interface ButtonProps {
   initValue?: string;
   type?: QInputProps['type'];
   autogrow?: boolean;
+  isActive?: boolean;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   placeholder: '',
   initValue: '',
   autogrow: false,
+  isActive: true,
 });
 
 const { errorMessage, value } = useField<string | number | undefined>(
@@ -46,6 +48,7 @@ const { errorMessage, value } = useField<string | number | undefined>(
     :color="color"
     :label="props.label"
     :label-color="props.labelColor"
+    :readonly="!props.isActive"
     :type="type as QInputProps['type'] "
   />
 </template>

@@ -44,6 +44,7 @@ defineProps<DetailedLabCardProps>();
 
   .files {
     column-gap: 0.5rem;
+    width: max-content;
     .file-wrapper {
       --size: 3rem;
       position: relative;

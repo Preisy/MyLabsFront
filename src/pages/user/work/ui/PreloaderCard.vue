@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { QPopupProxy } from 'quasar';
 import { ref } from 'vue';
 import CardPopup from './CardPopup.vue';
 
-const popup = ref<InstanceType<typeof QPopupProxy>>();
+const popup = ref<InstanceType<typeof CardPopup>>();
 const isOpen = ref<boolean>(false);
 const onclick = () => {
   popup.value?.show();

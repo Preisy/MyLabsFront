@@ -14,7 +14,11 @@ import heartImg from 'assets/pop_up/heart.png';
           <div class="text">
             {{ $t('pages.landing.referral.desc') }}
           </div>
-          <ABtn :label="$t('pages.landing.referral.detailsBtn')" theme="dark" />
+          <ABtn
+            :label="$t('pages.landing.referral.detailsBtn')"
+            theme="dark"
+            to="/referral"
+          />
         </div>
         <div class="img-wrapper">
           <img class="img" :src="heartImg" alt="" />

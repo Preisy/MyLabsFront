@@ -12,14 +12,17 @@ import { computed } from 'vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useRoute } from 'vue-router';
 import { Router } from 'src/router';
+import { useOrderStore } from 'src/stores/OrderStore';
 
 const { t } = useI18n();
 interface Props {
   start?: number;
   isFull: boolean;
+  isNeedToOrder?: boolean;
 }
 const props = defineProps<Props>();
 const authStore = useAuthStore();
+const orderStore = useOrderStore();
 
 let dialog = ref<InstanceType<typeof AModalDialog>>();
 const isDialogOpened = computed(() => dialog.value?.isOpened);
@@ -47,6 +50,7 @@ if (props.start)
   );
 
 const onComplete = () => {
+  if (orderStore.orderData) orderStore.sendOrder(orderStore.orderData);
   Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
 };
 </script>
