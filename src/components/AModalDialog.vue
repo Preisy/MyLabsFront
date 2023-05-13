@@ -42,6 +42,7 @@ const close = () => {
 defineEmits<{
   (e: 'close'): void;
 }>();
+
 let onSubmit = async (
   values: Record<string, unknown>,
   ctx: SubmissionContext<Record<string, unknown>>
@@ -106,12 +107,6 @@ defineExpose({
       :i="dialogs.length + 1"
       :type="isFull ? 'full' : 'short'"
       :redirect="redirect"
-      @close="
-        () => {
-          close();
-          props.onComplete?.();
-        }
-      "
     />
   </ADialog>
 </template>

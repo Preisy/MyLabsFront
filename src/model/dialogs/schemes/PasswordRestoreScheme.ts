@@ -2,7 +2,7 @@ import { storeToRefs } from 'pinia';
 import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { UnifiedApiPromise } from 'src/global/types/unifiedApiResponse';
-import { createErrorResponse } from 'src/global/utils/responseGenerators';
+import { createErrorResponse, createSuccessResponse } from 'src/global/utils/responseGenerators';
 import { useResetStore } from 'src/stores/ResetStore';
 
 const resetStore = useResetStore();
@@ -41,6 +41,7 @@ export const PasswordRestoreScheme = (
     resetStore.setPassword(newPassword);
     console.log(resetStore.changeData);
     return resetStore.resetPassword(resetStore.changeData) as UnifiedApiPromise;
+    // return createSuccessResponse('Good'); for tests
   },
   btnLabel: t('pages.landing.header.next'),
   state: storeToRefs(resetStore).resetState,

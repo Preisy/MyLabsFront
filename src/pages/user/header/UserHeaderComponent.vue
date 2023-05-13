@@ -54,7 +54,7 @@ const isMenuOpened = ref(false);
         />
       </div>
 
-      <div class="auth row">
+      <div class="right-side-btns row">
         <!-- <ABtn
           class="auth-login q-px-xl"
           color="grey"
@@ -63,7 +63,7 @@ const isMenuOpened = ref(false);
         /> -->
         <ContactsModal class="q-mr-lg" />
         <ABtn
-          class="auth-signup"
+          class="invite-friend-btn"
           :label="$t('pages.user.header.inviteFriend')"
           @click="
             inviteDialog?.open();
@@ -92,8 +92,6 @@ const isMenuOpened = ref(false);
       :class="{ open: isMenuOpened }"
     />
   </q-header>
-
-  <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
 
 <style scoped lang="scss">
@@ -133,9 +131,17 @@ const isMenuOpened = ref(false);
     }
   }
 
-  .auth {
+  .right-side-btns {
     .auth-login {
       margin-right: 0.75rem;
+    }
+    .invite-friend-btn {
+      width: 9rem;
+      font-size: 0.7rem;
+
+      @media (max-width: $screen-md) {
+        font-size: 0.6rem;
+      }
     }
   }
 

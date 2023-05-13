@@ -52,7 +52,7 @@ onMounted(async () => {
               class="referral-card"
             />
           </div>
-          <template v-if="!referrals">
+          <template v-if="referrals?.length === 0">
             <div
               class="slide row justify-center no-wrap"
               v-for="chunk in [2, 2]"

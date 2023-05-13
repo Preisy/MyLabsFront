@@ -5,7 +5,7 @@ import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import * as yup from 'yup';
 import { UnifiedApiPromise } from 'src/global/types/unifiedApiResponse';
-import { createErrorResponse } from 'src/global/utils/responseGenerators';
+import { createErrorResponse, createSuccessResponse } from 'src/global/utils/responseGenerators';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
@@ -34,6 +34,7 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
       };
 
       return authStore.signupConfirm(codeCheckData) as UnifiedApiPromise;
+      // return createSuccessResponse('Good'); for tests
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).codeApproveState,

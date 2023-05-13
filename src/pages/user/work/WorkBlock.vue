@@ -50,16 +50,16 @@ const getOrders = async () => {
   <div class="work-block bg-primary" :class="{ 'middle-screen': Screen.lt.lg }">
     <div class="content-wrapper structure">
       <div class="cards column">
-        <div class="titles row">
-          <h1 class="title text-accent q-ml-lg">
-            {{ $t('pages.user.work.inProgress') }}
-          </h1>
-          <h1 class="title q-mr-lg">{{ $t('pages.user.work.oldWorks') }}</h1>
-        </div>
         <div class="cards column">
           <q-scroll-area class="task-scroller">
-            <div class="task-wrapper row no-wrap">
+            <div
+              class="task-wrapper no-wrap"
+              :class="{ row: !Screen.lt.sm, column: Screen.lt.sm }"
+            >
               <div class="in-progress">
+                <h1 class="title text-accent text-center">
+                  {{ $t('pages.user.work.inProgress') }}
+                </h1>
                 <OrderCard
                   class="card"
                   v-for="(card, index) in cards.orders"
@@ -71,6 +71,9 @@ const getOrders = async () => {
                 </template>
               </div>
               <div class="done">
+                <h1 class="title text-center">
+                  {{ $t('pages.user.work.oldWorks') }}
+                </h1>
                 <div
                   class="slide justify-center no-wrap"
                   :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
@@ -79,12 +82,16 @@ const getOrders = async () => {
                 >
                   <LabCard
                     class="card"
+                    :class="{
+                      right:
+                        (index % 2 === 1 || chunkSize === 1) && !Screen.lt.sm,
+                    }"
                     v-for="(card, index) in slide"
                     :key="index"
                     :card="card"
                   />
                 </div>
-                <template v-if="cards.orders.length === 0">
+                <template v-if="cards.labs.length === 0">
                   <div
                     class="slide justify-center no-wrap"
                     :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
@@ -171,6 +178,18 @@ const getOrders = async () => {
 
     .task-scroller {
       height: calc(var(--subblock-height) + 3rem);
+    }
+
+    .done .slide {
+      gap: 1rem;
+      margin-bottom: 1rem;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .in-progress .card {
+      width: fit-content;
     }
   }
 }

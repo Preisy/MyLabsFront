@@ -30,7 +30,7 @@ const onclose = () => {
 
 <template>
   <div class="card-wrapper">
-    <div class="card-body" @click="onclick">
+    <div class="card-body" @click="onclick" :class="{ open: isOpen }">
       <div class="row justify-between items-start fit-content no-wrap">
         <div class="title-wrapper row items-center no-wrap q-mr-sm">
           <img
@@ -63,12 +63,21 @@ const onclose = () => {
         :order-id="card.id"
       />
     </div>
-    <CardPopup ref="popup" :data="card" :is-open="isOpen" @close="onclose" />
+    <CardPopup
+      class="onclick-popup"
+      ref="popup"
+      :data="card"
+      :is-open="isOpen"
+      @close="onclose"
+    />
   </div>
 </template>
 <style scoped lang="scss">
+.card-wrapper {
+  position: relative;
+}
 .card-body {
-  // position: relative;
+  position: relative;
   background-color: $primary;
   box-sizing: border-box;
   padding: 1rem;
@@ -76,6 +85,10 @@ const onclose = () => {
   box-shadow: 0 0 1rem 0 #00000020;
   max-width: 15rem;
   height: 100%;
+
+  &.open {
+    z-index: 9999;
+  }
 
   @media (max-width: $screen-lg) {
     max-width: 13rem;

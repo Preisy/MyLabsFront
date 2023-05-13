@@ -36,6 +36,8 @@
       height: var(--size);
       border-radius: 100%;
 
+      flex: 0 0 auto;
+
       background: #eaeaee;
     }
   }

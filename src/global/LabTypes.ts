@@ -31,7 +31,7 @@ export enum LabEnum {
 
 export type LabType =
   | 'C'
-  | 'Cpp'
+  | 'Cpp' | 'C++'
   | 'C#'
   | 'Java'
   | 'Python'
@@ -46,6 +46,7 @@ export const taskTypeToImg = (v: string) => {
 
   switch (type) {
     case 'Cpp':
+    case 'C++':
       return cppImg;
     case 'C':
       return cImg;

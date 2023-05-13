@@ -3,8 +3,9 @@ import { OrderModel, LabModel, isLabModel } from './Card';
 import DetailedLabCard from './DetailedLabCard.vue';
 import DetailedOrderCard from './DetailedOrderCard.vue';
 import { ref } from 'vue';
-// import ADialog from 'src/components/ADialog';
 import { QPopupProxy } from 'quasar';
+import lightImg from 'assets/header/langSwitchLight.svg';
+import { Screen } from 'quasar';
 
 interface CardPopupProps {
   data: LabModel | OrderModel;
@@ -26,10 +27,16 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <div class="popup-wrapper" :class="{ hide: !isOpen }">
+  <div
+    class="popup-wrapper"
+    :class="{ hide: !isOpen, compact: Screen.lt.md, mobile: Screen.lt.sm }"
+  >
     <div class="popup" :class="{ hide: !isOpen }">
       <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />
       <DetailedOrderCard v-else :card="(data as OrderModel)" />
+    </div>
+    <div class="light-holder">
+      <img :src="lightImg" alt="" class="light" />
     </div>
     <div class="bg-blur" @click="emits('close')" :class="{ hide: !isOpen }" />
   </div>
@@ -48,17 +55,26 @@ const emits = defineEmits<{
     // display: none;
   }
 
-  .popup {
-    // border-radius: 1.5rem;
-    // box-shadow: 0 0 2.5rem 0 rgba(191, 205, 243, 0.5);
+  &.compact {
+    .light-holder {
+      visibility: hidden;
+    }
+  }
 
+  &.mobile {
+    .popup {
+      left: unset;
+    }
+  }
+
+  .popup {
     border-radius: 1.5rem;
     box-shadow: 0 0 2.5rem 0 rgba(191, 205, 243, 0.5);
     position: absolute;
     background: white;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: calc(100% + 3rem);
+    // top: 50%;
+    // transform: translate(-50%, -50%);
     z-index: 10000;
 
     transition: 0.3s opacity ease-in-out;
@@ -69,12 +85,23 @@ const emits = defineEmits<{
       z-index: 0;
     }
   }
+  .light-holder {
+    position: absolute;
+    z-index: 9997;
+    right: 3rem;
+    top: -2.5rem;
+    transform: translateX(100%) scaleY(0.5);
+
+    .light {
+      rotate: 270deg;
+    }
+  }
   .bg-blur {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: -10000px;
+    right: -10000px;
+    top: -10000px;
+    bottom: -10000px;
     background: #ffffffaa;
     z-index: 9998;
 

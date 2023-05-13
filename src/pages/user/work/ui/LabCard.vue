@@ -22,7 +22,11 @@ const onclose = () => {
 </script>
 <template>
   <div class="card-wrapper">
-    <div class="card-body cursor-pointer" @click="onclick">
+    <div
+      class="card-body cursor-pointer"
+      @click="onclick"
+      :class="{ open: isOpen }"
+    >
       <div class="row justify-between items-start fit-content no-wrap">
         <div class="title-wrapper row items-center no-wrap q-mr-sm">
           <img
@@ -47,12 +51,44 @@ const onclose = () => {
         </div>
       </div>
     </div>
-    <CardPopup ref="popup" :data="card" :is-open="isOpen" @close="onclose" />
+    <CardPopup
+      class="lab-popup"
+      ref="popup"
+      :data="card"
+      :is-open="isOpen"
+      @close="onclose"
+    />
   </div>
 </template>
 <style scoped lang="scss">
+.card-wrapper {
+  position: relative;
+
+  &.right {
+    .lab-popup {
+      &:deep(.popup) {
+        right: unset;
+        left: calc(-100% - 3rem);
+      }
+      &:deep(.light-holder) {
+        right: unset;
+        left: 3rem;
+        transform: translateX(-100%) scaleY(0.5);
+      }
+      &:deep(.light) {
+        rotate: 90deg;
+      }
+    }
+  }
+
+  .lab-popup {
+    &:deep(.popup) {
+      top: 1rem;
+    }
+  }
+}
 .card-body {
-  // position: relative;
+  position: relative;
   background-color: $primary;
   box-sizing: border-box;
   padding: 1rem;
@@ -60,6 +96,10 @@ const onclose = () => {
   box-shadow: 0 0 1rem 0 #00000020;
   width: 15rem;
   height: 100%;
+
+  &.open {
+    z-index: 9999;
+  }
 
   @media (max-width: $screen-lg) {
     width: 13rem;

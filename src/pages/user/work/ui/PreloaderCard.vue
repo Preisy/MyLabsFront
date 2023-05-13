@@ -1,26 +1,8 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import CardPopup from './CardPopup.vue';
-
-const popup = ref<InstanceType<typeof CardPopup>>();
-const isOpen = ref<boolean>(false);
-const onclick = () => {
-  popup.value?.show();
-  isOpen.value = true;
-};
-const onclose = () => {
-  console.log('close');
-  isOpen.value = false;
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="card-wrapper">
-    <div
-      class="card-body cursor-pointer"
-      :class="{ open: isOpen }"
-      @click="onclick"
-    >
+    <div class="card-body">
       <div class="row justify-between items-start fit-content no-wrap">
         <div class="title-wrapper row items-center no-wrap q-mr-sm">
           <div class="title">Здесь будет отображен заказ</div>
@@ -31,35 +13,10 @@ const onclose = () => {
         <div class="price" color="grey" />
       </div>
     </div>
-    <CardPopup
-      @close="onclose"
-      :is-open="isOpen"
-      ref="popup"
-      :data="{
-        taskText: 'Какое-то крутое задание на очень много текста',
-        taskFiles: [
-          {
-            filename: 'abc',
-            createdAt: '0',
-            id: 9,
-          },
-          {
-            filename: 'bcd',
-            createdAt: '0',
-            id: 90,
-          },
-        ],
-        type: 'Cpp',
-        deadline: '29.05.23',
-        id: 0,
-      }"
-    />
   </div>
 </template>
 
 <style scoped lang="scss">
-.card-wrapper {
-}
 .card-body {
   position: relative;
   background-color: $primary;
@@ -103,13 +60,13 @@ const onclose = () => {
 
   .details {
     .date {
-      width: 5rem;
+      width: 4rem;
       height: 1.3rem;
       border-radius: 1.4rem;
       background: #eaeaea;
     }
     .price {
-      width: 5rem;
+      width: 4rem;
       height: 1.3rem;
       border-radius: 1.4rem;
       background: #eaeaea;
