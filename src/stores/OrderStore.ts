@@ -13,6 +13,7 @@ export const useOrderStore = defineStore('orderStore', () => {
     const currentOrders = ref<OrderModel[]>([]);
 
     const sendOrder = async (order: Record<string, unknown> | OrderData) => {
+        orderState.value = 'loading';
         const res = await OrderService.sendOrder(order as unknown as OrderData);
         if ('error' in res) {
             orderState.value = 'error';
@@ -24,6 +25,8 @@ export const useOrderStore = defineStore('orderStore', () => {
     }
 
     const getOrders = async () => {
+        orderState.value = 'loading';
+
         const res = await OrderService.getOrders();
         if ('error' in res) {
             orderState.value = 'error';
@@ -38,8 +41,9 @@ export const useOrderStore = defineStore('orderStore', () => {
     const sendOrderFiles = async (files: File[], orderId: number) => {
 
         const responses: AxiosResponse[] = [];
-        loadFilesState.value = 'unset';
-        files.forEach(async (file) => {
+        loadFilesState.value = 'loading';
+
+        for (const file of files) {
             const res = await OrderService.sendOrderFile(file, orderId);
 
             if ('error' in res) {
@@ -50,7 +54,7 @@ export const useOrderStore = defineStore('orderStore', () => {
             }
 
             responses.push(res);
-        })
+        }
 
         return responses;
     }

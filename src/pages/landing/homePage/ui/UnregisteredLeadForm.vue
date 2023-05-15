@@ -66,6 +66,10 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     return;
   }
 
+  doOrder();
+});
+
+const doOrder = async () => {
   let promo = values.promoName
     ? values.promoName.length > 0
       ? values.promoName
@@ -81,8 +85,6 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
   const orderResponse = await orderStore.sendOrder(sendData);
   if ('error' in orderResponse) {
     console.warn('Something went wrong with order');
-    console.log(orderResponse);
-    console.log(sendData);
     response.value = orderResponse.error as AxiosError;
     errPopup.value?.show();
     return;
@@ -92,7 +94,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
   orderStore.sendOrderFiles(fileStore.filesList, orderResponse.data.id);
   orderStore.clearOrderCache();
   cleanForm();
-});
+};
 
 const isFileDialogOpen = ref(false);
 const fileDialogOpen = () => {
@@ -207,6 +209,7 @@ const cleanForm = () => {
       :start="1"
       :is-need-to-order="true"
       :is-full="true"
+      :on-complete="doOrder"
       ref="signupDialog"
     />
     <ACompletePopup ref="donePopup" />

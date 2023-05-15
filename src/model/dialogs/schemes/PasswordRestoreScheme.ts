@@ -2,6 +2,7 @@ import { storeToRefs } from 'pinia';
 import { UserCredsSchema } from 'src/model/UserCreds';
 import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { UnifiedApiPromise } from 'src/global/types/unifiedApiResponse';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createErrorResponse, createSuccessResponse } from 'src/global/utils/responseGenerators';
 import { useResetStore } from 'src/stores/ResetStore';
 
@@ -33,15 +34,13 @@ export const PasswordRestoreScheme = (
       return createErrorResponse('Password mismatch');
     }
 
-    console.log(values);
     const newPassword = {
       newPassword: values['password'],
     };
 
     resetStore.setPassword(newPassword);
-    console.log(resetStore.changeData);
     return resetStore.resetPassword(resetStore.changeData) as UnifiedApiPromise;
-    // return createSuccessResponse('Good'); for tests
+    // return createSuccessResponse('Good'); //for tests
   },
   btnLabel: t('pages.landing.header.next'),
   state: storeToRefs(resetStore).resetState,

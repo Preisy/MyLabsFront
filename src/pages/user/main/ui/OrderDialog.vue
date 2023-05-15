@@ -71,25 +71,28 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
   };
 
   const sendResp = await orderStore.sendOrder(reqData);
-
   if ('error' in sendResp) {
     errorResponse.value = sendResp.error as AxiosError;
     popup.value?.show();
     return;
   }
 
-  const taskFiles = await filesProcessing(
+  const fileSendResp = await filesProcessing(
     fileStore.filesList,
     sendResp.data.id
-  );
+  ); //Await until all files loaded
 
-  orderStore.currentOrders.push({
-    deadline: reqData.deadline,
-    taskFiles: taskFiles,
-    taskText: reqData.taskText,
-    type: reqData.type,
-    id: sendResp.data.id,
-  });
+  if ('error' in fileSendResp) {
+    console.warn(fileSendResp.error);
+    return;
+  }
+
+  const refreshOrders = await orderStore.getOrders(); //Refresh all orders. Sad but true. Maybe i could push only 1 new order to end of list... But. I need more motivation
+  if ('error' in refreshOrders) {
+    console.warn(refreshOrders.error);
+    return;
+  }
+
   dialog.value?.close();
   fileStore.clearFiles();
 });

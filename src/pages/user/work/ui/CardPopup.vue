@@ -35,7 +35,7 @@ const emits = defineEmits<{
       <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />
       <DetailedOrderCard v-else :card="(data as OrderModel)" />
     </div>
-    <div class="light-holder">
+    <div class="light-holder" :class="{ hide: !isOpen }">
       <img :src="lightImg" alt="" class="light" />
     </div>
     <div class="bg-blur" @click="emits('close')" :class="{ hide: !isOpen }" />
@@ -49,10 +49,12 @@ const emits = defineEmits<{
   top: 0;
   right: 0;
   bottom: 0;
+  opacity: 1;
+  transition: 0.3s all ease-in-out;
 
   &.hide {
+    opacity: 0;
     visibility: hidden;
-    // display: none;
   }
 
   &.compact {
@@ -73,8 +75,6 @@ const emits = defineEmits<{
     position: absolute;
     background: white;
     left: calc(100% + 3rem);
-    // top: 50%;
-    // transform: translate(-50%, -50%);
     z-index: 10000;
 
     transition: 0.3s opacity ease-in-out;
@@ -82,7 +82,6 @@ const emits = defineEmits<{
 
     &.hide {
       opacity: 0;
-      z-index: 0;
     }
   }
   .light-holder {
@@ -91,13 +90,19 @@ const emits = defineEmits<{
     right: 3rem;
     top: -2.5rem;
     transform: translateX(100%) scaleY(0.5);
+    transition: 0.3s opacity ease-in-out;
+    opacity: 1;
+
+    &.hide {
+      opacity: 0;
+    }
 
     .light {
       rotate: 270deg;
     }
   }
   .bg-blur {
-    position: absolute;
+    position: fixed;
     left: -10000px;
     right: -10000px;
     top: -10000px;

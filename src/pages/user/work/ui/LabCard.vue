@@ -16,12 +16,11 @@ const onclick = () => {
   isOpen.value = true;
 };
 const onclose = () => {
-  console.log('close');
   isOpen.value = false;
 };
 </script>
 <template>
-  <div class="card-wrapper">
+  <div class="card-wrapper" :class="{ open: isOpen }">
     <div
       class="card-body cursor-pointer"
       @click="onclick"
@@ -63,6 +62,10 @@ const onclose = () => {
 <style scoped lang="scss">
 .card-wrapper {
   position: relative;
+
+  &.open {
+    z-index: 1;
+  }
 
   &.right {
     .lab-popup {

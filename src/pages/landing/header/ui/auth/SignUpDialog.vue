@@ -12,17 +12,16 @@ import { computed } from 'vue';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useRoute } from 'vue-router';
 import { Router } from 'src/router';
-import { useOrderStore } from 'src/stores/OrderStore';
 
 const { t } = useI18n();
 interface Props {
   start?: number;
   isFull: boolean;
   isNeedToOrder?: boolean;
+  onComplete?: () => void;
 }
 const props = defineProps<Props>();
 const authStore = useAuthStore();
-const orderStore = useOrderStore();
 
 let dialog = ref<InstanceType<typeof AModalDialog>>();
 const isDialogOpened = computed(() => dialog.value?.isOpened);
@@ -37,6 +36,8 @@ defineExpose({
   isOpened: isDialogOpened,
 });
 
+const emits = defineEmits<{ (e: 'close'): void }>();
+
 let signupDialogData: DialogData[] = [
   SignupScheme(t),
   PasswordScheme(t),
@@ -49,9 +50,12 @@ if (props.start)
     signupDialogData.length
   );
 
-const onComplete = () => {
-  if (orderStore.orderData) orderStore.sendOrder(orderStore.orderData);
-  Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+const onclose = () => {
+  emits('close');
+  if (props.onComplete) props.onComplete();
+  setTimeout(() => {
+    Router.push({ path: '/mpc/tasks' }).then(() => window.location.reload());
+  }, 1000);
 };
 </script>
 
@@ -59,8 +63,8 @@ const onComplete = () => {
   <AModalDialog
     :dialogs="signupDialogData"
     ref="dialog"
-    :on-complete="onComplete"
     :is-full="isFull"
+    @close="onclose"
   />
 </template>
 

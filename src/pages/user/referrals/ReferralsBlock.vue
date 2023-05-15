@@ -28,7 +28,6 @@ onMounted(async () => {
     console.warn('For some reason cant fetch referrals');
     return;
   }
-  console.log(refs);
 
   referrals.value = refs;
 });

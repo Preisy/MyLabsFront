@@ -29,7 +29,7 @@ const onclose = () => {
 </script>
 
 <template>
-  <div class="card-wrapper">
+  <div class="card-wrapper" :class="{ open: isOpen }">
     <div class="card-body" @click="onclick" :class="{ open: isOpen }">
       <div class="row justify-between items-start fit-content no-wrap">
         <div class="title-wrapper row items-center no-wrap q-mr-sm">
@@ -75,6 +75,10 @@ const onclose = () => {
 <style scoped lang="scss">
 .card-wrapper {
   position: relative;
+
+  &.open {
+    z-index: 1;
+  }
 }
 .card-body {
   position: relative;

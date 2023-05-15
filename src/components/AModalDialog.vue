@@ -34,12 +34,15 @@ const dialogsLen = props.needLast
 
 const close = () => {
   if (!props.closable) return;
+  emits('close');
   floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;
+
+  if (props.onComplete) props.onComplete();
 };
 
-defineEmits<{
+const emits = defineEmits<{
   (e: 'close'): void;
 }>();
 
@@ -107,6 +110,7 @@ defineExpose({
       :i="dialogs.length + 1"
       :type="isFull ? 'full' : 'short'"
       :redirect="redirect"
+      @close="close"
     />
   </ADialog>
 </template>

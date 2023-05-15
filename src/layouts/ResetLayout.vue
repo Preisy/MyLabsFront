@@ -16,14 +16,12 @@ let resetDialogData: DialogData[] = [PasswordRestoreScheme(t)];
 onMounted(() => {
   dialog.value?.open();
   const query = useRoute().query;
-  console.log(query);
 
   const email = query as Pick<changePasswordData, 'email'>;
   const code = query as Pick<changePasswordData, 'code'>;
 
   resetStore.setCode(code);
   resetStore.setEmail(email);
-  console.log(resetStore.changeData);
 });
 </script>
 

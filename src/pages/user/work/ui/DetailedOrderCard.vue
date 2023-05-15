@@ -35,7 +35,7 @@ const downloadFile = async (file: FileModel) => {
       <div class="text" :class="{ noMargin: !card.taskFiles?.length }">
         <p>{{ card.taskText }}</p>
       </div>
-      <div class="files row" v-if="card.taskFiles">
+      <div class="files" v-if="card.taskFiles">
         <div
           class="file-wrapper"
           v-for="file in card.taskFiles"
@@ -67,6 +67,7 @@ const downloadFile = async (file: FileModel) => {
   padding: 1.5rem;
   border-radius: 1.5rem;
   max-width: 20rem;
+  min-width: 12rem;
   box-shadow: 0 0 2.5rem 0 rgba(191, 205, 243, 0.5);
 
   .text {
@@ -80,6 +81,9 @@ const downloadFile = async (file: FileModel) => {
   .files {
     column-gap: 0.5rem;
     width: max-content;
+
+    display: grid;
+    grid-template-columns: repeat(5, auto);
     .file-wrapper {
       --size: 3rem;
       position: relative;

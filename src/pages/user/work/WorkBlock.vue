@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { chunk } from 'lodash';
-import { LabModel, OrderModel } from './ui/Card';
+import { LabModel } from './ui/Card';
 import { Screen } from 'quasar';
 import { computed, onMounted, ref } from 'vue';
 import { useLabsStore } from 'src/stores/LabsStore';
@@ -8,41 +8,38 @@ import { useOrderStore } from 'src/stores/OrderStore';
 import OrderCard from './ui/OrderCard.vue';
 import LabCard from './ui/LabCard.vue';
 import PreloaderCard from './ui/PreloaderCard.vue';
+import { storeToRefs } from 'pinia';
 
-const cards = ref<{ orders: OrderModel[]; labs: LabModel[] }>({
-  orders: [],
-  labs: [],
-});
+const labsStore = useLabsStore();
+const orderStore = useOrderStore();
+
+const orders = storeToRefs(orderStore).currentOrders;
+const labs = ref<LabModel[]>([]);
 const chunkSize = computed(() => {
   return Screen.lt.md ? 1 : 2;
 });
 
-const labsStore = useLabsStore();
-const orderStore = useOrderStore();
 onMounted(async () => {
-  if (!cards.value) return;
-
   getLabs();
   getOrders();
 });
 
 const getLabs = async () => {
-  const labs = await labsStore.getLabs();
+  const labsResp = await labsStore.getLabs();
 
-  if ('error' in labs) {
+  if ('error' in labsResp) {
     console.warn('For some reason cant fetch labs');
     return;
   }
-  cards.value.labs = labs;
+  labs.value = labsResp;
 };
 const getOrders = async () => {
-  const orders = await orderStore.getOrders();
+  const ordersResp = await orderStore.getOrders();
 
-  if ('error' in orders || !orderStore.currentOrders) {
+  if ('error' in ordersResp || !orderStore.currentOrders) {
     console.warn('For some reason cant fetch orders');
     return;
   }
-  cards.value.orders = orderStore.currentOrders;
 };
 </script>
 
@@ -50,65 +47,71 @@ const getOrders = async () => {
   <div class="work-block bg-primary" :class="{ 'middle-screen': Screen.lt.lg }">
     <div class="content-wrapper structure">
       <div class="cards column">
-        <div class="cards column">
-          <q-scroll-area class="task-scroller">
-            <div
-              class="task-wrapper no-wrap"
-              :class="{ row: !Screen.lt.sm, column: Screen.lt.sm }"
-            >
-              <div class="in-progress">
-                <h1 class="title text-accent text-center">
-                  {{ $t('pages.user.work.inProgress') }}
-                </h1>
-                <OrderCard
+        <div class="titles row" v-if="!Screen.lt.sm">
+          <h1 class="title text-accent">
+            {{ $t('pages.user.work.inProgress') }}
+          </h1>
+          <h1 class="title">
+            {{ $t('pages.user.work.oldWorks') }}
+          </h1>
+        </div>
+        <q-scroll-area class="task-scroller">
+          <div
+            class="task-wrapper no-wrap"
+            :class="{ row: !Screen.lt.sm, column: Screen.lt.sm }"
+          >
+            <div class="in-progress">
+              <h1 v-if="Screen.lt.sm" class="title text-accent text-center">
+                {{ $t('pages.user.work.inProgress') }}
+              </h1>
+              <OrderCard
+                class="card"
+                v-for="(card, index) in orders"
+                :key="index"
+                :card="card"
+              />
+              <template v-if="orders.length === 0">
+                <PreloaderCard class="card" v-for="index in 2" :key="index" />
+              </template>
+            </div>
+            <div class="done">
+              <h1 v-if="Screen.lt.sm" class="title text-center">
+                {{ $t('pages.user.work.oldWorks') }}
+              </h1>
+              <div
+                class="slide justify-center no-wrap"
+                :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
+                v-for="(slide, index) in chunk(labs, chunkSize)"
+                :key="index"
+              >
+                <LabCard
                   class="card"
-                  v-for="(card, index) in cards.orders"
+                  :class="{
+                    right:
+                      (index % 2 === 1 || chunkSize === 1) && !Screen.lt.sm,
+                  }"
+                  v-for="(card, index) in slide"
                   :key="index"
                   :card="card"
                 />
-                <template v-if="cards.orders.length === 0">
-                  <PreloaderCard class="card" v-for="index in 2" :key="index" />
-                </template>
               </div>
-              <div class="done">
-                <h1 class="title text-center">
-                  {{ $t('pages.user.work.oldWorks') }}
-                </h1>
+              <template v-if="labs.length === 0">
                 <div
                   class="slide justify-center no-wrap"
                   :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
-                  v-for="(slide, index) in chunk(cards.labs, chunkSize)"
-                  :key="index"
+                  v-for="slide in [2, 2]"
+                  :key="slide"
                 >
-                  <LabCard
+                  <PreloaderCard
                     class="card"
-                    :class="{
-                      right:
-                        (index % 2 === 1 || chunkSize === 1) && !Screen.lt.sm,
-                    }"
-                    v-for="(card, index) in slide"
+                    v-for="index in slide"
                     :key="index"
-                    :card="card"
                   />
                 </div>
-                <template v-if="cards.labs.length === 0">
-                  <div
-                    class="slide justify-center no-wrap"
-                    :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
-                    v-for="slide in [2, 2]"
-                    :key="slide"
-                  >
-                    <PreloaderCard
-                      class="card"
-                      v-for="index in slide"
-                      :key="index"
-                    />
-                  </div>
-                </template>
-              </div>
+              </template>
             </div>
-          </q-scroll-area>
-        </div>
+          </div>
+        </q-scroll-area>
       </div>
     </div>
   </div>
@@ -129,11 +132,14 @@ const getOrders = async () => {
   }
 
   .titles {
+    margin-top: 6rem;
     justify-content: space-between;
   }
 
   .task-scroller {
-    height: calc(var(--subblock-height) - 5rem);
+    margin-top: 2rem;
+    // height: calc(var(--subblock-height) - 5rem);
+    height: 11rem;
 
     .task-wrapper {
       margin: 1.2rem;
