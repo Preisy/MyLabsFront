@@ -9,7 +9,7 @@ import { assign } from 'lodash';
 import PasswordChangeDialog from './ui/PasswordChangeDialog.vue';
 import FieldProps from 'src/components/ADynamicForm/types';
 import AErrPopup from 'src/components/AErrPopup.vue';
-import ACompletePopup from 'src/components/ACompletePopup.vue';
+import ACompletePopup from 'src/components/ACompletePopup';
 import { AxiosError } from 'axios';
 
 const userStore = useUserStore();

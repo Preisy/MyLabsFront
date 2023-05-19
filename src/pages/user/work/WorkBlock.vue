@@ -44,9 +44,12 @@ const getOrders = async () => {
 </script>
 
 <template>
-  <div class="work-block bg-primary" :class="{ 'middle-screen': Screen.lt.lg }">
-    <div class="content-wrapper structure">
-      <div class="cards column">
+  <div
+    class="work-block bg-primary full-height"
+    :class="{ 'middle-screen': Screen.lt.lg }"
+  >
+    <div class="content-wrapper structure full-height">
+      <div class="cards column full-height">
         <div class="titles row" v-if="!Screen.lt.sm">
           <h1 class="title text-accent">
             {{ $t('pages.user.work.inProgress') }}
@@ -71,7 +74,7 @@ const getOrders = async () => {
                 :card="card"
               />
               <template v-if="orders.length === 0">
-                <PreloaderCard class="card" v-for="index in 2" :key="index" />
+                <PreloaderCard class="card" v-for="index in 1" :key="index" />
               </template>
             </div>
             <div class="done">
@@ -88,7 +91,10 @@ const getOrders = async () => {
                   class="card"
                   :class="{
                     right:
-                      (index % 2 === 1 || chunkSize === 1) && !Screen.lt.sm,
+                      (index % 2 === 1 ||
+                        chunkSize === 1 ||
+                        slide.length === 1) &&
+                      !Screen.lt.sm,
                   }"
                   v-for="(card, index) in slide"
                   :key="index"
@@ -99,7 +105,7 @@ const getOrders = async () => {
                 <div
                   class="slide justify-center no-wrap"
                   :class="{ row: !Screen.lt.md, column: Screen.lt.md }"
-                  v-for="slide in [2, 2]"
+                  v-for="slide in [2]"
                   :key="slide"
                 >
                   <PreloaderCard
@@ -124,22 +130,22 @@ const getOrders = async () => {
 
   .structure {
     padding: 0;
+    padding-top: 4rem;
   }
 
   .title {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
   .titles {
-    margin-top: 6rem;
     justify-content: space-between;
   }
 
   .task-scroller {
     margin-top: 2rem;
     // height: calc(var(--subblock-height) - 5rem);
-    height: 11rem;
+    height: calc(100% - 8rem);
 
     .task-wrapper {
       margin: 1.2rem;
@@ -175,6 +181,7 @@ const getOrders = async () => {
   @media (max-width: $screen-sm) {
     .structure {
       width: 90%;
+      padding-top: 0;
     }
 
     .title {
@@ -183,7 +190,8 @@ const getOrders = async () => {
     }
 
     .task-scroller {
-      height: calc(var(--subblock-height) + 3rem);
+      height: calc(var(--subblock-height) - 3rem);
+      margin-top: 0;
     }
 
     .done .slide {

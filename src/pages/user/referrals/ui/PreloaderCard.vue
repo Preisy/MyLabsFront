@@ -28,6 +28,13 @@
       margin-bottom: 0;
       margin-left: 0.5rem;
       color: #eaeaee;
+
+      @media (max-width: $screen-md-lg) {
+        font-size: 1.2rem;
+      }
+      @media (max-width: $screen-md) {
+        font-size: 1.05rem;
+      }
     }
 
     .profile-img {

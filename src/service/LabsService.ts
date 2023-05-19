@@ -5,7 +5,7 @@ import { omit } from 'lodash';
 export const LabsService = {
   async getLabs() {
     try {
-      const { data } = await $api.get<LabModel[]>('/users/labs');
+      const { data } = await $api.get<LabModel[]>('/labs');
       return data;
     } catch (e: unknown) {
       return { error: e };

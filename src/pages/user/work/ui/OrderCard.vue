@@ -16,20 +16,46 @@ const fileBtn = ref<InstanceType<typeof QBtn>>();
 
 const popup = ref<InstanceType<typeof CardPopup>>();
 const isOpen = ref<boolean>(false);
+
 const onclick = (e: Event) => {
-  if ((e.target as HTMLElement).tagName.toLowerCase() === 'i') return;
+  if (
+    (e.target as HTMLElement).tagName.toLowerCase() === 'i' ||
+    (e.target as HTMLElement).tagName.toLowerCase() === 'button'
+  )
+    return;
 
   popup.value?.show();
   isOpen.value = true;
 };
+
 const onclose = () => {
-  // console.log('close');
   isOpen.value = false;
 };
+
+defineExpose({
+  close: () => {
+    onclose;
+  },
+});
+
+const cardWrapper = ref<HTMLElement>();
+const findParent = (element: HTMLElement, parent: HTMLElement): boolean => {
+  if (element.parentElement === parent) return true;
+  if (!element.parentElement) return false;
+  return findParent(element.parentElement, parent);
+};
+window.addEventListener('click', (e: Event) => {
+  if (!cardWrapper.value) return;
+
+  const isCard = findParent(e.target as HTMLElement, cardWrapper.value);
+  if (isCard) return;
+
+  onclose();
+});
 </script>
 
 <template>
-  <div class="card-wrapper" :class="{ open: isOpen }">
+  <div class="card-wrapper" ref="cardWrapper" :class="{ open: isOpen }">
     <div class="card-body" @click="onclick" :class="{ open: isOpen }">
       <div class="row justify-between items-start fit-content no-wrap">
         <div class="title-wrapper row items-center no-wrap q-mr-sm">
@@ -103,7 +129,8 @@ const onclose = () => {
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    max-width: 10rem;
+    max-width: unset;
+    min-width: 17rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

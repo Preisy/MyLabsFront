@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { QScrollObserver, Screen } from 'quasar';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import ABtn from 'components/ABtn.vue';
 import { QScrollDetailsEvent } from 'src/global/types';
 import { SignUpDialog, LoginDialog } from 'pages/landing/header/ui/auth';
@@ -56,6 +56,10 @@ let login = ref<InstanceType<typeof LoginDialog>>();
 
 const isSignupOpened = computed(() => signup.value?.isOpened);
 const isLoginOpened = computed(() => login.value?.isOpened);
+
+onMounted(async () => {
+  await userStore.getPhoto();
+});
 </script>
 
 <template>

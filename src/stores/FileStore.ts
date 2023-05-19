@@ -2,16 +2,17 @@ import { defineStore } from 'pinia';
 import { SimpleState } from 'src/global/types';
 import { ref } from 'vue';
 import { FileService } from 'src/service/FileService';
-import { remove } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { FileModel } from 'src/pages/user/work/ui/Card';
+import { IdbService } from 'src/service/IdbService';
 
 export const useFileStore = defineStore('fileStore', () => {
     const fileUploadState = ref<SimpleState>('unset');
     const fileDownloadState = ref<SimpleState>('unset');
-    const filesList: File[] = [];
+    const filesList = ref<File[]>([]);
 
     const uploadFiles = async (files: File[] | undefined = undefined) => {
-        const _files = files ?? filesList;
+        const _files = files ?? filesList.value;
         if (!_files) return;
 
         fileUploadState.value = 'loading';
@@ -26,7 +27,7 @@ export const useFileStore = defineStore('fileStore', () => {
     }
 
     const clearFiles = () => {
-        remove(filesList, () => true)
+        filesList.value = [];
     }
 
     const downloadFile = async (orderId: number, filename: FileModel) => {
@@ -41,11 +42,32 @@ export const useFileStore = defineStore('fileStore', () => {
         return res;
     }
 
+    const pushFiles = async (files: readonly File[]) => {
+        for (const file of files) {
+            if (filesList.value.indexOf(file) === -1) filesList.value.push(file);
+        }
+
+        // saveFiles(cloneDeep(filesList.value));
+    }
+
+    const saveFiles = async (filelist: File[]) => {
+        await IdbService.saveFiles(cloneDeep(filelist));
+    }
+
+    const loadFiles = async () => {
+        const files = await IdbService.getFiles();
+        filesList.value = files;
+        return files;
+    }
+
     return {
+        pushFiles,
         filesList,
         fileUploadState,
         uploadFiles,
         clearFiles,
-        downloadFile
+        downloadFile,
+        saveFiles,
+        loadFiles
     }
 })

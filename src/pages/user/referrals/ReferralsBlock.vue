@@ -15,6 +15,9 @@ const chunkCount = computed(() => {
 });
 
 const referrals = ref<FriendCardModel[]>();
+const preloaders = computed(() => {
+  return Screen.lt.sm ? [1, 1] : [2];
+});
 onMounted(async () => {
   const user = await userStore.getCreds();
   if ('error' in user) {
@@ -54,7 +57,7 @@ onMounted(async () => {
           <template v-if="referrals?.length === 0">
             <div
               class="slide row justify-center no-wrap"
-              v-for="chunk in [2, 2]"
+              v-for="chunk in preloaders"
               :key="chunk"
             >
               <PreloaderCard v-for="card in chunk" :key="card" />
@@ -71,7 +74,7 @@ onMounted(async () => {
   height: 100%;
   border-radius: 2rem;
   .structure {
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
 
   .friends-scroller {

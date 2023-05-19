@@ -33,13 +33,12 @@ const dialogsLen = props.needLast
   : props.dialogs.length;
 
 const close = () => {
+  if (props.onComplete) props.onComplete();
   if (!props.closable) return;
   emits('close');
   floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;
-
-  if (props.onComplete) props.onComplete();
 };
 
 const emits = defineEmits<{
@@ -55,6 +54,7 @@ let onSubmit = async (
   if ('error' in submitResult) {
     errorResponse.value = submitResult.error as AxiosError;
     popup.value?.show();
+    console.log(submitResult);
     return;
   }
 

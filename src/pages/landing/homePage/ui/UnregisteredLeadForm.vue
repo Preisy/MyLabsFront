@@ -21,11 +21,12 @@ import { keys, pick } from 'lodash';
 import OrderData from 'src/model/order/OrderData';
 import AErrPopup from 'src/components/AErrPopup.vue';
 import { AxiosError } from 'axios';
-import ACompletePopup from 'src/components/ACompletePopup.vue';
+import ACompletePopup from 'src/components/ACompletePopup';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
 const orderStore = useOrderStore();
+const fileStore = useFileStore();
 
 interface UnregisteredLeadForm {
   name: string;
@@ -52,7 +53,6 @@ const { handleSubmit, values } = useForm<UnregisteredLeadForm>({
 
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
-const fileStore = useFileStore();
 
 const response = ref<AxiosError>();
 const errPopup = ref<InstanceType<typeof AErrPopup>>();
@@ -63,6 +63,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     dialogStore.setUser(pick(values, keys(UserCredsSchema)));
     signupDialog.value?.open();
     orderStore.saveOrder(values as unknown as OrderData);
+    fileStore.saveFiles(fileStore.filesList);
     return;
   }
 
@@ -112,6 +113,16 @@ const cleanForm = () => {
   values.taskText = '';
   values.promoName = '';
   fileStore.filesList = [];
+};
+
+const formOnComplete = (error: null | AxiosError) => {
+  if (error) {
+    response.value = error;
+    errPopup.value?.show();
+    return;
+  }
+
+  donePopup.value?.show();
 };
 </script>
 
@@ -209,7 +220,7 @@ const cleanForm = () => {
       :start="1"
       :is-need-to-order="true"
       :is-full="true"
-      :on-complete="doOrder"
+      :on-complete="formOnComplete"
       ref="signupDialog"
     />
     <ACompletePopup ref="donePopup" />

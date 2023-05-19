@@ -1,0 +1,8 @@
+{
+  "components": {
+    "done_popup": {
+      "done": "Успешно!",
+      "done_btn": "Закрыть"
+    }
+  }
+}

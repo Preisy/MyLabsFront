@@ -11,7 +11,7 @@
         "dialogs": {
           "invite": {
             "title": "Invite friends and get money!",
-            "desc": "For each friend you get 10% of his order",
+            "desc": "You will get bonus for each friend you invite",
             "btn": "Wow"
           }
         }

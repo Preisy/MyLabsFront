@@ -1,0 +1,24 @@
+{
+  "components": {
+    "AReferral": {
+      "title": "Referral programm:",
+      "elements": {
+        "1": {
+          "common": "You can provide your unique registration link to another person and you will receive bonuses!",
+          "bold": "With which you can cover no more than 50% on your future orders."
+        },
+        "2": {
+          "common": "Bonus rubles are credited as follows:",
+          "bold": "The inviting user receives 5% of the cost of the first five orders of the user invited by him!"
+        },
+        "3": {
+          "common": "Bonus for new users. After registering with someone's referral link, you get a discount:",
+          "bold": {
+            "1": "On your first order in the amount of 5% when ordering, the value of which was estimated up to 3000 rubles.",
+            "2": "Or a discount of 500 rubles when ordering, the cost of which was estimated at 3,000 rubles and more!"
+          }
+        }
+      }
+    }
+  }
+}

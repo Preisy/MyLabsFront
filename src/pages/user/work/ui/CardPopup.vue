@@ -3,7 +3,6 @@ import { OrderModel, LabModel, isLabModel } from './Card';
 import DetailedLabCard from './DetailedLabCard.vue';
 import DetailedOrderCard from './DetailedOrderCard.vue';
 import { ref } from 'vue';
-import { QPopupProxy } from 'quasar';
 import lightImg from 'assets/header/langSwitchLight.svg';
 import { Screen } from 'quasar';
 
@@ -13,17 +12,21 @@ interface CardPopupProps {
 }
 
 const props = defineProps<CardPopupProps>();
-const popup = ref<InstanceType<typeof QPopupProxy>>();
+const popup = ref<InstanceType<typeof HTMLElement>>();
 const isLab = isLabModel(props.data);
 
-defineExpose({
-  show: () => {
-    popup.value?.show();
-  },
-});
 const emits = defineEmits<{
   (event: 'close'): void;
 }>();
+const close = () => {
+  emits('close');
+};
+defineExpose({
+  show: () => {
+    // popupProxy.value?.show();
+  },
+  close,
+});
 </script>
 
 <template>
@@ -31,14 +34,14 @@ const emits = defineEmits<{
     class="popup-wrapper"
     :class="{ hide: !isOpen, compact: Screen.lt.md, mobile: Screen.lt.sm }"
   >
-    <div class="popup" :class="{ hide: !isOpen }">
+    <div ref="popup" class="popup" :class="{ hide: !isOpen }">
       <DetailedLabCard v-if="isLab" :card="(data as LabModel)" />
       <DetailedOrderCard v-else :card="(data as OrderModel)" />
     </div>
     <div class="light-holder" :class="{ hide: !isOpen }">
       <img :src="lightImg" alt="" class="light" />
     </div>
-    <div class="bg-blur" @click="emits('close')" :class="{ hide: !isOpen }" />
+    <div class="bg-blur" @click="close" :class="{ hide: !isOpen }" />
   </div>
 </template>
 
@@ -79,6 +82,7 @@ const emits = defineEmits<{
 
     transition: 0.3s opacity ease-in-out;
     opacity: 1;
+    top: 1rem;
 
     &.hide {
       opacity: 0;
@@ -98,7 +102,8 @@ const emits = defineEmits<{
     }
 
     .light {
-      rotate: 270deg;
+      // rotate: 270deg;
+      transform: rotate(270deg);
     }
   }
   .bg-blur {

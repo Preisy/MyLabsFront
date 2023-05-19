@@ -18,9 +18,30 @@ const onclick = () => {
 const onclose = () => {
   isOpen.value = false;
 };
+
+defineExpose({
+  close: () => {
+    onclose;
+  },
+});
+
+const cardWrapper = ref<HTMLElement>();
+const findParent = (element: HTMLElement, parent: HTMLElement): boolean => {
+  if (element.parentElement === parent) return true;
+  if (!element.parentElement) return false;
+  return findParent(element.parentElement, parent);
+};
+window.addEventListener('click', (e: Event) => {
+  if (!cardWrapper.value) return;
+
+  const isCard = findParent(e.target as HTMLElement, cardWrapper.value);
+  if (isCard) return;
+
+  onclose();
+});
 </script>
 <template>
-  <div class="card-wrapper" :class="{ open: isOpen }">
+  <div class="card-wrapper" ref="cardWrapper" :class="{ open: isOpen }">
     <div
       class="card-body cursor-pointer"
       @click="onclick"
@@ -71,7 +92,8 @@ const onclose = () => {
     .lab-popup {
       &:deep(.popup) {
         right: unset;
-        left: calc(-100% - 3rem);
+        left: 0;
+        transform: translateX(calc(-100% - 3rem));
       }
       &:deep(.light-holder) {
         right: unset;
@@ -79,7 +101,7 @@ const onclose = () => {
         transform: translateX(-100%) scaleY(0.5);
       }
       &:deep(.light) {
-        rotate: 90deg;
+        transform: rotate(90deg);
       }
     }
   }
@@ -113,7 +135,7 @@ const onclose = () => {
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    width: 10rem;
+    width: 17rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

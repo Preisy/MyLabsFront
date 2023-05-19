@@ -64,6 +64,7 @@ const downloadFile = async (file: FileModel) => {
 
 <style scoped lang="scss">
 .detailed-card {
+  background: white;
   padding: 1.5rem;
   border-radius: 1.5rem;
   max-width: 20rem;
@@ -72,6 +73,10 @@ const downloadFile = async (file: FileModel) => {
 
   .text {
     margin-bottom: 2rem;
+
+    p {
+      line-break: anywhere;
+    }
 
     &.noMargin {
       margin: 0;

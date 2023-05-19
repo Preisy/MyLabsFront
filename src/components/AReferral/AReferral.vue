@@ -6,37 +6,32 @@ import heartImg from 'assets/pop_up/heart.png';
 <template>
   <div class="referral">
     <div class="structure content-wrapper">
-      <h1 class="title text-center">Условия реферальной программы:</h1>
+      <h1 class="title text-center">{{ $t('components.AReferral.title') }}</h1>
       <div class="content">
         <AReferralElement>
           <p>
-            Вы можете предоставить свою уникальную ссылку для регистрации
-            другому человеку и будете получитать бонусы!
+            {{ $t('components.AReferral.elements.1.common') }}
           </p>
           <p class="text-weight-bold q-mt-lg">
-            Которыми можете покрыть не более 50% на своих будущих заказов.
+            {{ $t('components.AReferral.elements.1.bold') }}
           </p>
         </AReferralElement>
         <AReferralElement>
-          <p>Бонусные рубли начисляются следующим образом:</p>
+          <p>{{ $t('components.AReferral.elements.2.common') }}</p>
           <p class="text-weight-bold q-mt-lg">
-            Пригласивший пользователь получает 5% со стоимости первых пяти
-            заказов приглашенного им пользователя!
+            {{ $t('components.AReferral.elements.2.bold') }}
           </p>
         </AReferralElement>
         <AReferralElement :is-last="true">
           <p>
-            Бонус для новых пользователей. После регистрации по чьей-то
-            реферальной ссылке вы получаете скидку:
+            {{ $t('components.AReferral.elements.3.common') }}
           </p>
           <ul class="text-weight-bold q-mt-lg numerical-list">
             <li>
-              На свой первый заказ в размере 5% при заказе, стоимость которого
-              была оценена до 3000 рублей.
+              {{ $t('components.AReferral.elements.3.bold.1') }}
             </li>
             <li>
-              Или скидку в 500 рублей при заказе, стоимость которого была
-              оценена от 3000 рублей и выше!
+              {{ $t('components.AReferral.elements.3.bold.2') }}
             </li>
           </ul>
         </AReferralElement>

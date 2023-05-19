@@ -106,9 +106,20 @@ onMounted(async () => {
         :class="{ 'row items-center': !isMobile, 'column reverse': isMobile }"
       >
         <LangSwitch class="q-mr-md right-btn lang-btn" />
-        <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
+        <div class="auth-btns" :class="{ 'q-my-sm': isMobile }">
           <ABtn
-            v-if="!useAuthStore().isAuth"
+            v-if="authStore.isAuth"
+            class="auth-logout right-btn"
+            theme="light"
+            :label="$t('pages.landing.header.logout')"
+            @click="
+              if (authStore.isAuth) {
+                authStore.logout();
+              }
+            "
+          />
+          <ABtn
+            v-if="!authStore.isAuth"
             class="auth-login right-btn"
             theme="light"
             :label="$t('pages.landing.header.login')"
@@ -120,7 +131,7 @@ onMounted(async () => {
             "
           />
           <ABtn
-            v-if="!useAuthStore().isAuth"
+            v-if="!authStore.isAuth"
             class="auth-signup right-btn"
             theme="dark"
             :label="$t('pages.landing.header.signup')"
@@ -135,7 +146,7 @@ onMounted(async () => {
         <q-btn
           class="photo-wrapper-btn"
           flat
-          v-if="useAuthStore().isAuth"
+          v-if="authStore.isAuth"
           to="mpc/tasks"
         >
           <img

@@ -20,6 +20,8 @@ import { TSettingsBlockI18n } from 'src/pages/user/settings';
 import { TWorkBlockI18n } from 'src/pages/user/work';
 import { TReferralBlockI18n } from 'src/pages/landing/referralBlock/i18n';
 import { TReferralHeaderI18n } from 'src/pages/referral/header';
+import { TCompletePopupI18n } from 'components/ACompletePopup';
+import { TReferralComponentI18n } from 'src/components/AReferral';
 
 export default boot(({ app }) => {
   // Set i18n instance on app
@@ -44,7 +46,9 @@ export default boot(({ app }) => {
       TUserHeaderI18n,
       TReferralsUserBlockI18n,
       TSettingsBlockI18n,
-      TWorkBlockI18n
+      TWorkBlockI18n,
+      TCompletePopupI18n,
+      TReferralComponentI18n
     ),
   });
 
