@@ -192,6 +192,10 @@ const getOrders = async () => {
     .task-scroller {
       height: calc(var(--subblock-height) - 3rem);
       margin-top: 0;
+
+      &:deep(.q-scrollarea__content) {
+        overflow: hidden;
+      }
     }
 
     .done .slide {

@@ -39,8 +39,10 @@ export const PasswordRestoreScheme = (
     };
 
     resetStore.setPassword(newPassword);
-    return resetStore.resetPassword(resetStore.changeData) as UnifiedApiPromise;
-    // return createSuccessResponse('Good'); //for tests
+    if (resetStore.changeData.code)
+      return resetStore.resetPassword(resetStore.changeData) as UnifiedApiPromise;
+    else
+      return createSuccessResponse('Good');
   },
   btnLabel: t('pages.landing.header.next'),
   state: storeToRefs(resetStore).resetState,

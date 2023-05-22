@@ -13,7 +13,7 @@ import manOnChair from 'assets/man_on_chair_alt.png';
 const slider_index = ref('0');
 
 const cardsInOneSlide = computed(() => {
-  if (Screen.lt.sm) return 2;
+  if (Screen.lt.sm) return 4;
 
   if (Screen.width <= 900) return 4;
 

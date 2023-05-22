@@ -20,6 +20,7 @@ export const CodeScheme = (t: (arg: string) => string): DialogData => {
         name: 'secret code',
         rules: yup
           .number()
+          .test('maxLenght', 'Max 4', val => val ? !isNaN(val) && `${val}`.length <= 4 : false)
           .min(1000)
           .max(9999)
           .typeError('Input must be 4-digit number')
