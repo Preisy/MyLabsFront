@@ -11,7 +11,7 @@ import ContactsModal from 'components/AContactModal/ContactsModal.vue';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
-  '/dev': 0,
+  '/': 0,
   '/mpc/tasks': 1,
   '/mpc/referrals': 2,
   '/mpc/settings': 3,
@@ -21,7 +21,7 @@ const { t } = useI18n();
 const currentLinkIndex = ref(routerMap[routerPath.value]);
 
 const buttonLinks = [
-  { label: t('pages.user.header.home'), value: '/dev' },
+  { label: t('pages.user.header.home'), value: '/' },
   { label: t('pages.user.header.tasks'), value: '/mpc/tasks' },
   { label: t('pages.user.header.referrals'), value: '/mpc/referrals' },
   { label: t('pages.user.header.settings'), value: '/mpc/settings' },
@@ -54,7 +54,7 @@ const isMenuOpened = ref(false);
         />
       </div>
 
-      <div class="auth row">
+      <div class="right-side-btns row">
         <!-- <ABtn
           class="auth-login q-px-xl"
           color="grey"
@@ -63,7 +63,7 @@ const isMenuOpened = ref(false);
         /> -->
         <ContactsModal class="q-mr-lg" />
         <ABtn
-          class="auth-signup"
+          class="invite-friend-btn"
           :label="$t('pages.user.header.inviteFriend')"
           @click="
             inviteDialog?.open();
@@ -92,8 +92,6 @@ const isMenuOpened = ref(false);
       :class="{ open: isMenuOpened }"
     />
   </q-header>
-
-  <!-- <ADialogHolder ref="dialogComp" /> -->
 </template>
 
 <style scoped lang="scss">
@@ -133,9 +131,17 @@ const isMenuOpened = ref(false);
     }
   }
 
-  .auth {
+  .right-side-btns {
     .auth-login {
       margin-right: 0.75rem;
+    }
+    .invite-friend-btn {
+      width: 9rem;
+      font-size: 0.7rem;
+
+      @media (max-width: $screen-md) {
+        font-size: 0.6rem;
+      }
     }
   }
 

@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const dialogStore = useDialogStore();
   const invitedById = ref<string>()
 
-  let isAuth = !!localStorage.getItem('access_token');
+  const isAuth = ref<boolean>(!!localStorage.getItem('access_token'));
   const state = ref<SimpleState>('unset');
 
   const checkAuth = () => localStorage.getItem('access_token') && isAuth;
@@ -25,12 +25,12 @@ export const useAuthStore = defineStore('authStore', () => {
     dialogStore.loginState = 'loading';
     const res = await AuthService.login(data);
     if ('error' in res) {
-      isAuth = false;
+      isAuth.value = false;
       dialogStore.loginState = 'error';
       // return false;
     } else {
       localStorage.setItem('access_token', res.token);
-      isAuth = true;
+      isAuth.value = true;
       dialogStore.loginState = 'success';
       // return true;
     }
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('authStore', () => {
   };
   const logout = () => {
     localStorage.removeItem('access_token');
-    isAuth = false;
+    isAuth.value = false;
     dialogStore.logoutState = 'success';
     return true;
   };
@@ -47,10 +47,10 @@ export const useAuthStore = defineStore('authStore', () => {
     dialogStore.signupState = 'loading';
     const res = await AuthService.signup(creds);
     if ('error' in res) {
-      isAuth = false;
+      isAuth.value = false;
       dialogStore.signupState = 'error';
     } else {
-      isAuth = true;
+      isAuth.value = true;
       dialogStore.signupState = 'success';
     }
 
@@ -78,6 +78,7 @@ export const useAuthStore = defineStore('authStore', () => {
       dialogStore.codeApproveState = 'error';
     } else {
       localStorage.setItem('access_token', res.token);
+      isAuth.value = true;
       dialogStore.codeApproveState = 'success';
     }
 

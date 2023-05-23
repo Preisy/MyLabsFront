@@ -14,6 +14,7 @@ interface Props {
   onComplete?: () => void;
   needLast?: boolean;
   closable?: boolean;
+  redirect?: string;
   isFull: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -32,15 +33,18 @@ const dialogsLen = props.needLast
   : props.dialogs.length;
 
 const close = () => {
+  if (props.onComplete) props.onComplete();
   if (!props.closable) return;
+  emits('close');
   floor.value?.classList.remove('showed');
   dialog.value?.close();
   i.value = 0;
 };
 
-defineEmits<{
+const emits = defineEmits<{
   (e: 'close'): void;
 }>();
+
 let onSubmit = async (
   values: Record<string, unknown>,
   ctx: SubmissionContext<Record<string, unknown>>
@@ -50,6 +54,7 @@ let onSubmit = async (
   if ('error' in submitResult) {
     errorResponse.value = submitResult.error as AxiosError;
     popup.value?.show();
+    console.log(submitResult);
     return;
   }
 
@@ -104,12 +109,8 @@ defineExpose({
       v-else-if="needLast"
       :i="dialogs.length + 1"
       :type="isFull ? 'full' : 'short'"
-      @close="
-        () => {
-          close();
-          props.onComplete?.();
-        }
-      "
+      :redirect="redirect"
+      @close="close"
     />
   </ADialog>
 </template>

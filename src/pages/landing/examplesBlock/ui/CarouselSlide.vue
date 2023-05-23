@@ -40,7 +40,7 @@ const props = defineProps<SlideProps>();
 
   @media (max-width: $screen-sm) {
     --card-size: 11rem;
-    grid-template-rows: 1fr;
+    // grid-template-rows: 1fr;
   }
 }
 </style>

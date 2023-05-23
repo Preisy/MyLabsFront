@@ -7,4 +7,5 @@ export default interface FieldProps {
   rules: yup.Schema;
   type?: QInputProps['type']
   placeholder?: string
+  isActive?: boolean
 }

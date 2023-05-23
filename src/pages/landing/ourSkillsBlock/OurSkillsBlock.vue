@@ -42,7 +42,7 @@ import floorImg from 'assets/header/floor.svg';
   .skills-diagram {
     position: relative;
     width: min-content;
-
+    padding: 2rem;
     .blue-shadow {
       user-select: none;
       position: absolute;

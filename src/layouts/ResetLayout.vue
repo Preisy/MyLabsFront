@@ -16,21 +16,25 @@ let resetDialogData: DialogData[] = [PasswordRestoreScheme(t)];
 onMounted(() => {
   dialog.value?.open();
   const query = useRoute().query;
-  console.log(query);
 
   const email = query as Pick<changePasswordData, 'email'>;
   const code = query as Pick<changePasswordData, 'code'>;
 
   resetStore.setCode(code);
   resetStore.setEmail(email);
-  console.log(resetStore.changeData);
 });
 </script>
 
 <template>
   <q-layout view="lHh lpr lff">
     <q-page-container class="no-padding">
-      <AModalDialog :closable="false" :dialogs="resetDialogData" ref="dialog" />
+      <AModalDialog
+        :closable="false"
+        :is-full="false"
+        redirect="/"
+        :dialogs="resetDialogData"
+        ref="dialog"
+      />
     </q-page-container>
   </q-layout>
 </template>

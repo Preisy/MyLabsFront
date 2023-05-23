@@ -24,15 +24,15 @@ import MainBlock from 'src/pages/user/main/MainBlock.vue';
 
 <style scoped lang="scss">
 .user-page {
-  --main-height: 50vh;
+  --main-height: 23rem;
   --overlap: 3rem;
   --subblock-height: calc(100vh - var(--main-height) + var(--overlap));
 
   overflow: hidden;
 
   .main {
-    height: fit-content;
-    max-height: var(--main-height);
+    height: var(--main-height);
+    // max-height: var(--main-height);
   }
   .subblock {
     height: var(--subblock-height);

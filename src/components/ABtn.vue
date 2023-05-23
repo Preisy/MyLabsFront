@@ -8,6 +8,7 @@ interface ButtonProps {
   type?: 'button' | 'reset' | 'submit';
   width?: string;
   loadingState?: SimpleState;
+  to?: string;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -37,6 +38,7 @@ const state = ref<boolean>(false);
     @click="emits('click', state)"
     :style="{ width: width }"
     :loading="props.loadingState === 'loading'"
+    :to="to"
   />
 </template>
 

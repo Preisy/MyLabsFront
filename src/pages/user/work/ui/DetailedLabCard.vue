@@ -32,10 +32,15 @@ defineProps<DetailedLabCardProps>();
   padding: 1.5rem;
   border-radius: 1.5rem;
   max-width: 20rem;
+  min-width: 10rem;
   box-shadow: 0 0 2.5rem 0 rgba(191, 205, 243, 0.5);
 
   .text {
     margin-bottom: 2rem;
+
+    p {
+      line-break: anywhere;
+    }
 
     &.noMargin {
       margin: 0;
@@ -44,6 +49,7 @@ defineProps<DetailedLabCardProps>();
 
   .files {
     column-gap: 0.5rem;
+    width: max-content;
     .file-wrapper {
       --size: 3rem;
       position: relative;

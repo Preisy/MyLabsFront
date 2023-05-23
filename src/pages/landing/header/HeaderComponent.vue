@@ -106,9 +106,20 @@ onMounted(async () => {
         :class="{ 'row items-center': !isMobile, 'column reverse': isMobile }"
       >
         <LangSwitch class="q-mr-md right-btn lang-btn" />
-        <div class="auth-btns" :class="{ 'q-mb-md': isMobile }">
+        <div class="auth-btns" :class="{ 'q-my-sm': isMobile }">
           <ABtn
-            v-if="!useAuthStore().isAuth"
+            v-if="authStore.isAuth"
+            class="auth-logout right-btn"
+            theme="light"
+            :label="$t('pages.landing.header.logout')"
+            @click="
+              if (authStore.isAuth) {
+                authStore.logout();
+              }
+            "
+          />
+          <ABtn
+            v-if="!authStore.isAuth"
             class="auth-login right-btn"
             theme="light"
             :label="$t('pages.landing.header.login')"
@@ -120,7 +131,7 @@ onMounted(async () => {
             "
           />
           <ABtn
-            v-if="!useAuthStore().isAuth"
+            v-if="!authStore.isAuth"
             class="auth-signup right-btn"
             theme="dark"
             :label="$t('pages.landing.header.signup')"
@@ -135,7 +146,7 @@ onMounted(async () => {
         <q-btn
           class="photo-wrapper-btn"
           flat
-          v-if="useAuthStore().isAuth"
+          v-if="authStore.isAuth"
           to="mpc/tasks"
         >
           <img
@@ -172,11 +183,6 @@ onMounted(async () => {
 .header {
   border-radius: 0 0 2rem 2rem;
   background-color: $primary;
-  // background: url('assets/my_labs_logo.png');
-  // background-size: 4rem 2.25rem;
-  // background-position: 50% 50%;
-  // background-repeat: no-repeat;
-  box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
   position: fixed;
   z-index: 9999;
 
@@ -242,6 +248,7 @@ onMounted(async () => {
   }
 
   &.compact {
+    box-shadow: 0px 0px 50px rgba(191, 205, 243, 0.5);
     .header-toolbar {
       padding-top: 0.6rem;
       padding-bottom: 0.6rem;

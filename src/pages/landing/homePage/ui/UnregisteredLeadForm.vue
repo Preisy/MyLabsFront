@@ -19,10 +19,14 @@ import { computed } from 'vue';
 import ADatePicker from 'src/components/ADatePicker.vue';
 import { keys, pick } from 'lodash';
 import OrderData from 'src/model/order/OrderData';
+import AErrPopup from 'src/components/AErrPopup.vue';
+import { AxiosError } from 'axios';
+import ACompletePopup from 'src/components/ACompletePopup';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
 const orderStore = useOrderStore();
+const fileStore = useFileStore();
 
 interface UnregisteredLeadForm {
   name: string;
@@ -42,38 +46,56 @@ const UnregisteredLeadFormSchema = {
 };
 const schema = authStore.isAuth ? TaskSchema : UnregisteredLeadFormSchema;
 
-const { handleSubmit } = useForm<UnregisteredLeadForm>({
+const { handleSubmit, values } = useForm<UnregisteredLeadForm>({
   validationSchema: schema,
   initialValues: orderStore.orderData,
 });
 
 const fileDialog = ref<InstanceType<typeof FileAttachDialog>>();
 const signupDialog = ref<Nullable<InstanceType<typeof SignUpDialog>>>();
-const fileStore = useFileStore();
+
+const response = ref<AxiosError>();
+const errPopup = ref<InstanceType<typeof AErrPopup>>();
+const donePopup = ref<InstanceType<typeof ACompletePopup>>();
+
 const onSubmit = handleSubmit.withControlled(async (values) => {
   if (!authStore.isAuth) {
     dialogStore.setUser(pick(values, keys(UserCredsSchema)));
     signupDialog.value?.open();
     orderStore.saveOrder(values as unknown as OrderData);
+    fileStore.saveFiles(fileStore.filesList);
     return;
   }
 
+  doOrder();
+});
+
+const doOrder = async () => {
+  let promo = values.promoName
+    ? values.promoName.length > 0
+      ? values.promoName
+      : null
+    : null;
   const sendData: Omit<OrderData, 'files'> = {
     taskText: values.taskText,
     deadline: values.deadline.split('/').reverse().join('/'),
-    promoName: values.promoName ?? null,
+    promoName: promo,
     type: values.type,
   };
 
   const orderResponse = await orderStore.sendOrder(sendData);
   if ('error' in orderResponse) {
     console.warn('Something went wrong with order');
+    response.value = orderResponse.error as AxiosError;
+    errPopup.value?.show();
     return;
   }
 
+  donePopup.value?.show();
   orderStore.sendOrderFiles(fileStore.filesList, orderResponse.data.id);
   orderStore.clearOrderCache();
-});
+  cleanForm();
+};
 
 const isFileDialogOpen = ref(false);
 const fileDialogOpen = () => {
@@ -86,6 +108,22 @@ defineExpose({
 });
 
 const filesCount = computed(() => useFileStore().filesList.length);
+
+const cleanForm = () => {
+  values.taskText = '';
+  values.promoName = '';
+  fileStore.filesList = [];
+};
+
+const formOnComplete = (error: null | AxiosError) => {
+  if (error) {
+    response.value = error;
+    errPopup.value?.show();
+    return;
+  }
+
+  donePopup.value?.show();
+};
 </script>
 
 <template>
@@ -166,18 +204,33 @@ const filesCount = computed(() => useFileStore().filesList.length);
           theme="dark"
           :label="$t('pages.landing.homePage.form.order')"
           type="submit"
+          :loading-state="orderStore.orderState"
         ></a-btn>
       </div>
+      <AErrPopup
+        class="err-popup"
+        ref="errPopup"
+        :axios-err="response"
+        :timeout="2000"
+      />
     </form>
 
     <FileAttachDialog ref="fileDialog" />
-    <SignUpDialog :start="1" :is-full="true" ref="signupDialog" />
+    <SignUpDialog
+      :start="1"
+      :is-need-to-order="true"
+      :is-full="true"
+      :on-complete="formOnComplete"
+      ref="signupDialog"
+    />
+    <ACompletePopup ref="donePopup" />
   </div>
 </template>
 
 <style scoped lang="scss">
 .form {
   width: 20rem;
+  position: relative;
 
   .form-line {
     gap: 0.75rem;
@@ -207,12 +260,26 @@ const filesCount = computed(() => useFileStore().filesList.length);
       border-radius: 100%;
     }
   }
-
-  @media (max-width: $screen-sm) {
-    width: 100%;
+  .err-popup {
+    position: absolute;
+    top: -0.3rem;
+    bottom: -2rem;
+    left: -0.3rem;
+    right: -0.3rem;
+    padding: 0;
+    transform: unset;
+    border-radius: 1rem;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
+    padding-left: 0.3rem;
   }
+
   .clip-button {
     padding: 0.2rem 0.6rem;
+  }
+  @media (max-width: $screen-sm) {
+    width: 100%;
   }
 }
 </style>

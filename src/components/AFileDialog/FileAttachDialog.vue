@@ -21,9 +21,7 @@ defineExpose({
 });
 
 const onadded = (values: readonly File[]) => {
-  values.forEach((v) => {
-    if (fileStore.filesList.indexOf(v) === -1) fileStore.filesList.push(v);
-  });
+  fileStore.pushFiles(values);
 };
 
 const onremove = (values: readonly File[]) => {

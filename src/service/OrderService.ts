@@ -20,7 +20,7 @@ export const OrderService = {
     },
     async getOrders() {
         try {
-            const { data } = await $api.get<OrderModel[]>('/users/orders');
+            const { data } = await $api.get<OrderModel[]>('/me/orders');
 
             return data;
         } catch (e: unknown) {

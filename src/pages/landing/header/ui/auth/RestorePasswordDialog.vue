@@ -17,8 +17,8 @@ defineExpose({
 
 const signupDialogData: DialogData[] = [
   RestoreScheme(t),
-  CodeRestoreScheme(t),
   PasswordRestoreScheme(t),
+  CodeRestoreScheme(t),
 ];
 
 const onComplete = () => {

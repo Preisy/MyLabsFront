@@ -5,6 +5,7 @@ import heartImg from 'assets/pop_up/heart.png';
 interface SuccessDialogProps {
   i: number;
   type: 'full' | 'short';
+  redirect?: string;
 }
 const props = defineProps<SuccessDialogProps>();
 const emit = defineEmits<{
@@ -33,6 +34,7 @@ const titleText =
         class="q-px-xl"
         :label="$t('pages.landing.header.auth.success.button')"
         @click="onclick"
+        :to="redirect"
       />
     </div>
     <div class="page-counter">{{ i }} / {{ i }}</div>

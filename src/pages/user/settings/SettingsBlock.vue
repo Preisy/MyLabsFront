@@ -1,22 +1,51 @@
 <script setup lang="ts">
 import ABtn from 'src/components/ABtn.vue';
 import { UserCredsSchema } from 'src/model/UserCreds';
-import omit from 'lodash/omit';
 import { User } from 'src/model/User/User';
 import ADynamicForm from 'src/components/ADynamicForm';
 import { onMounted, ref } from 'vue';
-import { getSchema } from 'src/global/utils';
 import { useUserStore } from 'src/stores/UserStore';
 import { assign } from 'lodash';
 import PasswordChangeDialog from './ui/PasswordChangeDialog.vue';
+import FieldProps from 'src/components/ADynamicForm/types';
+import AErrPopup from 'src/components/AErrPopup.vue';
+import ACompletePopup from 'src/components/ACompletePopup';
+import { AxiosError } from 'axios';
 
 const userStore = useUserStore();
-const validateSchema = omit(UserCredsSchema, 'password');
+const validateSchema: FieldProps[] = [
+  {
+    label: 'Email',
+    name: 'email',
+    rules: UserCredsSchema.email,
+    isActive: false,
+  },
+  {
+    label: 'Name',
+    name: 'name',
+    rules: UserCredsSchema.name,
+  },
+  {
+    label: 'Contact',
+    name: 'contact',
+    rules: UserCredsSchema.contact,
+  },
+];
 const userform = ref<InstanceType<typeof ADynamicForm>>();
 const passwordChangeDialog = ref<InstanceType<typeof PasswordChangeDialog>>();
 
-const onsubmit = (values: Record<string, unknown>): void => {
-  userStore.changeCreds(values as unknown as User);
+const errPopup = ref<InstanceType<typeof AErrPopup>>();
+const donePopup = ref<InstanceType<typeof ACompletePopup>>();
+const respError = ref<AxiosError>();
+
+const onsubmit = async (values: Record<string, unknown>) => {
+  const response = await userStore.changeCreds(values as unknown as User);
+  if ('error' in response) {
+    respError.value = response.error as AxiosError;
+    errPopup.value?.show();
+  }
+
+  donePopup.value?.show();
 };
 
 onMounted(async () => {
@@ -39,7 +68,7 @@ onMounted(async () => {
       <ADynamicForm
         class="full-width text-center form"
         ref="userform"
-        :schema="getSchema(validateSchema)"
+        :schema="validateSchema"
         :on-submit="onsubmit"
         :btn-label="$t('pages.user.settings.applyBtn')"
         :state="userStore.changeCredsState"
@@ -53,6 +82,13 @@ onMounted(async () => {
       />
     </div>
     <PasswordChangeDialog ref="passwordChangeDialog" />
+
+    <AErrPopup
+      class="settings-err-popup"
+      ref="errPopup"
+      :axios-err="respError"
+    />
+    <ACompletePopup class="settings-complete-popup" ref="donePopup" />
   </div>
 </template>
 
@@ -75,6 +111,16 @@ onMounted(async () => {
 
   .change-password-btn {
     width: 10rem;
+  }
+
+  .settings-err-popup {
+    padding: 0;
+    border-radius: 1.5rem 1.5rem 0 0;
+    transform: unset;
+  }
+
+  .settings-complete-popup {
+    z-index: 1;
   }
 }
 </style>

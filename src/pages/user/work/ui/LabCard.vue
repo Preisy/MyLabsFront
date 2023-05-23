@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { taskTypeToImg } from 'src/global/LabTypes';
 import { LabModel } from './Card';
-import { QPopupProxy } from 'quasar';
 import { ref } from 'vue';
 import CardPopup from './CardPopup.vue';
 
@@ -9,34 +8,111 @@ interface Props {
   card: LabModel;
 }
 const props = defineProps<Props>();
-const popup = ref<InstanceType<typeof QPopupProxy>>();
+
+const popup = ref<InstanceType<typeof CardPopup>>();
+const isOpen = ref<boolean>(false);
+const onclick = () => {
+  popup.value?.show();
+  isOpen.value = true;
+};
+const onclose = () => {
+  isOpen.value = false;
+};
+
+defineExpose({
+  close: () => {
+    onclose;
+  },
+});
+
+const cardWrapper = ref<HTMLElement>();
+const findParent = (element: HTMLElement, parent: HTMLElement): boolean => {
+  if (element.parentElement === parent) return true;
+  if (!element.parentElement) return false;
+  return findParent(element.parentElement, parent);
+};
+window.addEventListener('click', (e: Event) => {
+  if (!cardWrapper.value) return;
+
+  const isCard = findParent(e.target as HTMLElement, cardWrapper.value);
+  if (isCard) return;
+
+  onclose();
+});
 </script>
 <template>
-  <div class="card cursor-pointer" @click="popup?.show">
-    <CardPopup ref="popup" :data="card" />
-    <div class="row justify-between items-start fit-content no-wrap">
-      <div class="title-wrapper row items-center no-wrap q-mr-sm">
-        <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
-        <h2 class="title">{{ props.card.title }}</h2>
+  <div class="card-wrapper" ref="cardWrapper" :class="{ open: isOpen }">
+    <div
+      class="card-body cursor-pointer"
+      @click="onclick"
+      :class="{ open: isOpen }"
+    >
+      <div class="row justify-between items-start fit-content no-wrap">
+        <div class="title-wrapper row items-center no-wrap q-mr-sm">
+          <img
+            class="title-icon"
+            :src="taskTypeToImg(props.card.type)"
+            alt=""
+          />
+          <h2 class="title">{{ props.card.title }}</h2>
+        </div>
+      </div>
+      <div class="details row justify-between">
+        <div class="price">
+          <q-icon class="icon" color="accent" name="currency_ruble" />
+          <span>
+            {{ props.card.price }}
+          </span>
+        </div>
+        <div class="date">
+          <span>
+            {{ props.card.date }}
+          </span>
+        </div>
       </div>
     </div>
-    <div class="details row justify-between">
-      <div class="price">
-        <q-icon class="icon" color="accent" name="currency_ruble" />
-        <span>
-          {{ props.card.price }}
-        </span>
-      </div>
-      <div class="date">
-        <span>
-          {{ props.card.date }}
-        </span>
-      </div>
-    </div>
+    <CardPopup
+      class="lab-popup"
+      ref="popup"
+      :data="card"
+      :is-open="isOpen"
+      @close="onclose"
+    />
   </div>
 </template>
 <style scoped lang="scss">
-.card {
+.card-wrapper {
+  position: relative;
+
+  &.open {
+    z-index: 1;
+  }
+
+  &.right {
+    .lab-popup {
+      &:deep(.popup) {
+        right: unset;
+        left: 0;
+        transform: translateX(calc(-100% - 3rem));
+      }
+      &:deep(.light-holder) {
+        right: unset;
+        left: 3rem;
+        transform: translateX(-100%) scaleY(0.5);
+      }
+      &:deep(.light) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .lab-popup {
+    &:deep(.popup) {
+      top: 1rem;
+    }
+  }
+}
+.card-body {
   position: relative;
   background-color: $primary;
   box-sizing: border-box;
@@ -44,6 +120,11 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
   width: 15rem;
+  height: 100%;
+
+  &.open {
+    z-index: 9999;
+  }
 
   @media (max-width: $screen-lg) {
     width: 13rem;
@@ -54,7 +135,7 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    width: 10rem;
+    width: 17rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

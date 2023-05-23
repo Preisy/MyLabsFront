@@ -3,8 +3,8 @@ import { taskTypeToImg } from 'src/global/LabTypes';
 import { OrderModel } from './Card';
 import FileDisplayDialog from './FileDisplayDialog.vue';
 import { ref } from 'vue';
-import { QPopupProxy } from 'quasar';
 import CardPopup from './CardPopup.vue';
+import { QBtn } from 'quasar';
 
 interface Props {
   card: OrderModel;
@@ -12,42 +12,101 @@ interface Props {
 
 const props = defineProps<Props>();
 const fileDisplay = ref<InstanceType<typeof FileDisplayDialog>>();
-const popup = ref<InstanceType<typeof QPopupProxy>>();
+const fileBtn = ref<InstanceType<typeof QBtn>>();
+
+const popup = ref<InstanceType<typeof CardPopup>>();
+const isOpen = ref<boolean>(false);
+
+const onclick = (e: Event) => {
+  if (
+    (e.target as HTMLElement).tagName.toLowerCase() === 'i' ||
+    (e.target as HTMLElement).tagName.toLowerCase() === 'button'
+  )
+    return;
+
+  popup.value?.show();
+  isOpen.value = true;
+};
+
+const onclose = () => {
+  isOpen.value = false;
+};
+
+defineExpose({
+  close: () => {
+    onclose;
+  },
+});
+
+const cardWrapper = ref<HTMLElement>();
+const findParent = (element: HTMLElement, parent: HTMLElement): boolean => {
+  if (element.parentElement === parent) return true;
+  if (!element.parentElement) return false;
+  return findParent(element.parentElement, parent);
+};
+window.addEventListener('click', (e: Event) => {
+  if (!cardWrapper.value) return;
+
+  const isCard = findParent(e.target as HTMLElement, cardWrapper.value);
+  if (isCard) return;
+
+  onclose();
+});
 </script>
 
 <template>
-  <div class="card" @click="popup?.show">
-    <CardPopup ref="popup" :data="card" />
-    <div class="row justify-between items-start fit-content no-wrap">
-      <div class="title-wrapper row items-center no-wrap q-mr-sm">
-        <img class="title-icon" :src="taskTypeToImg(props.card.type)" alt="" />
-        <h2 class="title">{{ props.card.taskText.slice(0, 10) }}...</h2>
+  <div class="card-wrapper" ref="cardWrapper" :class="{ open: isOpen }">
+    <div class="card-body" @click="onclick" :class="{ open: isOpen }">
+      <div class="row justify-between items-start fit-content no-wrap">
+        <div class="title-wrapper row items-center no-wrap q-mr-sm">
+          <img
+            class="title-icon"
+            :src="taskTypeToImg(props.card.type)"
+            alt=""
+          />
+          <h2 class="title">{{ props.card.taskText.slice(0, 10) }}...</h2>
+        </div>
       </div>
-    </div>
-    <div class="details row justify-between items-end">
-      <div class="date">
-        <span>
-          {{ props.card.deadline }}
-        </span>
+      <div class="details row justify-between items-end">
+        <div class="date">
+          <span>
+            {{ props.card.deadline }}
+          </span>
+        </div>
+        <q-btn
+          ref="fileBtn"
+          icon="attachment"
+          color="grey"
+          text-color="dark"
+          class="attachment-btn br-15px"
+          @click="fileDisplay?.open"
+          v-if="card.taskFiles.length > 0"
+        />
       </div>
-      <q-btn
-        icon="attachment"
-        color="grey"
-        text-color="dark"
-        class="attachment-btn br-15px"
-        @click="fileDisplay?.open"
-        v-if="card.taskFiles.length > 0"
+      <file-display-dialog
+        ref="fileDisplay"
+        :files="card.taskFiles"
+        :order-id="card.id"
       />
     </div>
-    <file-display-dialog
-      ref="fileDisplay"
-      :files="card.taskFiles"
-      :order-id="card.id"
+    <CardPopup
+      class="onclick-popup"
+      ref="popup"
+      :data="card"
+      :is-open="isOpen"
+      @close="onclose"
     />
   </div>
 </template>
 <style scoped lang="scss">
-.card {
+.card-wrapper {
+  position: relative;
+
+  &.open {
+    z-index: 1;
+  }
+}
+.card-body {
   position: relative;
   background-color: $primary;
   box-sizing: border-box;
@@ -55,6 +114,11 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
   border-radius: 1.5rem;
   box-shadow: 0 0 1rem 0 #00000020;
   max-width: 15rem;
+  height: 100%;
+
+  &.open {
+    z-index: 9999;
+  }
 
   @media (max-width: $screen-lg) {
     max-width: 13rem;
@@ -65,7 +129,8 @@ const popup = ref<InstanceType<typeof QPopupProxy>>();
     box-shadow: 0 0 0.8rem 0 #00000020;
   }
   @media (max-width: $screen-sm) {
-    max-width: 10rem;
+    max-width: unset;
+    min-width: 17rem;
     padding: 0.5rem;
     box-shadow: 0 0 0.4rem 0 #00000020;
     border-radius: 0.7rem;

@@ -12,6 +12,7 @@ interface ButtonProps {
   initValue?: string;
   type?: QInputProps['type'];
   autogrow?: boolean;
+  isActive?: boolean;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -21,11 +22,13 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   placeholder: '',
   initValue: '',
   autogrow: false,
+  isActive: true,
 });
 
 const { errorMessage, value } = useField<string | number | undefined>(
   props.name
 );
+let inputType = props.type as QInputProps['type'];
 // if (props.initValue) value.value = props.initValue ?? '';
 
 // const { errorMessage, value } = useField(toRef(props, 'name'));
@@ -40,18 +43,28 @@ const { errorMessage, value } = useField<string | number | undefined>(
     :placeholder="placeholder"
     hide-bottom-space
     class="ainput"
+    input-class="inner-input"
     filled
     dense
     :autogrow="props.autogrow"
     :color="color"
     :label="props.label"
     :label-color="props.labelColor"
-    :type="type as QInputProps['type'] "
+    :readonly="!props.isActive"
+    :type="inputType"
   />
 </template>
 
 <style scoped lang="scss">
 .ainput {
+  max-height: 6rem;
+  // overflow-y: hidden;
+
+  &:deep(.inner-input) {
+    max-height: 5rem;
+    overflow-y: hidden !important;
+  }
+
   &.q-field--filled :deep(.q-field__control:after) {
     display: none;
   }

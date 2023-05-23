@@ -4,7 +4,8 @@ import { DialogData } from 'src/pages/landing/header/ui/auth/types';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { useDialogStore } from 'src/pages/landing/header/store/DialogStore';
 import { UnifiedApiPromise } from 'src/global/types/unifiedApiResponse';
-import { createErrorResponse } from 'src/global/utils/responseGenerators';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { createErrorResponse, createSuccessResponse } from 'src/global/utils/responseGenerators';
 
 const authStore = useAuthStore();
 const dialogStore = useDialogStore();
@@ -43,6 +44,7 @@ export const PasswordScheme = (t: (arg: string) => string): DialogData => {
 
       dialogStore.setPassword(values);
       return authStore.signup(signData) as UnifiedApiPromise;
+      // return createSuccessResponse('good');
     },
     btnLabel: t('pages.landing.header.next'),
     state: storeToRefs(dialogStore).signupState,

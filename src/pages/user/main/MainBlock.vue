@@ -49,7 +49,7 @@ onMounted(async () => {
     <div class="content-wrapper structure">
       <div class="column items-center text-primary">
         <p class="balance">{{ $t('pages.user.main.balance') }}</p>
-        <div class="balance-preloader" v-if="!balance" />
+        <div class="balance-preloader" v-if="!balance && balance != 0" />
         <h1 class="balance-count">{{ balance }}</h1>
         <q-btn class="change-photo-btn" @click="onChangePhotoClick">
           <img
