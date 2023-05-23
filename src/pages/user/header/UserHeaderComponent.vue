@@ -11,7 +11,7 @@ import ContactsModal from 'components/AContactModal/ContactsModal.vue';
 
 const routerPath = ref(useRoute().path);
 const routerMap: Record<string, number> = {
-  '/dev': 0,
+  '/': 0,
   '/mpc/tasks': 1,
   '/mpc/referrals': 2,
   '/mpc/settings': 3,
@@ -21,7 +21,7 @@ const { t } = useI18n();
 const currentLinkIndex = ref(routerMap[routerPath.value]);
 
 const buttonLinks = [
-  { label: t('pages.user.header.home'), value: '/dev' },
+  { label: t('pages.user.header.home'), value: '/' },
   { label: t('pages.user.header.tasks'), value: '/mpc/tasks' },
   { label: t('pages.user.header.referrals'), value: '/mpc/referrals' },
   { label: t('pages.user.header.settings'), value: '/mpc/settings' },

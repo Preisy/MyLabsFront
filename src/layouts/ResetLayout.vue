@@ -31,7 +31,7 @@ onMounted(() => {
       <AModalDialog
         :closable="false"
         :is-full="false"
-        redirect="/dev"
+        redirect="/"
         :dialogs="resetDialogData"
         ref="dialog"
       />

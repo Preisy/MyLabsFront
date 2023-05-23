@@ -18,7 +18,7 @@ const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
     label: t('pages.referrals.header.home'),
-    value: '/dev',
+    value: '/',
   },
   {
     label: t('pages.referrals.header.referrals'),
