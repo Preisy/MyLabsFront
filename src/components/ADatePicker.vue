@@ -8,16 +8,10 @@ interface ADatePickerProps {
 }
 const props = defineProps<ADatePickerProps>();
 
-const getTomorrow = (): string => {
-  const now = new Date();
-  const tomorrow = new Date(now.setDate(now.getDate() + 1));
-  return tomorrow.toLocaleDateString().split('.').reverse().join('.');
-};
 const { errorMessage, value } = useField<string | number | undefined>(
   props.name
 );
 const dialog = ref<QDialog>();
-onMounted(() => useField(props.name).setValue(getTomorrow()));
 </script>
 
 <template>
