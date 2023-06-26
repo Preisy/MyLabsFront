@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { QDialog } from 'quasar';
 import { useField } from 'vee-validate';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 interface ADatePickerProps {
   name: string;
@@ -21,7 +21,6 @@ const dialog = ref<QDialog>();
       filled
       dense
       :error="!!errorMessage"
-      :error-message="errorMessage"
       :label="$t('pages.landing.homePage.form.deadline')"
       v-model="value"
       mask="date"
@@ -37,6 +36,9 @@ const dialog = ref<QDialog>();
             </div>
           </q-date>
         </q-dialog>
+      </template>
+      <template v-slot:error>
+        <div style="white-space: break-spaces">{{ errorMessage }}</div>
       </template>
     </q-input>
   </div>

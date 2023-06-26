@@ -16,6 +16,7 @@ const orderStore = useOrderStore();
 const orders = storeToRefs(orderStore).currentOrders;
 const labs = ref<LabModel[]>([]);
 const chunkSize = computed(() => {
+  console.log(Screen.width);
   return Screen.lt.md ? 1 : 2;
 });
 
@@ -172,13 +173,13 @@ const getOrders = async () => {
     }
   }
 
-  @media (max-width: $screen-md) {
+  @media (max-width: $screen-md), (max-device-width: $screen-md) {
     .title {
       font-size: 1.6rem;
       line-height: 1.6rem;
     }
   }
-  @media (max-width: $screen-sm) {
+  @media (max-width: $screen-sm), (max-device-width: $screen-sm) {
     .structure {
       width: 90%;
       padding-top: 0;

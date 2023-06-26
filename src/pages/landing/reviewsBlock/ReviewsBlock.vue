@@ -15,7 +15,7 @@ const isMobile = computed(() => Screen.lt.sm);
 const reviews = ref<Review[]>();
 
 const _slides = computed(() => {
-  const cardsInOneSlide = isMobile.value ? 1 : 2;
+  const cardsInOneSlide = isMobile.value ? 2 : 2;
   if (!reviews.value) return;
   return chunk(reviews.value, cardsInOneSlide);
 });

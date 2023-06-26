@@ -115,6 +115,12 @@ window.addEventListener('click', (e: Event) => {
   box-shadow: 0 0 1rem 0 #00000020;
   max-width: 15rem;
   height: 100%;
+  transition: 0.3s ease-in-out box-shadow;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1rem 0px #00000060;
+  }
 
   &.open {
     z-index: 9999;

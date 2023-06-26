@@ -52,8 +52,10 @@ const props = defineProps<CardProps>();
   }
 
   .title-wrapper {
-    margin-bottom: 2.5rem;
-
+    margin-bottom: 1.5rem;
+    .title {
+      margin-bottom: 0;
+    }
     .title-icon {
       --size: 1.2rem;
       width: var(--size);

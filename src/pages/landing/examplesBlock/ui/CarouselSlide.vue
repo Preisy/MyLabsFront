@@ -39,7 +39,8 @@ const props = defineProps<SlideProps>();
   }
 
   @media (max-width: $screen-sm) {
-    --card-size: 11rem;
+    --column-count: 1;
+    --card-size: 13rem;
     // grid-template-rows: 1fr;
   }
 }
