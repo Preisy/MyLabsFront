@@ -31,15 +31,18 @@ import heartImg from 'assets/pop_up/heart.png';
 <style scoped lang="scss">
 .referralBlock {
   padding-bottom: 2rem;
+  background: #fff;
+  border-radius: 2rem 2rem 0 0;
 
   .content-wrapper {
     margin: 0 auto;
   }
   .desc {
     margin-right: 3.5rem;
+    margin-bottom: 1rem;
     width: 20rem;
     .text {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
   }
   .img-wrapper {

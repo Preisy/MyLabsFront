@@ -23,18 +23,19 @@ import floorImg from 'assets/header/floor.svg';
 
 <style scoped lang="scss">
 .our-skills {
+  --border-radius: 2rem;
   background-color: $primary;
-  border-radius: 2rem 2rem 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 
   position: relative;
-  z-index: 1;
-  overflow: hidden;
+  z-index: 2;
 
   .floor {
     user-select: none;
     position: absolute;
     top: 0;
-    right: -5%;
+    right: 0%;
+    border-radius: var(--border-radius);
     z-index: -1;
     opacity: 0.5;
   }
@@ -92,7 +93,6 @@ import floorImg from 'assets/header/floor.svg';
 
   @media (max-width: $screen-sm) {
     .content-wrapper {
-      padding-top: 1.5rem;
       padding-bottom: 2rem;
 
       .content {
