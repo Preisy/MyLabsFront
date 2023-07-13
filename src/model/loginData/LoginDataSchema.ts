@@ -1,4 +1,4 @@
-import { UserCredsSchema } from '../userCreds';
+import { UserCredsSchema } from '../UserCreds';
 
 export const LoginDataSchema = {
   email: UserCredsSchema.email,

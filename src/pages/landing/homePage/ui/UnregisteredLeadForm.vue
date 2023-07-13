@@ -5,7 +5,7 @@ import ABtn from 'components/ABtn.vue';
 import ASelect from 'components/ASelect.vue';
 import { LabType, LabTypes } from 'src/global/LabTypes';
 import { TaskSchema } from 'src/model/task';
-import { UserCredsSchema } from 'src/model/userCreds';
+import { UserCredsSchema } from 'src/model/UserCreds';
 import omit from 'lodash/omit';
 import { useAuthStore } from 'src/stores/AuthStore';
 import { SignUpDialog } from '../../header/ui';
