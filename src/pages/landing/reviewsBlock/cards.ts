@@ -1,8 +1,11 @@
+import { Attachment } from "./service/ReviewsService";
+
 export default interface Review {
   name: string;
   details: string;
   imgSrc: string;
   link: string;
+  attachments?: Array<Attachment>
 }
 
 class ReviewClass implements Review {

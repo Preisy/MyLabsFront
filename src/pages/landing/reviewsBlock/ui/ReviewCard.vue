@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { Attachment } from '../service/ReviewsService';
+
 interface Review {
   name: string;
   details: string;
   imgSrc: string;
   link: string;
+  attachments?: Array<Attachment>;
 }
 
 const props = defineProps<Review>();
@@ -17,7 +20,8 @@ const props = defineProps<Review>();
       </a>
       <h2 class="name">{{ props.name }}</h2>
     </div>
-    <p class="details">{{ props.details }}</p>
+    <p v-if="props.details" class="details">{{ props.details }}</p>
+    <img v-else :src="props.attachments[0].photo" class="attachment" />
   </div>
 </template>
 
@@ -45,6 +49,13 @@ const props = defineProps<Review>();
 
   .details {
     font-size: 1.2rem;
+  }
+
+  .attachment {
+    min-width: 100px;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
   }
 
   @media (max-width: $screen-md) {

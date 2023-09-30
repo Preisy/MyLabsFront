@@ -1,5 +1,10 @@
 import { $api } from 'src/boot/axios';
 
+export interface Attachment {
+  type: string;
+  photo: string;
+}
+
 export interface ReviewResponse {
   first_name: string;
   from_id: number;
@@ -7,6 +12,7 @@ export interface ReviewResponse {
   last_name: string;
   text: string;
   commentUrl: string;
+  attachments?: Array<Attachment>;
 }
 
 export const ReviewsService = {
@@ -17,5 +23,5 @@ export const ReviewsService = {
     } catch (e: unknown) {
       return { error: e };
     }
-  },
+  }
 };
