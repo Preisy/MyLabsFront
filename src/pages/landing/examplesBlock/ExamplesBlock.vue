@@ -7,7 +7,6 @@ import ACarousel from 'src/components/ACarousel.vue';
 import { Screen } from 'quasar';
 import { chunk } from 'lodash';
 import { useExamplesStore } from './store/ExamplesStore';
-import { taskTypeToImg } from 'src/global/LabTypes';
 import manOnChair from 'assets/man_on_chair_alt.png';
 
 const slider_index = ref('0');
@@ -57,10 +56,7 @@ onMounted(async () => {
             class="example-card"
             v-for="(card, index) in slide"
             :key="index"
-            :img-src="taskTypeToImg(card.type)"
-            :title="card.title"
-            :time="card.duration.toString()"
-            :price="card.price.toString()"
+            v-bind="card"
           />
         </SlideComponent>
       </ACarousel>

@@ -9,5 +9,5 @@ export const ExamplesService = {
     } catch (e: unknown) {
       return { error: e };
     }
-  },
+  }
 };

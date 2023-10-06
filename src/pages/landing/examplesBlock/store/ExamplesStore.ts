@@ -12,14 +12,14 @@ export const useExamplesStore = defineStore('examplesStore', () => {
     if ('error' in res) {
       labsState.value = 'error';
     } else {
+      res.forEach((el, index) => (el.taskText = `text${index}`));
       labsState.value = 'success';
     }
-
     return res;
   };
 
   return {
     labsState,
-    getLabs,
+    getLabs
   };
 });

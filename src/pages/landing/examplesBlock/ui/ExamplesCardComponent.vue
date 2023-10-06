@@ -1,40 +1,62 @@
 <script setup lang="ts">
-interface CardProps {
+import { LabType, taskTypeToImg } from 'src/global/LabTypes';
+import CardPopup from './CardPopup.vue';
+import { ref } from 'vue';
+
+interface Card {
+  duration: number;
+  price: number;
   title: string;
-  imgSrc: string;
-  time: string;
-  price: string;
+  taskText: string;
+  type: LabType;
 }
 
-const props = defineProps<CardProps>();
+const popup = ref<InstanceType<typeof CardPopup>>();
+const props = defineProps<Card>();
+const isOpen = ref<boolean>(false);
+const open = () => {
+  console.log(popup);
+  console.log('open');
+  popup.value?.open();
+};
 </script>
 
 <template>
-  <div class="card column justify-between">
-    <div class="title-wrapper row items-start no-wrap">
-      <img class="title-icon q-mt-sm" :src="props.imgSrc" alt="" />
-      <h2 class="title">{{ props.title }}</h2>
-    </div>
-    <div class="details">
-      <div class="time">
-        <q-icon class="icon" color="accent" name="update" />
-        <span>
-          {{ props.time }}
-          {{ $t('pages.landing.examplesBlock.card.hours') }}
-        </span>
+  <div class="relative">
+    <div class="card column justify-between" @click="open">
+      <div class="title-wrapper row items-start no-wrap">
+        <img
+          class="title-icon q-mt-sm"
+          :src="taskTypeToImg(props.type)"
+          alt=""
+        />
+        <h2 class="title">{{ props.title }}</h2>
       </div>
-      <div class="price">
-        <q-icon class="icon" color="accent" name="currency_ruble" />
-        <span>
-          {{ props.price }}
-          {{ $t('pages.landing.examplesBlock.card.roubles') }}
-        </span>
+      <div class="details">
+        <div class="time">
+          <q-icon class="icon" color="accent" name="update" />
+          <span>
+            {{ props.duration }}
+            {{ $t('pages.landing.examplesBlock.card.hours') }}
+          </span>
+        </div>
+        <div class="price">
+          <q-icon class="icon" color="accent" name="currency_ruble" />
+          <span>
+            {{ props.price }}
+            {{ $t('pages.landing.examplesBlock.card.roubles') }}
+          </span>
+        </div>
       </div>
     </div>
+    <CardPopup ref="popup" :data="props" :is-open="isOpen" />
   </div>
 </template>
 
 <style scoped lang="scss">
+.relative {
+  position: relative;
+}
 .card {
   background-color: $primary;
   box-sizing: border-box;
