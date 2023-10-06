@@ -19,15 +19,15 @@ const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
     label: t('pages.landing.header.home'),
-    value: 'home',
+    value: 'home'
   },
   {
     label: t('pages.landing.header.ourskills'),
-    value: 'possibilities',
+    value: 'possibilities'
   },
   { label: t('pages.landing.header.examples'), value: 'examples' },
   { label: t('pages.landing.header.reviews'), value: 'reviews' },
-  { label: t('pages.landing.header.FAQ'), value: 'FAQ' },
+  { label: t('pages.landing.header.FAQ'), value: 'FAQ' }
 ];
 
 const isCompact = ref(false);
@@ -191,6 +191,7 @@ onMounted(async () => {
     --height: 2.25rem;
 
     user-select: none;
+    pointer-events: none;
     width: var(--width);
     height: var(--height);
     position: absolute;

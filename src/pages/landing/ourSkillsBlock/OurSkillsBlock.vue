@@ -32,12 +32,14 @@ import floorImg from 'assets/header/floor.svg';
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: 0;
     right: 0%;
     border-radius: var(--border-radius);
     z-index: -1;
     opacity: 0.5;
+    height: 100%;
   }
 
   .skills-diagram {
@@ -46,6 +48,7 @@ import floorImg from 'assets/header/floor.svg';
     padding: 2rem;
     .blue-shadow {
       user-select: none;
+      pointer-events: none;
       position: absolute;
       top: -36%;
       right: -60%;

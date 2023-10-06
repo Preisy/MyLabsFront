@@ -17,7 +17,7 @@ defineExpose({
     setTimeout(() => {
       uploader.value?.addFiles(fileStore.filesList as readonly File[]);
     }, 0);
-  },
+  }
 });
 
 const onadded = (values: readonly File[]) => {
@@ -198,6 +198,7 @@ const onremove = (values: readonly File[]) => {
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: -100%;
     right: -315%;

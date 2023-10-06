@@ -42,6 +42,7 @@ import manOnChair from 'assets/man_on_chair_alt.png';
     --width: 90rem;
     --aspect-ratio: 1.58371;
     user-select: none;
+    pointer-events: none;
 
     position: absolute;
     z-index: 0;

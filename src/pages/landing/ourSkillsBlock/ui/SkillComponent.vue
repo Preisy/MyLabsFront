@@ -63,6 +63,7 @@ const props = defineProps<SkillComponentProps>();
       height: 100%;
       transition: all 0.1s ease-in-out;
       user-select: none;
+      pointer-events: none;
     }
     .p {
       opacity: 0;

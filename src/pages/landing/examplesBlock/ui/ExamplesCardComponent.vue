@@ -62,6 +62,7 @@ const props = defineProps<CardProps>();
       height: var(--size);
 
       user-select: none;
+      pointer-events: none;
 
       margin-right: 0.4rem;
     }

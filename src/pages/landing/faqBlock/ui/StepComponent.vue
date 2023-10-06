@@ -53,6 +53,7 @@ defineProps<Props>();
     margin-right: var(--line-margin-right);
     .line {
       user-select: none;
+      pointer-events: none;
       touch-action: none;
       height: 100%;
 

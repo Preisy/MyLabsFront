@@ -26,7 +26,7 @@ defineExpose({
     myId.value = creds.id;
 
     setTimeout(() => (isOpened.value = true), 0);
-  },
+  }
 });
 const myId = ref(0);
 </script>
@@ -66,6 +66,7 @@ const myId = ref(0);
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: -130%;
     right: -100%;

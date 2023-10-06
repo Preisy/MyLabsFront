@@ -27,7 +27,7 @@ const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
         ref="leadForm"
         :class="{
           isAuth: useAuthStore().isAuth,
-          isFileDialogOpen: leadForm?.isFileDialogOpen,
+          isFileDialogOpen: leadForm?.isFileDialogOpen
         }"
         class="form-homepage"
       />
@@ -85,6 +85,7 @@ const leadForm = ref<InstanceType<typeof UnregisteredLeadForm>>();
 
       img {
         user-select: none;
+        pointer-events: none;
       }
     }
   }

@@ -22,7 +22,7 @@ const onclose = () => {
 defineExpose({
   close: () => {
     onclose;
-  },
+  }
 });
 
 const cardWrapper = ref<HTMLElement>();
@@ -158,6 +158,7 @@ window.addEventListener('click', (e: Event) => {
       height: var(--size);
 
       user-select: none;
+      pointer-events: none;
 
       margin-right: 0.4rem;
       margin-top: 0.3rem;

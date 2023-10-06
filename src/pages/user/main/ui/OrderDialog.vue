@@ -27,7 +27,7 @@ const fileStore = useFileStore();
 defineExpose({
   open: () => {
     dialog.value?.open();
-  },
+  }
 });
 
 const close = () => {
@@ -35,7 +35,7 @@ const close = () => {
 };
 
 const { handleSubmit } = useForm<OrderData>({
-  validationSchema: TaskSchema,
+  validationSchema: TaskSchema
 });
 
 const filesProcessing = async (
@@ -55,7 +55,7 @@ const filesProcessing = async (
     taskFiles.push({
       filename: file.name,
       createdAt: file.lastModified.toLocaleString(),
-      id: index,
+      id: index
     });
   });
 
@@ -67,7 +67,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     deadline: values.deadline.split('/').reverse().join('/'),
     promoName: values.promoName ?? null,
     taskText: values.taskText,
-    type: values.type,
+    type: values.type
   };
 
   const sendResp = await orderStore.sendOrder(reqData);
@@ -174,6 +174,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: -100%;
     right: -130%;

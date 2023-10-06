@@ -19,7 +19,7 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
   needLast: true,
-  closable: true,
+  closable: true
 });
 let i = ref(0);
 let dialog = ref<InstanceType<typeof ADialog>>();
@@ -74,7 +74,7 @@ defineExpose({
     setTimeout(() => (isOpened.value = true), 0);
   },
   close,
-  isOpened: isOpened,
+  isOpened: isOpened
 });
 </script>
 
@@ -127,6 +127,7 @@ defineExpose({
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: -100%;
     right: -140%;

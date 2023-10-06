@@ -48,6 +48,8 @@ import heartImg from 'assets/pop_up/heart.png';
   .img-wrapper {
     .img {
       width: 10rem;
+      user-select: none;
+      pointer-events: none;
     }
   }
 }

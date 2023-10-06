@@ -21,7 +21,7 @@ const props = defineProps<Review>();
       <h2 class="name">{{ props.name }}</h2>
     </div>
     <p v-if="props.details" class="details">{{ props.details }}</p>
-    <img v-else :src="props.attachments[0].photo" class="attachment" />
+    <img v-else :src="props.attachments?.[0].photo" class="attachment" />
   </div>
 </template>
 

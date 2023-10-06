@@ -4,7 +4,7 @@ import image from 'src/assets/soon.svg';
 
 <template>
   <div class="content">
-    <img class="icon" :src="image" alt="">
+    <img class="icon" :src="image" alt="" />
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import image from 'src/assets/soon.svg';
   align-items: center;
   height: 100vh;
   user-select: none;
+  pointer-events: none;
 
   .icon {
     display: block;
@@ -24,4 +25,3 @@ import image from 'src/assets/soon.svg';
   }
 }
 </style>
-

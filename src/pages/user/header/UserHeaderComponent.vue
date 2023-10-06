@@ -14,7 +14,7 @@ const routerMap: Record<string, number> = {
   '/': 0,
   '/mpc/tasks': 1,
   '/mpc/referrals': 2,
-  '/mpc/settings': 3,
+  '/mpc/settings': 3
 };
 
 const { t } = useI18n();
@@ -24,7 +24,7 @@ const buttonLinks = [
   { label: t('pages.user.header.home'), value: '/' },
   { label: t('pages.user.header.tasks'), value: '/mpc/tasks' },
   { label: t('pages.user.header.referrals'), value: '/mpc/referrals' },
-  { label: t('pages.user.header.settings'), value: '/mpc/settings' },
+  { label: t('pages.user.header.settings'), value: '/mpc/settings' }
 ];
 
 const inviteDialog = ref<InstanceType<typeof InviteDialog>>();
@@ -108,6 +108,7 @@ const isMenuOpened = ref(false);
     --height: 2.25rem;
 
     user-select: none;
+    pointer-events: none;
     width: var(--width);
     height: var(--height);
     position: absolute;

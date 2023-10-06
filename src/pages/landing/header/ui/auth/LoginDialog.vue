@@ -23,7 +23,7 @@ defineExpose({
     dialog.value?.open();
     setTimeout(() => (isOpened.value = true), 0);
   },
-  isOpened: isDialogOpened,
+  isOpened: isDialogOpened
 });
 const close = () => {
   floor.value?.classList.remove('showed');
@@ -34,14 +34,14 @@ let schema: FieldProps[] = [
   {
     label: 'email',
     name: 'email',
-    rules: LoginDataSchema.email,
+    rules: LoginDataSchema.email
   },
   {
     label: 'password',
     name: 'password',
     rules: LoginDataSchema.password,
-    type: 'password',
-  },
+    type: 'password'
+  }
 ];
 
 const errorResponse = ref<AxiosError>();
@@ -121,6 +121,7 @@ const onSubmit = async (values: Record<string, unknown>) => {
 
   .floor {
     user-select: none;
+    pointer-events: none;
     position: absolute;
     top: -100%;
     right: -160%;

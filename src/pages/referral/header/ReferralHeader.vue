@@ -18,12 +18,12 @@ const elements: HTMLElement[] = [];
 const buttonLinks = [
   {
     label: t('pages.referrals.header.home'),
-    value: '/',
+    value: '/'
   },
   {
     label: t('pages.referrals.header.referrals'),
-    value: '/referrals',
-  },
+    value: '/referrals'
+  }
 ];
 
 const isCompact = ref(false);
@@ -165,6 +165,7 @@ onMounted(async () => {
     --height: 2.25rem;
 
     user-select: none;
+    pointer-events: none;
     width: var(--width);
     height: var(--height);
     position: absolute;

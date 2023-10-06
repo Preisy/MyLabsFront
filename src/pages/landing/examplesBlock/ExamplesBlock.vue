@@ -109,13 +109,13 @@ onMounted(async () => {
     --aspect-ratio: 1.58371;
 
     user-select: none;
+    pointer-events: none;
     position: absolute;
     width: var(--width);
     bottom: 0;
     right: 50%;
     transform: translateY(59%);
     z-index: -1;
-    user-select: none;
   }
 
   @media (max-width: $screen-sm) {
