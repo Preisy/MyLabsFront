@@ -7,7 +7,6 @@ import ACarousel from 'src/components/ACarousel.vue';
 import { Screen } from 'quasar';
 import { chunk } from 'lodash';
 import { useReviewsStore } from './store/ReviewsStore';
-import { ReviewResponse } from './service/ReviewsService';
 import lab from 'src/assets/Labs_square_icon.png';
 
 const carousel_val = ref('0');
@@ -25,8 +24,7 @@ const _slides = computed(() => {
 const reviewsStore = useReviewsStore();
 onMounted(async () => {
   const result: Review[] = [];
-  const rawReviews: ReviewResponse[] | { error: unknown } =
-    await reviewsStore.getReviews();
+  const rawReviews = await reviewsStore.getReviews();
 
   if ('error' in rawReviews) return;
 

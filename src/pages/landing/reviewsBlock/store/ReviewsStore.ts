@@ -20,6 +20,6 @@ export const useReviewsStore = defineStore('reviewsStore', () => {
 
   return {
     reviewsState,
-    getReviews,
+    getReviews
   };
 });

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Attachment } from '../service/ReviewsService';
+import ImgDialog from './ImgDialog.vue';
 
 interface Review {
   name: string;
@@ -10,6 +12,7 @@ interface Review {
 }
 
 const props = defineProps<Review>();
+const dialog = ref<InstanceType<typeof ImgDialog>>();
 </script>
 
 <template>
@@ -20,8 +23,15 @@ const props = defineProps<Review>();
       </a>
       <h2 class="name">{{ props.name }}</h2>
     </div>
-    <p v-if="props.details" class="details">{{ props.details }}</p>
-    <img v-else :src="props.attachments?.[0].photo" class="attachment" />
+    <p props.details class="details">{{ props.details }}</p>
+    <template v-if="props.attachments">
+      <img
+        @click="dialog?.show()"
+        :src="props.attachments[0].photo"
+        class="attachment"
+      />
+      <ImgDialog ref="dialog" :img-src="props.attachments[0].photo" />
+    </template>
   </div>
 </template>
 
@@ -53,6 +63,7 @@ const props = defineProps<Review>();
 
   .attachment {
     min-width: 100px;
+    width: 100%;
     max-height: 200px;
     display: block;
     margin: 0 auto;
