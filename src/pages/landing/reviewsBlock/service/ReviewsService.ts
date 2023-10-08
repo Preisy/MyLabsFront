@@ -1,8 +1,11 @@
 import { $api } from 'src/boot/axios';
 
 export interface Attachment {
-  type: string;
-  photo: string;
+  photo: {
+    sizes: Array<{
+      url:string
+    }>
+  }
 }
 
 export interface ReviewResponse {

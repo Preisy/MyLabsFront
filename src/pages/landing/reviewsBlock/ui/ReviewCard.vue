@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { Attachment } from '../service/ReviewsService';
 import ImgDialog from './ImgDialog.vue';
+import { nextTick } from 'vue';
 
 interface Review {
   name: string;
@@ -13,6 +14,12 @@ interface Review {
 
 const props = defineProps<Review>();
 const dialog = ref<InstanceType<typeof ImgDialog>>();
+const dialogUrl = ref<string>();
+
+const onclick = (url: string) => {
+  dialogUrl.value = url;
+  nextTick(() => dialog.value?.show());
+};
 </script>
 
 <template>
@@ -24,13 +31,15 @@ const dialog = ref<InstanceType<typeof ImgDialog>>();
       <h2 class="name">{{ props.name }}</h2>
     </div>
     <p props.details class="details">{{ props.details }}</p>
-    <template v-if="props.attachments">
+    <template v-if="attachments">
       <img
-        @click="dialog?.show()"
-        :src="props.attachments[0].photo"
+        v-for="attachment in attachments"
+        :key="attachment.photo.sizes[0].url"
+        :src="attachment.photo.sizes[0].url"
+        @click="onclick(attachment.photo.sizes[0].url)"
         class="attachment"
       />
-      <ImgDialog ref="dialog" :img-src="props.attachments[0].photo" />
+      <ImgDialog v-if="dialogUrl" ref="dialog" :img-src="dialogUrl" />
     </template>
   </div>
 </template>

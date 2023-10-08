@@ -14,7 +14,7 @@ const props = defineProps<SlideProps>();
 <style scoped lang="scss">
 .slide {
   --column-count: 3;
-  --card-size: 15rem;
+  --card-size: 17rem;
 
   display: grid;
 
