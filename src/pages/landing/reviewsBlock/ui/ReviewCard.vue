@@ -32,13 +32,13 @@ const onclick = (url: string) => {
     </div>
     <p props.details class="details">{{ props.details }}</p>
     <template v-if="attachments">
-      <img
+      <div
         v-for="attachment in attachments"
         :key="attachment.photo.sizes[0].url"
-        :src="attachment.photo.sizes[0].url"
         @click="onclick(attachment.photo.sizes[0].url)"
-        class="attachment"
-      />
+      >
+        <img class="attachment" :src="attachment.photo.sizes[0].url" />
+      </div>
       <ImgDialog v-if="dialogUrl" ref="dialog" :img-src="dialogUrl" />
     </template>
   </div>
@@ -68,6 +68,7 @@ const onclick = (url: string) => {
 
   .details {
     font-size: 1.2rem;
+    margin-bottom: 6px;
   }
 
   .attachment {
@@ -76,6 +77,7 @@ const onclick = (url: string) => {
     max-height: 200px;
     display: block;
     margin: 0 auto;
+    pointer-events: none;
   }
 
   @media (max-width: $screen-md) {

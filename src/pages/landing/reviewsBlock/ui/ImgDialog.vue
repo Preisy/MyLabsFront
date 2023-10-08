@@ -15,7 +15,7 @@ defineExpose({ show });
 <template>
   <q-dialog ref="dialog" full-width>
     <div @click="dialog?.hide()">
-      <q-img :src="imgSrc" class="img" />
+      <q-img fit="contain" :src="imgSrc" class="img" />
     </div>
   </q-dialog>
 </template>
