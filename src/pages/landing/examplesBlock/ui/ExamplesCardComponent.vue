@@ -15,8 +15,7 @@ const popup = ref<InstanceType<typeof CardPopup>>();
 const props = defineProps<Card>();
 const isOpen = ref<boolean>(false);
 const open = () => {
-  console.log(popup);
-  console.log('open');
+  if (!props.taskText) return;
   popup.value?.open();
 };
 </script>

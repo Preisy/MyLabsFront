@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { QDialog, Screen } from 'quasar';
+import { QDialog } from 'quasar';
 import Card from '../cards';
 import DetailedCard from './DetailedCard.vue';
 
@@ -10,7 +10,6 @@ interface CardPopupProps {
 }
 
 defineProps<CardPopupProps>();
-// const popup = ref<InstanceType<typeof HTMLElement>>();
 const dialog = ref<InstanceType<typeof QDialog>>();
 
 const emits = defineEmits<{
@@ -32,20 +31,8 @@ defineExpose({
 </script>
 
 <template>
-  <!-- <div
-    class="popup-wrapper"
-    :class="{ hide: !isOpen, compact: Screen.lt.md, mobile: Screen.lt.sm }"
-  >
-    <div ref="popup" class="popup" :class="{ hide: !isOpen }">
-      <DetailedCard :card="data" />
-    </div>
-    <div class="bg-blur" @click="close" :class="{ hide: !isOpen }" />
-  </div> -->
   <q-dialog ref="dialog">
-    <!-- <div ref="popup" class="popup" :class="{ hide: !isOpen }"> -->
     <DetailedCard :card="data" />
-    <!-- </div> -->
-    <!-- <div class="bg-blur" @click="close" :class="{ hide: !isOpen }" /> -->
   </q-dialog>
 </template>
 
