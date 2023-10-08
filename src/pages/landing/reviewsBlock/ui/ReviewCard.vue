@@ -72,7 +72,7 @@ const onclick = (url: string) => {
 
   .attachment {
     min-width: 100px;
-    width: 100%;
+    max-width: 100%;
     max-height: 200px;
     display: block;
     margin: 0 auto;

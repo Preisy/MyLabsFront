@@ -34,7 +34,7 @@ onMounted(async () => {
       details: record.text,
       imgSrc: record.photo_200,
       link: record.commentUrl,
-      attachments: record.attachments ?? [{ type: 'photo', photo: lab }]
+      attachments: record.attachments
     };
     result.push(review);
   });

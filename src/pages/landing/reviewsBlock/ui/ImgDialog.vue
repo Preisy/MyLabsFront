@@ -24,10 +24,14 @@ defineExpose({ show });
 .img {
   min-width: 150px;
   min-height: 150px;
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 60%;
+  max-height: 60%;
   width: 100%;
   margin: 0 auto;
   display: block;
+
+  @media screen and (max-width: $screen-md) {
+    max-width: 85%;
+  }
 }
 </style>
