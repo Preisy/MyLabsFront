@@ -7,7 +7,7 @@ interface Card {
   duration: number;
   price: number;
   title: string;
-  taskText: string;
+  description: string;
   type: LabType;
 }
 
@@ -15,7 +15,7 @@ const popup = ref<InstanceType<typeof CardPopup>>();
 const props = defineProps<Card>();
 const isOpen = ref<boolean>(false);
 const open = () => {
-  if (!props.taskText) return;
+  if (!props.description) return;
   popup.value?.open();
 };
 </script>

@@ -11,7 +11,7 @@ defineProps<DetailedLabCardProps>();
   <div class="detailed-card">
     <div class="content-wrapper">
       <div class="text">
-        <p>{{ card.taskText }}</p>
+        <p>{{ card.description }}</p>
       </div>
     </div>
   </div>

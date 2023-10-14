@@ -4,6 +4,6 @@ export default interface Card {
   duration: number;
   price: number;
   title: string;
-  taskText: string;
+  description: string;
   type: LabType;
 }
