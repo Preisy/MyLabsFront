@@ -10,16 +10,17 @@
         <div class="contacts column">
           <h2>{{ $t('pages.landing.footerBlock.contacts') }}</h2>
           <a
-            href="https://t.me/cockyasfxck"
+            href="https://t.me/mylabsadmin"
             target="_blank"
             class="tg link text-primary"
           >
             {{ $t('pages.landing.footerBlock.tg') }}
           </a>
           <a
-            href="https://vk.com/cockyasfxck"
+            href="#"
             target="_blank"
             class="vk link text-primary"
+            :style="{ opacity: 0.5 }"
           >
             {{ $t('pages.landing.footerBlock.vk') }}
           </a>

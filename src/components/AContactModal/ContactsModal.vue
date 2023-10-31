@@ -9,7 +9,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  theme: 'light',
+  theme: 'light'
 });
 
 const isShown = ref<boolean>(false);
@@ -37,8 +37,8 @@ const toggleExtend = () => {
         class="popup row justify-around bg-primary"
         :class="{ hide: !isShown }"
       >
-        <ContactBtn label="Telegram" href="https://t.me/cockyasfxck" />
-        <ContactBtn label="ВКонтакте" href="https://vk.com/cockyasfxck" />
+        <ContactBtn label="Telegram" href="https://t.me/mylabsadmin" />
+        <ContactBtn label="ВКонтакте" href="#" :style="{ opacity: 0.5 }" />
       </div>
       <img :src="langSwitchLight" class="light" :class="{ hide: !isShown }" />
     </div>
