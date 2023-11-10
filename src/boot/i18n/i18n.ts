@@ -49,7 +49,7 @@ export default boot(({ app }) => {
       TWorkBlockI18n,
       TCompletePopupI18n,
       TReferralComponentI18n
-    ),
+    )
   });
 
   app.use(i18n);
