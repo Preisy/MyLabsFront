@@ -15,8 +15,8 @@ let components = [
   ExamplesBlock,
   ReviewsBlock,
   ReferralBlock,
-  FaqBlock,
-  FooterBlock,
+  // FaqBlock,
+  FooterBlock
 ];
 </script>
 
